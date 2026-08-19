@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EV Compare — Find and compare electric vehicles</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">⚡</span>
+      <span class="brand-name">EV Compare</span>
+    </div>
+    <div class="topbar-search">
+      <input type="search" id="searchInput" placeholder="Search make or model…" autocomplete="off" />
+    </div>
+    <div class="topbar-actions">
+      <span id="resultCount" class="result-count">0 vehicles</span>
+      <button id="resetFiltersBtn" class="btn btn-ghost">Reset filters</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Filters</h2>
+      </div>
+      <div id="filterGroups" class="filter-groups"><!-- generated --></div>
+    </aside>
+
+    <main class="content">
+      <div id="viewResults" class="view">
+        <div id="cardGrid" class="card-grid"></div>
+      </div>
+
+      <div id="viewCompare" class="view" hidden>
+        <div class="compare-header">
+          <button id="backToResultsBtn" class="btn btn-ghost">&larr; Back to results</button>
+          <h2>Comparing <span id="compareCount">0</span> vehicles</h2>
+          <button id="clearCompareBtn" class="btn btn-ghost">Clear all</button>
+        </div>
+        <div class="compare-scroll">
+          <table id="compareTable" class="compare-table"></table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="compareBar" class="compare-bar" hidden>
+    <div class="compare-bar-inner">
+      <span id="compareBarText">0 selected</span>
+      <div class="compare-bar-actions">
+        <button id="compareBarClearBtn" class="btn btn-ghost">Clear</button>
+        <button id="compareBarViewBtn" class="btn btn-primary">Compare</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="detailModal" class="modal-backdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true">
+      <button id="modalCloseBtn" class="modal-close" aria-label="Close">&times;</button>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

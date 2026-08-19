@@ -1,0 +1,2455 @@
+[
+  {
+    "id": "cadillac-lyriq-2025-luxury-rwd",
+    "make": "Cadillac",
+    "model": "Lyriq",
+    "trim": "Luxury RWD",
+    "modelYear": 2025,
+    "bodyStyle": "SUV",
+    "msrp": 58590,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 102,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 326,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Cadillac&baseModel=LYRIQ&srchtyp=ymm&pageno=1"
+    },
+    "performance": {
+      "zeroTo60Sec": null,
+      "horsepowerHp": 365,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 190,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": null
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Super Cruise",
+        "subscriptionUsdPerMonth": 25
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20,
+      22
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 28.0,
+      "maxCubicFeet": 60.8,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 7.0,
+    "links": {
+      "manufacturerSpec": "https://www.cadillac.com/electric/lyriq",
+      "review": "https://www.caranddriver.com/cadillac/lyriq",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Cadillac&baseModel=LYRIQ&srchtyp=ymm&pageno=1"
+    },
+    "notes": "102 kWh is Cadillac's published 'Battery Rated Energy' (total pack); usable capacity is somewhat lower per third-party estimates but no clean official usable figure was found. RWD Lyriq is not tow-rated (towCapacityLbs left null); AWD adds a 3,500 lb tow rating. 0-60 time not confirmed specifically for RWD (a 2023-era Car and Driver test cited 4.6s but that may reflect a different model-year/trim, so left null rather than guess). Super Cruise hands-free driving is available; GM's typical post-trial subscription price (~$25/mo) used, not independently re-verified for MY2025 Lyriq specifically. No frunk on Lyriq."
+  },
+  {
+    "id": "cadillac-lyriq-2025-sport-awd",
+    "make": "Cadillac",
+    "model": "Lyriq",
+    "trim": "Sport AWD",
+    "modelYear": 2025,
+    "bodyStyle": "SUV",
+    "msrp": 62590,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 102,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 319,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Cadillac&baseModel=LYRIQ&srchtyp=ymm&pageno=1"
+    },
+    "performance": {
+      "zeroTo60Sec": 5.1,
+      "horsepowerHp": 515,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 190,
+      "level2Kw": 19.2,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": null
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Super Cruise",
+        "subscriptionUsdPerMonth": 25
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      22
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 28.0,
+      "maxCubicFeet": 60.8,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 3500,
+    "groundClearanceIn": 7.0,
+    "links": {
+      "manufacturerSpec": "https://www.cadillac.com/electric/lyriq",
+      "review": "https://www.caranddriver.com/cadillac/lyriq",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Cadillac&baseModel=LYRIQ&srchtyp=ymm&pageno=1"
+    },
+    "notes": "Dual-motor AWD, 515 hp / 450 lb-ft, 22-inch 'After Midnight' finish wheels standard on Sport. 0-60 of 5.1s sourced from a Consumer Reports/Clean Fleet Report test of the same 515hp AWD powertrain (test vehicle was a MY2026 Signature Sport AWD; figure should be very close for MY2025 Sport AWD but wasn't independently tested for MY2025 specifically). Exact Sport 1 AWD MSRP varies across sources ($62k-$65k range seen); $62,590 used as a reasonable estimate off the Luxury AWD price plus the typical Sport premium \u2014 treat as approximate rather than a confirmed manufacturer figure. 19.2 kW Level 2 charger listed as it's the AWD-available upgraded onboard charger seen in EPA test configs; base charger may be lower (11.5 kW)."
+  },
+  {
+    "id": "chevrolet-blazer-ev-2026-lt-fwd",
+    "make": "Chevrolet",
+    "model": "Blazer EV",
+    "trim": "LT FWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 44600,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "FWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 85,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 312,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49644"
+    },
+    "performance": {
+      "zeroTo60Sec": 8,
+      "horsepowerHp": 220,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 150,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": false,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": 0,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 25.5,
+      "maxCubicFeet": 59.1,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": 1500,
+    "groundClearanceIn": 7.5,
+    "links": {
+      "manufacturerSpec": "https://www.chevrolet.com/electric/previous-year/blazer-ev",
+      "review": "https://www.edmunds.com/chevrolet/blazer-ev/2026/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49644"
+    },
+    "notes": "Uses native CCS1 port for 2026 model year with optional NACS Level 2 (AC-only) adapter; DC fast charging remains CCS1. 0-60 time is an approximate figure from press estimates, not an independently verified test. Tow capacity of 1,500 lb requires the optional Trailering Provisions package."
+  },
+  {
+    "id": "chevrolet-blazer-ev-2026-lt-awd",
+    "make": "Chevrolet",
+    "model": "Blazer EV",
+    "trim": "LT AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 47700,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 85,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 283,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49646"
+    },
+    "performance": {
+      "zeroTo60Sec": 6,
+      "horsepowerHp": 300,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 150,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": false,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": 0,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 25.5,
+      "maxCubicFeet": 59.1,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": 1500,
+    "groundClearanceIn": 7.5,
+    "links": {
+      "manufacturerSpec": "https://www.chevrolet.com/electric/previous-year/blazer-ev",
+      "review": "https://www.edmunds.com/chevrolet/blazer-ev/2026/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49646"
+    },
+    "notes": "Uses native CCS1 port for 2026 model year; DC fast charging remains CCS1 (optional NACS adapter is AC/Level 2 only). Super Cruise availability on Blazer EV LT/RS not independently confirmed for this trim, so selfDriving.available is set to false pending verification. 0-60 time is an approximate figure from press estimates."
+  },
+  {
+    "id": "chevrolet-equinox-ev-2026-lt-fwd",
+    "make": "Chevrolet",
+    "model": "Equinox EV",
+    "trim": "LT FWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 34995,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "FWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 85,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 319,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49953"
+    },
+    "performance": {
+      "zeroTo60Sec": 7.7,
+      "horsepowerHp": 220,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 150,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": false,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": 0,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 26.4,
+      "maxCubicFeet": 57.2,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 6.4,
+    "links": {
+      "manufacturerSpec": "https://www.chevrolet.com/electric/previous-year/equinox-ev",
+      "review": "https://www.edmunds.com/chevrolet/equinox-ev/2026/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49953"
+    },
+    "notes": "Uses native CCS1 port for 2026 model year (GM has announced the 2027 Equinox EV switches to native NACS); optional NACS AC adapter exists but DC fast charging remains CCS1. Wireless phone charging is standard only on LT2/RS trims, not base LT1. No Apple CarPlay/Android Auto - Chevy uses Google built-in infotainment instead. Super Cruise is an option on LT2/RS, not available on base LT."
+  },
+  {
+    "id": "chevrolet-equinox-ev-2026-rs-awd",
+    "make": "Chevrolet",
+    "model": "Equinox EV",
+    "trim": "RS AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 44095,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 85,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 307,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49955"
+    },
+    "performance": {
+      "zeroTo60Sec": 5.8,
+      "horsepowerHp": 300,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 150,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": 0,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Super Cruise",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      21
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 26.4,
+      "maxCubicFeet": 57.2,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 6.4,
+    "links": {
+      "manufacturerSpec": "https://www.chevrolet.com/electric/previous-year/equinox-ev",
+      "review": "https://www.edmunds.com/chevrolet/equinox-ev/2026/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49955"
+    },
+    "notes": "RS AWD MSRP based on 2026 pricing reports (~$44,095-$44,600 depending on source). Super Cruise is available as part of an optional Active Safety Package (~$3,355) on RS, not standard; subscriptionUsdPerMonth for Super Cruise trial not confirmed. GM's fueleconomy.gov listing offers two AWD sub-variants (11kW and 19kW onboard charger) with slightly different range (307 vs 288 mi); this entry uses the 11kW/307-mile variant."
+  },
+  {
+    "id": "ford-mustang-mach-e-2026-select-rwd",
+    "make": "Ford",
+    "model": "Mustang Mach-E",
+    "trim": "Select RWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 37795,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 68,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 260,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50204"
+    },
+    "performance": {
+      "zeroTo60Sec": 5.6,
+      "horsepowerHp": 264,
+      "topSpeedMph": 112
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 115,
+      "level2Kw": 10.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": false,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "BlueCruise",
+        "subscriptionUsdPerMonth": 49.99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18,
+      19,
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 29.7,
+      "maxCubicFeet": 59.7,
+      "frunkCubicFeet": 4.8
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 5.7,
+    "links": {
+      "manufacturerSpec": "https://www.ford.com/suvs/mach-e/models/select/",
+      "review": "https://www.edmunds.com/ford/mustang-mach-e/2026/trims/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50204"
+    },
+    "notes": "MY2026 is the current model year on ford.com (2025 has been superseded). Select RWD uses the Standard Range 75.7 kWh (68 kWh usable) LFP-family pack. Despite Ford's 2023 NACS announcement, the Mach-E still ships with a native CCS1 port as of MY2026; a NACS-to-CCS1 Fast Charging Adapter is a separate ~$200 accessory (not bundled). For 2026, the frunk (4.8 cu ft) became a $495 option rather than standard equipment, and BlueCruise/wireless charging pad/360-camera moved from standard to optional on Select. Cupholder count, USB port breakdown, and tow rating could not be confirmed from reliable current-MY sources and are left null rather than guessed. Top speed (112 mph) reflects the figure consistently cited for non-GT Mach-E trims across recent model years; a MY2026-specific primary-source citation was not found. Seat material is Ford's synthetic \"ActiveX\" leatherette (no genuine leather is offered on any Mach-E trim), so leatherAvailable is false."
+  },
+  {
+    "id": "ford-mustang-mach-e-2026-gt-awd",
+    "make": "Ford",
+    "model": "Mustang Mach-E",
+    "trim": "GT AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 53395,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 88,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 280,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50202"
+    },
+    "performance": {
+      "zeroTo60Sec": 3.7,
+      "horsepowerHp": 480,
+      "topSpeedMph": 124
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 150,
+      "level2Kw": 10.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "BlueCruise",
+        "subscriptionUsdPerMonth": 49.99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 29.7,
+      "maxCubicFeet": 59.7,
+      "frunkCubicFeet": 4.8
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 5.2,
+    "links": {
+      "manufacturerSpec": "https://www.ford.com/suvs/mach-e/models/gt/",
+      "review": "https://www.edmunds.com/ford/mustang-mach-e/2026/gt/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50202"
+    },
+    "notes": "MY2026 GT is standard AWD with the Extended Range 98.8 kWh pack (88 kWh usable), 480 hp / 600 lb-ft. Edmunds' own test track measured 3.7s 0-60; Ford's own claim (with the optional GT Performance Upgrade, +100 lb-ft to 700 lb-ft) is 3.3s -- used the independently-tested base-GT figure here rather than the marketing number. Charging port is native CCS1 (not NACS) as of MY2026; NACS Supercharger access requires Ford's separate ~$200 adapter accessory. Ventilated seats are notably NOT offered on GT (only on Premium), despite GT being the top trim -- confirmed via multiple owner/dealer sources. Top speed (124 mph / 200 km/h) and tow capacity could not be confirmed against a primary MY2026 Ford source with high confidence; tow capacity is left null rather than guessed. Cupholder/USB port counts also left null for the same reason."
+  },
+  {
+    "id": "honda-prologue-2025-ex-fwd",
+    "make": "Honda",
+    "model": "Prologue",
+    "trim": "EX FWD",
+    "modelYear": 2025,
+    "bodyStyle": "SUV",
+    "msrp": 47400,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "FWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 85,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 308,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Honda&baseModel=Prologue&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "performance": {
+      "zeroTo60Sec": 6.7,
+      "horsepowerHp": 220,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 150,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": null
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 25.2,
+      "maxCubicFeet": 57.7,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 8.0,
+    "links": {
+      "manufacturerSpec": "https://automobiles.honda.com/prologue",
+      "review": "https://www.caranddriver.com/honda/prologue",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Honda&baseModel=Prologue&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "notes": "Built on GM's Ultium platform (shares underpinnings with Chevy Blazer EV/Cadillac Lyriq). No frunk; there is a small ~0.8 cu ft underfloor storage bin behind the rear cargo floor, not counted in frunkCubicFeet (left null). Honda's published max tow rating (1,500 lbs) appears tied to AWD/tow-package trims; whether the base FWD EX is tow-rated at all was not confirmed, so towCapacityLbs left null for this trim. Heat pump availability on Prologue not confirmed either way (left null)."
+  },
+  {
+    "id": "honda-prologue-2025-elite-awd",
+    "make": "Honda",
+    "model": "Prologue",
+    "trim": "Elite AWD",
+    "modelYear": 2025,
+    "bodyStyle": "SUV",
+    "msrp": 57900,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 85,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 283,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Honda&baseModel=Prologue&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "performance": {
+      "zeroTo60Sec": 6.4,
+      "horsepowerHp": 300,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 150,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": null
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      21
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 25.2,
+      "maxCubicFeet": 57.7,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": 1500,
+    "groundClearanceIn": 8.0,
+    "links": {
+      "manufacturerSpec": "https://automobiles.honda.com/prologue",
+      "review": "https://www.caranddriver.com/honda/prologue",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Honda&baseModel=Prologue&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "notes": "Top trim; adds 360-degree camera, head-up display, ventilated front seats and heated steering wheel over EX. Cargo figures reused from EX/general Prologue spec since Elite-specific cargo numbers weren't separately published (AWD hardware typically doesn't change cargo volume materially on this platform). Heated rear seats and heat pump availability not confirmed. No frunk (small underfloor bin only, not counted)."
+  },
+  {
+    "id": "hyundai-ioniq-5-2026-se-standard-range-rwd",
+    "make": "Hyundai",
+    "model": "Ioniq 5",
+    "trim": "SE Standard Range RWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 35000,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": false,
+    "battery": {
+      "usableKwh": 63,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 245,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49961"
+    },
+    "performance": {
+      "zeroTo60Sec": 8.5,
+      "horsepowerHp": 168,
+      "topSpeedMph": 115
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 10.9,
+      "vehicleToLoad": true,
+      "heatPump": false
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": false,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": 0,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 26.3,
+      "maxCubicFeet": 58.5,
+      "frunkCubicFeet": 0.85
+    },
+    "towCapacityLbs": 0,
+    "groundClearanceIn": 6.1,
+    "links": {
+      "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-5/se-standard-range",
+      "review": "https://cars.usnews.com/cars-trucks/hyundai/ioniq-5/specs/ioniq-5-se-standard-range-rwd-474165",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49961"
+    },
+    "notes": "2026 model year (Hyundai's current lineup after the Oct 2025 price cuts). MSRP of $35,000 excludes the $1,600 destination/freight charge (total ~$36,600). AWD is not offered on this specific SE Standard Range trim (it is exclusive to the RWD 63 kWh configuration); AWD is available on other 2026 Ioniq 5 trims (SE, SEL, XRT, Limited). Seats are cloth; no leather/H-Tex option at this trim. V2L is supported via an accessory exterior adapter at the charge port, but the interior 120V household outlet is reserved for Limited/XRT. Heated front seats are standard but heated steering wheel/rear seats and ventilated seats are not available on this trim. Cupholder count and exact USB-A/Type-C port breakdown could not be confirmed from a reliable source and are left null. Tow capacity is not factory-rated (0) for this trim; only the XRT trim (with optional hitch) is rated to tow (2,700 lb)."
+  },
+  {
+    "id": "hyundai-ioniq-5-2026-limited-awd",
+    "make": "Hyundai",
+    "model": "Ioniq 5",
+    "trim": "Limited AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 48975,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 84,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 269,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49963"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.6,
+      "horsepowerHp": 320,
+      "topSpeedMph": 115
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 10.9,
+      "vehicleToLoad": true,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": 0,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist 2",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 26.3,
+      "maxCubicFeet": 58.5,
+      "frunkCubicFeet": 0.85
+    },
+    "towCapacityLbs": 0,
+    "groundClearanceIn": 6.1,
+    "links": {
+      "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-5/limited",
+      "review": "https://cars.usnews.com/cars-trucks/hyundai/ioniq-5/specs/ioniq-5-limited-awd-474172",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49963"
+    },
+    "notes": "2026 model year, dual-motor AWD (165 kW rear + 74 kW front = 239 kW / 320 hp combined, 446 lb-ft). MSRP of $48,975 is a computed figure (Limited RWD base $45,075 + the commonly reported $3,900 AWD upcharge) since Hyundai/dealer sources did not publish an explicit stand-alone Limited AWD MSRP line; it is cross-checked against third-party listings showing ~$50,575 MSRP including the $1,600 destination fee ($50,575 - $1,600 = $48,975). Seat material is Hyundai's synthetic 'H-Tex' leatherette, not genuine leather, so leatherAvailable is set to false. V2L includes both the exterior charge-port adapter and the interior 120V household outlet on this trim. Not factory-rated to tow (0 lb); only XRT (with optional hitch) is tow-rated. Cupholder count and exact USB-A/Type-C port breakdown could not be confirmed from a reliable source and are left null."
+  },
+  {
+    "id": "hyundai-ioniq-6-2025-se-standard-range-rwd",
+    "make": "Hyundai",
+    "model": "Ioniq 6",
+    "trim": "SE Standard Range RWD",
+    "modelYear": 2025,
+    "bodyStyle": "Sedan",
+    "msrp": 37750,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 53,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 240,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48364"
+    },
+    "performance": {
+      "zeroTo60Sec": 8.7,
+      "horsepowerHp": 149,
+      "topSpeedMph": 115
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 175,
+      "level2Kw": 10.9,
+      "vehicleToLoad": true,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": false,
+      "cupholders": 4,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": null,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 11.2,
+      "maxCubicFeet": null,
+      "frunkCubicFeet": 0.5
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 5.6,
+    "links": {
+      "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-6/se-standard-range",
+      "review": "https://www.motormatchup.com/catalog/Hyundai/IONIQ-6/2025/SE-Standard-Range-RWD",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48364"
+    },
+    "notes": "hyundaiusa.com currently lists MY2025 as the latest standard Ioniq 6 lineup (SE Standard Range, SE, SEL, Limited); the 2026 model year update to the regular lineup was not yet live at time of research, only the separate high-performance Ioniq 6 N. Standard Range battery is widely cited as '53 kWh' but usable-capacity estimates vary by source (roughly 48-53 kWh); reported 53 kWh here should be treated as approximate/gross. Heated steering wheel availability on this base trim could not be confirmed with a reliable source, so left null rather than guessed."
+  },
+  {
+    "id": "hyundai-ioniq-6-2025-limited-awd",
+    "make": "Hyundai",
+    "model": "Ioniq 6",
+    "trim": "Limited AWD",
+    "modelYear": 2025,
+    "bodyStyle": "Sedan",
+    "msrp": 54500,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 74,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 270,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48365"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.6,
+      "horsepowerHp": 320,
+      "topSpeedMph": 115
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 233,
+      "level2Kw": 10.9,
+      "vehicleToLoad": true,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": 4,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist II",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 11.2,
+      "maxCubicFeet": null,
+      "frunkCubicFeet": 0.5
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 5.6,
+    "links": {
+      "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-6/limited",
+      "review": "https://www.motormatchup.com/catalog/Hyundai/IONIQ-6/2025/Limited-AWD",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48365"
+    },
+    "notes": "MSRP reported as $54,500-$54,600 across sources (Carbuzz $54,500, Capital One/Car Connection $54,600); used $54,500. Ground clearance figure reused from the RWD trim (5.6 in) since a distinct AWD-specific figure was not found. Rear heated seats confirmed absent even on this top trim per Hyundai IONIQ owner forum reports."
+  },
+  {
+    "id": "kia-ev6-2026-light-rwd",
+    "make": "Kia",
+    "model": "EV6",
+    "trim": "Light RWD",
+    "modelYear": 2026,
+    "bodyStyle": "Crossover",
+    "msrp": 37900,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": false,
+    "battery": {
+      "usableKwh": 63.0,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 237,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50215"
+    },
+    "performance": {
+      "zeroTo60Sec": 8.3,
+      "horsepowerHp": 167,
+      "topSpeedMph": 115
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 180,
+      "level2Kw": 10.9,
+      "vehicleToLoad": false,
+      "heatPump": false
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": 4,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 1,
+        "total": 5
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 24.4,
+      "maxCubicFeet": 46.7,
+      "frunkCubicFeet": 1.8
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": 6.1,
+    "links": {
+      "manufacturerSpec": "https://www.kia.com/us/en/ev6/specs-compare",
+      "review": "https://cars.usnews.com/cars-trucks/kia/ev6",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50215"
+    },
+    "notes": "2026 MY 'Light' trim is RWD-only (no AWD option at this trim level; AWD becomes available starting with Light Long Range). Base MSRP excludes $1,545 destination fee. Top speed (115 mph) and frunk volume (1.8 cu ft) are not published by Kia directly and are sourced from third-party spec aggregators (evspecifications.com); Kia's own site does not list a frunk figure. Max DC charging rate (180 kW) is a third-party-reported peak acceptance rate for the 63 kWh Standard Range pack; Kia's site only states that a 350 kW DC station can reach 10-80% in ~20 min, without giving a literal vehicle peak-kW spec, so treat 180 kW as an estimate rather than an official number."
+  },
+  {
+    "id": "kia-ev6-2026-gt-line-awd",
+    "make": "Kia",
+    "model": "EV6",
+    "trim": "GT-Line AWD",
+    "modelYear": 2026,
+    "bodyStyle": "Crossover",
+    "msrp": 53000,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 84.0,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 270,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50213"
+    },
+    "performance": {
+      "zeroTo60Sec": 5.0,
+      "horsepowerHp": 320,
+      "topSpeedMph": 117
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 239,
+      "level2Kw": 10.9,
+      "vehicleToLoad": true,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": 4,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 1,
+        "total": 5
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist 2",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 24.4,
+      "maxCubicFeet": 46.7,
+      "frunkCubicFeet": 0.7
+    },
+    "towCapacityLbs": 2700,
+    "groundClearanceIn": 6.1,
+    "links": {
+      "manufacturerSpec": "https://www.kia.com/us/en/ev6/specs-compare",
+      "review": "https://www.edmunds.com/car-news/2025-kia-ev6-gt-line-tested.html",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50213"
+    },
+    "notes": "GT-Line AWD price ($53,000) = GT-Line base $48,700 + $4,300 AWD upcharge, per Kia's official build-and-price tool (kia.com/us/en/ev6/build); excludes $1,545 destination fee. Seat material is SynTex synthetic leather/suede (no genuine leather option offered on EV6). Wheels: 19-in black alloy standard, 20-in black alloy available (EPA range figure of 270 mi corresponds to the 20-in wheel/Long Range AWD configuration, which is the fueleconomy.gov listing matching GT-Line AWD's official Kia-published 270 mi range and 106/89/97 MPGe). Top speed (117 mph, i.e. 116.8 mph) and frunk volume (0.7 cu ft, reduced vs RWD due to front drive motor) are third-party figures (evspecifications.com, EV forums), not published by Kia. Max DC charging rate (239 kW) is a third-party estimate for the 84 kWh Long Range pack (sources ranged 235-263 kW); Kia's own site only states a 350 kW EVSE achieves 10-80% in ~20 min without citing the vehicle's literal peak-kW acceptance."
+  },
+  {
+    "id": "kia-ev9-2026-light-rwd",
+    "make": "Kia",
+    "model": "EV9",
+    "trim": "Light RWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 54900,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 7,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 76.1,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 230,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49665"
+    },
+    "performance": {
+      "zeroTo60Sec": 7.7,
+      "horsepowerHp": 215,
+      "topSpeedMph": 118
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 235,
+      "level2Kw": 11,
+      "vehicleToLoad": true,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": 8,
+      "usbPorts": {
+        "typeC": 6,
+        "typeA": 0,
+        "total": 6
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist 2",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 20.2,
+      "maxCubicFeet": 81.7,
+      "frunkCubicFeet": 3.2
+    },
+    "towCapacityLbs": 2000,
+    "groundClearanceIn": 7.0,
+    "links": {
+      "manufacturerSpec": "https://www.kia.com/us/en/ev9/specs-compare",
+      "review": "https://www.kiamedia.com/us/en/models/ev9/2026/specifications",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49665"
+    },
+    "notes": "Standard config is 7-passenger with 2nd-row bench (6-passenger captain's-chair layout is available on other RWD/AWD trims, not standard on Light RWD). No built-in/integrated booster seat is offered on the Kia EV9 on any trim as of MY2026 \u2014 extensive search found only third-party/aftermarket booster seat compatibility guidance, no factory integrated booster feature. Cupholder count (8) and USB port count (6, all USB-C) are lineup-wide figures cited by multiple secondary sources, not itemized per trim by Kia directly. Max DC charge rate (235kW) and cargo max (81.7 cu ft, all seats folded) are lineup-wide figures from secondary sources; Kia's official per-trim table (kiamedia.com) did not separately break these out by exact kW or max-fold cargo per trim."
+  },
+  {
+    "id": "kia-ev9-2026-wind-awd",
+    "make": "Kia",
+    "model": "EV9",
+    "trim": "Wind AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 63900,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 7,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 99.8,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 283,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49667"
+    },
+    "performance": {
+      "zeroTo60Sec": 5.7,
+      "horsepowerHp": 379,
+      "topSpeedMph": 124
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 210,
+      "level2Kw": 11,
+      "vehicleToLoad": true,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": 8,
+      "usbPorts": {
+        "typeC": 6,
+        "typeA": 0,
+        "total": 6
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist 2",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 20.2,
+      "maxCubicFeet": 81.7,
+      "frunkCubicFeet": 1.8
+    },
+    "towCapacityLbs": 3500,
+    "groundClearanceIn": 7.8,
+    "links": {
+      "manufacturerSpec": "https://www.kia.com/us/en/ev9/specs-compare",
+      "review": "https://www.kiamedia.com/us/en/models/ev9/2026/specifications",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49667"
+    },
+    "notes": "Wind AWD's standard seating is 7-passenger with a 2nd-row bench (6-passenger captain's-chair layout is standard on Light Long Range RWD, Land AWD, and GT-Line AWD instead). Dual-motor e-AWD with torque vectoring, 99.8kWh battery shared with Land and GT-Line trims. Kia's official spec sheet lists 0-60 as '5.7/5.0 sec' referring to Boost-mode on/off; 5.7 sec (Boost off) is used here as the more consistently cited figure across independent sources. No built-in/integrated booster seat is offered on the Kia EV9 on any trim as of MY2026. Max DC charge rate (210kW) reflects the larger 99.8kWh battery pack per independent charging tests; frunk volume shrinks to 1.8 cu ft on AWD trims due to the added front motor. Cupholder and USB port counts are lineup-wide figures from secondary sources, not itemized per trim by Kia directly."
+  },
+  {
+    "id": "rivian-r1s-2025-dual-motor-awd-large-pack",
+    "make": "Rivian",
+    "model": "R1S",
+    "trim": "Dual-Motor AWD (Large Pack)",
+    "modelYear": 2025,
+    "bodyStyle": "SUV",
+    "msrp": 82900,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 7,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 109.4,
+      "warrantyYears": 8,
+      "warrantyMiles": 175000
+    },
+    "range": {
+      "epaMiles": 329,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1S&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.5,
+      "horsepowerHp": 533,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 220,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 6,
+        "typeA": 0,
+        "total": 6
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": "Highway Assist",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20,
+      22
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 17.6,
+      "maxCubicFeet": 90.7,
+      "frunkCubicFeet": 9.9
+    },
+    "towCapacityLbs": 7700,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://rivian.com/r1s",
+      "review": "https://www.caranddriver.com/rivian/r1s",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1S&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "notes": "3-row SUV, no captain's chairs option in MY2025 (added for MY2027), so 2nd-row bench gives 7-passenger seating. R1S rides on adjustable air suspension (approx. 8.3-14.6 in travel depending on mode) so a single ground-clearance figure isn't published; left null. Vegan/synthetic interior materials only (no leather offered). Does not support Apple CarPlay/Android Auto. USB-C port count taken from shared R1 platform spec (R1T), not independently confirmed for R1S. Rivian's 'Highway Assist' is a hands-on/limited hands-free driver-assist feature, not a full self-driving product, hence selfDriving.available=false. Top speed not published by Rivian for this configuration."
+  },
+  {
+    "id": "rivian-r1s-2025-quad-motor-awd-max-pack",
+    "make": "Rivian",
+    "model": "R1S",
+    "trim": "Quad-Motor AWD (Max Pack)",
+    "modelYear": 2025,
+    "bodyStyle": "SUV",
+    "msrp": 121990,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 7,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 141.5,
+      "warrantyYears": 8,
+      "warrantyMiles": 175000
+    },
+    "range": {
+      "epaMiles": 374,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1S&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "performance": {
+      "zeroTo60Sec": 2.6,
+      "horsepowerHp": 1025,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 220,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 6,
+        "typeA": 0,
+        "total": 6
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": "Highway Assist",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20,
+      22
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 17.6,
+      "maxCubicFeet": 90.7,
+      "frunkCubicFeet": 9.9
+    },
+    "towCapacityLbs": 7700,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://rivian.com/r1s",
+      "review": "https://www.caranddriver.com/rivian/r1s",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1S&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "notes": "Top performance trim; four independently-controlled motors, 1025 hp / 1198 lb-ft, sub-2.6s 0-60 (2.5s possible with 22in Super Sport wheels + Launch mode). Range figure (374 mi) is Rivian's own claim for the shared 140-kWh Max pack; the exact EPA-certified number for the Quad-Motor configuration specifically was not confirmed on fueleconomy.gov during research, so treat with slightly less confidence than the Dual-Motor entry. Same cargo/seating/interior-material notes as the Dual-Motor Large Pack entry apply."
+  },
+  {
+    "id": "rivian-r1t-2025-adventure-dual-motor-awd-large-pack",
+    "make": "Rivian",
+    "model": "R1T",
+    "trim": "Adventure Dual-Motor AWD (Large Pack)",
+    "modelYear": 2025,
+    "bodyStyle": "Truck",
+    "msrp": 76900,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 109.4,
+      "warrantyYears": 8,
+      "warrantyMiles": 175000
+    },
+    "range": {
+      "epaMiles": 329,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1T&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.5,
+      "horsepowerHp": 533,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 220,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 6,
+        "typeA": 0,
+        "total": 6
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": "Highway Assist",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20,
+      22
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": null,
+      "frunkCubicFeet": 11
+    },
+    "towCapacityLbs": 11000,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://rivian.com/r1t",
+      "review": "https://www.caranddriver.com/rivian/r1t",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1T&srchtyp=ymm&pageno=1&rowLimit=50"
+    },
+    "notes": "Pickup truck: it has no conventional enclosed rear cargo/trunk area, so cargo.rearCubicFeet and cargo.maxCubicFeet (which assume a hatch/liftgate cargo hold) are left null as not applicable. Actual storage comes from: an 11 cu ft powered frunk (captured in cargo.frunkCubicFeet), an 11.7 cu ft 'Gear Tunnel' running through the cabin (65 in L x 18.1 in W x 20.3 in H, doors on both ends), and a 54.2 in long truck bed (51.1 in wide, extendable to 83.6 in with tailgate down and seats folded). Bed/frunk/gear-tunnel figures vary slightly by source (frunk reported as either 9.9 or 11 cu ft); 11 cu ft used here per Rivian's own storage breakdown. Adjustable air suspension means no single ground-clearance figure is published (left null). Vegan/synthetic interior materials only; no Apple CarPlay/Android Auto support."
+  },
+  {
+    "id": "tesla-model-3-2026-standard-rwd",
+    "make": "Tesla",
+    "model": "Model 3",
+    "trim": "Standard RWD",
+    "modelYear": 2026,
+    "bodyStyle": "Sedan",
+    "msrp": 36990,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 60,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 321,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50251"
+    },
+    "performance": {
+      "zeroTo60Sec": 5.8,
+      "horsepowerHp": 264,
+      "topSpeedMph": 125
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 170,
+      "level2Kw": 7.7,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18,
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 15,
+      "maxCubicFeet": 43,
+      "frunkCubicFeet": 3.1
+    },
+    "towCapacityLbs": 2205,
+    "groundClearanceIn": 5.4,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/model3/design",
+      "review": "https://www.edmunds.com/tesla/model-3/2026/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50251"
+    },
+    "notes": "Battery kWh, horsepower, 0-60, top speed, tow rating, and ground clearance are third-party estimates (Tesla does not officially publish these figures); MSRP/range/MPGe are official EPA/manufacturer figures."
+  },
+  {
+    "id": "tesla-model-3-2026-performance-awd",
+    "make": "Tesla",
+    "model": "Model 3",
+    "trim": "Performance AWD",
+    "modelYear": 2026,
+    "bodyStyle": "Sedan",
+    "msrp": 54990,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 82.1,
+      "warrantyYears": 8,
+      "warrantyMiles": 120000
+    },
+    "range": {
+      "epaMiles": 346,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50250"
+    },
+    "performance": {
+      "zeroTo60Sec": 2.9,
+      "horsepowerHp": 510,
+      "topSpeedMph": 163
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 15,
+      "maxCubicFeet": 43,
+      "frunkCubicFeet": 3.1
+    },
+    "towCapacityLbs": 2205,
+    "groundClearanceIn": 5.4,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/model3-performance",
+      "review": "https://www.edmunds.com/tesla/model-3/2026/performance/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50250"
+    },
+    "notes": "Battery kWh figure is a third-party estimate; horsepower figures for Model 3 Performance vary by source (460-510 hp cited); MSRP/range/MPGe are official EPA/manufacturer figures."
+  },
+  {
+    "id": "tesla-model-x-2026-plaid-awd",
+    "make": "Tesla",
+    "model": "Model X",
+    "trim": "Plaid AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 114990,
+    "doors": 5,
+    "rearDoorStyle": "Suicide/Coach",
+    "slidingDoors": false,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 6,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 100,
+      "warrantyYears": 8,
+      "warrantyMiles": 150000
+    },
+    "range": {
+      "epaMiles": 335,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49746"
+    },
+    "performance": {
+      "zeroTo60Sec": 2.5,
+      "horsepowerHp": 1020,
+      "topSpeedMph": 163
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 5,
+        "typeA": 0,
+        "total": 5
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20,
+      22
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 20,
+      "maxCubicFeet": 92.3,
+      "frunkCubicFeet": 6.5
+    },
+    "towCapacityLbs": 5000,
+    "groundClearanceIn": 6.6,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/modelx/design",
+      "review": "https://www.edmunds.com/tesla/model-x/2026/st-402085867/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49746"
+    },
+    "notes": "Model X has 'falcon wing' rear doors (roof-hinged, powered) rather than conventional or sliding doors; mapped to 'Suicide/Coach' as the closest schema option. Third-row seat count and maxPassengers can be 5, 6, or 7 depending on configuration (2+3+2 seven-seat layout is optional); this entry assumes the 6-seat (2+2+2) captain's-chair layout common on Plaid. rearCubicFeet behind 3rd row and warranty miles are estimates."
+  },
+  {
+    "id": "tesla-model-y-2026-standard-rwd",
+    "make": "Tesla",
+    "model": "Model Y",
+    "trim": "Standard RWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 39990,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 60,
+      "warrantyYears": 8,
+      "warrantyMiles": 120000
+    },
+    "range": {
+      "epaMiles": 321,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50040"
+    },
+    "performance": {
+      "zeroTo60Sec": 6.8,
+      "horsepowerHp": 295,
+      "topSpeedMph": 125
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 170,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": 5,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18,
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 34.4,
+      "maxCubicFeet": 68,
+      "frunkCubicFeet": 4.1
+    },
+    "towCapacityLbs": 3500,
+    "groundClearanceIn": 6.6,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/modely/design",
+      "review": "https://www.edmunds.com/tesla/model-y/2026/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50040"
+    },
+    "notes": "id 50040 is the 18-inch-wheel EPA listing (321 mi); a 19-inch-wheel variant is rated slightly lower. Battery kWh is a third-party estimate."
+  },
+  {
+    "id": "tesla-model-y-2026-long-range-awd",
+    "make": "Tesla",
+    "model": "Model Y",
+    "trim": "Long Range AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "msrp": 48990,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 78.4,
+      "warrantyYears": 8,
+      "warrantyMiles": 120000
+    },
+    "range": {
+      "epaMiles": 327,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49744"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.6,
+      "horsepowerHp": 346,
+      "topSpeedMph": 133
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": 5,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 34.4,
+      "maxCubicFeet": 68,
+      "frunkCubicFeet": 4.1
+    },
+    "towCapacityLbs": 3500,
+    "groundClearanceIn": 6.6,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/modely/design",
+      "review": "https://www.caranddriver.com/tesla/model-y",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49744"
+    },
+    "notes": "Battery kWh is a third-party estimate; Tesla does not officially publish pack capacity."
+  },
+  {
+    "id": "volkswagen-id-buzz-2025-pro-s-rwd",
+    "make": "Volkswagen",
+    "model": "ID. Buzz",
+    "trim": "Pro S",
+    "modelYear": 2025,
+    "bodyStyle": "Minivan",
+    "msrp": 59995,
+    "doors": 5,
+    "rearDoorStyle": "Sliding",
+    "slidingDoors": true,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 7,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 86,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 234,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48444"
+    },
+    "performance": {
+      "zeroTo60Sec": 7.4,
+      "horsepowerHp": 282,
+      "topSpeedMph": 99
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 200,
+      "level2Kw": 11,
+      "vehicleToLoad": false,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 8,
+        "typeA": 0,
+        "total": 8
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": null
+    },
+    "cargo": {
+      "rearCubicFeet": 18.6,
+      "maxCubicFeet": 145.5,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 2600,
+    "groundClearanceIn": 6.3,
+    "links": {
+      "manufacturerSpec": "https://www.vw.com/idhub/content/dam/onehub_pkw/importers/us/en/showrooms/id-buzz/2025/tech-specs/ID_Buzz_Pro_S_Technical_Data.pdf",
+      "review": "https://www.edmunds.com/volkswagen/id-buzz/2025/st-401990543/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48444"
+    },
+    "notes": "MSRP excludes $1,550 destination charge (total $61,545), per VW's official build-and-price tech spec sheet. No frunk \u2014 the front compartment holds only the washer-fluid reservoir, no cargo space (confirmed across multiple outlets). Front seats get heating, ventilation, and massage as standard; heated rear seats and an exact cupholder count were not confirmed from an official source. No built-in/integrated booster seat option found for this model."
+  },
+  {
+    "id": "volkswagen-id-buzz-2025-pro-s-plus-4motion-awd",
+    "make": "Volkswagen",
+    "model": "ID. Buzz",
+    "trim": "Pro S Plus 4MOTION",
+    "modelYear": 2025,
+    "bodyStyle": "Minivan",
+    "msrp": 68990,
+    "doors": 5,
+    "rearDoorStyle": "Sliding",
+    "slidingDoors": true,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 6,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 86,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 231,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48445"
+    },
+    "performance": {
+      "zeroTo60Sec": 6.0,
+      "horsepowerHp": 335,
+      "topSpeedMph": 99
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 200,
+      "level2Kw": 11,
+      "vehicleToLoad": false,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 8,
+        "typeA": 0,
+        "total": 8
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": null
+    },
+    "cargo": {
+      "rearCubicFeet": 18.6,
+      "maxCubicFeet": 145.5,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 3500,
+    "groundClearanceIn": 6.3,
+    "links": {
+      "manufacturerSpec": "https://www.vw.com/idhub/content/dam/onehub_pkw/importers/us/en/showrooms/id-buzz/2025/tech-specs/ID_Buzz_Pro_S_Plus_with_4MOTION_Technical_Data.pdf",
+      "review": "https://www.edmunds.com/volkswagen/id-buzz/2025/st-402061745/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48445"
+    },
+    "notes": "MSRP excludes $1,550 destination charge (total $70,540), per VW's official build-and-price tech spec sheet. VW's own spec sheet lists 0-60 mph as 6.0s; Car and Driver's independent test clocked this AWD trim at 5.5s. No frunk. Captain's-chair 2nd row seats 6 total, vs. the RWD Pro S's 7-passenger bench seat."
+  },
+  {
+    "id": "volkswagen-id4-2025-standard-rwd",
+    "make": "Volkswagen",
+    "model": "ID.4",
+    "trim": "Standard RWD",
+    "modelYear": 2025,
+    "bodyStyle": "SUV",
+    "msrp": 39995,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 62,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 206,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Volkswagen&baseModel=ID.4&srchtyp=ymm&pageno=1"
+    },
+    "performance": {
+      "zeroTo60Sec": 7.1,
+      "horsepowerHp": 282,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 135,
+      "level2Kw": 11,
+      "vehicleToLoad": false,
+      "heatPump": false
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": false,
+      "cupholders": null,
+      "usbPorts": null
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 30.3,
+      "maxCubicFeet": 64.2,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 2200,
+    "groundClearanceIn": 6.1,
+    "links": {
+      "manufacturerSpec": "https://www.vw.com/en/models/id-4.html",
+      "review": "https://www.caranddriver.com/volkswagen/id4",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Volkswagen&baseModel=ID.4&srchtyp=ymm&pageno=1"
+    },
+    "notes": "62 kWh figure is the gross/nominal pack size commonly published for the Standard trim; VW's precise usable-capacity number was not independently confirmed this session. Wireless charging, ventilated seats, heated steering wheel, and heat pump are Pro/Pro S-tier features not standard on the base Standard trim (feature-by-feature confirmation not exhaustive; treat as best estimate). Note: VW discontinued this 62-kWh Standard trim for MY2026, so 2025 is the last model year it's offered."
+  },
+  {
+    "id": "volkswagen-id4-2025-pro-s-awd",
+    "make": "Volkswagen",
+    "model": "ID.4",
+    "trim": "Pro S AWD",
+    "modelYear": 2025,
+    "bodyStyle": "SUV",
+    "msrp": 54095,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 82,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 263,
+      "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Volkswagen&baseModel=ID.4&srchtyp=ymm&pageno=1"
+    },
+    "performance": {
+      "zeroTo60Sec": 5.7,
+      "horsepowerHp": 335,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 175,
+      "level2Kw": 11,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": null
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      20,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 30.3,
+      "maxCubicFeet": 64.2,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 2700,
+    "groundClearanceIn": 6.9,
+    "links": {
+      "manufacturerSpec": "https://www.vw.com/en/models/id-4.html",
+      "review": "https://www.caranddriver.com/volkswagen/id4",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Volkswagen&baseModel=ID.4&srchtyp=ymm&pageno=1"
+    },
+    "notes": "82 kWh is the gross/nominal pack size widely published for Pro/Pro S trims; exact usable figure not independently confirmed. Horsepower sources conflicted between 295 hp (older 2023-24 AWD rating) and 335 hp (MY2025's mid-cycle AWD power bump); 335 hp used here as the figure specific to MY2025. Includes 12-way power/massaging front seats and panoramic glass roof per Pro S equipment; heated rear seats not confirmed as standard so left false."
+  }
+]
