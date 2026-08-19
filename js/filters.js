@@ -1,5 +1,9 @@
 import { FIELDS, GROUP_ORDER } from "./fields.js";
 
+// Enum filter lists longer than this get a "Show all" toggle + type-to-filter box
+// instead of an inner scrollbar, so the sidebar only ever scrolls at the outer level.
+const ENUM_VISIBLE_COUNT = 6;
+
 // Build the domain (possible values / min-max) for each filterable field from the dataset.
 export function computeDomains(cars) {
   const domains = {};
@@ -148,28 +152,74 @@ export function renderFilterSidebar(container, domains, filterState, onChange) {
         });
       } else if (field.type === "enum" || field.type === "enumMulti") {
         if (!domain || domain.values.length === 0) continue;
-        const listId = `enum-${field.key}`;
         const label = document.createElement("span");
         label.className = "filter-field-label";
         label.textContent = field.label;
         wrap.appendChild(label);
+
+        const values = domain.values;
+        const needsExpand = values.length > ENUM_VISIBLE_COUNT;
+        const selectedSet = filterState[field.key];
+
+        let searchInput = null;
+        if (needsExpand) {
+          searchInput = document.createElement("input");
+          searchInput.type = "text";
+          searchInput.className = "enum-filter-input";
+          searchInput.placeholder = `Filter ${field.label.toLowerCase()}…`;
+          wrap.appendChild(searchInput);
+        }
+
         const list = document.createElement("div");
         list.className = "enum-list";
-        list.id = listId;
-        for (const val of domain.values) {
+        wrap.appendChild(list);
+
+        let expandBtn = null;
+        if (needsExpand) {
+          expandBtn = document.createElement("button");
+          expandBtn.type = "button";
+          expandBtn.className = "enum-expand-btn";
+          wrap.appendChild(expandBtn);
+        }
+
+        // If a value beyond the visible cutoff is already selected, start expanded so it stays visible.
+        let expanded = values.some((val, i) => i >= ENUM_VISIBLE_COUNT && selectedSet.has(val));
+
+        const rows = values.map(val => {
           const row = document.createElement("label");
           row.className = "checkbox-row";
-          const checked = filterState[field.key].has(val);
+          const checked = selectedSet.has(val);
           row.innerHTML = `<input type="checkbox" data-key="${field.key}" data-val="${String(val).replace(/"/g, '&quot;')}" ${checked ? "checked" : ""}/> <span>${val}</span>`;
           row.querySelector("input").addEventListener("change", e => {
-            const set = filterState[field.key];
-            if (e.target.checked) set.add(field.type === "enumMulti" || typeof val === "number" ? val : val);
-            else set.delete(val);
+            if (e.target.checked) selectedSet.add(val);
+            else selectedSet.delete(val);
             onChange();
           });
           list.appendChild(row);
+          return { el: row, text: String(val).toLowerCase() };
+        });
+
+        function applyVisibility() {
+          const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+          rows.forEach((r, i) => {
+            const matchesQuery = !query || r.text.includes(query);
+            const withinLimit = expanded || query || i < ENUM_VISIBLE_COUNT;
+            r.el.style.display = matchesQuery && withinLimit ? "" : "none";
+          });
+          if (expandBtn) {
+            expandBtn.hidden = !!query;
+            expandBtn.textContent = expanded ? "Show less" : `Show all (${rows.length})`;
+          }
         }
-        wrap.appendChild(list);
+
+        if (searchInput) searchInput.addEventListener("input", applyVisibility);
+        if (expandBtn) {
+          expandBtn.addEventListener("click", () => {
+            expanded = !expanded;
+            applyVisibility();
+          });
+        }
+        applyVisibility();
       } else if (field.type === "range") {
         if (!domain || domain.min === domain.max) continue;
         const label = document.createElement("span");
