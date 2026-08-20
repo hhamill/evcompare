@@ -80,3 +80,15 @@ Five cosmetic/UX fixes from testing the deployed `hhamill.github.io/evcompare/` 
 5. **No way to open full detail from the compare view** — added a "View details" button to each column header in the compare table (both the auto-compare-at-≤5-results view and the manual multi-select compare view), wired to the same detail modal as the card grid.
 
 All verified against the real `/evcompare/` subpath locally, both desktop and mobile.
+
+---
+
+# TODO: Filter slider precision (2026-08-20)
+
+Sliders were letting continuous physical measurements drift to arbitrary decimals while dragging (step was auto-computed purely from `(max-min)/100`), and count-like fields (passengers, cupholders, USB ports, subscription cost) could land on fractional values that don't mean anything. Fixed:
+
+- `js/fields.js`: range fields now declare an explicit `step` — `0.1` for continuous specs (Level 2 AC charging, 0–60, ground clearance, all three cargo volumes) and `1` for counts (max passengers, cupholders, USB ports, self-driving subscription). Each `format` rounds to that same precision via a shared `roundTo` helper, so raw data display (cards, compare table, modal) and slider-derived display always match.
+- `js/filters.js`: the slider's HTML `step` attribute now honors `field.step` when set, instead of only the old auto-computed value.
+- Found a second issue while testing: the slider's `min`/`max` bounds come straight from raw data, and real data isn't always aligned to the target precision (ground clearance `4.48`, a subscription at `$49.99`) — so even with the right `step`, dragging would start from that odd fraction and every subsequent stop would drift by the same offset (`49.99, 50.99, 51.99, ...`). Fixed by floor/ceil-ing the domain bounds to the field's step grid in `computeDomains`. Also had to guard that against a classic float bug — `6.6 / 0.1` is `65.99999999999999` in JS, not `66`, which would floor an already-clean value down to the previous step — with a `1e-9` epsilon nudge before flooring/ceiling.
+
+Verified: sliders for the affected fields only stop on clean values, and detail/compare/card display for all of them (e.g. Mustang Mach-E GT: `10.5 kW`, `5.6s`, `5.7 in`, `4.8 cf`, `$50/mo` from a raw `$49.99`) is clean with no stray decimals.

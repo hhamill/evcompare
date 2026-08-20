@@ -1,5 +1,18 @@
 // Central field registry: drives filter UI, card stats, and the compare table.
 // type: "enum" | "enumMulti" | "boolean" | "range" | "text"
+//
+// Range fields may set `step` (the slider's drag granularity, e.g. 0.1 for a field that's
+// naturally fractional like charging kW, 1 for a field that's naturally a count like
+// passengers) — filters.js uses it for the <input type=range> step attribute instead of
+// guessing one from the domain's min/max spread. `roundTo` below keeps displayed values
+// at the same precision regardless of whether the number came from raw car data or from
+// dragging the slider (which can otherwise accumulate floating-point noise).
+
+function roundTo(value, decimals) {
+  if (value == null) return value;
+  const factor = 10 ** decimals;
+  return Math.round(value * factor) / factor;
+}
 
 export const FIELDS = [
   // ---- Overview ----
@@ -19,22 +32,22 @@ export const FIELDS = [
   { key: "chargePort", label: "Charge Port Type", group: "Range & Charging", type: "enum", get: c => c.charging?.portType },
   { key: "maxDcKw", label: "Max DC Fast Charging", group: "Range & Charging", type: "range", get: c => c.charging?.maxDcKw,
     format: v => v == null ? "—" : `${v} kW` },
-  { key: "level2Kw", label: "Level 2 AC Charging", group: "Range & Charging", type: "range", get: c => c.charging?.level2Kw,
-    format: v => v == null ? "—" : `${v} kW` },
+  { key: "level2Kw", label: "Level 2 AC Charging", group: "Range & Charging", type: "range", step: 0.1, get: c => c.charging?.level2Kw,
+    format: v => v == null ? "—" : `${roundTo(v, 1)} kW` },
   { key: "vehicleToLoad", label: "Vehicle-to-Load (V2L)", group: "Range & Charging", type: "boolean", get: c => c.charging?.vehicleToLoad },
   { key: "heatPump", label: "Heat Pump", group: "Range & Charging", type: "boolean", get: c => c.charging?.heatPump },
 
   // ---- Performance & Drivetrain ----
   { key: "drivetrain", label: "Drivetrain", group: "Performance & Drivetrain", type: "enum", get: c => c.drivetrain },
   { key: "allWheelDriveAvailable", label: "All-Wheel Drive Available", group: "Performance & Drivetrain", type: "boolean", get: c => c.allWheelDriveAvailable },
-  { key: "zeroTo60", label: "0–60 mph", group: "Performance & Drivetrain", type: "range", get: c => c.performance?.zeroTo60Sec,
-    format: v => v == null ? "—" : `${v}s` },
+  { key: "zeroTo60", label: "0–60 mph", group: "Performance & Drivetrain", type: "range", step: 0.1, get: c => c.performance?.zeroTo60Sec,
+    format: v => v == null ? "—" : `${roundTo(v, 1)}s` },
   { key: "horsepower", label: "Horsepower", group: "Performance & Drivetrain", type: "range", get: c => c.performance?.horsepowerHp,
     format: v => v == null ? "—" : `${v} hp` },
   { key: "towCapacityLbs", label: "Tow Capacity", group: "Performance & Drivetrain", type: "range", get: c => c.towCapacityLbs,
     format: v => v == null ? "—" : `${v.toLocaleString()} lb` },
-  { key: "groundClearanceIn", label: "Ground Clearance", group: "Performance & Drivetrain", type: "range", get: c => c.groundClearanceIn,
-    format: v => v == null ? "—" : `${v} in` },
+  { key: "groundClearanceIn", label: "Ground Clearance", group: "Performance & Drivetrain", type: "range", step: 0.1, get: c => c.groundClearanceIn,
+    format: v => v == null ? "—" : `${roundTo(v, 1)} in` },
   { key: "wheelSizesIn", label: "Wheel Size", group: "Performance & Drivetrain", type: "enumMulti", get: c => c.wheelSizesIn,
     format: v => Array.isArray(v) && v.length ? v.map(x => `${x}"`).join(", ") : "—" },
 
@@ -43,8 +56,8 @@ export const FIELDS = [
   { key: "rearDoorStyle", label: "Rear Door Style", group: "Doors & Seating", type: "enum", get: c => c.rearDoorStyle },
   { key: "slidingDoors", label: "Sliding Doors", group: "Doors & Seating", type: "boolean", get: c => c.slidingDoors },
   { key: "isThreeRow", label: "Three-Row Seating", group: "Doors & Seating", type: "boolean", get: c => c.isThreeRow },
-  { key: "maxPassengers", label: "Max Passengers", group: "Doors & Seating", type: "range", get: c => c.maxPassengers,
-    format: v => v == null ? "—" : `${v}` },
+  { key: "maxPassengers", label: "Max Passengers", group: "Doors & Seating", type: "range", step: 1, get: c => c.maxPassengers,
+    format: v => v == null ? "—" : `${roundTo(v, 0)}` },
   { key: "builtInBoosterSeats", label: "Built-in Booster Seats", group: "Doors & Seating", type: "boolean", get: c => c.builtInBoosterSeats },
 
   // ---- Comfort ----
@@ -57,24 +70,24 @@ export const FIELDS = [
   { key: "appleCarPlay", label: "Apple CarPlay", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.appleCarPlay },
   { key: "androidAuto", label: "Android Auto", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.androidAuto },
   { key: "wirelessPhoneCharging", label: "Wireless Phone Charging", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.wirelessPhoneCharging },
-  { key: "cupholders", label: "Cupholders", group: "Tech & Safety", type: "range", get: c => c.techFeatures?.cupholders,
-    format: v => v == null ? "—" : `${v}` },
-  { key: "usbPortsTotal", label: "USB Ports (total)", group: "Tech & Safety", type: "range", get: c => c.techFeatures?.usbPorts?.total,
-    format: v => v == null ? "—" : `${v}` },
+  { key: "cupholders", label: "Cupholders", group: "Tech & Safety", type: "range", step: 1, get: c => c.techFeatures?.cupholders,
+    format: v => v == null ? "—" : `${roundTo(v, 0)}` },
+  { key: "usbPortsTotal", label: "USB Ports (total)", group: "Tech & Safety", type: "range", step: 1, get: c => c.techFeatures?.usbPorts?.total,
+    format: v => v == null ? "—" : `${roundTo(v, 0)}` },
   { key: "selfDriving", label: "Self-Driving Capability", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.selfDriving?.available },
-  { key: "selfDrivingCost", label: "Self-Driving Subscription", group: "Tech & Safety", type: "range", get: c => c.driverAssist?.selfDriving?.subscriptionUsdPerMonth,
-    format: v => v == null ? "—" : (v === 0 ? "Included" : `$${v}/mo`) },
+  { key: "selfDrivingCost", label: "Self-Driving Subscription", group: "Tech & Safety", type: "range", step: 1, get: c => c.driverAssist?.selfDriving?.subscriptionUsdPerMonth,
+    format: v => v == null ? "—" : (roundTo(v, 0) === 0 ? "Included" : `$${roundTo(v, 0)}/mo`) },
   { key: "collisionAvoidanceAutoBrake", label: "Collision Avoidance Auto-Brake", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.collisionAvoidanceAutoBrake },
   { key: "laneKeepAssist", label: "Lane Keep Assist", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.laneKeepAssist },
   { key: "adaptiveCruiseControl", label: "Adaptive Cruise Control", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.adaptiveCruiseControl },
 
   // ---- Cargo ----
-  { key: "rearCubicFeet", label: "Rear Cargo Volume", group: "Cargo", type: "range", get: c => c.cargo?.rearCubicFeet,
-    format: v => v == null ? "—" : `${v} cf` },
-  { key: "maxCubicFeet", label: "Max Cargo (seats folded)", group: "Cargo", type: "range", get: c => c.cargo?.maxCubicFeet,
-    format: v => v == null ? "—" : `${v} cf` },
-  { key: "frunkCubicFeet", label: "Frunk Volume", group: "Cargo", type: "range", get: c => c.cargo?.frunkCubicFeet,
-    format: v => v == null ? "—" : `${v} cf` },
+  { key: "rearCubicFeet", label: "Rear Cargo Volume", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.rearCubicFeet,
+    format: v => v == null ? "—" : `${roundTo(v, 1)} cf` },
+  { key: "maxCubicFeet", label: "Max Cargo (seats folded)", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.maxCubicFeet,
+    format: v => v == null ? "—" : `${roundTo(v, 1)} cf` },
+  { key: "frunkCubicFeet", label: "Frunk Volume", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.frunkCubicFeet,
+    format: v => v == null ? "—" : `${roundTo(v, 1)} cf` },
 ];
 
 export const GROUP_ORDER = [

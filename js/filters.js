@@ -1,8 +1,31 @@
-import { FIELDS, GROUP_ORDER } from "./fields.js";
+import { FIELDS, GROUP_ORDER } from "./fields.js?v=2";
 
 // Enum filter lists longer than this get a "Show all" toggle + type-to-filter box
 // instead of an inner scrollbar, so the sidebar only ever scrolls at the outer level.
 const ENUM_VISIBLE_COUNT = 6;
+
+// A field's declared `step` implies its display precision (0.1 -> 1 decimal, 1 -> whole
+// numbers). Snapping the domain's min/max to that same grid (floor/ceil, so real data at
+// the edges is never excluded) keeps every subsequent step landing on a clean number too —
+// otherwise a raw value like "$49.99/mo" or "4.48 in" becomes the slider's zero point and
+// every step drifts by that same fraction (49.99, 50.99, 51.99, ...).
+function stepDecimals(step) {
+  return (String(step).split(".")[1] || "").length;
+}
+// value/step is prone to float representation error (6.6/0.1 is 65.99999999999999 in JS,
+// not 66), which would floor a value that's already exactly on the grid down to the
+// previous step. A tiny epsilon — far smaller than any real spec's precision — corrects
+// for that noise without masking genuine extra precision in the source data (4.48 should
+// still floor to 4.4, not get rounded up to the grid first).
+const EPSILON = 1e-9;
+function floorToStep(value, step) {
+  const decimals = stepDecimals(step);
+  return Number((Math.floor(value / step + EPSILON) * step).toFixed(decimals));
+}
+function ceilToStep(value, step) {
+  const decimals = stepDecimals(step);
+  return Number((Math.ceil(value / step - EPSILON) * step).toFixed(decimals));
+}
 
 // Build the domain (possible values / min-max) for each filterable field from the dataset.
 export function computeDomains(cars) {
@@ -32,6 +55,7 @@ export function computeDomains(cars) {
         }
       }
       if (min === Infinity) { min = 0; max = 0; }
+      else if (field.step) { min = floorToStep(min, field.step); max = ceilToStep(max, field.step); }
       domains[field.key] = { min, max };
     }
   }
@@ -229,7 +253,7 @@ export function renderFilterSidebar(container, domains, filterState, onChange) {
 
         const dr = document.createElement("div");
         dr.className = "dual-range";
-        const step = (domain.max - domain.min) > 50 ? 1 : (domain.max - domain.min) / 100 || 1;
+        const step = field.step ?? ((domain.max - domain.min) > 50 ? 1 : (domain.max - domain.min) / 100 || 1);
         dr.innerHTML = `
           <div class="dual-range-track"></div>
           <div class="dual-range-fill"></div>

@@ -1,5 +1,5 @@
-import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js";
-import { findSimilarCars } from "./similar.js";
+import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=2";
+import { findSimilarCars } from "./similar.js?v=2";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
 
