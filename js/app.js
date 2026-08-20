@@ -1,6 +1,7 @@
 import { FIELDS } from "./fields.js";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js";
+import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=2";
+import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js";
 
 const AUTO_COMPARE_THRESHOLD = 5;
 const MAX_COMPARE = 6;
@@ -13,10 +14,15 @@ const state = {
   compareSet: new Set(),
   view: "results", // "results" | "compare"
   activeDetailCar: null,
+  pathIndex: null,
 };
 
 const el = {
   sidebar: document.getElementById("filterGroups"),
+  sidebarEl: document.getElementById("sidebar"),
+  sidebarBackdrop: document.getElementById("sidebarBackdrop"),
+  filtersToggleBtn: document.getElementById("filtersToggleBtn"),
+  sidebarCloseBtn: document.getElementById("sidebarCloseBtn"),
   cardGrid: document.getElementById("cardGrid"),
   viewResults: document.getElementById("viewResults"),
   viewCompare: document.getElementById("viewCompare"),
@@ -32,6 +38,7 @@ const el = {
   compareBarClearBtn: document.getElementById("compareBarClearBtn"),
   compareBarViewBtn: document.getElementById("compareBarViewBtn"),
   detailModal: document.getElementById("detailModal"),
+  modal: document.querySelector("#detailModal .modal"),
   modalBody: document.getElementById("modalBody"),
   modalCloseBtn: document.getElementById("modalCloseBtn"),
 };
@@ -42,6 +49,7 @@ async function init() {
   state.cars = cars;
   state.domains = computeDomains(cars);
   state.filterState = defaultFilterState(state.domains);
+  state.pathIndex = buildCarPathIndex(cars);
 
   renderFilterSidebar(el.sidebar, state.domains, state.filterState, () => {
     state.view = "results";
@@ -50,6 +58,9 @@ async function init() {
 
   bindGlobalEvents();
   renderAll();
+
+  const carFromUrl = carForPath(state.pathIndex, location.pathname);
+  if (carFromUrl) openDetail(carFromUrl, { pushState: false });
 }
 
 function bindGlobalEvents() {
@@ -95,8 +106,35 @@ function bindGlobalEvents() {
     if (e.target === el.detailModal) closeModal();
   });
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeModal();
+    if (e.key === "Escape") {
+      closeModal();
+      closeSidebar();
+    }
   });
+
+  el.filtersToggleBtn.addEventListener("click", openSidebar);
+  el.sidebarCloseBtn.addEventListener("click", closeSidebar);
+  el.sidebarBackdrop.addEventListener("click", closeSidebar);
+
+  window.addEventListener("popstate", () => {
+    const car = carForPath(state.pathIndex, location.pathname);
+    if (car) openDetail(car, { pushState: false });
+    else closeModal({ pushState: false });
+  });
+}
+
+function openSidebar() {
+  el.sidebarEl.classList.add("open");
+  el.sidebarBackdrop.hidden = false;
+  document.body.classList.add("sidebar-open-lock");
+  el.filtersToggleBtn.setAttribute("aria-expanded", "true");
+}
+
+function closeSidebar() {
+  el.sidebarEl.classList.remove("open");
+  el.sidebarBackdrop.hidden = true;
+  document.body.classList.remove("sidebar-open-lock");
+  el.filtersToggleBtn.setAttribute("aria-expanded", "false");
 }
 
 function getFilteredCars() {
@@ -116,7 +154,7 @@ function toggleCompare(id, shouldAdd) {
   renderAll();
 }
 
-function openDetail(car) {
+function openDetail(car, { pushState = true } = {}) {
   state.activeDetailCar = car;
   const renderModal = () => {
     renderDetailModal(el.modalBody, car, {
@@ -125,20 +163,28 @@ function openDetail(car) {
         toggleCompare(id, !state.compareSet.has(id));
         renderModal();
       },
+      allCars: state.cars,
+      onSelectCar: nextCar => openDetail(nextCar),
     });
   };
   renderModal();
+  el.modal.scrollTop = 0;
   el.detailModal.hidden = false;
+  if (pushState) history.pushState({ carId: car.id }, "", carPath(car));
 }
 
-function closeModal() {
+function closeModal({ pushState = true } = {}) {
   el.detailModal.hidden = true;
   state.activeDetailCar = null;
+  if (pushState && location.pathname !== homePath()) history.pushState({}, "", homePath());
 }
 
 function renderResultsView() {
   const filtered = getFilteredCars();
   el.resultCount.textContent = `${filtered.length} vehicle${filtered.length === 1 ? "" : "s"}`;
+
+  const activeCount = countActiveFilters(state.filterState, state.domains);
+  el.filtersToggleBtn.textContent = activeCount > 0 ? `Filters (${activeCount})` : "Filters";
 
   const autoCompare = filtered.length > 0 && filtered.length <= AUTO_COMPARE_THRESHOLD;
 

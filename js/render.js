@@ -1,4 +1,5 @@
 import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js";
+import { findSimilarCars } from "./similar.js";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
 
@@ -143,7 +144,60 @@ export function renderCompareTable(table, cars, { onRemove }) {
   }
 }
 
-export function renderDetailModal(body, car, { inCompare, onToggleCompare }) {
+function fmtPriceDelta(v) {
+  if (v == null) return null;
+  const sign = v > 0 ? "+" : v < 0 ? "−" : "";
+  return `${sign}$${Math.round(Math.abs(v)).toLocaleString()}`;
+}
+
+function fmtRangeDelta(v) {
+  if (v == null) return null;
+  const sign = v > 0 ? "+" : v < 0 ? "−" : "";
+  return `${sign}${Math.abs(v)} mi range`;
+}
+
+function renderSimilarSection(anchor, allCars) {
+  const matches = findSimilarCars(anchor, allCars, { limit: 4 });
+  if (matches.length === 0) return "";
+
+  const tiles = matches.map(({ car, diff }) => {
+    const priceDeltaText = fmtPriceDelta(diff.priceDelta);
+    const rangeDeltaText = fmtRangeDelta(diff.rangeDelta);
+    const badges = [];
+    if (rangeDeltaText) {
+      badges.push(`<span class="diff-badge ${diff.rangeDelta > 0 ? "diff-gain" : diff.rangeDelta < 0 ? "diff-loss" : ""}">${rangeDeltaText}</span>`);
+    }
+    diff.gained.slice(0, 2).forEach(label => badges.push(`<span class="diff-badge diff-gain">+ ${label}</span>`));
+    diff.lost.slice(0, 2).forEach(label => badges.push(`<span class="diff-badge diff-loss">− ${label}</span>`));
+
+    return `
+      <div class="similar-card" data-id="${car.id}">
+        <div class="similar-card-top">
+          <span class="similar-card-icon">${bodyIcon(car.bodyStyle)}</span>
+          <div>
+            <div class="similar-card-title">${carTitle(car)}</div>
+            <div class="similar-card-trim">${car.modelYear} · ${car.trim}</div>
+          </div>
+        </div>
+        <div class="similar-card-price">
+          ${fmtVal(fieldByKey("msrp"), car.msrp)}
+          ${priceDeltaText ? `<span class="similar-price-delta">${priceDeltaText} vs. this car</span>` : ""}
+        </div>
+        <div class="similar-diff-list">${badges.join("")}</div>
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="modal-section">
+      <h4>Similar Vehicles</h4>
+      <p class="similar-hint">Close matches on price and specs — click one to compare it in this view.</p>
+      <div class="similar-grid">${tiles}</div>
+    </div>
+  `;
+}
+
+export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCars, onSelectCar }) {
   const groups = {};
   for (const field of FIELDS) {
     if (field.key === "msrp") continue;
@@ -177,6 +231,16 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare }) {
     <div class="modal-actions">
       <button id="modalCompareBtn" class="btn ${inCompare ? "btn-ghost" : "btn-primary"}">${inCompare ? "Remove from compare" : "Add to compare"}</button>
     </div>
+    ${allCars ? renderSimilarSection(car, allCars) : ""}
   `;
   body.querySelector("#modalCompareBtn").addEventListener("click", () => onToggleCompare(car.id));
+
+  if (allCars && onSelectCar) {
+    body.querySelectorAll(".similar-card").forEach(el => {
+      el.addEventListener("click", () => {
+        const target = allCars.find(c => c.id === el.dataset.id);
+        if (target) onSelectCar(target);
+      });
+    });
+  }
 }
