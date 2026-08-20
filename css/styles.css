@@ -264,6 +264,9 @@ input { font-family: inherit; }
 .cell-no { color: var(--text-faint); }
 .cell-empty { color: var(--text-faint); }
 
+.compare-table td a { color: var(--accent-2); text-decoration: none; margin-right: 10px; }
+.compare-table td a:hover { text-decoration: underline; }
+
 /* ---------- Compare bar ---------- */
 .compare-bar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
@@ -310,7 +313,7 @@ input { font-family: inherit; }
   font-size: 12.5px; color: var(--accent-2); text-decoration: none; border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px;
 }
 .modal-links a:hover { border-color: var(--accent-2); }
-.modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+.modal-actions { display: flex; gap: 10px; margin-top: 20px; margin-bottom: 26px; }
 
 /* ---------- Similar vehicles (in detail modal) ---------- */
 .similar-hint { font-size: 12.5px; color: var(--text-faint); margin: -4px 0 10px; }
@@ -352,6 +355,9 @@ input { font-family: inherit; }
   .topbar-search { order: 3; max-width: none; flex: 1 1 100%; }
   .content { padding: 16px; }
   .compare-table thead th { position: static; }
+
+  /* iOS Safari auto-zooms the page on focusing any input with font-size below 16px. */
+  .topbar-search input, .enum-filter-input { font-size: 16px; }
 
   /* Filter sidebar becomes an off-canvas drawer instead of stacking above results,
      so the results are visible immediately instead of below a long filter list. */

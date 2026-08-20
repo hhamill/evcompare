@@ -75,7 +75,7 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
   }
 }
 
-export function renderCompareTable(table, cars, { onRemove }) {
+export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
   table.innerHTML = "";
   if (cars.length === 0) {
     table.innerHTML = `<tr><td class="empty-state">No vehicles selected for comparison.</td></tr>`;
@@ -90,6 +90,7 @@ export function renderCompareTable(table, cars, { onRemove }) {
       <div class="compare-col-title">${bodyIcon(car.bodyStyle)} ${carTitle(car)}</div>
       <div class="compare-col-trim">${car.modelYear} · ${car.trim}</div>
       <div class="compare-col-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+      ${onOpenDetail ? `<button class="btn btn-sm compare-col-view-btn" data-id="${car.id}">View details</button>` : ""}
     </th>
   `).join("");
   thead.appendChild(headRow);
@@ -140,6 +141,15 @@ export function renderCompareTable(table, cars, { onRemove }) {
   if (onRemove) {
     table.querySelectorAll(".compare-col-remove").forEach(btn => {
       btn.addEventListener("click", () => onRemove(btn.dataset.id));
+    });
+  }
+
+  if (onOpenDetail) {
+    table.querySelectorAll(".compare-col-view-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const car = cars.find(c => c.id === btn.dataset.id);
+        if (car) onOpenDetail(car);
+      });
     });
   }
 }

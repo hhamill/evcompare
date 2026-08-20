@@ -4,11 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>EV Compare — Find and compare electric vehicles</title>
-<!-- Fixes the base for every relative css/js/fetch reference in this document to "/", regardless
+<!-- Pins where every relative css/js/fetch reference in this document resolves against, regardless
      of what history.replaceState below does to location.pathname when restoring a deep link — without
-     this, resources would try to resolve relative to e.g. /2026/mustang-mach-e/gt-awd/ instead of /.
-     If deployed as a GitHub Pages *project* page (https://user.github.io/evcompare/), change this to
-     "/evcompare/" to match BASE_PATH in js/router.js and pathSegmentsToKeep in 404.html. -->
+     this, resources would try to resolve relative to e.g. /evcompare/2026/mustang-mach-e/gt-awd/
+     instead of /evcompare/. Currently set for this site's real deployment: a GitHub Pages *project*
+     page at hhamill.github.io/evcompare/. If that ever changes (custom domain, user/org root page),
+     update this to "/" and match BASE_PATH in js/router.js + pathSegmentsToKeep in 404.html. -->
 <base href="/evcompare/" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
 <!-- Restores the real deep-link path that 404.html stashed in ?p= before our own router runs. See 404.html. -->
@@ -20,7 +21,7 @@
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="css/styles.css?v=5" />
+<link rel="stylesheet" href="css/styles.css?v=6" />
 </head>
 <body>
 <div class="app">
@@ -88,6 +89,6 @@
 
 </div>
 
-<script type="module" src="js/app.js?v=7"></script>
+<script type="module" src="js/app.js?v=9"></script>
 </body>
 </html>

@@ -37,5 +37,5 @@ export function carForPath(pathIndex, pathname) {
 }
 
 export function homePath() {
-  return BASE_PATH || "/";
+  return BASE_PATH ? `${BASE_PATH}/` : "/";
 }

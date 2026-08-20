@@ -66,3 +66,17 @@ Hit and fixed one real bug along the way: that `replaceState` call shifts the do
 **Deployment (confirmed 2026-08-19)**: this is live at `hhamill.github.io/evcompare/` — a GitHub Pages *project* page, not root. Set all three deployment-path constants accordingly: `<base href="/evcompare/">` in `index.html`, `BASE_PATH = "/evcompare"` in `js/router.js`, `pathSegmentsToKeep = 1` in `404.html`. Verified end to end against a local server mirroring the `/evcompare/` subpath: home load, clicking into a car, the 404→index.html deep-link restore, and browser back/forward all resolve assets and routes correctly with no 404s.
 
 No filter/search state is reflected in the URL — only the car-detail view. Kept in scope on purpose; broadening it is a separate, larger piece of work if wanted later.
+
+---
+
+# TODO: Post-review polish (2026-08-20)
+
+Five cosmetic/UX fixes from testing the deployed `hhamill.github.io/evcompare/` site — all done:
+
+1. **Spacing** — "Add to compare" button sat right on top of the "Similar Vehicles" heading in the detail view. Added `margin-bottom` to `.modal-actions`.
+2. **Mobile search-box zoom** — iOS Safari auto-zooms the page when focusing an input with `font-size` under 16px. The search box and the "Filter make…" box were both at 14px on mobile; bumped to 16px there.
+3. **Back navigation not returning to home** — root cause: every "similar vehicle" click was a `pushState`, so hopping through several related cars built a deep history stack — "back" walked you through every car you'd glanced at, not straight back to where you started. Fixed by giving `openDetail` three history modes: `push` (a genuine new navigation, e.g. from the results grid), `replace` (hopping between similar-car suggestions — swaps what you're looking at without growing the stack), and `none` (reflecting a popstate/deep-link that already happened). Closing the modal now also replaces rather than pushes, so it doesn't leave a dead entry either. One back-press from any depth of similar-car browsing now returns directly home.
+4. **Unreadable blue links** — the compare table's "Review"/"Specs" links in the Links row were never actually styled, so they rendered in the browser's default link blue (built for white backgrounds) against our dark theme. Styled them with `--accent-2` to match the rest of the app.
+5. **No way to open full detail from the compare view** — added a "View details" button to each column header in the compare table (both the auto-compare-at-≤5-results view and the manual multi-select compare view), wired to the same detail modal as the card grid.
+
+All verified against the real `/evcompare/` subpath locally, both desktop and mobile.

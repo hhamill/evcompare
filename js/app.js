@@ -1,7 +1,7 @@
 import { FIELDS } from "./fields.js";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=2";
-import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js";
+import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=3";
+import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=2";
 
 const AUTO_COMPARE_THRESHOLD = 5;
 const MAX_COMPARE = 6;
@@ -60,7 +60,7 @@ async function init() {
   renderAll();
 
   const carFromUrl = carForPath(state.pathIndex, location.pathname);
-  if (carFromUrl) openDetail(carFromUrl, { pushState: false });
+  if (carFromUrl) openDetail(carFromUrl, { historyMode: "none" });
 }
 
 function bindGlobalEvents() {
@@ -118,8 +118,8 @@ function bindGlobalEvents() {
 
   window.addEventListener("popstate", () => {
     const car = carForPath(state.pathIndex, location.pathname);
-    if (car) openDetail(car, { pushState: false });
-    else closeModal({ pushState: false });
+    if (car) openDetail(car, { historyMode: "none" });
+    else closeModal({ updateHistory: false });
   });
 }
 
@@ -154,7 +154,12 @@ function toggleCompare(id, shouldAdd) {
   renderAll();
 }
 
-function openDetail(car, { pushState = true } = {}) {
+// historyMode: "push" for a genuinely new navigation (clicking a car from the list/compare
+// view) so back returns you to where you were; "replace" for hopping between similar-car
+// suggestions from within a detail view, so browsing five related cars doesn't force five
+// back-presses to escape — one back always returns to wherever you started browsing from;
+// "none" when we're just reflecting a popstate/deep-link that already happened.
+function openDetail(car, { historyMode = "push" } = {}) {
   state.activeDetailCar = car;
   const renderModal = () => {
     renderDetailModal(el.modalBody, car, {
@@ -164,19 +169,22 @@ function openDetail(car, { pushState = true } = {}) {
         renderModal();
       },
       allCars: state.cars,
-      onSelectCar: nextCar => openDetail(nextCar),
+      onSelectCar: nextCar => openDetail(nextCar, { historyMode: "replace" }),
     });
   };
   renderModal();
   el.modal.scrollTop = 0;
   el.detailModal.hidden = false;
-  if (pushState) history.pushState({ carId: car.id }, "", carPath(car));
+  if (historyMode === "push") history.pushState({ carId: car.id }, "", carPath(car));
+  else if (historyMode === "replace") history.replaceState({ carId: car.id }, "", carPath(car));
 }
 
-function closeModal({ pushState = true } = {}) {
+function closeModal({ updateHistory = true } = {}) {
   el.detailModal.hidden = true;
   state.activeDetailCar = null;
-  if (pushState && location.pathname !== homePath()) history.pushState({}, "", homePath());
+  // Replace, not push: closing shouldn't grow the stack either, so "back" from wherever
+  // you land next still goes to wherever you were before you opened a car at all.
+  if (updateHistory && location.pathname !== homePath()) history.replaceState({}, "", homePath());
 }
 
 function renderResultsView() {
@@ -198,6 +206,7 @@ function renderResultsView() {
     el.compareCount.textContent = carsToShow.length;
     renderCompareTable(el.compareTable, carsToShow, {
       onRemove: allowRemove ? (id => { state.compareSet.delete(id); renderAll(); }) : null,
+      onOpenDetail: openDetail,
     });
     el.backToResultsBtn.hidden = autoCompare && state.view !== "compare";
     el.clearCompareBtn.hidden = !allowRemove;
