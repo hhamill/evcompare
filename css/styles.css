@@ -281,6 +281,22 @@ input { font-family: inherit; }
 /* ---------- Compare ---------- */
 .compare-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
 .compare-header h2 { font-size: 18px; margin-right: auto; }
+/* A native horizontal scrollbar on a tall, capped-height table sits at that table's own
+   bottom edge — reachable in principle, but easy to lose track of and awkward to grab on
+   some setups. These buttons live up here in the header, which is never capped/scrolled,
+   so they're always reachable regardless of table height. Desktop only — mobile scrolls
+   the table by touch directly, no scrollbar-hunting problem to solve there. */
+.compare-scroll-nav { display: none; gap: 6px; }
+.compare-scroll-nav[hidden] { display: none; }
+.compare-scroll-nav-btn {
+  width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg-card); color: var(--text-dim); font-size: 18px; line-height: 1; cursor: pointer;
+}
+.compare-scroll-nav-btn:hover { background: var(--bg-card-hover); color: var(--text); }
+.compare-scroll-nav-btn:disabled { opacity: .35; cursor: default; }
+@media (min-width: 881px) {
+  .compare-scroll-nav:not([hidden]) { display: flex; }
+}
 /* overflow-x:auto here is needed so wide tables scroll sideways with the row-label column
    pinned via position:sticky;left:0 below — but per the CSS overflow spec, giving an element
    overflow-x anything other than visible forces overflow-y's *used* value to auto too, even
@@ -304,6 +320,11 @@ input { font-family: inherit; }
 .compare-table tbody th {
   position: sticky; left: 0; background: var(--bg); z-index: 4; color: var(--text-dim); font-weight: 600; white-space: normal; min-width: 180px;
 }
+/* Marks a row where the cars actually differ, so there's a real winner to jump to — e.g. on
+   a 5-car mobile comparison you can tap "Tow Capacity" instead of swiping through every
+   column to find out which one wins. */
+.row-label-clickable { cursor: pointer; transition: color .15s; }
+.row-label-clickable:hover { color: var(--accent); }
 .compare-table tr.group-row th, .compare-table tr.group-row td {
   background: var(--bg-elevated); color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
   position: sticky; left: 0;
@@ -438,17 +459,19 @@ input { font-family: inherit; }
      room above the table than on desktop — give it a smaller offset. */
   .compare-scroll { max-height: calc(100vh - 260px); }
 
-  /* Keep the sticky header (inherited from the base rule), but compact it: icon/trim/price/
-     button take up real vertical space that's scarce on a phone, and the row-label column
-     already tells you which spec you're looking at — the header's only remaining job while
-     scrolled is "which column is which car," so just the name covers that. */
+  /* Keep the sticky header (inherited from the base rule), but compact it: the icon is
+     decorative, and price is already visible before you scroll — dropping just those two
+     saves real space. Trim and the View details button stay: trim is often the only thing
+     distinguishing two rows of the same model (e.g. two Mach-E trims), and losing the
+     button while scrolled meant no way to reach full detail without scrolling back to the
+     top first. */
   .compare-col-icon,
-  .compare-table thead .compare-col-trim,
-  .compare-table thead .compare-col-price,
-  .compare-table thead .compare-col-view-btn {
+  .compare-table thead .compare-col-price {
     display: none;
   }
   .compare-col-header { padding-top: 10px; padding-bottom: 10px; }
+  .compare-col-trim { margin-top: 1px; }
+  .compare-col-view-btn { margin-top: 6px; padding: 4px 8px; font-size: 11px; }
 
   /* iOS Safari auto-zooms the page on focusing any input with font-size below 16px. */
   .topbar-search input, .enum-filter-input { font-size: 16px; }

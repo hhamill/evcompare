@@ -21,7 +21,7 @@
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="css/styles.css?v=10" />
+<link rel="stylesheet" href="css/styles.css?v=11" />
 </head>
 <body>
 <div class="app">
@@ -62,6 +62,10 @@
         <div class="compare-header">
           <button id="backToResultsBtn" class="btn btn-ghost">&larr; Back to results</button>
           <h2>Comparing <span id="compareCount">0</span> vehicles</h2>
+          <div class="compare-scroll-nav" id="compareScrollNav" hidden>
+            <button id="compareScrollLeftBtn" class="compare-scroll-nav-btn" aria-label="Scroll left">&lsaquo;</button>
+            <button id="compareScrollRightBtn" class="compare-scroll-nav-btn" aria-label="Scroll right">&rsaquo;</button>
+          </div>
           <button id="clearCompareBtn" class="btn btn-ghost">Clear all</button>
         </div>
         <div class="compare-scroll">
@@ -90,6 +94,6 @@
 
 </div>
 
-<script type="module" src="js/app.js?v=18"></script>
+<script type="module" src="js/app.js?v=20"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
-import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=3";
-import { findSimilarCars } from "./similar.js?v=3";
+import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=4";
+import { findSimilarCars } from "./similar.js?v=4";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
 
@@ -118,13 +118,18 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
     for (const field of fields) {
       const row = document.createElement("tr");
 
-      // Only highlight a winner when there's an actual choice to make: 2+ cars with a
-      // real numeric value for this field, and the field has a declared "better" direction.
+      // Only highlight/enable jump-to-winner when there's an actual difference to point
+      // out — a tie across every car (or an empty row) has nothing worth jumping to.
       let bestValue = null;
-      if (field.compareBetter && cars.length > 1) {
+      let hasDifferentiation = false;
+      if (field.type === "boolean") {
+        const bools = cars.map(car => !!field.get(car));
+        hasDifferentiation = bools.some(b => b) && bools.some(b => !b);
+      } else if (field.compareBetter && cars.length > 1) {
         const numericValues = cars.map(car => field.get(car)).filter(v => typeof v === "number");
-        if (numericValues.length > 1) {
+        if (numericValues.length > 1 && new Set(numericValues).size > 1) {
           bestValue = field.compareBetter === "higher" ? Math.max(...numericValues) : Math.min(...numericValues);
+          hasDifferentiation = true;
         }
       }
 
@@ -136,8 +141,22 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
         else if (bestValue !== null && v === bestValue) cls = "cell-winner";
         return `<td class="${cls}">${fmtVal(field, v)}</td>`;
       }).join("");
-      row.innerHTML = `<th>${field.label}</th>${cells}`;
+      row.innerHTML = `<th${hasDifferentiation ? ' class="row-label-clickable" title="Jump to the winner"' : ""}>${field.label}</th>${cells}`;
       tbody.appendChild(row);
+
+      if (hasDifferentiation) {
+        const winnerCell = row.querySelector("td.cell-winner, td.cell-yes");
+        const labelCell = row.querySelector("th");
+        if (winnerCell && labelCell) {
+          labelCell.addEventListener("click", () => {
+            // behavior:"smooth" silently fails to scroll at all here — this container is
+            // nested inside another sticky-positioned scroll context (the header row/label
+            // column stickiness), and smooth scrollIntoView across that setup just doesn't
+            // animate in testing, even from this exact handler. Instant is reliable.
+            winnerCell.scrollIntoView({ behavior: "auto", block: "center", inline: "center" });
+          });
+        }
+      }
     }
   }
 

@@ -52,7 +52,7 @@ export const FIELDS = [
     format: v => v == null ? "—" : `${roundTo(v, 1)}s` },
   { key: "horsepower", label: "Horsepower", group: "Performance & Drivetrain", type: "range", compareBetter: "higher", get: c => c.performance?.horsepowerHp,
     format: v => v == null ? "—" : `${v} hp` },
-  { key: "towCapacityLbs", label: "Tow Capacity", group: "Performance & Drivetrain", type: "range", get: c => c.towCapacityLbs,
+  { key: "towCapacityLbs", label: "Tow Capacity", group: "Performance & Drivetrain", type: "range", compareBetter: "higher", get: c => c.towCapacityLbs,
     format: v => v == null ? "—" : `${v.toLocaleString()} lb` },
   { key: "groundClearanceIn", label: "Ground Clearance", group: "Performance & Drivetrain", type: "range", step: 0.1, get: c => c.groundClearanceIn,
     format: v => v == null ? "—" : `${roundTo(v, 1)} in` },

@@ -152,3 +152,25 @@ Asked: pin the column headers (car names) when scrolling down a long comparison,
 **Fix**: embrace the forced behavior instead of fighting it. `.compare-scroll` now has an explicit `overflow-y: auto` and a bounded `max-height` (`calc(100vh - 190px)` desktop, `calc(100vh - 260px)` mobile — mobile's topbar wraps to two rows so there's less room above the table). The compare table now scrolls in its own contained viewport, like a spreadsheet, and `position: sticky; top: 0` on the header pins correctly to *that* — no more hardcoded, fragile "guess the topbar's pixel height" offset needed. Verified both sticky axes work together: scrolled a 4-car comparison diagonally (down *and* right) and both the header row (top) and row-label column (left) stayed correctly pinned at the same time.
 
 **Mobile compaction**: implemented, but simplified from what was floated — rather than a scroll-triggered transition from full to compact header (which needs JS scroll-position tracking and two header representations), the mobile sticky header is just always compact: wrapped the body-style icon in its own `<span>` so CSS could target it independently, then hide `.compare-col-icon`, `.compare-col-trim`, `.compare-col-price`, and `.compare-col-view-btn` under the existing `880px` media query, leaving just the car name. Desktop is untouched — full header (icon, trim, price, View details button), always, exactly as requested. Worth revisiting with the fancier scroll-triggered version later if the always-compact tradeoff feels wrong in practice.
+
+---
+
+# TODO: Follow-ups on sticky compare table (2026-08-20)
+
+Three more, after trying the sticky-header version live:
+
+## 1. Mobile compact header dropped too much — restored trim + View details
+
+Testing surfaced that the always-compact mobile header (name only) lost two things that turned out to matter: **trim** (often the only thing telling two rows of the same model apart — e.g. two Mach-E trims look identical as just "Ford Mustang Mach-E") and the **View details button** (no way to reach full detail once scrolled, without scrolling back to the top). Kept the compaction, narrowed its scope: mobile now hides only the icon (decorative) and price (already seen before scrolling); trim and the View details button (shrunk slightly — smaller padding/font) stay in the sticky header.
+
+## 2. Click a row's spec label to jump straight to the winning cell
+
+Added: clicking/tapping a row label (e.g. "Tow Capacity") scrolls that row's winning cell into view, centered — the exact "which one wins, without swiping through every column" shortcut asked for, useful on both a wide desktop comparison and a many-cars mobile swipe. Extended to boolean rows too (jumps to a "Yes" when the cars are split), not just the numeric `compareBetter` rows — same underlying "is there a real winner to point at" logic, so it felt natural to cover both. A row is only clickable when there's an actual difference between the cars (all-same or fully-empty rows have nothing to jump to, so no cursor/hover affordance on those).
+
+Also reclassified **Tow Capacity** from neutral to `compareBetter: "higher"` in `js/fields.js` — it was used as the worked example for this feature, which only makes sense if it has a winner; the earlier "genuinely a tradeoff" reasoning didn't hold up against that.
+
+Hit a real bug building this: `scrollIntoView({behavior: "smooth", ...})` silently did nothing when called from the row-label click handler — confirmed by testing the identical call directly at the console (worked) vs. through the actual click path (didn't), and separately confirmed `behavior: "auto"` works fine through that same click path. Root cause looks like smooth-scrolling not animating reliably through a container that's itself nested inside another sticky-positioned scroll context (the compare table's own header/label-column stickiness) — a real, reproducible browser quirk, not a logic bug. Switched to `behavior: "auto"` (instant, no animation) since a reliable instant jump beats a broken animation.
+
+## 3. Desktop: horizontal scrollbar hard to reach on a tall table
+
+However precisely `.compare-scroll`'s `max-height` is tuned, a scrollbar living at the bottom edge of a tall, capped-height box is an easy target to lose track of. Rather than chase the exact pixel offset, sidestepped the problem: added `‹`/`›` buttons next to the "Comparing N vehicles" heading — which is never capped or internally scrolled, so they're always reachable regardless of table height. They only appear when the table actually overflows horizontally, disable themselves at whichever end you've scrolled to (updates live as you scroll by any method — buttons, trackpad, or the native scrollbar), and scroll by a fixed 280px per click. Desktop-only (`min-width: 881px`) — mobile scrolls the table by touch directly, so there's no equivalent "can't find the scrollbar" problem to solve there.

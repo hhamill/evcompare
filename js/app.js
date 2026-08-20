@@ -1,6 +1,6 @@
-import { FIELDS } from "./fields.js?v=3";
-import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=6";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=8";
+import { FIELDS } from "./fields.js?v=4";
+import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=7";
+import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=11";
 import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=2";
 
 const AUTO_COMPARE_THRESHOLD = 5;
@@ -27,6 +27,10 @@ const el = {
   viewResults: document.getElementById("viewResults"),
   viewCompare: document.getElementById("viewCompare"),
   compareTable: document.getElementById("compareTable"),
+  compareScroll: document.querySelector(".compare-scroll"),
+  compareScrollNav: document.getElementById("compareScrollNav"),
+  compareScrollLeftBtn: document.getElementById("compareScrollLeftBtn"),
+  compareScrollRightBtn: document.getElementById("compareScrollRightBtn"),
   compareCount: document.getElementById("compareCount"),
   resultCount: document.getElementById("resultCount"),
   searchInput: document.getElementById("searchInput"),
@@ -146,6 +150,15 @@ function bindGlobalEvents() {
   el.sidebarCloseBtn.addEventListener("click", closeSidebar);
   el.sidebarBackdrop.addEventListener("click", closeSidebar);
 
+  el.compareScrollLeftBtn.addEventListener("click", () => {
+    el.compareScroll.scrollBy({ left: -280, behavior: "smooth" });
+  });
+  el.compareScrollRightBtn.addEventListener("click", () => {
+    el.compareScroll.scrollBy({ left: 280, behavior: "smooth" });
+  });
+  el.compareScroll.addEventListener("scroll", updateCompareScrollNav);
+  window.addEventListener("resize", updateCompareScrollNav);
+
   window.addEventListener("popstate", () => {
     const car = carForPath(state.pathIndex, location.pathname);
     if (car) openDetail(car, { historyMode: "none" });
@@ -215,6 +228,17 @@ function closeModal({ updateHistory = true } = {}) {
   if (updateHistory && location.pathname !== homePath()) history.replaceState({}, "", homePath());
 }
 
+// Shows/hides the header's left/right nav buttons based on whether the table actually
+// overflows horizontally, and disables whichever end you've already scrolled to.
+function updateCompareScrollNav() {
+  const scrollEl = el.compareScroll;
+  const overflows = scrollEl.scrollWidth > scrollEl.clientWidth + 1;
+  el.compareScrollNav.hidden = !overflows;
+  if (!overflows) return;
+  el.compareScrollLeftBtn.disabled = scrollEl.scrollLeft <= 0;
+  el.compareScrollRightBtn.disabled = scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
+}
+
 function renderResultsView() {
   const filtered = getFilteredCars();
   el.resultCount.textContent = `${filtered.length} vehicle${filtered.length === 1 ? "" : "s"}`;
@@ -238,6 +262,7 @@ function renderResultsView() {
     });
     el.backToResultsBtn.hidden = autoCompare && state.view !== "compare";
     el.clearCompareBtn.hidden = !allowRemove;
+    updateCompareScrollNav();
   } else {
     el.viewResults.hidden = false;
     el.viewCompare.hidden = true;
