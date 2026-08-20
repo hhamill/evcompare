@@ -104,3 +104,39 @@ Root cause: the two handles are separate overlapping `<input type=range>` elemen
 Fixed in `js/filters.js`'s `updateVisual()`: whichever thumb's value is in the upper half of the field's domain now gets `z-index: 3` (the other drops to `1`), recomputed on every drag. This only matters when the thumbs are close enough to visually overlap — for normal, well-separated positions it's a no-op.
 
 Verified both directions on Max Passengers: dragged 7–7 down to 4–7 (previously stuck), and 4–4 up to 4–7 (already worked, confirmed still does).
+
+---
+
+# TODO: Modal scrollbar poking past rounded corner (2026-08-20)
+
+Reported: the detail popover's scrollbar extended straight past the top-right rounded corner instead of curving with it. `.modal` had `overflow-y: auto` and `border-radius` on the same element — clipping content to a rounded corner is one thing, but the actual scrollbar track some browsers draw isn't guaranteed to respect that curvature, so it can poke out past it.
+
+Fixed by moving the scroll to an inner element: `.modal` is now `overflow: hidden` (clips everything, including whatever the browser draws for a child's scrollbar, to the rounded corner — this part is reliable) and a flex column; `.modal-body` (the actual content) got `overflow-y: auto` + the padding that used to live on `.modal` + `min-height: 0` (the standard fix so a flex child scrolls instead of just stretching its parent). `#modalCloseBtn` stays a sibling of `.modal-body`, so it's unaffected by the inner scroll and stays fixed in the corner while content scrolls underneath it, same as before.
+
+`js/app.js` had a `el.modal` reference (`document.querySelector("#detailModal .modal")`) used only to reset scroll position when switching between similar-car suggestions — since `#modalBody` (already referenced separately as `el.modalBody`) *is* the `.modal-body` element, that was a redundant duplicate reference pointing at the wrong element post-fix; removed it and pointed the scroll-reset at `el.modalBody` directly.
+
+Verified on desktop and mobile: corners stay clean while scrolled, close button stays fixed in place during scroll.
+
+---
+
+# TODO: Theme toggle, Similar Vehicles distinction, compare-grid winners (2026-08-20)
+
+Three requests, all done:
+
+## 1. Manual theme toggle (was: system-preference only)
+
+Site only ever followed `prefers-color-scheme`, no way to force a look regardless of system setting for checking both. Added a compact icon-only button in the topbar (fits inline next to Filters/Reset filters on both desktop and mobile — no wrapping issues, confirmed at 375px) that cycles **Auto → Light → Dark → Auto**, persisted in `localStorage`. Icon reflects current mode: 🌓 auto, ☀️ light, 🌙 dark.
+
+Restructured the CSS tokens in `css/styles.css` to make this possible: base `:root` stays the dark palette (unchanged), the light-token block gained a `:not([data-theme])` guard so it only applies in "auto" mode, and two new unconditional blocks — `:root[data-theme="light"]` and `:root[data-theme="dark"]` — let an explicit choice win regardless of what the system prefers. `js/app.js` applies the stored preference (`removeAttribute`/`setAttribute("data-theme", …)` on `<html>`) as the very first thing the script does, before the data fetch even starts, so there's no flash of the wrong theme on load. Verified: cycles correctly, persists across reload, fits on mobile.
+
+## 2. Similar Vehicles section blended into the spec detail above it
+
+Gave `.similar-section` (the wrapping div around the "Similar Vehicles" tiles in the detail modal) a distinct treatment: bleeds to the modal's edges via negative margin (so it reads as a footer band, not just another spec section), a slightly lighter background (`--bg-card` vs the modal's `--bg-elevated`), a top border to separate it from the content above, and the heading recolored to the accent green instead of the neutral gray every other section heading uses.
+
+## 3. Compare grid only highlighted boolean winners, not numeric ones
+
+Added `compareBetter: "higher" | "lower"` to `js/fields.js` for fields with real consensus on which direction is better: price (lower), EPA range, max DC charging, Level 2 charging, USB ports, horsepower (all higher), 0-60 and self-driving subscription cost (lower). Deliberately left neutral — no highlighting — fields that are genuinely tradeoffs rather than a clear win: doors, wheel size, cargo volume, ground clearance, tow capacity, max passengers, cupholders, battery capacity. `renderCompareTable` in `js/render.js` computes the best value per row (only when 2+ cars have real numeric data for that field — a lone value or all-empty row doesn't get highlighted) and marks matching cell(s) with `.cell-winner`; ties are handled correctly (all tied cars get highlighted, not an arbitrary one).
+
+Price needed a different treatment than the rest: `.compare-col-price` is *already* always rendered in accent green (matches the card grid), so marking the cheapest one "winner" the same way would have been invisible. Inverted it instead — the non-cheapest price(s) get dimmed to `--text-dim` via `.compare-col-price-not-cheapest`, so the cheapest one stands out by contrast against the others rather than by a highlight that was already the default.
+
+Verified on a Mustang Mach-E Select vs. GT comparison: range/charging/horsepower/0-60 correctly favor the GT, Level 2 charging correctly ties (both highlighted, same value), price correctly favors the cheaper Select trim.

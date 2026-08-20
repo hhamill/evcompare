@@ -1,5 +1,5 @@
-import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=2";
-import { findSimilarCars } from "./similar.js?v=2";
+import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=3";
+import { findSimilarCars } from "./similar.js?v=3";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
 
@@ -82,6 +82,9 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
     return;
   }
 
+  const prices = cars.map(car => car.msrp).filter(v => typeof v === "number");
+  const bestPrice = prices.length > 1 ? Math.min(...prices) : null;
+
   const thead = document.createElement("thead");
   const headRow = document.createElement("tr");
   headRow.innerHTML = `<th></th>` + cars.map(car => `
@@ -89,7 +92,7 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
       ${onRemove ? `<button class="compare-col-remove" data-id="${car.id}" aria-label="Remove">&times;</button>` : ""}
       <div class="compare-col-title">${bodyIcon(car.bodyStyle)} ${carTitle(car)}</div>
       <div class="compare-col-trim">${car.modelYear} · ${car.trim}</div>
-      <div class="compare-col-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+      <div class="compare-col-price${bestPrice !== null && car.msrp !== bestPrice ? " compare-col-price-not-cheapest" : ""}">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
       ${onOpenDetail ? `<button class="btn btn-sm compare-col-view-btn" data-id="${car.id}">View details</button>` : ""}
     </th>
   `).join("");
@@ -114,11 +117,23 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
 
     for (const field of fields) {
       const row = document.createElement("tr");
+
+      // Only highlight a winner when there's an actual choice to make: 2+ cars with a
+      // real numeric value for this field, and the field has a declared "better" direction.
+      let bestValue = null;
+      if (field.compareBetter && cars.length > 1) {
+        const numericValues = cars.map(car => field.get(car)).filter(v => typeof v === "number");
+        if (numericValues.length > 1) {
+          bestValue = field.compareBetter === "higher" ? Math.max(...numericValues) : Math.min(...numericValues);
+        }
+      }
+
       const cells = cars.map(car => {
         const v = field.get(car);
         let cls = "";
         if (field.type === "boolean") cls = v ? "cell-yes" : "cell-no";
         else if (v === undefined || v === null || v === "") cls = "cell-empty";
+        else if (bestValue !== null && v === bestValue) cls = "cell-winner";
         return `<td class="${cls}">${fmtVal(field, v)}</td>`;
       }).join("");
       row.innerHTML = `<th>${field.label}</th>${cells}`;
@@ -199,7 +214,7 @@ function renderSimilarSection(anchor, allCars) {
   }).join("");
 
   return `
-    <div class="modal-section">
+    <div class="modal-section similar-section">
       <h4>Similar Vehicles</h4>
       <p class="similar-hint">Close matches on price and specs — click one to compare it in this view.</p>
       <div class="similar-grid">${tiles}</div>

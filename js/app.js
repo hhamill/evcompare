@@ -1,6 +1,6 @@
-import { FIELDS } from "./fields.js?v=2";
-import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=5";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=4";
+import { FIELDS } from "./fields.js?v=3";
+import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=6";
+import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=7";
 import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=2";
 
 const AUTO_COMPARE_THRESHOLD = 5;
@@ -38,10 +38,40 @@ const el = {
   compareBarClearBtn: document.getElementById("compareBarClearBtn"),
   compareBarViewBtn: document.getElementById("compareBarViewBtn"),
   detailModal: document.getElementById("detailModal"),
-  modal: document.querySelector("#detailModal .modal"),
   modalBody: document.getElementById("modalBody"),
   modalCloseBtn: document.getElementById("modalCloseBtn"),
+  themeToggleBtn: document.getElementById("themeToggleBtn"),
 };
+
+// Cycles auto (follow system) -> light -> dark -> auto. Applied as early as possible (before
+// the data fetch even starts) so there's no flash of the wrong theme on load.
+const THEME_STORAGE_KEY = "evcompare-theme";
+const THEME_ORDER = ["auto", "light", "dark"];
+const THEME_ICONS = { auto: "🌓", light: "☀️", dark: "🌙" };
+const THEME_LABELS = { auto: "Auto (follows system)", light: "Light", dark: "Dark" };
+
+function getStoredTheme() {
+  const v = localStorage.getItem(THEME_STORAGE_KEY);
+  return THEME_ORDER.includes(v) ? v : "auto";
+}
+
+function applyTheme(theme) {
+  if (theme === "auto") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", theme);
+  el.themeToggleBtn.textContent = THEME_ICONS[theme];
+  el.themeToggleBtn.title = `Theme: ${THEME_LABELS[theme]} (click to change)`;
+}
+
+function initTheme() {
+  applyTheme(getStoredTheme());
+  el.themeToggleBtn.addEventListener("click", () => {
+    const next = THEME_ORDER[(THEME_ORDER.indexOf(getStoredTheme()) + 1) % THEME_ORDER.length];
+    localStorage.setItem(THEME_STORAGE_KEY, next);
+    applyTheme(next);
+  });
+}
+
+initTheme();
 
 async function init() {
   const res = await fetch("data/evs.json");
@@ -172,7 +202,7 @@ function openDetail(car, { historyMode = "push" } = {}) {
     });
   };
   renderModal();
-  el.modal.scrollTop = 0;
+  el.modalBody.scrollTop = 0;
   el.detailModal.hidden = false;
   if (historyMode === "push") history.pushState({ carId: car.id }, "", carPath(car));
 }

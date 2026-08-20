@@ -21,8 +21,12 @@
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Light tokens apply when the system prefers light and the user hasn't picked a theme
+   explicitly (data-theme absent), OR when the user has explicitly picked light regardless
+   of system preference. Explicit dark (data-theme="dark") always wins over both, since
+   dark is what :root already is by default. */
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme]) {
     --bg: #f4f6fa;
     --bg-elevated: #ffffff;
     --bg-card: #ffffff;
@@ -38,6 +42,38 @@
     --accent-2: #2a6fdb;
     --shadow: 0 8px 30px rgba(20,30,50,0.08);
   }
+}
+:root[data-theme="light"] {
+  --bg: #f4f6fa;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f3f9;
+  --border: #dfe4ee;
+  --border-soft: #e7eaf2;
+  --text: #161a23;
+  --text-dim: #545e70;
+  --text-faint: #8791a3;
+  --accent: #16a35e;
+  --accent-dim: #0f7a46;
+  --accent-contrast: #ffffff;
+  --accent-2: #2a6fdb;
+  --shadow: 0 8px 30px rgba(20,30,50,0.08);
+}
+:root[data-theme="dark"] {
+  --bg: #0b0d12;
+  --bg-elevated: #11141b;
+  --bg-card: #161a23;
+  --bg-card-hover: #1c212c;
+  --border: #262c39;
+  --border-soft: #1d222c;
+  --text: #eef1f6;
+  --text-dim: #9aa4b6;
+  --text-faint: #616b7d;
+  --accent: #4ee08a;
+  --accent-dim: #2c8f5c;
+  --accent-contrast: #06110a;
+  --accent-2: #5aa2ff;
+  --shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
 * { box-sizing: border-box; }
@@ -86,6 +122,14 @@ input { font-family: inherit; }
 
 .topbar-actions { display: flex; align-items: center; gap: 14px; margin-left: auto; flex-shrink: 0; }
 .result-count { color: var(--text-dim); font-size: 13px; white-space: nowrap; }
+
+.theme-toggle-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 33px; height: 33px; flex-shrink: 0;
+  border: 1px solid var(--border); background: var(--bg-card); color: var(--text-dim);
+  border-radius: 9px; font-size: 15px; cursor: pointer; transition: all .15s; padding: 0;
+}
+.theme-toggle-btn:hover { background: var(--bg-card-hover); color: var(--text); }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -256,6 +300,10 @@ input { font-family: inherit; }
 .compare-col-title { font-size: 14px; font-weight: 700; }
 .compare-col-trim { font-size: 12px; color: var(--text-dim); margin-top: 2px; font-weight: 400; white-space: normal; }
 .compare-col-price { font-size: 13px; color: var(--accent); font-weight: 700; margin-top: 6px; }
+/* Price is always shown in accent green (matches the card grid), so highlighting the
+   cheapest car the same way everything else is highlighted would be invisible — dim
+   the others instead to make the cheapest one stand out by contrast. */
+.compare-col-price-not-cheapest { color: var(--text-dim); font-weight: 600; }
 .compare-col-remove {
   border: none; background: transparent; color: var(--text-faint); cursor: pointer; font-size: 16px; float: right;
 }
@@ -263,6 +311,7 @@ input { font-family: inherit; }
 .cell-yes { color: var(--accent); font-weight: 700; }
 .cell-no { color: var(--text-faint); }
 .cell-empty { color: var(--text-faint); }
+.cell-winner { color: var(--accent); font-weight: 700; }
 
 .compare-table td a { color: var(--accent-2); text-decoration: none; margin-right: 10px; }
 .compare-table td a:hover { text-decoration: underline; }
@@ -291,8 +340,18 @@ input { font-family: inherit; }
 .modal-backdrop[hidden] { display: none; }
 .modal {
   background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg);
-  max-width: 640px; width: 100%; max-height: 86vh; overflow-y: auto; padding: 28px; position: relative;
+  max-width: 640px; width: 100%; max-height: 86vh; position: relative;
   box-shadow: var(--shadow);
+  /* Scrolling happens on .modal-body, not here — a native scrollbar drawn directly on an
+     overflow:auto element doesn't reliably clip to a rounded corner in every browser (it can
+     poke out past the curve). Clipping it here with overflow:hidden on the outer box fixes it
+     regardless of how any particular browser draws the inner scrollbar. */
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.modal-body {
+  overflow-y: auto; padding: 28px;
+  min-height: 0; /* let this flex child actually shrink and scroll instead of stretching .modal */
 }
 .modal-close {
   position: absolute; top: 16px; right: 16px; border: none; background: var(--bg-card); color: var(--text-dim);
@@ -342,6 +401,14 @@ input { font-family: inherit; }
 }
 .diff-badge.diff-gain { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, var(--border)); }
 .diff-badge.diff-loss { color: var(--text-faint); }
+
+/* Bleeds to the modal's edges (negating .modal-body's own padding) so this reads as a
+   distinct footer zone rather than blending into the spec rows above it. */
+.similar-section {
+  margin: 28px -28px -28px; padding: 20px 28px 28px;
+  background: var(--bg-card); border-top: 1px solid var(--border);
+}
+.similar-section h4 { color: var(--accent); }
 
 /* ---------- Scrollbars ---------- */
 ::-webkit-scrollbar { width: 10px; height: 10px; }

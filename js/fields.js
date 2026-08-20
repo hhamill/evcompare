@@ -14,25 +14,33 @@ function roundTo(value, decimals) {
   return Math.round(value * factor) / factor;
 }
 
+// `compareBetter: "higher" | "lower"` marks a numeric field as having a genuinely
+// uncontroversial "better" direction, so the compare table can highlight the winning
+// value(s) — used only where there's broad consensus (price, range, charging speed,
+// 0-60, horsepower, USB ports, self-driving cost). Left unset for fields that are more
+// about tradeoffs than a clear win (doors, wheel size, cargo volume, ground clearance,
+// tow capacity, passenger count) — those stay neutral rather than implying a value
+// judgment that doesn't hold for every shopper.
+
 export const FIELDS = [
   // ---- Overview ----
   { key: "make", label: "Make", group: "Overview", type: "enum", get: c => c.make },
   { key: "bodyStyle", label: "Body Style", group: "Overview", type: "enum", get: c => c.bodyStyle },
   { key: "modelYear", label: "Model Year", group: "Overview", type: "enum", get: c => c.modelYear },
-  { key: "msrp", label: "Price (MSRP)", group: "Overview", type: "range", get: c => c.msrp,
+  { key: "msrp", label: "Price (MSRP)", group: "Overview", type: "range", compareBetter: "lower", get: c => c.msrp,
     format: v => v == null ? "—" : `$${Math.round(v).toLocaleString()}` },
   { key: "onSaleDate", label: "On Sale Date", group: "Overview", type: "text", get: c => c.onSaleDate,
     format: v => v == null ? "Available now" : v },
 
   // ---- Range & Charging ----
-  { key: "epaRange", label: "EPA Range", group: "Range & Charging", type: "range", get: c => c.range?.epaMiles,
+  { key: "epaRange", label: "EPA Range", group: "Range & Charging", type: "range", compareBetter: "higher", get: c => c.range?.epaMiles,
     format: v => v == null ? "—" : `${v} mi` },
   { key: "usableKwh", label: "Battery Capacity", group: "Range & Charging", type: "range", get: c => c.battery?.usableKwh,
     format: v => v == null ? "—" : `${v} kWh` },
   { key: "chargePort", label: "Charge Port Type", group: "Range & Charging", type: "enum", get: c => c.charging?.portType },
-  { key: "maxDcKw", label: "Max DC Fast Charging", group: "Range & Charging", type: "range", get: c => c.charging?.maxDcKw,
+  { key: "maxDcKw", label: "Max DC Fast Charging", group: "Range & Charging", type: "range", compareBetter: "higher", get: c => c.charging?.maxDcKw,
     format: v => v == null ? "—" : `${v} kW` },
-  { key: "level2Kw", label: "Level 2 AC Charging", group: "Range & Charging", type: "range", step: 0.1, get: c => c.charging?.level2Kw,
+  { key: "level2Kw", label: "Level 2 AC Charging", group: "Range & Charging", type: "range", step: 0.1, compareBetter: "higher", get: c => c.charging?.level2Kw,
     format: v => v == null ? "—" : `${roundTo(v, 1)} kW` },
   { key: "vehicleToLoad", label: "Vehicle-to-Load (V2L)", group: "Range & Charging", type: "boolean", get: c => c.charging?.vehicleToLoad },
   { key: "heatPump", label: "Heat Pump", group: "Range & Charging", type: "boolean", get: c => c.charging?.heatPump },
@@ -40,9 +48,9 @@ export const FIELDS = [
   // ---- Performance & Drivetrain ----
   { key: "drivetrain", label: "Drivetrain", group: "Performance & Drivetrain", type: "enum", get: c => c.drivetrain },
   { key: "allWheelDriveAvailable", label: "All-Wheel Drive Available", group: "Performance & Drivetrain", type: "boolean", get: c => c.allWheelDriveAvailable },
-  { key: "zeroTo60", label: "0–60 mph", group: "Performance & Drivetrain", type: "range", step: 0.1, get: c => c.performance?.zeroTo60Sec,
+  { key: "zeroTo60", label: "0–60 mph", group: "Performance & Drivetrain", type: "range", step: 0.1, compareBetter: "lower", get: c => c.performance?.zeroTo60Sec,
     format: v => v == null ? "—" : `${roundTo(v, 1)}s` },
-  { key: "horsepower", label: "Horsepower", group: "Performance & Drivetrain", type: "range", get: c => c.performance?.horsepowerHp,
+  { key: "horsepower", label: "Horsepower", group: "Performance & Drivetrain", type: "range", compareBetter: "higher", get: c => c.performance?.horsepowerHp,
     format: v => v == null ? "—" : `${v} hp` },
   { key: "towCapacityLbs", label: "Tow Capacity", group: "Performance & Drivetrain", type: "range", get: c => c.towCapacityLbs,
     format: v => v == null ? "—" : `${v.toLocaleString()} lb` },
@@ -72,10 +80,10 @@ export const FIELDS = [
   { key: "wirelessPhoneCharging", label: "Wireless Phone Charging", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.wirelessPhoneCharging },
   { key: "cupholders", label: "Cupholders", group: "Tech & Safety", type: "range", step: 1, get: c => c.techFeatures?.cupholders,
     format: v => v == null ? "—" : `${roundTo(v, 0)}` },
-  { key: "usbPortsTotal", label: "USB Ports (total)", group: "Tech & Safety", type: "range", step: 1, get: c => c.techFeatures?.usbPorts?.total,
+  { key: "usbPortsTotal", label: "USB Ports (total)", group: "Tech & Safety", type: "range", step: 1, compareBetter: "higher", get: c => c.techFeatures?.usbPorts?.total,
     format: v => v == null ? "—" : `${roundTo(v, 0)}` },
   { key: "selfDriving", label: "Self-Driving Capability", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.selfDriving?.available },
-  { key: "selfDrivingCost", label: "Self-Driving Subscription", group: "Tech & Safety", type: "range", step: 1, get: c => c.driverAssist?.selfDriving?.subscriptionUsdPerMonth,
+  { key: "selfDrivingCost", label: "Self-Driving Subscription", group: "Tech & Safety", type: "range", step: 1, compareBetter: "lower", get: c => c.driverAssist?.selfDriving?.subscriptionUsdPerMonth,
     format: v => v == null ? "—" : (roundTo(v, 0) === 0 ? "Included" : `$${roundTo(v, 0)}/mo`) },
   { key: "collisionAvoidanceAutoBrake", label: "Collision Avoidance Auto-Brake", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.collisionAvoidanceAutoBrake },
   { key: "laneKeepAssist", label: "Lane Keep Assist", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.laneKeepAssist },
