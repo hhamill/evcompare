@@ -154,11 +154,10 @@ function toggleCompare(id, shouldAdd) {
   renderAll();
 }
 
-// historyMode: "push" for a genuinely new navigation (clicking a car from the list/compare
-// view) so back returns you to where you were; "replace" for hopping between similar-car
-// suggestions from within a detail view, so browsing five related cars doesn't force five
-// back-presses to escape — one back always returns to wherever you started browsing from;
-// "none" when we're just reflecting a popstate/deep-link that already happened.
+// historyMode: "push" for a genuinely new navigation — clicking a car from the list/compare
+// view, or hopping to a similar-car suggestion — so back walks you through each car you
+// visited, one at a time, same as any other breadcrumb trail; "none" when we're just
+// reflecting a popstate/deep-link that already happened (don't touch history again).
 function openDetail(car, { historyMode = "push" } = {}) {
   state.activeDetailCar = car;
   const renderModal = () => {
@@ -169,14 +168,13 @@ function openDetail(car, { historyMode = "push" } = {}) {
         renderModal();
       },
       allCars: state.cars,
-      onSelectCar: nextCar => openDetail(nextCar, { historyMode: "replace" }),
+      onSelectCar: nextCar => openDetail(nextCar),
     });
   };
   renderModal();
   el.modal.scrollTop = 0;
   el.detailModal.hidden = false;
   if (historyMode === "push") history.pushState({ carId: car.id }, "", carPath(car));
-  else if (historyMode === "replace") history.replaceState({ carId: car.id }, "", carPath(car));
 }
 
 function closeModal({ updateHistory = true } = {}) {
