@@ -15,6 +15,7 @@ const state = {
   view: "results", // "results" | "compare"
   activeDetailCar: null,
   pathIndex: null,
+  sortKey: "default",
 };
 
 const el = {
@@ -34,6 +35,7 @@ const el = {
   compareCount: document.getElementById("compareCount"),
   resultCount: document.getElementById("resultCount"),
   searchInput: document.getElementById("searchInput"),
+  sortSelect: document.getElementById("sortSelect"),
   resetFiltersBtn: document.getElementById("resetFiltersBtn"),
   backToResultsBtn: document.getElementById("backToResultsBtn"),
   clearCompareBtn: document.getElementById("clearCompareBtn"),
@@ -100,6 +102,11 @@ async function init() {
 function bindGlobalEvents() {
   el.searchInput.addEventListener("input", e => {
     state.searchText = e.target.value.trim();
+    renderResultsView();
+  });
+
+  el.sortSelect.addEventListener("change", e => {
+    state.sortKey = e.target.value;
     renderResultsView();
   });
 
@@ -184,6 +191,32 @@ function getFilteredCars() {
   return state.cars.filter(c => matchesFilters(c, state.filterState, state.domains, state.searchText));
 }
 
+// Only used for the card grid, never the compare views — sorting there would reorder
+// columns out from under whatever order you picked/expected them in.
+const SORT_GETTERS = {
+  price: c => c.msrp,
+  range: c => c.range?.epaMiles,
+  zeroTo60: c => c.performance?.zeroTo60Sec,
+  maxPassengers: c => c.maxPassengers,
+};
+
+function sortCars(cars, sortKey) {
+  if (sortKey === "default") return cars;
+  const [fieldName, dir] = sortKey.split("-");
+  const getter = SORT_GETTERS[fieldName];
+  if (!getter) return cars;
+
+  const withValue = [];
+  const withoutValue = [];
+  for (const car of cars) {
+    (typeof getter(car) === "number" ? withValue : withoutValue).push(car);
+  }
+  // Cars missing this spec sink to the bottom regardless of direction — "lowest price
+  // first" shouldn't surface a car with no listed price ahead of a real $30k one.
+  withValue.sort((a, b) => (getter(a) - getter(b)) * (dir === "desc" ? -1 : 1));
+  return [...withValue, ...withoutValue];
+}
+
 function toggleCompare(id, shouldAdd) {
   if (shouldAdd) {
     if (state.compareSet.size >= MAX_COMPARE) {
@@ -266,7 +299,7 @@ function renderResultsView() {
   } else {
     el.viewResults.hidden = false;
     el.viewCompare.hidden = true;
-    renderCardGrid(el.cardGrid, filtered, {
+    renderCardGrid(el.cardGrid, sortCars(filtered, state.sortKey), {
       compareSet: state.compareSet,
       onToggleCompare: (id, checked) => toggleCompare(id, checked),
       onOpenDetail: openDetail,

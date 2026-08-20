@@ -21,7 +21,7 @@
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="css/styles.css?v=11" />
+<link rel="stylesheet" href="css/styles.css?v=12" />
 </head>
 <body>
 <div class="app">
@@ -55,6 +55,20 @@
 
     <main class="content">
       <div id="viewResults" class="view">
+        <div class="results-toolbar">
+          <label for="sortSelect" class="results-toolbar-label">Sort by</label>
+          <select id="sortSelect" class="sort-select">
+            <option value="default">Default</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="range-desc">Range: Longest first</option>
+            <option value="range-asc">Range: Shortest first</option>
+            <option value="zeroTo60-asc">0–60: Fastest first</option>
+            <option value="zeroTo60-desc">0–60: Slowest first</option>
+            <option value="maxPassengers-desc">Max Passengers: Most first</option>
+            <option value="maxPassengers-asc">Max Passengers: Fewest first</option>
+          </select>
+        </div>
         <div id="cardGrid" class="card-grid"></div>
       </div>
 
@@ -94,6 +108,6 @@
 
 </div>
 
-<script type="module" src="js/app.js?v=20"></script>
+<script type="module" src="js/app.js?v=21"></script>
 </body>
 </html>

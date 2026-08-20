@@ -174,3 +174,17 @@ Hit a real bug building this: `scrollIntoView({behavior: "smooth", ...})` silent
 ## 3. Desktop: horizontal scrollbar hard to reach on a tall table
 
 However precisely `.compare-scroll`'s `max-height` is tuned, a scrollbar living at the bottom edge of a tall, capped-height box is an easy target to lose track of. Rather than chase the exact pixel offset, sidestepped the problem: added `‹`/`›` buttons next to the "Comparing N vehicles" heading — which is never capped or internally scrolled, so they're always reachable regardless of table height. They only appear when the table actually overflows horizontally, disable themselves at whichever end you've scrolled to (updates live as you scroll by any method — buttons, trackpad, or the native scrollbar), and scroll by a fixed 280px per click. Desktop-only (`min-width: 881px`) — mobile scrolls the table by touch directly, so there's no equivalent "can't find the scrollbar" problem to solve there.
+
+---
+
+# TODO: Scrollbar corner + card grid sort (2026-08-20)
+
+## 1. White square at the bottom-right of the compare grid
+
+The corner where a horizontal and vertical scrollbar meet is a separate pseudo-element (`::-webkit-scrollbar-corner`) from the scrollbar track/thumb — we'd styled those but never that, so it fell back to the browser's default (stark white) styling against the dark theme. Added a themed rule for it alongside the existing scrollbar styles in `css/styles.css`.
+
+## 2. Sort control for the card grid (not compare views)
+
+Added a "Sort by" dropdown above the card grid: Price (low→high / high→low), Range (longest/shortest first), 0–60 (fastest/slowest first), Max Passengers (most/fewest first), plus the original default order. Scoped exactly as asked — it only ever touches `js/app.js`'s card-grid render call; the auto-compare and manual-compare table column order is untouched regardless of what's selected (verified: sorted the grid by "Max Passengers: Most first," then searched down to a 2-result auto-compare view, and the columns still came out in original catalog order, not passenger-sorted).
+
+Cars missing a given spec (e.g. no listed 0-60 time) sink to the bottom of the sort regardless of direction, rather than clustering at the top on an ascending sort via `undefined`/`NaN` comparison weirdness. "Sort by" is independent of "Reset filters" — clearing filters doesn't reset your sort choice, matching how most shopping sites treat the two as separate controls.
