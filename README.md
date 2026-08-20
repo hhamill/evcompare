@@ -24,7 +24,7 @@ To deploy, push the repo to GitHub and enable **Pages** on it — no build step,
 
 ## The dataset
 
-`data/evs.json` currently has **30 trims across 16 models** from 9 automakers: Tesla, Chevrolet, Ford, Hyundai, Kia, Rivian, Volkswagen, Honda, and Cadillac. Specs were gathered from manufacturer spec sheets, EPA/fueleconomy.gov listings, and outlets like Edmunds and Car and Driver.
+`data/evs.json` currently has **128 trims across 72 models** from 28 automakers — everything from Tesla, Ford, and Chevrolet to BMW, Mercedes-Benz, Audi, Porsche, Genesis, Volvo, Polestar, Lucid, and more, including a few 2027 models (BMW iX3, Lexus ES, Rivian R2, the Chevy Bolt relaunch, Volvo EX60) that are pre-order/imminent rather than already in dealers — see each entry's `onSaleDate`. Specs were gathered from manufacturer spec sheets, EPA/fueleconomy.gov listings, and outlets like Edmunds and Car and Driver. See `TODO.md` for what's still deliberately excluded (a few ultra-low-volume exotics, a couple of not-yet-on-sale models) and known gaps.
 
 Fields that couldn't be confirmed from a real source are left `null` rather than guessed, and many entries carry a `notes` field flagging estimates or discrepancies between sources (e.g. Tesla doesn't publish official battery capacity, so those figures are third-party estimates). Treat this as a snapshot and a starting point, not a live feed — specs, trims, and prices change.
 

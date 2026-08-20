@@ -10,6 +10,7 @@ Each entry in `evs.json` is one **trim** of one model (a single model year, e.g.
   "trim": "Long Range AWD",
   "modelYear": 2025,
   "bodyStyle": "SUV",                // "Sedan" | "SUV" | "Crossover" | "Hatchback" | "Truck" | "Minivan"
+  "onSaleDate": null,                // ISO date/month ("2026-09-25" or "2026-09") if a manufacturer has published one, else null. For not-yet-shipping models this is what tells a shopper "preorder now, delivery later" vs. "buy today."
   "msrp": 47990,                     // USD, base price for this trim, number or null
   "doors": 5,
   "rearDoorStyle": "Hinged",         // "Hinged" | "Sliding" | "Suicide/Coach"
@@ -85,5 +86,6 @@ Each entry in `evs.json` is one **trim** of one model (a single model year, e.g.
 - Use only real, verifiable public data (manufacturer spec pages, fueleconomy.gov, EPA, Car and Driver / Edmunds / MotorTrend reviews). Do not invent numbers.
 - If a field is genuinely unknown/not applicable, use `null` (numbers/strings) or omit nested optional sub-fields — never guess.
 - Every entry MUST have `range.source` (EPA/fueleconomy.gov link) and at least one link in `links`.
-- Prefer current model year (2025 or 2026) US-market specs.
+- Prefer current model year (2025 or 2026) US-market specs; 2027 models are fine to include if the manufacturer has published real (not estimated) specs and pricing.
 - Keep `id` unique and kebab-case: `{make}-{model}-{year}-{trim}`.
+- `onSaleDate`: only set this when a manufacturer has stated an actual date/month (a press release, an order-bank open date, "arriving September 2026," etc.) — never estimate it. Leave `null` for vehicles already broadly available where no specific "on sale" date is meaningful.

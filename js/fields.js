@@ -8,6 +8,8 @@ export const FIELDS = [
   { key: "modelYear", label: "Model Year", group: "Overview", type: "enum", get: c => c.modelYear },
   { key: "msrp", label: "Price (MSRP)", group: "Overview", type: "range", get: c => c.msrp,
     format: v => v == null ? "—" : `$${Math.round(v).toLocaleString()}` },
+  { key: "onSaleDate", label: "On Sale Date", group: "Overview", type: "text", get: c => c.onSaleDate,
+    format: v => v == null ? "Available now" : v },
 
   // ---- Range & Charging ----
   { key: "epaRange", label: "EPA Range", group: "Range & Charging", type: "range", get: c => c.range?.epaMiles,
