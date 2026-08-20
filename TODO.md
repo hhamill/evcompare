@@ -1,6 +1,8 @@
 # TODO: Data coverage
 
-`data/evs.json` now covers **28 makes / 72 models / 128 trims** — up from 9 makes / 16 models / 30 trims. Every make identified in the original survey below (German luxury, other premium/EV-native, mainstream, trucks, and the 2027-ready batch) has been researched and merged in, each trim sourced from manufacturer spec pages + fueleconomy.gov + a review link, following `data/SCHEMA.md`.
+`data/evs.json` now covers **28 makes / 72 models / 129 trims** — up from 9 makes / 16 models / 30 trims. Every make identified in the original survey below (German luxury, other premium/EV-native, mainstream, trucks, and the 2027-ready batch) has been researched and merged in, each trim sourced from manufacturer spec pages + fueleconomy.gov + a review link, following `data/SCHEMA.md`.
+
+**2026-08-20**: Added the missing **Ford Mustang Mach-E Premium** trim (user noticed the dataset only had Select RWD and GT AWD). Added as `Premium AWD Extended Range` ($48,845, 300mi EPA, 91kWh, 150kW DC) — the popular loaded-but-not-GT configuration. `towCapacityLbs` and `groundClearanceIn` are `null`: the only figures found for these were from older-model-year or EU-spec (kg/liter) aggregator sites, not a reliable MY2026 US-spec primary source, so left null rather than guessed per `data/SCHEMA.md` rules.
 
 ## What's in now
 

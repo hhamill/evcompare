@@ -3265,6 +3265,89 @@
     "notes": "MY2026 is the current model year on ford.com (2025 has been superseded). Select RWD uses the Standard Range 75.7 kWh (68 kWh usable) LFP-family pack. Despite Ford's 2023 NACS announcement, the Mach-E still ships with a native CCS1 port as of MY2026; a NACS-to-CCS1 Fast Charging Adapter is a separate ~$200 accessory (not bundled). For 2026, the frunk (4.8 cu ft) became a $495 option rather than standard equipment, and BlueCruise/wireless charging pad/360-camera moved from standard to optional on Select. Cupholder count, USB port breakdown, and tow rating could not be confirmed from reliable current-MY sources and are left null rather than guessed. Top speed (112 mph) reflects the figure consistently cited for non-GT Mach-E trims across recent model years; a MY2026-specific primary-source citation was not found. Seat material is Ford's synthetic \"ActiveX\" leatherette (no genuine leather is offered on any Mach-E trim), so leatherAvailable is false."
   },
   {
+    "id": "ford-mustang-mach-e-2026-premium-awd",
+    "make": "Ford",
+    "model": "Mustang Mach-E",
+    "trim": "Premium AWD Extended Range",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 48845,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 91,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 300,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50201"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.8,
+      "horsepowerHp": 346,
+      "topSpeedMph": 112
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 150,
+      "level2Kw": 10.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": false,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "BlueCruise",
+        "subscriptionUsdPerMonth": 49.99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 29.7,
+      "maxCubicFeet": 59.1,
+      "frunkCubicFeet": 4.8
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.ford.com/suvs/mach-e/models/premium/",
+      "review": "https://www.edmunds.com/ford/mustang-mach-e/2026/trims/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50201"
+    },
+    "notes": "MY2026 Premium sits between Select and GT and is available RWD ($40,595) or AWD ($43,595); this entry represents the popular AWD + Extended Range (91 kWh usable, 98.7 kWh pack) configuration at approx. $48,845 ($43,595 AWD base + ~$5,250 Extended Range upgrade), corroborated by a real dealer listing at $48,840. 346 hp / 428 lb-ft and 258 kW motor output confirmed via fueleconomy.gov (id 50201, \"2026 Ford Mustang Mach-E AWD Extended\"). DC fast charging is listed at 150 kW to match the same Extended Range pack used on GT, rather than the 115 kW figure that applies to the smaller Standard Range pack (Select RWD) -- some aggregator sites conflate the two. Wireless charging pad lost standard-equipment status for MY2026 and is now bundled only in the optional Technology Package, so wirelessPhoneCharging is false here despite being standard on GT. Heated steering wheel and heated/ventilated front seats plus a 10-speaker Bang & Olufsen system are confirmed standard on Premium (Ford 2026 order guide). Premium is limited to 19-inch wheels only (no 20/21-inch option, unlike Select and GT). Tow capacity and ground clearance could not be confirmed against a reliable MY2026 US-spec primary source -- some sites show older-model-year or EU-spec (kg/liter) figures for these fields, so they are left null rather than guessed. Cupholder and USB port counts left null for the same reason as the other Mach-E entries. Charging port is native CCS1, consistent with the rest of the MY2026 Mach-E lineup."
+  },
+  {
     "id": "ford-mustang-mach-e-2026-gt-awd",
     "make": "Ford",
     "model": "Mustang Mach-E",
