@@ -1,5 +1,5 @@
-import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=4";
-import { findSimilarCars } from "./similar.js?v=4";
+import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=5";
+import { findSimilarCars } from "./similar.js?v=5";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
 
@@ -138,6 +138,8 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
         let cls = "";
         if (field.type === "boolean") cls = v ? "cell-yes" : "cell-no";
         else if (v === undefined || v === null || v === "") cls = "cell-empty";
+        else if (v === "N/A") cls = "cell-na";
+        else if (v === "Pending") cls = "cell-pending";
         else if (bestValue !== null && v === bestValue) cls = "cell-winner";
         return `<td class="${cls}">${fmtVal(field, v)}</td>`;
       }).join("");

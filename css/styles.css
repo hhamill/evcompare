@@ -354,6 +354,8 @@ input { font-family: inherit; }
 .cell-yes { color: var(--accent); font-weight: 700; }
 .cell-no { color: var(--text-faint); }
 .cell-empty { color: var(--text-faint); }
+.cell-na { color: var(--text-faint); }
+.cell-pending { color: var(--text-faint); font-style: italic; }
 .cell-winner { color: var(--accent); font-weight: 700; }
 
 .compare-table td a { color: var(--accent-2); text-decoration: none; margin-right: 10px; }

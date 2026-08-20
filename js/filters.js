@@ -1,4 +1,4 @@
-import { FIELDS, GROUP_ORDER } from "./fields.js?v=4";
+import { FIELDS, GROUP_ORDER } from "./fields.js?v=5";
 
 // Enum filter lists longer than this get a "Show all" toggle + type-to-filter box
 // instead of an inner scrollbar, so the sidebar only ever scrolls at the outer level.

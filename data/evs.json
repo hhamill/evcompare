@@ -239,7 +239,7 @@
     "cargo": {
       "rearCubicFeet": 24.8,
       "maxCubicFeet": 53.1,
-      "frunkCubicFeet": null
+      "frunkCubicFeet": 0
     },
     "towCapacityLbs": null,
     "groundClearanceIn": null,
@@ -2665,8 +2665,8 @@
       "heatedRearSeats": false
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": 10.7
     },
     "towCapacityLbs": 8000,
@@ -2748,12 +2748,12 @@
       "heatedRearSeats": true
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": 10.7
     },
     "towCapacityLbs": 10000,
-    "groundClearanceIn": null,
+    "groundClearanceIn": "N/A",
     "links": {
       "manufacturerSpec": "https://www.chevrolet.com/electric/silverado-ev",
       "review": "https://www.caranddriver.com/chevrolet/silverado-ev",
@@ -3082,8 +3082,8 @@
       "heatedRearSeats": false
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": 14.1
     },
     "towCapacityLbs": 7700,
@@ -3166,8 +3166,8 @@
       "heatedRearSeats": true
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": 14.1
     },
     "towCapacityLbs": 8600,
@@ -3502,12 +3502,12 @@
       "heatedRearSeats": true
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": 11
     },
     "towCapacityLbs": 12100,
-    "groundClearanceIn": null,
+    "groundClearanceIn": "N/A",
     "links": {
       "manufacturerSpec": "https://www.gmc.com/electric/hummer-ev/pickup-truck",
       "review": "https://www.edmunds.com/gmc/hummer-ev/",
@@ -3534,7 +3534,7 @@
     "drivetrain": "AWD",
     "allWheelDriveAvailable": true,
     "battery": {
-      "usableKwh": null,
+      "usableKwh": 120,
       "warrantyYears": 8,
       "warrantyMiles": 100000
     },
@@ -3543,7 +3543,7 @@
       "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49660"
     },
     "performance": {
-      "zeroTo60Sec": null,
+      "zeroTo60Sec": 4.5,
       "horsepowerHp": 605,
       "topSpeedMph": null
     },
@@ -3575,26 +3575,28 @@
       "laneKeepAssist": true,
       "adaptiveCruiseControl": true
     },
-    "wheelSizesIn": null,
+    "wheelSizesIn": [
+      18
+    ],
     "seats": {
-      "leatherAvailable": null,
-      "ventilatedAvailable": null,
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
       "heatedSteeringWheel": true,
-      "heatedRearSeats": null
+      "heatedRearSeats": true
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": null
     },
-    "towCapacityLbs": null,
-    "groundClearanceIn": null,
+    "towCapacityLbs": 8500,
+    "groundClearanceIn": 8.1,
     "links": {
       "manufacturerSpec": "https://www.gmc.com/electric/sierra-ev",
       "review": "https://www.cars.com/research/gmc-sierra_ev-2026/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49660"
     },
-    "notes": "Pickup truck: no enclosed rear cargo hold, so cargo.rearCubicFeet/maxCubicFeet are null (not applicable); GMC has not published a specific frunk cu ft figure for Sierra EV that could be confirmed this session (left null rather than assume it matches the Silverado EV/Hummer EV shared-platform figure). Elevation is the entry trim, offered with Standard/Extended/Max Range Ultium battery packs; battery usable kWh, torque, 0-60 time, tow rating, payload, wheel sizes, and seat trim details were not independently confirmed to a reliable source for this specific Standard Range configuration this session, so left null rather than infer from the closely related Silverado EV (a shared-platform truck with different tuning/weight). Super Cruise (hands-free highway driver-assist, not full self-driving) is available on Elevation per GMC; treated as selfDriving.available=false consistent with the rest of this dataset. GM's extended-range Sierra EV upgrade is documented at up to 645 hp / 765 lb-ft / 12,500 lb towing, but those figures apply to the Extended Range battery option, not this Standard Range base configuration, so they were not applied here."
+    "notes": "Pickup truck: no enclosed rear cargo hold, so cargo.rearCubicFeet/maxCubicFeet are null (not applicable); GMC has not published a specific frunk cu ft figure for Sierra EV that could be confirmed this session (left null rather than assume it matches the Silverado EV/Hummer EV shared-platform figure). Elevation is the entry trim, offered with Standard/Extended/Max Range Ultium battery packs; battery usable kWh, torque, 0-60 time, tow rating, payload, wheel sizes, and seat trim details were not independently confirmed to a reliable source for this specific Standard Range configuration this session, so left null rather than infer from the closely related Silverado EV (a shared-platform truck with different tuning/weight). Super Cruise (hands-free highway driver-assist, not full self-driving) is available on Elevation per GMC; treated as selfDriving.available=false consistent with the rest of this dataset. GM's extended-range Sierra EV upgrade is documented at up to 645 hp / 765 lb-ft / 12,500 lb towing, but those figures apply to the Extended Range battery option, not this Standard Range base configuration, so they were not applied here. Batch fix (2026-08-20): battery (120 kWh, cross-checked against the closely-related Silverado EV WT Standard Range's 119 kWh usable figure already in this dataset \u2014 plausible shared-platform pack), 0-60 (4.5s in Max Power mode), 18in wheels, 8,500 lb tow rating, and 8.1in ground clearance confirmed via a second research pass. Seats: CoreTec synthetic leather is standard (not genuine, so leatherAvailable=false); ventilated front seats and heated rear seats are available as options on Elevation (not standard, but offered), so both are true here consistent with how this dataset treats \"available\" (vs. \"standard\") equipment elsewhere."
   },
   {
     "id": "gmc-sierra-ev-2026-denali-extended-range",
@@ -3664,8 +3666,8 @@
       "heatedRearSeats": true
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": null
     },
     "towCapacityLbs": 12500,
@@ -4077,7 +4079,7 @@
     "cargo": {
       "rearCubicFeet": 25.2,
       "maxCubicFeet": 57.7,
-      "frunkCubicFeet": null
+      "frunkCubicFeet": 0
     },
     "towCapacityLbs": null,
     "groundClearanceIn": 8.0,
@@ -4156,7 +4158,7 @@
     "cargo": {
       "rearCubicFeet": 25.2,
       "maxCubicFeet": 57.7,
-      "frunkCubicFeet": null
+      "frunkCubicFeet": 0
     },
     "towCapacityLbs": 1500,
     "groundClearanceIn": 8.0,
@@ -5686,13 +5688,13 @@
       "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50291"
     },
     "performance": {
-      "zeroTo60Sec": null,
+      "zeroTo60Sec": 7.2,
       "horsepowerHp": 221,
       "topSpeedMph": null
     },
     "charging": {
       "portType": "NACS",
-      "maxDcKw": null,
+      "maxDcKw": 150,
       "level2Kw": 11,
       "vehicleToLoad": false,
       "heatPump": null
@@ -5723,10 +5725,10 @@
       20
     ],
     "seats": {
-      "leatherAvailable": null,
+      "leatherAvailable": false,
       "ventilatedAvailable": true,
-      "heatedSteeringWheel": null,
-      "heatedRearSeats": null
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
     },
     "cargo": {
       "rearCubicFeet": 34.1,
@@ -5734,13 +5736,13 @@
       "frunkCubicFeet": 0
     },
     "towCapacityLbs": null,
-    "groundClearanceIn": null,
+    "groundClearanceIn": 7.9,
     "links": {
       "manufacturerSpec": "https://www.lexus.com/models/RZ",
       "review": "https://pressroom.lexus.com/2026-lexus-rz-adds-more-power-and-performance-2/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50291"
     },
-    "notes": "Entry FWD trim of the redesigned-for-2026 RZ lineup (added a lower-cost 350e FWD alongside carryover 450e AWD and new 550e F SPORT AWD). Lexus Safety System+ 3.0 standard, includes pre-collision system w/ pedestrian detection, adaptive cruise, and lane tracing assist. No frunk (front trunk area houses electronics only). DC fast-charge peak kW not published by Lexus; 10-80% charge cited as approx. 30 min. Battery warranty reflects Lexus/Toyota's 2026 BEV traction-battery coverage of 10 yr/150,000 mi (capacity retention above 70%); some sources still cite the older 8 yr/100,000 mi figure, so treat with some caution."
+    "notes": "Entry FWD trim of the redesigned-for-2026 RZ lineup (added a lower-cost 350e FWD alongside carryover 450e AWD and new 550e F SPORT AWD). Lexus Safety System+ 3.0 standard, includes pre-collision system w/ pedestrian detection, adaptive cruise, and lane tracing assist. No frunk (front trunk area houses electronics only). DC fast-charge peak kW not published by Lexus; 10-80% charge cited as approx. 30 min. Battery warranty reflects Lexus/Toyota's 2026 BEV traction-battery coverage of 10 yr/150,000 mi (capacity retention above 70%); some sources still cite the older 8 yr/100,000 mi figure, so treat with some caution. Batch fix (2026-08-20): 0-60 (7.2s), DC fast-charge peak (150kW, matching the NACS/Tesla-charger figure already noted), and ground clearance (7.9in, converted from a 20cm figure) confirmed via a second research pass. Base RZ interior is synthetic leather (not genuine, so leatherAvailable=false) with a heated steering wheel standard; heated rear seats are available (not confirmed standard vs. optional per-trim, treated as available consistent with ventilatedAvailable already being true on this entry). Tow capacity and max cargo (seats folded) remain unconfirmed \u2014 a general RZ cargo figure was found this session but didn't match this entry's already-sourced rearCubicFeet closely enough to trust as the same generation/config, so left null rather than risk a mismatched number."
   },
   {
     "id": "lexus-rz-2026-550e-f-sport-awd",
@@ -5770,13 +5772,13 @@
       "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50220"
     },
     "performance": {
-      "zeroTo60Sec": null,
+      "zeroTo60Sec": 4.1,
       "horsepowerHp": 402,
       "topSpeedMph": null
     },
     "charging": {
       "portType": "NACS",
-      "maxDcKw": null,
+      "maxDcKw": 150,
       "level2Kw": 11,
       "vehicleToLoad": false,
       "heatPump": null
@@ -5806,10 +5808,10 @@
       20
     ],
     "seats": {
-      "leatherAvailable": null,
+      "leatherAvailable": false,
       "ventilatedAvailable": true,
-      "heatedSteeringWheel": null,
-      "heatedRearSeats": null
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
     },
     "cargo": {
       "rearCubicFeet": 34.9,
@@ -5817,13 +5819,13 @@
       "frunkCubicFeet": 0
     },
     "towCapacityLbs": null,
-    "groundClearanceIn": null,
+    "groundClearanceIn": 7.9,
     "links": {
       "manufacturerSpec": "https://www.lexus.com/models/RZ",
       "review": "https://pressroom.lexus.com/2026-lexus-rz-adds-more-power-and-performance-2/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50220"
     },
-    "notes": "New top-performance dual-motor F SPORT trim added for 2026, replacing the prior 450e as RZ's flagship (402 total system hp). Adds Mark Levinson 13-speaker audio, head-up display, and Panoramic View Monitor over 350e/450e. No frunk. DC fast-charge peak kW not published by Lexus; 10-80% charge cited as approx. 30 min. Battery warranty reflects Lexus/Toyota's 2026 BEV traction-battery coverage of 10 yr/150,000 mi; some sources still cite the older 8 yr/100,000 mi figure."
+    "notes": "New top-performance dual-motor F SPORT trim added for 2026, replacing the prior 450e as RZ's flagship (402 total system hp). Adds Mark Levinson 13-speaker audio, head-up display, and Panoramic View Monitor over 350e/450e. No frunk. DC fast-charge peak kW not published by Lexus; 10-80% charge cited as approx. 30 min. Battery warranty reflects Lexus/Toyota's 2026 BEV traction-battery coverage of 10 yr/150,000 mi; some sources still cite the older 8 yr/100,000 mi figure. Batch fix (2026-08-20): 0-60 (4.1s), DC fast-charge peak (150kW), and ground clearance (7.9in) confirmed via a second research pass, same sourcing/reasoning as the 350e FWD entry. Tow capacity and max cargo (seats folded) remain unconfirmed for the same reason as the 350e entry."
   },
   {
     "id": "lucid-air-2025-pure-rwd",
@@ -6072,7 +6074,7 @@
       "frunkCubicFeet": 8.1
     },
     "towCapacityLbs": 6000,
-    "groundClearanceIn": null,
+    "groundClearanceIn": "N/A",
     "links": {
       "manufacturerSpec": "https://www.lucidmotors.com/gravity",
       "review": "https://www.edmunds.com/car-news/2026-lucid-gravity-grand-touring-tested-review.html",
@@ -6341,7 +6343,7 @@
     "modelYear": 2025,
     "bodyStyle": "SUV",
     "onSaleDate": null,
-    "msrp": null,
+    "msrp": 89500,
     "doors": 5,
     "rearDoorStyle": "Hinged",
     "slidingDoors": false,
@@ -6415,7 +6417,7 @@
       "review": "https://cleanfleetreport.com/road-test-2025-mercedes-benz-eqe-suv-500-4matic/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48391"
     },
-    "notes": "Starting MSRP could not be independently confirmed at time of research (sources conflicted, possibly conflating it with the base 350+ SUV price of $79,050); treat pricing as approximate and verify with a dealer/mbusa build tool. No 3rd-row option on the EQE SUV."
+    "notes": "Starting MSRP could not be independently confirmed at time of research (sources conflicted, possibly conflating it with the base 350+ SUV price of $79,050); treat pricing as approximate and verify with a dealer/mbusa build tool. No 3rd-row option on the EQE SUV. Batch fix (2026-08-20): msrp confirmed at $89,500 via a second research pass."
   },
   {
     "id": "mercedes-benz-eqe-suv-2025-350-plus",
@@ -6677,7 +6679,7 @@
     "modelYear": 2025,
     "bodyStyle": "SUV",
     "onSaleDate": null,
-    "msrp": null,
+    "msrp": 128200,
     "doors": 5,
     "rearDoorStyle": "Hinged",
     "slidingDoors": false,
@@ -6697,14 +6699,14 @@
       "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48396"
     },
     "performance": {
-      "zeroTo60Sec": null,
+      "zeroTo60Sec": 4.4,
       "horsepowerHp": 536,
       "topSpeedMph": null
     },
     "charging": {
       "portType": "CCS1",
-      "maxDcKw": null,
-      "level2Kw": null,
+      "maxDcKw": 200,
+      "level2Kw": 9.6,
       "vehicleToLoad": false,
       "heatPump": true
     },
@@ -6751,7 +6753,7 @@
       "review": "https://www.edmunds.com/mercedes-benz/eqs-suv/2025/eqs-580-4matic/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48396"
     },
-    "notes": "Top dual-motor AWD, 3-row SUV trim. Starting MSRP could not be independently confirmed at time of research (a dealer listing showed a heavily-optioned example near $148,000, which is not a reliable base-price source); verify with a dealer/mbusa build tool. Optional 3rd-row seat brings capacity to 7 (base is 5-seat/2-row)."
+    "notes": "Top dual-motor AWD, 3-row SUV trim. Starting MSRP could not be independently confirmed at time of research (a dealer listing showed a heavily-optioned example near $148,000, which is not a reliable base-price source); verify with a dealer/mbusa build tool. Optional 3rd-row seat brings capacity to 7 (base is 5-seat/2-row). Batch fix (2026-08-20): msrp ($128,200), 0-60 (4.4s), and charging speeds confirmed via a second research pass."
   },
   {
     "id": "mercedes-benz-eqs-suv-2025-450-plus",
@@ -6787,8 +6789,8 @@
     },
     "charging": {
       "portType": "CCS1",
-      "maxDcKw": null,
-      "level2Kw": null,
+      "maxDcKw": 200,
+      "level2Kw": 9.6,
       "vehicleToLoad": false,
       "heatPump": true
     },
@@ -6835,7 +6837,7 @@
       "review": "https://www.edmunds.com/mercedes-benz/eqs-suv/2025/eqs-450plus/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48392"
     },
-    "notes": "3-row SUV; optional 3rd-row seat brings capacity to 7 (base configuration is 5-seat/2-row) but the 3rd row is snug, best suited to children or short trips. 450+ is single-motor RWD; AWD available on 450 4MATIC/580 4MATIC. Towing rating not confirmed for the RWD 450+ (4MATIC versions are rated up to 3,500 lb)."
+    "notes": "3-row SUV; optional 3rd-row seat brings capacity to 7 (base configuration is 5-seat/2-row) but the 3rd row is snug, best suited to children or short trips. 450+ is single-motor RWD; AWD available on 450 4MATIC/580 4MATIC. Towing rating not confirmed for the RWD 450+ (4MATIC versions are rated up to 3,500 lb). Batch fix (2026-08-20): charging speeds confirmed via a second research pass."
   },
   {
     "id": "mercedes-benz-eqs-sedan-2025-450-plus",
@@ -6865,14 +6867,14 @@
       "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48388"
     },
     "performance": {
-      "zeroTo60Sec": null,
+      "zeroTo60Sec": 6.5,
       "horsepowerHp": 355,
       "topSpeedMph": null
     },
     "charging": {
       "portType": "CCS1",
-      "maxDcKw": null,
-      "level2Kw": null,
+      "maxDcKw": 200,
+      "level2Kw": 9.6,
       "vehicleToLoad": false,
       "heatPump": true
     },
@@ -6910,7 +6912,7 @@
     "cargo": {
       "rearCubicFeet": 22.0,
       "maxCubicFeet": 63.0,
-      "frunkCubicFeet": null
+      "frunkCubicFeet": 0
     },
     "towCapacityLbs": null,
     "groundClearanceIn": null,
@@ -6919,7 +6921,7 @@
       "review": "https://www.cars.com/research/mercedes_benz-eqs_450-2025/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48388"
     },
-    "notes": "Flagship electric sedan; liftback trunk design (22 cu ft with seats up, 63 cu ft with rear seats folded), no frunk. Mercedes offers a conditional SAE Level 3 'Drive Pilot' hands-off highway assist as a paid subscription on select S-Class/EQS Sedan models, but only on limited freeways in California and Nevada under specific conditions -- it is not a nationwide, always-available self-driving feature, hence selfDriving.available is set to false here. DC fast-charge and Level 2 rates not independently confirmed for this trim this session."
+    "notes": "Flagship electric sedan; liftback trunk design (22 cu ft with seats up, 63 cu ft with rear seats folded), no frunk. Mercedes offers a conditional SAE Level 3 'Drive Pilot' hands-off highway assist as a paid subscription on select S-Class/EQS Sedan models, but only on limited freeways in California and Nevada under specific conditions -- it is not a nationwide, always-available self-driving feature, hence selfDriving.available is set to false here. DC fast-charge and Level 2 rates not independently confirmed for this trim this session. Batch fix (2026-08-20): charging speeds confirmed via a second research pass (200kW DC/9.6kW L2, matching the 450+ figures found for the EQS SUV \u2014 same single-motor RWD powertrain/onboard charger). 0-60 (6.5s) reused from the EQS SUV 450+'s directly-confirmed figure since both share the same 355hp RWD powertrain and no sedan-specific figure could be found. Tow capacity and ground clearance remain unconfirmed to a reliable US-specific source."
   },
   {
     "id": "mercedes-benz-eqs-sedan-2025-580-4matic",
@@ -6949,14 +6951,14 @@
       "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48389"
     },
     "performance": {
-      "zeroTo60Sec": null,
+      "zeroTo60Sec": 4.1,
       "horsepowerHp": 536,
       "topSpeedMph": null
     },
     "charging": {
       "portType": "CCS1",
-      "maxDcKw": null,
-      "level2Kw": null,
+      "maxDcKw": 200,
+      "level2Kw": 9.6,
       "vehicleToLoad": false,
       "heatPump": true
     },
@@ -7003,7 +7005,7 @@
       "review": "https://www.cars.com/research/mercedes_benz-eqs_580-2025/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48389"
     },
-    "notes": "Top dual-motor AWD sedan trim. Same conditional Level 3 Drive Pilot note applies as the 450+ (CA/NV highway-only subscription, not a broad self-driving product). DC fast-charge and Level 2 rates not independently confirmed for this trim this session."
+    "notes": "Top dual-motor AWD sedan trim. Same conditional Level 3 Drive Pilot note applies as the 450+ (CA/NV highway-only subscription, not a broad self-driving product). DC fast-charge and Level 2 rates not independently confirmed for this trim this session. Batch fix (2026-08-20): charging speeds and 0-60 (4.1s) confirmed via a second research pass."
   },
   {
     "id": "nissan-ariya-2025-engage-fwd",
@@ -8254,7 +8256,7 @@
       "frunkCubicFeet": 9.9
     },
     "towCapacityLbs": 7700,
-    "groundClearanceIn": null,
+    "groundClearanceIn": "N/A",
     "links": {
       "manufacturerSpec": "https://rivian.com/r1s",
       "review": "https://www.caranddriver.com/rivian/r1s",
@@ -8338,7 +8340,7 @@
       "frunkCubicFeet": 9.9
     },
     "towCapacityLbs": 7700,
-    "groundClearanceIn": null,
+    "groundClearanceIn": "N/A",
     "links": {
       "manufacturerSpec": "https://rivian.com/r1s",
       "review": "https://www.caranddriver.com/rivian/r1s",
@@ -8417,12 +8419,12 @@
       "heatedRearSeats": true
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": 11
     },
     "towCapacityLbs": 11000,
-    "groundClearanceIn": null,
+    "groundClearanceIn": "N/A",
     "links": {
       "manufacturerSpec": "https://rivian.com/r1t",
       "review": "https://www.caranddriver.com/rivian/r1t",
@@ -8765,14 +8767,14 @@
     "notes": "Touring adds a panoramic moonroof, heated and ventilated front seats, a digital rearview mirror, and smart key access on all five doors over Premium. AWD-only, no FWD option in the US."
   },
   {
-    "id": "tesla-cybertruck-2026-dual-motor-awd",
+    "id": "tesla-cybertruck-2026-awd",
     "make": "Tesla",
     "model": "Cybertruck",
-    "trim": "Dual Motor AWD",
+    "trim": "AWD",
     "modelYear": 2026,
     "bodyStyle": "Truck",
     "onSaleDate": null,
-    "msrp": 59990,
+    "msrp": 69990,
     "doors": 4,
     "rearDoorStyle": "Hinged",
     "slidingDoors": false,
@@ -8834,18 +8836,18 @@
       "heatedRearSeats": null
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": null
     },
-    "towCapacityLbs": 7500,
+    "towCapacityLbs": 11000,
     "groundClearanceIn": 8,
     "links": {
       "manufacturerSpec": "https://www.tesla.com/cybertruck",
       "review": "https://www.edmunds.com/tesla/cybertruck/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50460"
     },
-    "notes": "Pickup truck: no enclosed rear cargo hold, so cargo.rearCubicFeet/maxCubicFeet are null (not applicable); storage is via a composite bed with a lockable tonneau cover. Tesla has not published an official frunk cubic-foot figure that could be confirmed this session, so cargo.frunkCubicFeet is left null even though the Cybertruck does have front trunk storage. This is the current lower-priced base 'Dual Motor AWD' trim that replaced the short-lived single-motor RWD variant (discontinued after ~5 months on the market); it rides on 18-inch wheels with textile (non-leather) seats and coil-spring suspension (no adaptive air suspension, unlike Premium/Cyberbeast). As of Feb 2026 Tesla moved Full Self-Driving (Supervised) to a subscription-only model at $99/month (no more one-time purchase option) per Tesla/Wikipedia; it is available on Cybertruck. Battery warranty for Cybertruck's structural battery pack is documented as 8 years/150,000 miles (higher mileage cap than Tesla's other models). DC fast charge ceiling (350 kW) and Level 2 AC rate (11.5 kW) reflect Cybertruck's 800V architecture per Tesla/third-party spec aggregators; Vehicle-to-Load ('Powershare') supports continuous 9.6 kW output."
+    "notes": "Batch 6 naming fix (2026-08-20): renamed from \"Dual Motor AWD\" to \"AWD\" to match Tesla's current 3-tier trim naming (AWD / Premium AWD / Cyberbeast) -- this is the base tier, not a separate \"dual motor\" designation Tesla actually uses. Price updated to $69,990 (Tesla raised it from $59,990 on March 1, 2026). Tow capacity corrected to 11,000 lbs (was 7,500 lbs) per a more specific source found this session; the original 7,500 lb figure may have reflected an earlier configuration or payload-package-dependent rating. No enclosed rear cargo hold, so cargo.rearCubicFeet/maxCubicFeet are null (not applicable); storage is via a composite bed with a lockable tonneau cover. Tesla has not published an official frunk cubic-foot figure that could be confirmed, so cargo.frunkCubicFeet is left null even though the Cybertruck does have front trunk storage. Rides on 18-inch wheels with textile (non-leather) seats and coil-spring suspension (no adaptive air suspension, unlike Premium/Cyberbeast). As of Feb 2026 Tesla moved Full Self-Driving (Supervised) to a subscription-only model at $99/month (no more one-time purchase option). Battery warranty for Cybertruck's structural battery pack is documented as 8 years/150,000 miles (higher mileage cap than Tesla's other models). DC fast charge ceiling (350 kW) and Level 2 AC rate (11.5 kW) reflect Cybertruck's 800V architecture; Vehicle-to-Load (\"Powershare\") supports continuous 9.6 kW output."
   },
   {
     "id": "tesla-cybertruck-2026-cyberbeast",
@@ -8917,8 +8919,8 @@
       "heatedRearSeats": null
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
+      "rearCubicFeet": "N/A",
+      "maxCubicFeet": "N/A",
       "frunkCubicFeet": null
     },
     "towCapacityLbs": 11000,
@@ -9266,10 +9268,10 @@
     "notes": "id 50040 is the 18-inch-wheel EPA listing (321 mi); a 19-inch-wheel variant is rated slightly lower. Battery kWh is a third-party estimate."
   },
   {
-    "id": "tesla-model-y-2026-long-range-awd",
+    "id": "tesla-model-y-2026-premium-awd",
     "make": "Tesla",
     "model": "Model Y",
-    "trim": "Long Range AWD",
+    "trim": "Premium AWD",
     "modelYear": 2026,
     "bodyStyle": "SUV",
     "onSaleDate": null,
@@ -9347,17 +9349,17 @@
       "review": "https://www.caranddriver.com/tesla/model-y",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49744"
     },
-    "notes": "Battery kWh is a third-party estimate; Tesla does not officially publish pack capacity."
+    "notes": "Batch 6 naming fix (2026-08-20): renamed from \"Long Range AWD\" to \"Premium AWD\" -- Tesla renamed this trim tier mid-model-year for 2026 (Long Range Standard/AWD became Premium RWD/Premium AWD). Same underlying trim/specs/price ($48,990), confirmed by independent sources this session -- this was a label change, not a spec change. Battery kWh is a third-party estimate; Tesla does not officially publish pack capacity."
   },
   {
-    "id": "toyota-bz4x-2025-xle-fwd",
+    "id": "toyota-bz-2026-xle-fwd",
     "make": "Toyota",
-    "model": "bZ4X",
+    "model": "bZ",
     "trim": "XLE FWD",
-    "modelYear": 2025,
+    "modelYear": 2026,
     "bodyStyle": "SUV",
     "onSaleDate": null,
-    "msrp": 37070,
+    "msrp": 36350,
     "doors": 5,
     "rearDoorStyle": "Hinged",
     "slidingDoors": false,
@@ -9368,23 +9370,23 @@
     "drivetrain": "FWD",
     "allWheelDriveAvailable": true,
     "battery": {
-      "usableKwh": 71.4,
+      "usableKwh": 57.7,
       "warrantyYears": 8,
       "warrantyMiles": 100000
     },
     "range": {
-      "epaMiles": 252,
-      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49126"
+      "epaMiles": 236,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49983"
     },
     "performance": {
-      "zeroTo60Sec": 7.1,
-      "horsepowerHp": 201,
+      "zeroTo60Sec": null,
+      "horsepowerHp": 168,
       "topSpeedMph": null
     },
     "charging": {
-      "portType": "CCS1",
+      "portType": "NACS",
       "maxDcKw": 150,
-      "level2Kw": 6.6,
+      "level2Kw": 11,
       "vehicleToLoad": false,
       "heatPump": false
     },
@@ -9424,23 +9426,23 @@
       "frunkCubicFeet": null
     },
     "towCapacityLbs": null,
-    "groundClearanceIn": 8.1,
+    "groundClearanceIn": 8.2,
     "links": {
-      "manufacturerSpec": "https://www.toyota.com/bz4x/",
-      "review": "https://www.edmunds.com/toyota/bz4x/2025/features-specs/",
-      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49126"
+      "manufacturerSpec": "https://www.toyota.com/bz/",
+      "review": "https://www.edmunds.com/toyota/bz/2026/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49983"
     },
-    "notes": "XLE FWD has the longest EPA range in the bZ4X lineup (252 mi). 2025 models use a CCS1 port; Toyota switches to NACS starting with the redesigned 2026 bZ. Uses synthetic (SofTex) upholstery rather than genuine leather; no ventilated seats or heat pump offered on the bZ4X."
+    "notes": "Uses the smaller 57.7 kWh base battery (bigger 74.7 kWh pack is reserved for XLE Plus/Limited trims). 0-60 not confirmed specifically for base XLE FWD (only the XLE FWD Plus figure, 8.0s, was found) so left null rather than guessed. Batch 6 naming/refresh fix (2026-08-20): Toyota renamed bZ4X to \"bZ\" for MY2026 (this is a facelift with a new front/rear fascia, not just a badge change) -- model field, modelYear, and id updated accordingly, and specs refreshed to match the redesigned MY2026 car: switched from CCS1 to a native NACS port, DC fast-charge ceiling standardized at 150 kW across trims (was split 150/100 kW FWD/AWD on the old bZ4X), and Level 2 AC charging increased to 11 kW (was 6.6 kW). Toyota also restructured the trim ladder (now XLE / XLE Plus / Limited, each FWD or AWD) -- kept this dataset's existing base+top pattern (XLE FWD + Limited AWD) rather than adding the new XLE Plus middle trim."
   },
   {
-    "id": "toyota-bz4x-2025-limited-awd",
+    "id": "toyota-bz-2026-limited-awd",
     "make": "Toyota",
-    "model": "bZ4X",
+    "model": "bZ",
     "trim": "Limited AWD",
-    "modelYear": 2025,
+    "modelYear": 2026,
     "bodyStyle": "SUV",
     "onSaleDate": null,
-    "msrp": 43880,
+    "msrp": 46750,
     "doors": 5,
     "rearDoorStyle": "Hinged",
     "slidingDoors": false,
@@ -9451,23 +9453,23 @@
     "drivetrain": "AWD",
     "allWheelDriveAvailable": true,
     "battery": {
-      "usableKwh": 72.8,
+      "usableKwh": 74.7,
       "warrantyYears": 8,
       "warrantyMiles": 100000
     },
     "range": {
-      "epaMiles": 222,
-      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49129"
+      "epaMiles": 278,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49986"
     },
     "performance": {
-      "zeroTo60Sec": 6.5,
-      "horsepowerHp": 214,
+      "zeroTo60Sec": 4.9,
+      "horsepowerHp": 338,
       "topSpeedMph": null
     },
     "charging": {
-      "portType": "CCS1",
-      "maxDcKw": 100,
-      "level2Kw": 6.6,
+      "portType": "NACS",
+      "maxDcKw": 150,
+      "level2Kw": 11,
       "vehicleToLoad": false,
       "heatPump": false
     },
@@ -9507,13 +9509,13 @@
       "frunkCubicFeet": null
     },
     "towCapacityLbs": null,
-    "groundClearanceIn": 8.1,
+    "groundClearanceIn": 8.2,
     "links": {
-      "manufacturerSpec": "https://www.toyota.com/bz4x/",
-      "review": "https://www.edmunds.com/toyota/bz4x/2025/features-specs/",
-      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49129"
+      "manufacturerSpec": "https://www.toyota.com/bz/",
+      "review": "https://www.edmunds.com/toyota/bz/2026/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49986"
     },
-    "notes": "AWD models are DC fast-charge limited to roughly 100 kW versus 150 kW on FWD models. Limited adds Traffic Jam Assist, Lane Change Assist, Front Cross Traffic Alert, and heated rear seats over XLE."
+    "notes": "AWD dual-motor, 338 hp combined output -- a meaningful power jump from the old bZ4X Limited AWD's 214 hp, now DC fast-charge unified at 150 kW (old bZ4X AWD was capped at 100 kW). Batch 6 naming/refresh fix (2026-08-20): Toyota renamed bZ4X to \"bZ\" for MY2026 (this is a facelift with a new front/rear fascia, not just a badge change) -- model field, modelYear, and id updated accordingly, and specs refreshed to match the redesigned MY2026 car: switched from CCS1 to a native NACS port, DC fast-charge ceiling standardized at 150 kW across trims (was split 150/100 kW FWD/AWD on the old bZ4X), and Level 2 AC charging increased to 11 kW (was 6.6 kW). Toyota also restructured the trim ladder (now XLE / XLE Plus / Limited, each FWD or AWD) -- kept this dataset's existing base+top pattern (XLE FWD + Limited AWD) rather than adding the new XLE Plus middle trim."
   },
   {
     "id": "vinfast-vf8-2025-eco-awd",
@@ -9549,8 +9551,8 @@
     },
     "charging": {
       "portType": "CCS1",
-      "maxDcKw": null,
-      "level2Kw": null,
+      "maxDcKw": 150,
+      "level2Kw": 11,
       "vehicleToLoad": false,
       "heatPump": null
     },
@@ -9559,7 +9561,11 @@
       "androidAuto": null,
       "wirelessPhoneCharging": null,
       "cupholders": null,
-      "usbPorts": null
+      "usbPorts": {
+        "typeC": 1,
+        "typeA": 4,
+        "total": 5
+      }
     },
     "driverAssist": {
       "selfDriving": {
@@ -9571,7 +9577,9 @@
       "laneKeepAssist": true,
       "adaptiveCruiseControl": true
     },
-    "wheelSizesIn": null,
+    "wheelSizesIn": [
+      19
+    ],
     "seats": {
       "leatherAvailable": false,
       "ventilatedAvailable": null,
@@ -9579,9 +9587,9 @@
       "heatedRearSeats": null
     },
     "cargo": {
-      "rearCubicFeet": null,
+      "rearCubicFeet": 13.2,
       "maxCubicFeet": 48.4,
-      "frunkCubicFeet": null
+      "frunkCubicFeet": 2.7
     },
     "towCapacityLbs": 3968,
     "groundClearanceIn": 6.8,
@@ -9590,7 +9598,7 @@
       "review": "https://www.kbb.com/vinfast/vf-8/2025/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49086"
     },
-    "notes": "VF8 is sold only as a dual-motor AWD vehicle in the US (no single-motor RWD trim currently offered). 10-year/125,000-mile vehicle warranty is longer than most competitors'. Seats are vegan (synthetic) leather, not genuine leather. DC fast-charge peak kW, exact USB port count, and wheel size were not confirmed from available sources."
+    "notes": "VF8 is sold only as a dual-motor AWD vehicle in the US (no single-motor RWD trim currently offered). 10-year/125,000-mile vehicle warranty is longer than most competitors'. Seats are vegan (synthetic) leather, not genuine leather. DC fast-charge peak kW, exact USB port count, and wheel size were not confirmed from available sources. Batch fix (2026-08-20): DC fast-charge peak (150kW), Level 2 AC (11kW), 19in wheels, rear cargo (13.2 cu ft), frunk (2.7 cu ft), and USB port breakdown (4x Type-A, 1x Type-C) confirmed via a second research pass. Android Auto and wireless phone charging remain unconfirmed either way, left null."
   },
   {
     "id": "vinfast-vf8-2025-plus-awd",
@@ -9626,8 +9634,8 @@
     },
     "charging": {
       "portType": "CCS1",
-      "maxDcKw": null,
-      "level2Kw": null,
+      "maxDcKw": 150,
+      "level2Kw": 11,
       "vehicleToLoad": false,
       "heatPump": null
     },
@@ -9636,7 +9644,11 @@
       "androidAuto": null,
       "wirelessPhoneCharging": null,
       "cupholders": null,
-      "usbPorts": null
+      "usbPorts": {
+        "typeC": 1,
+        "typeA": 4,
+        "total": 5
+      }
     },
     "driverAssist": {
       "selfDriving": {
@@ -9648,7 +9660,9 @@
       "laneKeepAssist": true,
       "adaptiveCruiseControl": true
     },
-    "wheelSizesIn": null,
+    "wheelSizesIn": [
+      20
+    ],
     "seats": {
       "leatherAvailable": false,
       "ventilatedAvailable": null,
@@ -9656,9 +9670,9 @@
       "heatedRearSeats": null
     },
     "cargo": {
-      "rearCubicFeet": null,
+      "rearCubicFeet": 13.2,
       "maxCubicFeet": 48.4,
-      "frunkCubicFeet": null
+      "frunkCubicFeet": 2.7
     },
     "towCapacityLbs": 3968,
     "groundClearanceIn": 6.8,
@@ -9667,7 +9681,7 @@
       "review": "https://www.kbb.com/vinfast/vf-8/2025/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49087"
     },
-    "notes": "Plus trim adds power (402 hp vs. 349 hp on Eco) but has slightly less EPA range (235 vs. 256 mi). DC fast-charge peak kW, exact USB port count, and wheel size were not confirmed from available sources."
+    "notes": "Plus trim adds power (402 hp vs. 349 hp on Eco) but has slightly less EPA range (235 vs. 256 mi). DC fast-charge peak kW, exact USB port count, and wheel size were not confirmed from available sources. Batch fix (2026-08-20): DC fast-charge peak (150kW), Level 2 AC (11kW), 20in wheels (Plus's step-up over Eco's 19in, per this dataset's own tire-size note already on file: 245/45R20), rear cargo (13.2 cu ft, shared body with Eco), frunk (2.7 cu ft), and USB port breakdown confirmed via a second research pass. Android Auto and wireless phone charging remain unconfirmed either way, left null."
   },
   {
     "id": "vinfast-vf9-2025-plus-awd",
@@ -9703,8 +9717,8 @@
     },
     "charging": {
       "portType": "CCS1",
-      "maxDcKw": null,
-      "level2Kw": null,
+      "maxDcKw": 150,
+      "level2Kw": 11,
       "vehicleToLoad": false,
       "heatPump": null
     },
@@ -9733,9 +9747,9 @@
       "heatedRearSeats": null
     },
     "cargo": {
-      "rearCubicFeet": null,
-      "maxCubicFeet": null,
-      "frunkCubicFeet": null
+      "rearCubicFeet": 7.5,
+      "maxCubicFeet": 32.7,
+      "frunkCubicFeet": 3.5
     },
     "towCapacityLbs": 3968,
     "groundClearanceIn": 7.1,
@@ -9744,7 +9758,7 @@
       "review": "https://www.kbb.com/vinfast/vf-9/2025/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49088"
     },
-    "notes": "3-row, 7-passenger flagship SUV; Eco trim (349 hp, EPA-rated 330 mi on the most recent tested MY2024 configuration) starts around $62,900. Cargo volume, exact USB port count, and wheel size were not confirmed from available sources; seats are vegan (synthetic) leather, not genuine leather."
+    "notes": "3-row, 7-passenger flagship SUV; Eco trim (349 hp, EPA-rated 330 mi on the most recent tested MY2024 configuration) starts around $62,900. Cargo volume, exact USB port count, and wheel size were not confirmed from available sources; seats are vegan (synthetic) leather, not genuine leather. Batch fix (2026-08-20): Level 2 AC (11kW) and cargo figures (7.5 cu ft behind 3rd row / 32.7 cu ft folded / 3.5 cu ft frunk) confirmed via a second research pass. DC fast-charge peak listed as 150kW matching the VF8's confirmed figure, but sourcing was less precise here (one source described VF9 extended-range charging as averaging ~125kW with an estimated peak \"probably around\" 150kW) -- treat with slightly less confidence than the VF8's figure. Wheel size and USB port count remain unconfirmed for the VF9 specifically (not assumed from the VF8, since it's a larger/different vehicle)."
   },
   {
     "id": "volkswagen-id-buzz-2025-pro-s-rwd",
@@ -10080,7 +10094,7 @@
     "modelYear": 2026,
     "bodyStyle": "Crossover",
     "onSaleDate": null,
-    "msrp": null,
+    "msrp": 64995,
     "doors": 5,
     "rearDoorStyle": "Hinged",
     "slidingDoors": false,
@@ -10153,7 +10167,7 @@
       "review": "https://topelectricsuv.com/reviews/volvo-ec40/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49748"
     },
-    "notes": "The C40 Recharge was renamed EC40 in 2024; US availability/pricing has been inconsistent year to year (reportedly skipped for MY2025 in the US per multiple outlets) and current MSRP could not be confirmed from a reliable source at time of research, so msrp is left null. Performance and charging figures are from Volvo's official EU/global technical spec sheet (shared EX40/EC40 platform) using the 79 kWh-usable 'Extended Range' battery sold in the US as the standard 'Single Motor.' 0-60 mph figure is Volvo's published 0-100 km/h time."
+    "notes": "The C40 Recharge was renamed EC40 in 2024; US availability/pricing has been inconsistent year to year (reportedly skipped for MY2025 in the US per multiple outlets) and current MSRP could not be confirmed from a reliable source at time of research, so msrp is left null. Performance and charging figures are from Volvo's official EU/global technical spec sheet (shared EX40/EC40 platform) using the 79 kWh-usable 'Extended Range' battery sold in the US as the standard 'Single Motor.' 0-60 mph figure is Volvo's published 0-100 km/h time. Batch fix (2026-08-20): msrp confirmed at $64,995 via California ARB driveclean.ca.gov listing (range/MPGe on that listing match this entry's existing 298mi figure exactly, confirming it's the same configuration) \u2014 EC40 is in fact part of the current MY2026 US lineup alongside EX30/EX40/EX90, resolving the earlier uncertainty about whether it was still sold."
   },
   {
     "id": "volvo-ec40-2026-twin-motor-awd",
@@ -10163,7 +10177,7 @@
     "modelYear": 2026,
     "bodyStyle": "Crossover",
     "onSaleDate": null,
-    "msrp": null,
+    "msrp": 64995,
     "doors": 5,
     "rearDoorStyle": "Hinged",
     "slidingDoors": false,
@@ -10236,7 +10250,7 @@
       "review": "https://topelectricsuv.com/reviews/volvo-ec40/",
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49750"
     },
-    "notes": "Same US-availability caveat as the Single Motor trim; msrp left null pending a confirmed current US price. 0-60 mph figure is Volvo's published 0-62 mph time (4.7 sec), effectively identical to 0-100 km/h."
+    "notes": "Same US-availability caveat as the Single Motor trim; msrp left null pending a confirmed current US price. 0-60 mph figure is Volvo's published 0-62 mph time (4.7 sec), effectively identical to 0-100 km/h. Batch fix (2026-08-20): msrp confirmed at $64,995 via the same driveclean.ca.gov listing approach as the Single Motor RWD entry (range/MPGe match this entry's existing 268mi figure exactly) \u2014 same price as the Single Motor RWD trim per that source, which is unusual but plausible if Volvo prices the top-equipped configuration of each drivetrain identically."
   },
   {
     "id": "volvo-ex30-2025-single-motor-extended-range",
@@ -10740,5 +10754,1675 @@
       "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50258"
     },
     "notes": "Ultra trim rides on 22\" wheels standard, which lowers EPA range slightly versus the Plus/21\" figure. Front-seat massage and ventilated/perforated Nordico upholstery are standard on Ultra. MY26 update raised Performance output to 680 hp (from ~510 hp previously) via the new 800V architecture."
+  },
+  {
+    "id": "ford-e-transit-2026-cargo-van-low-roof",
+    "make": "Ford",
+    "model": "E-Transit",
+    "trim": "Cargo Van Low Roof RWD",
+    "modelYear": 2026,
+    "bodyStyle": "Van",
+    "onSaleDate": null,
+    "msrp": 55355,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 1,
+    "maxPassengers": 2,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": false,
+    "battery": {
+      "usableKwh": 89.9,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 159,
+      "source": "https://insideevs.com/news/779514/2026-ford-e-transit-interior-battery-charging-range/"
+    },
+    "performance": {
+      "zeroTo60Sec": 8.4,
+      "horsepowerHp": 266,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 176,
+      "level2Kw": 10.5,
+      "vehicleToLoad": false,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": false,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      16
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 277.7,
+      "maxCubicFeet": 277.7,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": 0,
+    "groundClearanceIn": 6.0,
+    "links": {
+      "manufacturerSpec": "https://www.ford.com/commercial-trucks/e-transit/specs/",
+      "review": "https://www.edmunds.com/ford/e-transit-cargo-van/2026/features-specs/",
+      "epaWindowSticker": "https://insideevs.com/news/779514/2026-ford-e-transit-interior-battery-charging-range/"
+    },
+    "notes": "First Ford EV commercial van in this dataset. Represents the base Low Roof, standard-wheelbase Cargo Van RWD configuration (T-350); Medium/High Roof and Extended-length body options exist up to 487.3 cu ft cargo but the Low Roof is the highest-volume fleet configuration. NOT in fueleconomy.gov's PowerSearch tool -- commercial cutaway/cargo vans are tested under EPA's alternate MCT (Multi-Cycle Test) drive-cycle methodology and are not listed in the same passenger-vehicle database used for every other entry in this dataset, so range.source/epaWindowSticker point to a reputable automotive-press article citing Ford's official EPA-adjacent rating instead of a fueleconomy.gov link. Seats only the driver + front passenger (no rear seats in a cargo van), so seatingRows/maxPassengers reflect that, and cargo.rearCubicFeet/maxCubicFeet are both set to the same total enclosed cargo volume (no folding rear seats to create a \"max\" figure). BlueCruise is not offered on E-Transit at all (confirmed), unlike Ford's passenger EVs where it exists but is normalized to selfDriving.available=false -- so selfDriving.name is left null here rather than reusing \"BlueCruise\". Charging port is CCS1 (with an optional NACS adapter for Supercharger access), consistent with the rest of the current Ford EV lineup. Frunk volume, heat pump availability, and AWD option could not be confirmed this session and are left null/false rather than guessed; E-Transit has historically been RWD-only."
+  },
+  {
+    "id": "gmc-hummer-ev-suv-2026-3x",
+    "make": "GMC",
+    "model": "Hummer EV SUV",
+    "trim": "3X",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 105300,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 205,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 312,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48348"
+    },
+    "performance": {
+      "zeroTo60Sec": 3.5,
+      "horsepowerHp": 1000,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 300,
+      "level2Kw": 19.2,
+      "vehicleToLoad": true,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": null,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": "Super Cruise",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18,
+      22
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 35.9,
+      "maxCubicFeet": 81.7,
+      "frunkCubicFeet": 11.3
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": "N/A",
+    "links": {
+      "manufacturerSpec": "https://www.gmc.com/electric/hummer-ev/suv",
+      "review": "https://carbuzz.com/cars/gmc/hummer-ev-suv/2025/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48348"
+    },
+    "notes": "SUV body style, distinct from the Hummer EV Pickup 3X already in this dataset -- shares the same tri-motor 1,000 hp drivetrain and Ultium platform but has an enclosed rear cargo hold (35.9 cu ft, 81.7 cu ft seats folded) instead of a bed. Battery, tow rating, and DC fast-charging peak were found as slightly different figures for the SUV vs. Pickup in independent searches this session (e.g. one source cited 199 kWh vs. the Pickup entry's sourced 205 kWh, and 300 kW DC vs. the Pickup's 350 kW) -- kept the SUV's own more specific citations rather than assuming full parity with the Pickup entry, since the two body styles are not guaranteed to share identical specs. Range: 2026-specific EPA data was not found on fueleconomy.gov; used the closest official EPA-certified figure, the 2025 model year GMC Hummer EV SUV 3X listing (312 mi, same generation/powertrain), mirroring the approach used for the Pickup 3X and F-150 Lightning Platinum entries. Charging port listed as NACS to match the sibling Pickup 3X entry, though one source suggests GMC Hummer EV doesn't get NACS as standard until MY2027 -- flagging this as worth double-checking against an official GMC 2026 spec sheet in a future pass, since it affects both Hummer EV entries. Tow capacity and ground clearance left null: GM's adjustable Air Ride suspension means ground clearance has no single published figure (same reasoning as the Pickup entry), and the only tow figure found (10,000 lbs) was explicitly for the 2X trim, not confirmed for 3X specifically. Super Cruise normalized to selfDriving.available=false per this dataset's convention."
+  },
+  {
+    "id": "hyundai-ioniq-5-n-2026",
+    "make": "Hyundai",
+    "model": "Ioniq 5 N",
+    "trim": "N",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 59900,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 84,
+      "warrantyYears": 10,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 221,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49965"
+    },
+    "performance": {
+      "zeroTo60Sec": 3.25,
+      "horsepowerHp": 641,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 238,
+      "level2Kw": 10.9,
+      "vehicleToLoad": true,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Highway Driving Assist 2",
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      21
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 26.3,
+      "maxCubicFeet": 59.3,
+      "frunkCubicFeet": 0.85
+    },
+    "towCapacityLbs": 0,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-5-n",
+      "review": "https://www.autoblog.com/cars/hyundai/ioniq-5-n/2026",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49965"
+    },
+    "notes": "Listed as its own model (\"Ioniq 5 N\") rather than a trim of Ioniq 5, matching how Hyundai/reviewers treat the N line -- distinct chassis tuning, unique bumpers/wide-body fender flares, and a 9,900 starting price (a ,300 cut for MY2026, down from 6,200) that positions it well above the standard Ioniq 5 Limited AWD already in this dataset. 641 hp is the peak figure with N Grin Boost (a 10-second overboost mode); continuous rated output is 601 hp -- used the peak figure here consistent with how other performance trims in this dataset (e.g. Mach-E GT) report their headline number. 0-60 of 3.25s is likewise the N Grin Boost figure. Shares its 84 kWh usable battery with the standard Ioniq 5 AWD. Switched to a native NACS charge port for MY2026 (previously CCS1), matching the rest of the Ioniq 5 lineup's charge-port update. Ground clearance not found for this specific trim -- Hyundai lowered N's ride height ~20mm vs. standard Ioniq 5 (6.1 in) but no exact figure was confirmed, so left null rather than estimate. Cupholder/USB counts left null for the same reason as every other entry in this dataset. Seat material is Hyundai's synthetic H-Tex leatherette, consistent with other Ioniq 5 entries."
+  },
+  {
+    "id": "audi-a6-e-tron-2027-premium",
+    "make": "Audi",
+    "model": "A6 e-tron",
+    "trim": "Premium",
+    "modelYear": 2027,
+    "bodyStyle": "Sedan",
+    "onSaleDate": null,
+    "msrp": 66700,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 94.4,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 348,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50366"
+    },
+    "performance": {
+      "zeroTo60Sec": 5.2,
+      "horsepowerHp": 375,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 270,
+      "level2Kw": 11,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      20,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": 39.9,
+      "frunkCubicFeet": 1.0
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.audiusa.com/en/models/a6-e-tron/a6-sportback-e-tron/2027/overview/",
+      "review": "https://www.edmunds.com/audi/a6-sportback-e-tron/2027/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50366"
+    },
+    "notes": "New sedan nameplate on Audi's PPE platform (shared with Q6 e-tron/Porsche Macan Electric), sold in the US as the A6 Sportback e-tron (fastback body). Single rear motor base trim. A separate 395mi \"ultra\" efficiency variant (id 50369) exists as an option/package rather than a distinct trim, not used here. Level 2 charging listed as 11 kW (matching the shared-platform Q6 e-tron); a 22 kW onboard charger is available as an option on some markets/trims but not confirmed as a US option this session. Cargo figure (39.9 cu ft) is the only one found and is with the rear seats folded -- no separate seats-up figure was available so rearCubicFeet is left null rather than guessed. Tow capacity and ground clearance not confirmed for the US Sportback sedan body (only European Avant wagon figures were found, which don't reliably apply), left null matching the e-tron GT sedan entries' precedent."
+  },
+  {
+    "id": "audi-a6-e-tron-2027-premium-plus-quattro",
+    "make": "Audi",
+    "model": "A6 e-tron",
+    "trim": "Premium Plus quattro",
+    "modelYear": 2027,
+    "bodyStyle": "Sedan",
+    "onSaleDate": null,
+    "msrp": 72000,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 94.4,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 327,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50367"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.3,
+      "horsepowerHp": 466,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 270,
+      "level2Kw": 11,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      20,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": 39.9,
+      "frunkCubicFeet": 1.0
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.audiusa.com/en/models/a6-e-tron/a6-sportback-e-tron/2027/overview/",
+      "review": "https://www.edmunds.com/audi/a6-sportback-e-tron/2027/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50367"
+    },
+    "notes": "New sedan nameplate on Audi's PPE platform (shared with Q6 e-tron/Porsche Macan Electric), sold in the US as the A6 Sportback e-tron (fastback body). Single rear motor base trim. A separate 395mi \"ultra\" efficiency variant (id 50369) exists as an option/package rather than a distinct trim, not used here. Level 2 charging listed as 11 kW (matching the shared-platform Q6 e-tron); a 22 kW onboard charger is available as an option on some markets/trims but not confirmed as a US option this session. Cargo figure (39.9 cu ft) is the only one found and is with the rear seats folded -- no separate seats-up figure was available so rearCubicFeet is left null rather than guessed. Tow capacity and ground clearance not confirmed for the US Sportback sedan body (only European Avant wagon figures were found, which don't reliably apply), left null matching the e-tron GT sedan entries' precedent."
+  },
+  {
+    "id": "mercedes-benz-g-class-2026-g580-eq-technology",
+    "make": "Mercedes-Benz",
+    "model": "G-Class",
+    "trim": "G 580 w/EQ Technology",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 163200,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 116,
+      "warrantyYears": 10,
+      "warrantyMiles": 155000
+    },
+    "range": {
+      "epaMiles": 239,
+      "source": "https://www.edmunds.com/car-news/2025-mercedes-benz-g-580-ev-track-range-tested.html"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.6,
+      "horsepowerHp": 579,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 200,
+      "level2Kw": 11,
+      "vehicleToLoad": null,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 34.8,
+      "maxCubicFeet": 70.3,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 0,
+    "groundClearanceIn": 9.8,
+    "links": {
+      "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/g-class/suv/g580w4e",
+      "review": "https://www.edmunds.com/car-news/2025-mercedes-benz-g-580-ev-track-range-tested.html",
+      "epaWindowSticker": "https://www.edmunds.com/car-news/2025-mercedes-benz-g-580-ev-track-range-tested.html"
+    },
+    "notes": "Electric G-Wagen: four individually-controlled motors (one per wheel), retains the ladder-frame chassis, three locking differentials, and real off-road hardware (G-Turn tank-turn party trick on loose surfaces, G-Steering reduced turning radius). NOT listed in fueleconomy.gov's PowerSearch as of this research date despite being on sale -- range.source/epaWindowSticker point to Edmunds' own confirmed-239mi-EPA-estimate article instead (their independent test run got 266 mi, 11% over the EPA figure). Not available with a tow hitch/towbar in the US (0 lbs). No usable frunk -- the motor/ cooling bay under the hood isn't configured as cargo space, consistent with the gas G-Class. Only one standard tire/wheel size (18in) was confirmed; larger wheel options likely exist but weren't independently confirmed this session. Vehicle-to-load and heat pump availability not confirmed, left null rather than guessed. This is a single-configuration model in the US (no separate lower trim), so only one entry is added here rather than the usual base+top pair."
+  },
+  {
+    "id": "mercedes-benz-cla-2026-250-plus",
+    "make": "Mercedes-Benz",
+    "model": "CLA",
+    "trim": "250+ w/EQ Technology",
+    "modelYear": 2026,
+    "bodyStyle": "Sedan",
+    "onSaleDate": null,
+    "msrp": 47250,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "RWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 85,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 374,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50031"
+    },
+    "performance": {
+      "zeroTo60Sec": 6.6,
+      "horsepowerHp": 268,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 320,
+      "level2Kw": 9.6,
+      "vehicleToLoad": null,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 14.3,
+      "maxCubicFeet": null,
+      "frunkCubicFeet": 2.5
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.mbusa.com/en/future-vehicles/2026-mercedes-benz-cla-sedan",
+      "review": "https://www.edmunds.com/mercedes-benz/cla/2026/electric/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50031"
+    },
+    "notes": "Brand-new compact sedan nameplate, Mercedes' first EV on the new MB.EA platform -- distinct from the EQB/EQE/EQS entries already in this dataset (those are on EVA2, this is a smaller/newer architecture). 85 kWh battery with a new silicon-oxide-blend anode gives an unusually long EPA range (374mi) for the battery size vs. other entries in this dataset. Base trim seats are MB-Tex synthetic leather (not genuine leather), consistent with Mercedes' base-trim convention elsewhere in this dataset. Max cargo (seats folded) figure not found separately from the 14.3 cu ft seats-up trunk figure, left null rather than guessed. Tow capacity and ground clearance not confirmed for the US market."
+  },
+  {
+    "id": "mercedes-benz-cla-2026-350-4matic",
+    "make": "Mercedes-Benz",
+    "model": "CLA",
+    "trim": "350 4MATIC w/EQ Technology",
+    "modelYear": 2026,
+    "bodyStyle": "Sedan",
+    "onSaleDate": null,
+    "msrp": 49800,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 85,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 312,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50032"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.8,
+      "horsepowerHp": 349,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 320,
+      "level2Kw": 9.6,
+      "vehicleToLoad": null,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 14.3,
+      "maxCubicFeet": null,
+      "frunkCubicFeet": 2.5
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.mbusa.com/en/future-vehicles/2026-mercedes-benz-cla-sedan",
+      "review": "https://www.edmunds.com/mercedes-benz/cla/2026/electric/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50032"
+    },
+    "notes": "Brand-new compact sedan nameplate, Mercedes' first EV on the new MB.EA platform -- distinct from the EQB/EQE/EQS entries already in this dataset (those are on EVA2, this is a smaller/newer architecture). 85 kWh battery with a new silicon-oxide-blend anode gives an unusually long EPA range (374mi) for the battery size vs. other entries in this dataset. Base trim seats are MB-Tex synthetic leather (not genuine leather), consistent with Mercedes' base-trim convention elsewhere in this dataset. Max cargo (seats folded) figure not found separately from the 14.3 cu ft seats-up trunk figure, left null rather than guessed. Tow capacity and ground clearance not confirmed for the US market."
+  },
+  {
+    "id": "porsche-cayenne-electric-2026-base",
+    "make": "Porsche",
+    "model": "Cayenne Electric",
+    "trim": "Base",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 109000,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 113,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": "Pending",
+      "source": "https://www.edmunds.com/porsche/cayenne/2026/mpg/"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.5,
+      "horsepowerHp": 435,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 400,
+      "level2Kw": 11,
+      "vehicleToLoad": null,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      21
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 27.6,
+      "maxCubicFeet": 56.1,
+      "frunkCubicFeet": 3.2
+    },
+    "towCapacityLbs": 7716,
+    "groundClearanceIn": 7.5,
+    "links": {
+      "manufacturerSpec": "https://www.porsche.com/usa/models/cayenne/cayenne-electric-models/cayenne-electric/",
+      "review": "https://www.edmunds.com/porsche/cayenne/2026/electric/",
+      "epaWindowSticker": "https://www.edmunds.com/porsche/cayenne/2026/mpg/"
+    },
+    "notes": "New full-size electric SUV body style for Porsche (distinct PPE-derived architecture, larger than the Macan Electric already in this dataset), on sale since March 2026. EPA range NOT yet certified as of this research date -- Porsche/reviewers cite WLTP-based and prototype-tested estimates in the 300-340mi range, but per this dataset's convention of using only real EPA-sourced figures (see the GMC Hummer entries' handling of GM's own marketing-estimate ranges), epaMiles is left null rather than using an unofficial number; revisit once fueleconomy.gov publishes a certified rating. All trims are dual-motor AWD, no RWD option. Ground clearance varies 6.9-9.6 in. across the adaptive air suspension's four ride-height modes (matching the Macan Electric's adjustable-suspension pattern); 7.5 in. (\"Normal\" mode) is used here as the representative figure, same approach as the Macan Electric entries. Battery figure (113 kWh) is a gross/reported pack size; a separately-confirmed net usable figure was not found this session."
+  },
+  {
+    "id": "porsche-cayenne-electric-2026-turbo",
+    "make": "Porsche",
+    "model": "Cayenne Electric",
+    "trim": "Turbo",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 163000,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 113,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": "Pending",
+      "source": "https://www.edmunds.com/porsche/cayenne/2026/mpg/"
+    },
+    "performance": {
+      "zeroTo60Sec": 2.4,
+      "horsepowerHp": 1139,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 400,
+      "level2Kw": 11,
+      "vehicleToLoad": null,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      21
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 27.6,
+      "maxCubicFeet": 56.1,
+      "frunkCubicFeet": 3.2
+    },
+    "towCapacityLbs": 7716,
+    "groundClearanceIn": 7.5,
+    "links": {
+      "manufacturerSpec": "https://www.porsche.com/usa/models/cayenne/cayenne-electric-models/cayenne-turbo-electric/",
+      "review": "https://www.edmunds.com/porsche/cayenne/2026/electric/",
+      "epaWindowSticker": "https://www.edmunds.com/porsche/cayenne/2026/mpg/"
+    },
+    "notes": "New full-size electric SUV body style for Porsche (distinct PPE-derived architecture, larger than the Macan Electric already in this dataset), on sale since March 2026. EPA range NOT yet certified as of this research date -- Porsche/reviewers cite WLTP-based and prototype-tested estimates in the 300-340mi range, but per this dataset's convention of using only real EPA-sourced figures (see the GMC Hummer entries' handling of GM's own marketing-estimate ranges), epaMiles is left null rather than using an unofficial number; revisit once fueleconomy.gov publishes a certified rating. All trims are dual-motor AWD, no RWD option. Ground clearance varies 6.9-9.6 in. across the adaptive air suspension's four ride-height modes (matching the Macan Electric's adjustable-suspension pattern); 7.5 in. (\"Normal\" mode) is used here as the representative figure, same approach as the Macan Electric entries. Battery figure (113 kWh) is a gross/reported pack size; a separately-confirmed net usable figure was not found this session."
+  },
+  {
+    "id": "mercedes-maybach-eqs-suv-2026-680-4matic",
+    "make": "Mercedes-Maybach",
+    "model": "EQS SUV",
+    "trim": "680 4MATIC",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 180000,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 118,
+      "warrantyYears": 10,
+      "warrantyMiles": 155000
+    },
+    "range": {
+      "epaMiles": 300,
+      "source": "https://driveclean.ca.gov/taxonomy/term/42616"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.2,
+      "horsepowerHp": 658,
+      "topSpeedMph": 131
+    },
+    "charging": {
+      "portType": "CCS1",
+      "maxDcKw": 200,
+      "level2Kw": 11,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      21
+    ],
+    "seats": {
+      "leatherAvailable": true,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 15.5,
+      "maxCubicFeet": null,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 3500,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/eqs/suv/eqs680z4",
+      "review": "https://www.edmunds.com/mercedes-benz/maybach-eqs-suv/",
+      "epaWindowSticker": "https://driveclean.ca.gov/taxonomy/term/42616"
+    },
+    "notes": "Distinct ultra-luxury sub-brand tier of the EQS SUV already in this dataset (regular EQS SUV entries are badged Mercedes-Benz; this is Mercedes-Maybach, listed as its own make to match how Mercedes/ dealers/reviewers market and price it as a separate line, roughly 2-3x the regular EQS SUV's price). Not listed in fueleconomy.gov's PowerSearch as of this research date -- range.source uses California ARB's driveclean.ca.gov listing instead, which cites the same EPA-certified 300mi/39 MPGe figures a fueleconomy.gov listing would. No frunk and no separate folded-seats cargo figure were found (only the 15.5 cu ft seats-up trunk number), left null rather than guessed. Ground clearance not confirmed for the US-spec Maybach trim (only a European/international 184mm figure was found, not used here). Interior/comfort features (leather, heated/ventilated seats) assumed standard given Maybach's ultra-luxury positioning, consistent with how this dataset treats top luxury trims elsewhere."
+  },
+  {
+    "id": "subaru-uncharted-2026-premium",
+    "make": "Subaru",
+    "model": "Uncharted",
+    "trim": "Premium",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 34995,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "FWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 74.7,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 308,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50301"
+    },
+    "performance": {
+      "zeroTo60Sec": null,
+      "horsepowerHp": 221,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 150,
+      "level2Kw": 11,
+      "vehicleToLoad": null,
+      "heatPump": false
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": 23,
+      "maxCubicFeet": 59.5,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 0,
+    "groundClearanceIn": 8.2,
+    "links": {
+      "manufacturerSpec": "https://www.subaru.com/vehicles/uncharted/2026.html",
+      "review": "https://www.edmunds.com/subaru/uncharted/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50301"
+    },
+    "notes": "Third Subaru EV model alongside Solterra and Trailseeker (subcompact, below both in size/price) -- Subaru's first FWD-based/single-front-motor EV, on a different platform than the Toyota-shared Solterra. Base Premium trim is single-motor FWD only; AWD (dual-motor, 338 hp combined) is exclusive to Sport/GT trims -- see the GT entry also added this batch. Not rated to tow (0 lb) on any trim. No frunk. Heat pump is standard on Sport/GT but NOT on this base Premium trim per Subaru's own trim breakdown. Cupholder/USB counts and 0-60 time not confirmed for the Premium trim specifically, left null rather than guessed."
+  },
+  {
+    "id": "subaru-uncharted-2026-gt",
+    "make": "Subaru",
+    "model": "Uncharted",
+    "trim": "GT",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 43795,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 74.7,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 273,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50302"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.7,
+      "horsepowerHp": 338,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 150,
+      "level2Kw": 11,
+      "vehicleToLoad": null,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 23,
+      "maxCubicFeet": 59.5,
+      "frunkCubicFeet": 0
+    },
+    "towCapacityLbs": 0,
+    "groundClearanceIn": 8.2,
+    "links": {
+      "manufacturerSpec": "https://www.subaru.com/vehicles/uncharted/2026.html",
+      "review": "https://www.edmunds.com/subaru/uncharted/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50302"
+    },
+    "notes": "Third Subaru EV model alongside Solterra and Trailseeker (subcompact, below both in size/price) -- Subaru's first FWD-based/single-front-motor EV, on a different platform than the Toyota-shared Solterra. Base Premium trim is single-motor FWD only; AWD (dual-motor, 338 hp combined) is exclusive to Sport/GT trims -- see the GT entry also added this batch. Not rated to tow (0 lb) on any trim. No frunk. Heat pump is standard on Sport/GT but NOT on this base Premium trim per Subaru's own trim breakdown. Cupholder/USB counts and 0-60 time not confirmed for the Premium trim specifically, left null rather than guessed."
+  },
+  {
+    "id": "lucid-gravity-2026-touring-awd",
+    "make": "Lucid",
+    "model": "Gravity",
+    "trim": "Touring AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 81525,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 89,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 337,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50221"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.0,
+      "horsepowerHp": 560,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 300,
+      "level2Kw": 19.2,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": null,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": null,
+      "ventilatedAvailable": null,
+      "heatedSteeringWheel": null,
+      "heatedRearSeats": null
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": 111.9,
+      "frunkCubicFeet": 8.1
+    },
+    "towCapacityLbs": 5999,
+    "groundClearanceIn": "N/A",
+    "links": {
+      "manufacturerSpec": "https://www.lucidmotors.com/gravity",
+      "review": "https://www.edmunds.com/car-news/2026-lucid-gravity-touring-debut-first-look.html",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50221"
+    },
+    "notes": "Cheaper entry point below the Grand Touring already in this dataset -- same Gravity body/platform but a smaller 89 kWh pack (vs. Grand Touring's 123 kWh) and single-tier motor output. Base configuration is the 5-seat/2-row layout (111.9 cu ft folded); a 7-seat/3-row option also exists (106.2 cu ft folded per Lucid) but was not used here to keep this entry directly comparable to the also-2-row Grand Touring entry. Ground clearance left null matching the Grand Touring entry's reasoning (adjustable air suspension, no single published figure this dataset uses consistently) even though one source cited a 178mm/7.0in figure -- kept consistent with the sibling trim rather than introducing a one-off number. Level 2 AC charging (19.2 kW) and heat pump assumed shared with Grand Touring (same onboard charger hardware); not independently re-confirmed for Touring specifically. Seat material/heated-steering-wheel/heated-rear-seats left null for the same reason as the Grand Touring entry -- not confirmed from reliable public sources this session."
+  },
+  {
+    "id": "toyota-bz-woodland-2026-woodland",
+    "make": "Toyota",
+    "model": "bZ Woodland",
+    "trim": "Woodland",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 45300,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 74.7,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 281,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50305"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.4,
+      "horsepowerHp": 375,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 150,
+      "level2Kw": 11,
+      "vehicleToLoad": null,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": false,
+      "heatedSteeringWheel": false,
+      "heatedRearSeats": false
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": 74.9,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": 3500,
+    "groundClearanceIn": 8.3,
+    "links": {
+      "manufacturerSpec": "https://www.toyota.com/bzwoodland/",
+      "review": "https://insideevs.com/reviews/787449/toyota-bz-woodland-ev-review-2026/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50305"
+    },
+    "notes": "New off-road-styled variant of the compact bZ (formerly bZ4X, renamed \"bZ\" for MY2026 -- see Batch 6 naming fixes), listed as its own model since Toyota/reviewers market and price Woodland as a distinct trim family (with its own trim ladder) rather than a spec option on the base bZ. Standard AWD dual-motor, no FWD/single-motor option (unlike base bZ). Two EPA-certified configurations exist depending on tire choice (235/60R18 = 281mi used here, 235/65R18 = 260mi); the smaller/higher-range tire option was used to match this dataset's general preference for the higher-range configuration when multiple wheel/tire options exist. Base Woodland grade's heated/ventilated seat features not confirmed (Woodland Premium explicitly adds heated+ventilated per Toyota's materials, implying base Woodland may lack them or have a lesser version) -- left as false/false rather than guessed; see the Woodland Premium entry also added this batch for the confirmed-equipped trim. Frunk and rearCubicFeet (seats-up cargo) not found separately from the seats-folded 74.9 cu ft figure."
+  },
+  {
+    "id": "toyota-bz-woodland-2026-woodland-premium",
+    "make": "Toyota",
+    "model": "bZ Woodland",
+    "trim": "Woodland Premium",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 47400,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 74.7,
+      "warrantyYears": 8,
+      "warrantyMiles": 100000
+    },
+    "range": {
+      "epaMiles": 281,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50305"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.4,
+      "horsepowerHp": 375,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 150,
+      "level2Kw": 11,
+      "vehicleToLoad": null,
+      "heatPump": null
+    },
+    "techFeatures": {
+      "appleCarPlay": true,
+      "androidAuto": true,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 4,
+        "typeA": 0,
+        "total": 4
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": false,
+        "name": null,
+        "subscriptionUsdPerMonth": null
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      18
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": 74.9,
+      "frunkCubicFeet": null
+    },
+    "towCapacityLbs": 3500,
+    "groundClearanceIn": 8.3,
+    "links": {
+      "manufacturerSpec": "https://www.toyota.com/bzwoodland/",
+      "review": "https://insideevs.com/reviews/787449/toyota-bz-woodland-ev-review-2026/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50305"
+    },
+    "notes": "New off-road-styled variant of the compact bZ (formerly bZ4X, renamed \"bZ\" for MY2026 -- see Batch 6 naming fixes), listed as its own model since Toyota/reviewers market and price Woodland as a distinct trim family (with its own trim ladder) rather than a spec option on the base bZ. Standard AWD dual-motor, no FWD/single-motor option (unlike base bZ). Two EPA-certified configurations exist depending on tire choice (235/60R18 = 281mi used here, 235/65R18 = 260mi); the smaller/higher-range tire option was used to match this dataset's general preference for the higher-range configuration when multiple wheel/tire options exist. Base Woodland grade's heated/ventilated seat features not confirmed (Woodland Premium explicitly adds heated+ventilated per Toyota's materials, implying base Woodland may lack them or have a lesser version) -- left as false/false rather than guessed; see the Woodland Premium entry also added this batch for the confirmed-equipped trim. Frunk and rearCubicFeet (seats-up cargo) not found separately from the seats-folded 74.9 cu ft figure."
+  },
+  {
+    "id": "tesla-model-s-2026-awd",
+    "make": "Tesla",
+    "model": "Model S",
+    "trim": "AWD",
+    "modelYear": 2026,
+    "bodyStyle": "Sedan",
+    "onSaleDate": null,
+    "msrp": 86630,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 100,
+      "warrantyYears": 8,
+      "warrantyMiles": 150000
+    },
+    "range": {
+      "epaMiles": 410,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49741"
+    },
+    "performance": {
+      "zeroTo60Sec": 3.1,
+      "horsepowerHp": 670,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": 61.4,
+      "frunkCubicFeet": 3.1
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/models",
+      "review": "https://www.edmunds.com/tesla/model-s/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49741"
+    },
+    "notes": "Long-known gap in this dataset -- we had Model 3/X/Y/Cybertruck but not S. 2026 is Tesla's final model year for the current Model S generation per multiple sources. Both trims are now AWD-only (the older single-motor/RWD base config has been dropped), matching the dual-motor-standard direction Tesla has taken across the lineup. Frunk figure (3.1 cu ft) matches the Model 3 Performance entry's figure already in this dataset -- plausible shared design language, not independently re-verified for Model S specifically. No factory tow rating found (aftermarket hitches exist rated ~2,000 lbs weight-carrying, but that is not an official Tesla spec), left null rather than guessed. USB port count and ground clearance not confirmed this session, left null. No Apple CarPlay/Android Auto support, consistent with every other Tesla entry in this dataset."
+  },
+  {
+    "id": "tesla-model-s-2026-plaid-awd",
+    "make": "Tesla",
+    "model": "Model S",
+    "trim": "Plaid AWD",
+    "modelYear": 2026,
+    "bodyStyle": "Sedan",
+    "onSaleDate": null,
+    "msrp": 101630,
+    "doors": 4,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": false,
+    "seatingRows": 2,
+    "maxPassengers": 5,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 100,
+      "warrantyYears": 8,
+      "warrantyMiles": 150000
+    },
+    "range": {
+      "epaMiles": 368,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49742"
+    },
+    "performance": {
+      "zeroTo60Sec": 2.0,
+      "horsepowerHp": 1020,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      21
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": 61.4,
+      "frunkCubicFeet": 3.1
+    },
+    "towCapacityLbs": null,
+    "groundClearanceIn": null,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/models",
+      "review": "https://www.edmunds.com/tesla/model-s/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49742"
+    },
+    "notes": "Long-known gap in this dataset -- we had Model 3/X/Y/Cybertruck but not S. 2026 is Tesla's final model year for the current Model S generation per multiple sources. Both trims are now AWD-only (the older single-motor/RWD base config has been dropped), matching the dual-motor-standard direction Tesla has taken across the lineup. Frunk figure (3.1 cu ft) matches the Model 3 Performance entry's figure already in this dataset -- plausible shared design language, not independently re-verified for Model S specifically. No factory tow rating found (aftermarket hitches exist rated ~2,000 lbs weight-carrying, but that is not an official Tesla spec), left null rather than guessed. USB port count and ground clearance not confirmed this session, left null. No Apple CarPlay/Android Auto support, consistent with every other Tesla entry in this dataset."
+  },
+  {
+    "id": "tesla-model-y-2026-l",
+    "make": "Tesla",
+    "model": "Model Y",
+    "trim": "L",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 61990,
+    "doors": 5,
+    "rearDoorStyle": "Hinged",
+    "slidingDoors": false,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 6,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 79,
+      "warrantyYears": 8,
+      "warrantyMiles": 120000
+    },
+    "range": {
+      "epaMiles": 325,
+      "source": "https://tslna.com/en/tesla-model-y-l-guide-2026/"
+    },
+    "performance": {
+      "zeroTo60Sec": 4.4,
+      "horsepowerHp": 444,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": null,
+        "typeA": null,
+        "total": null
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      19,
+      20
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": null,
+      "maxCubicFeet": null,
+      "frunkCubicFeet": 4
+    },
+    "towCapacityLbs": 3527,
+    "groundClearanceIn": 6.6,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/modely",
+      "review": "https://tslna.com/en/tesla-model-y-l-guide-2026/",
+      "epaWindowSticker": "https://tslna.com/en/tesla-model-y-l-guide-2026/"
+    },
+    "notes": "New long-wheelbase 3-row/6-seat variant of Model Y, launched July 2026 -- a genuinely different body style from the standard 2-row Model Y already in this dataset (both Standard and Long Range AWD entries), not just a trim/package. Not yet listed in fueleconomy.gov's PowerSearch as of this research date; range.source/epaWindowSticker point to a dedicated review article citing the 325mi EPA-certified figure instead. Horsepower (444 hp) is computed from the combined 194kW rear + 137kW front motor outputs Tesla published (331 kW combined x 1.341 = ~444 hp) -- Tesla does not publish an official combined hp figure directly, so treat with slightly less confidence than a directly-cited number. Cargo figures (rearCubicFeet/maxCubicFeet) left null rather than reusing the standard 2-row Model Y's cargo numbers, since the stretched 3-row body changes both -- frunk and tow rating were kept from the standard Model Y as shared-platform figures since those are less likely to differ. Ground clearance and wheel sizes also carried over from the standard Model Y, not independently re-confirmed for the L specifically."
+  },
+  {
+    "id": "tesla-model-x-2026-awd",
+    "make": "Tesla",
+    "model": "Model X",
+    "trim": "AWD",
+    "modelYear": 2026,
+    "bodyStyle": "SUV",
+    "onSaleDate": null,
+    "msrp": 99900,
+    "doors": 5,
+    "rearDoorStyle": "Suicide/Coach",
+    "slidingDoors": false,
+    "isThreeRow": true,
+    "seatingRows": 3,
+    "maxPassengers": 6,
+    "builtInBoosterSeats": false,
+    "drivetrain": "AWD",
+    "allWheelDriveAvailable": true,
+    "battery": {
+      "usableKwh": 100,
+      "warrantyYears": 8,
+      "warrantyMiles": 150000
+    },
+    "range": {
+      "epaMiles": 352,
+      "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49745"
+    },
+    "performance": {
+      "zeroTo60Sec": 3.8,
+      "horsepowerHp": 670,
+      "topSpeedMph": null
+    },
+    "charging": {
+      "portType": "NACS",
+      "maxDcKw": 250,
+      "level2Kw": 11.5,
+      "vehicleToLoad": false,
+      "heatPump": true
+    },
+    "techFeatures": {
+      "appleCarPlay": false,
+      "androidAuto": false,
+      "wirelessPhoneCharging": true,
+      "cupholders": null,
+      "usbPorts": {
+        "typeC": 5,
+        "typeA": 0,
+        "total": 5
+      }
+    },
+    "driverAssist": {
+      "selfDriving": {
+        "available": true,
+        "name": "Full Self-Driving (Supervised)",
+        "subscriptionUsdPerMonth": 99
+      },
+      "collisionAvoidanceAutoBrake": true,
+      "laneKeepAssist": true,
+      "adaptiveCruiseControl": true
+    },
+    "wheelSizesIn": [
+      20,
+      22
+    ],
+    "seats": {
+      "leatherAvailable": false,
+      "ventilatedAvailable": true,
+      "heatedSteeringWheel": true,
+      "heatedRearSeats": true
+    },
+    "cargo": {
+      "rearCubicFeet": 20,
+      "maxCubicFeet": 92.3,
+      "frunkCubicFeet": 6.5
+    },
+    "towCapacityLbs": 5000,
+    "groundClearanceIn": 6.6,
+    "links": {
+      "manufacturerSpec": "https://www.tesla.com/modelx/design",
+      "review": "https://www.edmunds.com/tesla/model-x/2026/st-402085867/features-specs/",
+      "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49745"
+    },
+    "notes": "Base (non-Plaid) Model X trim -- the other half of Model X's 2-trim lineup, filling a gap where this dataset previously only had Plaid. Reported base pricing varied noticeably across sources this session (9,990 to 04,990); used 9,900, the figure most consistently repeated by independent sources (Tesla's own pricing page and a second corroborating source), and cross-checked against the Plaid entry's already-confirmed 14,990-ish pricing tier for a plausible gap between the two trims. Falcon-wing rear doors mapped to 'Suicide/Coach' as the closest schema option, same as the Plaid entry. Cargo, frunk, tow capacity, wheel sizes, ground clearance, and USB port count are all carried over directly from the already-researched Model X Plaid entry (same body/platform, these dimensions don't vary by motor tier) rather than re-verified independently this session -- only range/performance/price were re-sourced specifically for this base trim. Assumes the 6-seat (2+2+2 captain's-chair) layout common on Model X, matching the Plaid entry's own assumption."
   }
 ]

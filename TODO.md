@@ -1,8 +1,27 @@
 # TODO: Data coverage
 
-`data/evs.json` now covers **28 makes / 72 models / 129 trims** — up from 9 makes / 16 models / 30 trims. Every make identified in the original survey below (German luxury, other premium/EV-native, mainstream, trucks, and the 2027-ready batch) has been researched and merged in, each trim sourced from manufacturer spec pages + fueleconomy.gov + a review link, following `data/SCHEMA.md`.
+`data/evs.json` now covers **29 makes / 81 models / 149 trims** — up from 9 makes / 16 models / 30 trims. Every make identified in the original survey below (German luxury, other premium/EV-native, mainstream, trucks, and the 2027-ready batch) has been researched and merged in, each trim sourced from manufacturer spec pages + fueleconomy.gov + a review link, following `data/SCHEMA.md`.
 
 **2026-08-20**: Added the missing **Ford Mustang Mach-E Premium** trim (user noticed the dataset only had Select RWD and GT AWD). Added as `Premium AWD Extended Range` ($48,845, 300mi EPA, 91kWh, 150kW DC) — the popular loaded-but-not-GT configuration. `towCapacityLbs` and `groundClearanceIn` are `null`: the only figures found for these were from older-model-year or EU-spec (kg/liter) aggregator sites, not a reliable MY2026 US-spec primary source, so left null rather than guessed per `data/SCHEMA.md` rules.
+
+**2026-08-20**: Ran a research batch on the 13 most under-researched entries surfaced by the missing-attributes audit (5 with no price at all, plus GMC Sierra EV Elevation and a Mercedes EQS cluster that were missing several core fields each). Closed 51 of ~76 core-field gaps across those entries:
+- **Mercedes EQE/EQS SUV+Sedan cluster** (5 entries): filled in missing `msrp` (EQE SUV 500 4MATIC $89,500; EQS SUV 580 4MATIC $128,200), DC/L2 charging speeds (200kW/9.6kW, consistent across the whole EQS family), and 0-60 times. Still open: tow capacity/ground clearance on the two EQS Sedan entries — genuinely couldn't confirm a reliable US-specific figure.
+- **Volvo EC40** (both trims): filled in `msrp` ($64,995 each, confirmed via CARB's driveclean.ca.gov, matching each entry's already-on-file range/MPGe exactly). Along the way, resolved real uncertainty about whether EC40 is still sold in the US at all (an earlier note said "reportedly skipped for MY2025") — it's back for MY2026 as part of a 4-model EX30/EX40/EC40/EX90 lineup. **Also surfaced a naming trap worth knowing about**: EC40 and EX40 are NOT the same car under different names — Volvo renamed C40 Recharge → EC40 (coupe-styled) and XC40 Recharge → EX40 (conventional SUV) as two distinct models. Search results kept conflating them. Our two EC40 entries are correctly the coupe-styled EC40; the EX40 is a completely different, real, on-sale Volvo EV (~$55,150 starting) that isn't in this dataset at all yet — worth adding in a future batch.
+- **GMC Sierra EV Elevation (Standard Range)**: the worst-researched entry in the dataset (10 missing core fields) — now fully filled in: 120kWh battery (cross-checked against the Silverado EV WT's 119kWh), 4.5s 0-60, 18in wheels, 8,500lb tow, 8.1in ground clearance, and seat features.
+- **Lexus RZ** (both trims): filled in 0-60 (7.2s/4.1s), DC fast-charge (150kW), ground clearance (7.9in), and seat features. Still open: tow capacity and max folded-cargo — a general RZ cargo figure was found but didn't line up with this entry's already-sourced rear-cargo number closely enough to trust, so left null rather than risk a mismatched figure.
+- **VinFast VF8 (both trims) + VF9**: filled in DC/L2 charging speeds, wheel sizes (VF8 only), and cargo figures (rear/frunk for VF8, rear/max/frunk for VF9) that had been null since the original bulk-research pass.
+
+Remaining gaps across these 13 entries are now down to 25, concentrated in seat-comfort booleans (heated steering wheel/rear seats, ventilated seats) and a few tow-capacity/ground-clearance figures — the same category of "genuinely hard to source per-trim" data that's a known, accepted gap throughout the rest of this dataset. Not planning to chase those further without a specific reason to.
+
+**2026-08-20**: Introduced a **three-state convention for numeric fields** — `null` (unknown/unresearched), `"N/A"` (the concept doesn't apply to this vehicle), `"Pending"` (known to be coming, just not published yet) — prompted by the user asking whether a pickup's missing cargo cubic feet (genuinely N/A) was being represented any differently from an unresearched cupholder count (genuinely unknown). It wasn't — both were plain `null` and rendered as the same "—" everywhere. Fixed:
+- `js/fields.js`: added an `fmtNum(value, formatter)` helper and routed all 14 range-type fields' `format` functions through it, so `"N/A"`/`"Pending"` display as themselves instead of falling through to number formatting (which would've produced `NaN`/garbage).
+- `js/render.js`: compare-table cells get distinct `cell-na`/`cell-pending` classes (`css/styles.css`: both muted like the existing "unknown" dash, `cell-pending` additionally italicized so it reads as "temporary" rather than permanent).
+- `filters.js`/domain computation and `app.js`'s `sortCars` needed **no changes** — both already gated on `typeof v === "number"`, so the new sentinel strings automatically behave like `null` there (excluded from slider domains/winner-highlighting, sink to the bottom on sort) with no extra work.
+- `data/SCHEMA.md`: documented the three states and when to use each.
+- **Data reclassified**: all 10 pickup-truck-body entries' `cargo.rearCubicFeet`/`maxCubicFeet` → `"N/A"` (no enclosed cargo hold exists on a truck bed); 8 adjustable-air-suspension entries' (GMC Hummer EV Pickup/SUV, Lucid Gravity both trims, Rivian R1S both packs, R1T, Silverado EV RST) `groundClearanceIn` → `"N/A"` (no single figure meaningfully exists); Porsche Cayenne Electric's (both trims) `range.epaMiles` → `"Pending"` (on sale now, EPA just hasn't certified it yet — the one clear-cut case found).
+- **Bonus fix found during the audit**: 8 entries (Audi Q4 e-tron Premium 45, Honda Prologue x2, Mercedes EQS Sedan 450+, Mercedes G-Class, Mercedes-Maybach EQS SUV, Subaru Uncharted x2) had `cargo.frunkCubicFeet: null` despite their own `notes` explicitly confirming "no frunk" — that's a real `0`, not an unknown, and other entries (BMW iX, Cadillac Lyriq, Lexus RZ, Mercedes EQE Sedan, VW ID. Buzz) already correctly used `0` for the identical situation. Fixed for consistency/comparability.
+- Cache versions bumped: `fields.js` v4→v5, `render.js` v12→v13, `similar.js` v4→v5 (transitively, since it re-exports through render.js's import chain), `styles.css` v13→v14, `app.js` v22→v23.
+- Verified in the browser: F-150 Lightning shows "N/A" for cargo (vs. "—" for its unresearched cupholders), Rivian R1S shows "N/A" for ground clearance, Porsche Cayenne Electric shows italicized "Pending" for EPA range, and the ground-clearance filter slider's domain is unaffected (4.4–9.8 in, no NaN/string pollution).
 
 ## What's in now
 
@@ -17,23 +36,79 @@
 
 - **MINI Cooper SE Hardtop is NOT in the dataset** — it's not actually sold in the US (China-built, currently tariff-blocked; MINI has deferred the US launch indefinitely). Only Countryman Electric made it in.
 - **Ram 1500 REV was skipped** — confirmed cancelled; Stellantis reused the name for a gas range-extender instead, not a BEV.
-- **Tesla Model S** is still missing (we have 3/X/Y/Cybertruck) — worth a quick follow-up batch.
-- **Hyundai Ioniq 5 N** and **Cadillac Celestiq** were deliberately skipped as niche/halo trims — could add if there's interest.
+- **Cadillac Celestiq** was deliberately skipped as a niche/halo trim — could add if there's interest.
 - **GM Super Cruise** is normalized to `selfDriving.available: false` across every Cadillac/Chevrolet/GMC entry (treated as adaptive-cruise-tier driver-assist, not self-driving) — a few early entries briefly drifted from this and were corrected for consistency.
 
 ## Still explicitly deferred (low priority / low-volume)
 
-- Rolls-Royce Spectre, Maserati Grecale Folgore/GranTurismo Folgore, Lotus Eletre/Emeya, Land Rover Range Rover Electric, Faraday Future FF91 — ultra-low-volume exotics, low practical value for a shopping-comparison tool. Add on request.
+- Rolls-Royce Spectre, Maserati Grecale Folgore/GranTurismo Folgore, Lotus Eletre/Emeya, Land Rover Range Rover Electric, Faraday Future FF91, Karma Revero/GS-6/GSe-6 — ultra-low-volume exotics, low practical value for a shopping-comparison tool. Add on request.
 
 ## Not yet on sale (watch, don't add yet)
 
 - **Kia EV4** — full specs exist but US launch delayed indefinitely (tariffs/demand), no confirmed on-sale date.
 - **Scout Traveler / Terra** — specs still "estimated," not final; production doesn't start until end of 2027 as **2028** models.
 - **Slate Truck** — timing TBD, no confirmed specs yet.
+- **Acura RSX** — confirmed electric coupe-SUV, launching H2 2026, but no published pricing yet.
+- **BMW i3 (Neue Klasse sedan)** and **BMW iX4** — confirmed specs, 2027 MY, US pricing not yet finalized.
+- **VW ID. Buzz Tourer 4Motion** — confirmed for MY2027 return after a 2026 hiatus, but no pricing/specs published yet.
+- **Volvo ES90** — confirmed coming to the US, only European pricing exists so far, no US configurator live.
+- **Mitsubishi Eclipse Sportback EV** — real (Leaf-based), Mitsubishi hasn't published pricing/specs yet ("coming in the near future").
+- **Polestar 5 / 6** — real models but not sold in the US (Polestar restricted from selling vehicles with Chinese-origin software/hardware; company refocused on Europe).
+
+## 2026-08-20 audit: 14 confirmed gaps + 3 naming fixes, queued in batches of 3
+
+Ran a full 5-way parallel audit of all 28 makes against current 2025-2027 US-market EV lineups (triggered by spotting the missing Mach-E Premium). Found 14 real, on-sale-or-confirmed-with-published-pricing models/variants that are entirely missing, plus 3 existing entries with stale trim naming. Doing research + add in small batches (3 at a time) rather than one big parallel push, to keep capacity use per session manageable and each batch independently completable/verifiable. Order is roughly "most clearly real/simple" first.
+
+**Batch 1 — done (2026-08-20)**
+- Ford **E-Transit** — added as `Cargo Van Low Roof RWD`, $55,355, 159mi (EPA MCT-cycle rating; not in fueleconomy.gov's PowerSearch since commercial vans use a different EPA test methodology than passenger vehicles, so `range.source` points to a press article citing Ford's official figure instead). Added `"Van"` as a new `bodyStyle` value (filter sidebar picks it up automatically, no code change needed). BlueCruise isn't offered on this model at all, so `selfDriving.name` is `null` rather than reusing "BlueCruise" the way Ford's passenger EVs do.
+- GMC **Hummer EV SUV** — added as `3X`, $105,300, 312mi (EPA figure carried over from the MY2025 listing, same as the Pickup 3X entry, since MY2026-specific EPA data isn't published yet). Distinct enclosed cargo hold (35.9/81.7 cu ft) vs. the Pickup's bed. Flagged an open question in its `notes`: one source suggests the Hummer EV doesn't get a native NACS port as standard until MY2027, which would contradict the already-existing Pickup 3X entry's `NACS` value — kept `NACS` for consistency with that sibling entry for now, but this is worth confirming against an official GMC spec sheet and fixing both entries together if wrong.
+- Hyundai **Ioniq 5 N** — added as its own **model** (`Ioniq 5 N`, not a trim of `Ioniq 5`, matching how Hyundai/reviewers treat the N line), $59,900 (post price-cut MY2026 figure), 221mi, 641hp/3.25s (both are the N Grin Boost peak figures, continuous rating is 601hp).
+
+Verified all three in the card grid (132 vehicles now, was 129), compare table, and detail modal.
+
+**Batch 2 — done (2026-08-20)**
+- Audi **A6 e-tron** — added as 2 trims: `Premium` (RWD, $66,700, 348mi, 375hp) and `Premium Plus quattro` (AWD, $72,000, 327mi, 466hp). New sedan nameplate on the PPE platform (shared with Q6 e-tron), sold in the US as the A6 Sportback e-tron fastback body. Tow capacity/ground clearance left null — only European Avant-wagon figures were found, which don't reliably apply to the US sedan.
+- Mercedes-Benz **G-Class Electric** — added as `G 580 w/EQ Technology`, $163,200, 239mi, 579hp/4.6s. Single US configuration (no lower trim), so only one entry rather than the usual pair. Not in fueleconomy.gov's PowerSearch despite being on sale — used Edmunds' own confirmed-EPA-figure article as `range.source` instead (same workaround as the E-Transit in Batch 1).
+- Mercedes-Benz **CLA Electric** — added as 2 trims: `250+ w/EQ Technology` (RWD, $47,250, 374mi, 268hp) and `350 4MATIC w/EQ Technology` (AWD, $49,800, 312mi, 349hp). Mercedes' first EV on the new MB.EA platform (distinct from the EVA2-based EQB/EQE/EQS already in the dataset) — unusually long EPA range for an 85kWh pack thanks to a new silicon-oxide-blend anode.
+
+Verified all 5 in the card grid (137 vehicles now, was 132), compare table, and detail modal.
+
+**Batch 3 — done (2026-08-20)**
+- Mercedes-Maybach **EQS SUV** — added as `680 4MATIC`, $180,000, 300mi, 658hp/4.2s. Listed under its own `make: "Mercedes-Maybach"` (distinct from `Mercedes-Benz`) since that's how it's actually marketed/priced as its own line — filter sidebar picked up the new make automatically (29 makes now). Not in fueleconomy.gov's PowerSearch; used California ARB's driveclean.ca.gov listing as `range.source` instead (same EPA-certified figures, different database).
+- Porsche **Cayenne Electric** — added as 2 trims: `Base` (AWD, $109,000, 435hp/4.5s) and `Turbo` (AWD, $163,000, 1,139hp/2.4s). New full-size SUV body style for Porsche EVs, on sale since March 2026. EPA range is genuinely not yet certified (not a fueleconomy.gov-listing gap like the other two — Porsche/reviewers are still citing WLTP/prototype estimates), so `range.epaMiles` is `null` on both trims per this dataset's "don't use uncertified marketing numbers" convention; revisit once fueleconomy.gov publishes a rating.
+- Subaru **Uncharted** — added as 2 trims: `Premium` (FWD, $34,995, 308mi, 221hp) and `GT` (AWD, $43,795, 273mi, 338hp/4.7s). Subaru's first FWD-based EV, third model alongside Solterra/Trailseeker, different platform than the Toyota-shared Solterra.
+
+Verified all 5 in the card grid (142 vehicles now, was 137), compare table, and detail modal.
+
+**Batch 4 — done (2026-08-20)**
+- Lucid **Gravity Touring** — added as `Touring AWD`, $81,525, 337mi, 560hp/4.0s. Cheaper 89kWh-pack entry point below the already-listed Grand Touring (123kWh). Ground clearance left null to stay consistent with the Grand Touring entry's own reasoning (adjustable air suspension, no single figure this dataset uses).
+- Toyota **bZ Woodland** — added as 2 trims: `Woodland` ($45,300, 281mi, 375hp) and `Woodland Premium` ($47,400, adds heated/ventilated seats). Listed as its own model (not a bZ4X trim) since Toyota markets/prices it as a distinct off-road-styled trim family.
+- Tesla **Model S** — added as 2 trims: `AWD` ($86,630, 410mi, 670hp/3.1s) and `Plaid AWD` ($101,630, 368mi, 1,020hp/2.0s). Long-known gap (we had 3/X/Y/Cybertruck but not S). Both trims are AWD-only now — Tesla dropped the old single-motor/RWD base config. 2026 is the final model year for this generation per multiple sources. Note: pricing came in noticeably lower than the original audit's finding ($109,990/$124,990) — used the more specific, dedicated-search figures from this session's research, but worth a quick re-check given Tesla's frequent unannounced price changes.
+
+Verified all 5 in the card grid (147 vehicles now, was 142), compare table, and detail modal.
+
+**Batch 5 — done (2026-08-20)**
+- Tesla **Model Y L** — added as `L`, $61,990, 325mi, ~444hp (computed from published combined motor kW, not a directly-cited Tesla figure)/4.4s. New long-wheelbase 3-row/6-seat body style, not in fueleconomy.gov yet — used a dedicated review article as `range.source`. Cargo figures left null since the standard 2-row Model Y's numbers don't apply to the stretched 3-row body; frunk/tow/wheel/ground-clearance were carried over from standard Model Y as shared-platform figures.
+- Tesla **Model X base AWD** — added as `AWD`, $99,900, 352mi, 670hp/3.8s. Fills the gap where we only had Plaid. Base pricing varied a lot across sources this session ($89,990–$104,990); went with $99,900 as the most consistently-repeated figure. Cargo/frunk/tow/wheel/ground-clearance carried over directly from the existing Plaid entry (shared body/platform, don't vary by motor tier).
+
+Verified both in the card grid (149 vehicles now, was 147), compare table, and detail modal.
+
+All 5 data batches (14 new models/variants) are now complete. Only Batch 6 (naming/staleness fixes) remains.
+
+**Batch 6 — done (2026-08-20)**
+- Tesla Model Y **"Long Range AWD" → "Premium AWD"** — confirmed a pure label change (Tesla renamed the tier mid-model-year), same $48,990 price and specs. `id` updated to `tesla-model-y-2026-premium-awd`.
+- Tesla Cybertruck **"Dual Motor AWD" → "AWD"** — matches Tesla's actual current 3-tier naming (AWD / Premium AWD / Cyberbeast). Also caught two real spec drifts while in there: price was stale at $59,990 (Tesla raised it to $69,990 on 2026-03-01) and tow capacity corrected from 7,500 lbs to 11,000 lbs per a more specific source. `id` updated to `tesla-cybertruck-2026-awd`.
+- Toyota **bZ4X → bZ** — this turned out to be a full MY2026 facelift, not just a badge change: switched CCS1 → native NACS, DC fast-charging unified at 150kW across trims (was split 150/100 FWD/AWD), Level 2 AC bumped 6.6kW → 11kW, and the AWD trim's power jumped 214hp → 338hp. Updated both existing entries in place (`model`, `modelYear` 2025→2026, `id`s, and all the above specs) rather than adding new rows — kept the same base+top trim pattern (XLE FWD + Limited AWD) rather than adding Toyota's new middle XLE Plus trim. New `id`s: `toyota-bz-2026-xle-fwd`, `toyota-bz-2026-limited-awd`.
+
+Verified all three fixes in the card grid, compare table, and detail modal (149 vehicles unchanged — these were edits, not additions).
+
+**All 6 batches from the 2026-08-20 audit are now complete.**
+
+Also worth a quick note while we're in there: Audi Q8 e-tron (ended production Feb 2025) and Dodge Charger Daytona R/T (discontinued for MY2026) are both still accurate for the model year we have them listed as — no fix needed, just flagged in case those entries get refreshed to a newer year later.
 
 ## Next step (data)
 
-Nothing urgent queued. If new 2027 models get real published specs (the way BMW iX3/Lexus ES/Rivian R2/Chevy Bolt/Volvo EX60 did), add them the same way. Otherwise, revisit when Kia EV4 or Scout actually get a confirmed on-sale date.
+Work through the 6 batches above in order, one at a time. After each batch: research real specs per `data/SCHEMA.md`, add the entries, verify rendering (card grid count, compare table, detail modal), and check this list off. Otherwise, revisit the "not yet on sale" watch list above once any of those get confirmed pricing/specs.
 
 ---
 

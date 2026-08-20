@@ -84,8 +84,12 @@ Each entry in `evs.json` is one **trim** of one model (a single model year, e.g.
 
 ## Rules for filling this out
 - Use only real, verifiable public data (manufacturer spec pages, fueleconomy.gov, EPA, Car and Driver / Edmunds / MotorTrend reviews). Do not invent numbers.
-- If a field is genuinely unknown/not applicable, use `null` (numbers/strings) or omit nested optional sub-fields — never guess.
 - Every entry MUST have `range.source` (EPA/fueleconomy.gov link) and at least one link in `links`.
+- **Numeric ("range"-type) fields have three distinct non-value states — pick the right one, don't default everything to `null`:**
+  - `null` — **unknown**: the field applies to this vehicle, we just couldn't confirm a real number from a reliable source. Never guess a number instead — leave it `null`. (e.g. cupholder count, USB port count — routinely hard to source per-trim.)
+  - `"N/A"` — **not applicable**: the concept the field measures doesn't exist for this vehicle, so no number could ever fill it in. (e.g. `cargo.rearCubicFeet`/`maxCubicFeet` on a pickup truck — there's no enclosed cargo hold, just a bed, which isn't tracked by this schema; `groundClearanceIn` on a vehicle with adjustable air suspension and no single published figure — clearance genuinely isn't one number for that vehicle.)
+  - `"Pending"` — **known but not yet published**: we're confident the real number exists or will exist and just hasn't been released yet, for a vehicle that's otherwise on sale now. (e.g. EPA range certification that hasn't posted to fueleconomy.gov yet for a vehicle already shipping.) Don't use this for "might not even launch in the US" uncertainty — that's still `null`.
+  - Boolean fields stay plain `true`/`false`/`null` (no N/A/Pending) — a feature is either confirmed present, confirmed absent, or unconfirmed.
 - Prefer current model year (2025 or 2026) US-market specs; 2027 models are fine to include if the manufacturer has published real (not estimated) specs and pricing.
 - Keep `id` unique and kebab-case: `{make}-{model}-{year}-{trim}`.
 - `onSaleDate`: only set this when a manufacturer has stated an actual date/month (a press release, an order-bank open date, "arriving September 2026," etc.) — never estimate it. Leave `null` for vehicles already broadly available where no specific "on sale" date is meaningful.

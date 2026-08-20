@@ -14,6 +14,22 @@ function roundTo(value, decimals) {
   return Math.round(value * factor) / factor;
 }
 
+// Numeric ("range"-type) fields carry three distinct non-value states, not just one:
+//   null      — unknown: we looked and couldn't confirm a real number.
+//   "N/A"     — not applicable: the concept doesn't exist for this vehicle (e.g. enclosed
+//               cargo volume on a pickup truck bed, or a single ground-clearance figure on
+//               a vehicle with adjustable air suspension).
+//   "Pending" — known to be coming but not yet available (e.g. EPA range certification
+//               that hasn't been published yet for an already-on-sale vehicle).
+// `fmtNum` centralizes that three-way branch so every field's `format` only has to supply
+// the actual-number case.
+function fmtNum(value, formatter) {
+  if (value === "N/A") return "N/A";
+  if (value === "Pending") return "Pending";
+  if (value == null) return "—";
+  return formatter(value);
+}
+
 // `compareBetter: "higher" | "lower"` marks a numeric field as having a genuinely
 // uncontroversial "better" direction, so the compare table can highlight the winning
 // value(s) — used only where there's broad consensus (price, range, charging speed,
@@ -28,20 +44,20 @@ export const FIELDS = [
   { key: "bodyStyle", label: "Body Style", group: "Overview", type: "enum", get: c => c.bodyStyle },
   { key: "modelYear", label: "Model Year", group: "Overview", type: "enum", get: c => c.modelYear },
   { key: "msrp", label: "Price (MSRP)", group: "Overview", type: "range", compareBetter: "lower", get: c => c.msrp,
-    format: v => v == null ? "—" : `$${Math.round(v).toLocaleString()}` },
+    format: v => fmtNum(v, n => `$${Math.round(n).toLocaleString()}`) },
   { key: "onSaleDate", label: "On Sale Date", group: "Overview", type: "text", get: c => c.onSaleDate,
     format: v => v == null ? "Available now" : v },
 
   // ---- Range & Charging ----
   { key: "epaRange", label: "EPA Range", group: "Range & Charging", type: "range", compareBetter: "higher", get: c => c.range?.epaMiles,
-    format: v => v == null ? "—" : `${v} mi` },
+    format: v => fmtNum(v, n => `${n} mi`) },
   { key: "usableKwh", label: "Battery Capacity", group: "Range & Charging", type: "range", get: c => c.battery?.usableKwh,
-    format: v => v == null ? "—" : `${v} kWh` },
+    format: v => fmtNum(v, n => `${n} kWh`) },
   { key: "chargePort", label: "Charge Port Type", group: "Range & Charging", type: "enum", get: c => c.charging?.portType },
   { key: "maxDcKw", label: "Max DC Fast Charging", group: "Range & Charging", type: "range", compareBetter: "higher", get: c => c.charging?.maxDcKw,
-    format: v => v == null ? "—" : `${v} kW` },
+    format: v => fmtNum(v, n => `${n} kW`) },
   { key: "level2Kw", label: "Level 2 AC Charging", group: "Range & Charging", type: "range", step: 0.1, compareBetter: "higher", get: c => c.charging?.level2Kw,
-    format: v => v == null ? "—" : `${roundTo(v, 1)} kW` },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)} kW`) },
   { key: "vehicleToLoad", label: "Vehicle-to-Load (V2L)", group: "Range & Charging", type: "boolean", get: c => c.charging?.vehicleToLoad },
   { key: "heatPump", label: "Heat Pump", group: "Range & Charging", type: "boolean", get: c => c.charging?.heatPump },
 
@@ -49,13 +65,13 @@ export const FIELDS = [
   { key: "drivetrain", label: "Drivetrain", group: "Performance & Drivetrain", type: "enum", get: c => c.drivetrain },
   { key: "allWheelDriveAvailable", label: "All-Wheel Drive Available", group: "Performance & Drivetrain", type: "boolean", get: c => c.allWheelDriveAvailable },
   { key: "zeroTo60", label: "0–60 mph", group: "Performance & Drivetrain", type: "range", step: 0.1, compareBetter: "lower", get: c => c.performance?.zeroTo60Sec,
-    format: v => v == null ? "—" : `${roundTo(v, 1)}s` },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)}s`) },
   { key: "horsepower", label: "Horsepower", group: "Performance & Drivetrain", type: "range", compareBetter: "higher", get: c => c.performance?.horsepowerHp,
-    format: v => v == null ? "—" : `${v} hp` },
+    format: v => fmtNum(v, n => `${n} hp`) },
   { key: "towCapacityLbs", label: "Tow Capacity", group: "Performance & Drivetrain", type: "range", compareBetter: "higher", get: c => c.towCapacityLbs,
-    format: v => v == null ? "—" : `${v.toLocaleString()} lb` },
+    format: v => fmtNum(v, n => `${n.toLocaleString()} lb`) },
   { key: "groundClearanceIn", label: "Ground Clearance", group: "Performance & Drivetrain", type: "range", step: 0.1, get: c => c.groundClearanceIn,
-    format: v => v == null ? "—" : `${roundTo(v, 1)} in` },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)} in`) },
   { key: "wheelSizesIn", label: "Wheel Size", group: "Performance & Drivetrain", type: "enumMulti", get: c => c.wheelSizesIn,
     format: v => Array.isArray(v) && v.length ? v.map(x => `${x}"`).join(", ") : "—" },
 
@@ -65,7 +81,7 @@ export const FIELDS = [
   { key: "slidingDoors", label: "Sliding Doors", group: "Doors & Seating", type: "boolean", get: c => c.slidingDoors },
   { key: "isThreeRow", label: "Three-Row Seating", group: "Doors & Seating", type: "boolean", get: c => c.isThreeRow },
   { key: "maxPassengers", label: "Max Passengers", group: "Doors & Seating", type: "range", step: 1, get: c => c.maxPassengers,
-    format: v => v == null ? "—" : `${roundTo(v, 0)}` },
+    format: v => fmtNum(v, n => `${roundTo(n, 0)}`) },
   { key: "builtInBoosterSeats", label: "Built-in Booster Seats", group: "Doors & Seating", type: "boolean", get: c => c.builtInBoosterSeats },
 
   // ---- Comfort ----
@@ -79,23 +95,23 @@ export const FIELDS = [
   { key: "androidAuto", label: "Android Auto", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.androidAuto },
   { key: "wirelessPhoneCharging", label: "Wireless Phone Charging", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.wirelessPhoneCharging },
   { key: "cupholders", label: "Cupholders", group: "Tech & Safety", type: "range", step: 1, get: c => c.techFeatures?.cupholders,
-    format: v => v == null ? "—" : `${roundTo(v, 0)}` },
+    format: v => fmtNum(v, n => `${roundTo(n, 0)}`) },
   { key: "usbPortsTotal", label: "USB Ports (total)", group: "Tech & Safety", type: "range", step: 1, compareBetter: "higher", get: c => c.techFeatures?.usbPorts?.total,
-    format: v => v == null ? "—" : `${roundTo(v, 0)}` },
+    format: v => fmtNum(v, n => `${roundTo(n, 0)}`) },
   { key: "selfDriving", label: "Self-Driving Capability", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.selfDriving?.available },
   { key: "selfDrivingCost", label: "Self-Driving Subscription", group: "Tech & Safety", type: "range", step: 1, compareBetter: "lower", get: c => c.driverAssist?.selfDriving?.subscriptionUsdPerMonth,
-    format: v => v == null ? "—" : (roundTo(v, 0) === 0 ? "Included" : `$${roundTo(v, 0)}/mo`) },
+    format: v => fmtNum(v, n => (roundTo(n, 0) === 0 ? "Included" : `$${roundTo(n, 0)}/mo`)) },
   { key: "collisionAvoidanceAutoBrake", label: "Collision Avoidance Auto-Brake", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.collisionAvoidanceAutoBrake },
   { key: "laneKeepAssist", label: "Lane Keep Assist", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.laneKeepAssist },
   { key: "adaptiveCruiseControl", label: "Adaptive Cruise Control", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.adaptiveCruiseControl },
 
   // ---- Cargo ----
   { key: "rearCubicFeet", label: "Rear Cargo Volume", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.rearCubicFeet,
-    format: v => v == null ? "—" : `${roundTo(v, 1)} cf` },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)} cf`) },
   { key: "maxCubicFeet", label: "Max Cargo (seats folded)", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.maxCubicFeet,
-    format: v => v == null ? "—" : `${roundTo(v, 1)} cf` },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)} cf`) },
   { key: "frunkCubicFeet", label: "Frunk Volume", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.frunkCubicFeet,
-    format: v => v == null ? "—" : `${roundTo(v, 1)} cf` },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)} cf`) },
 ];
 
 export const GROUP_ORDER = [
