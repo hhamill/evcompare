@@ -92,3 +92,15 @@ Sliders were letting continuous physical measurements drift to arbitrary decimal
 - Found a second issue while testing: the slider's `min`/`max` bounds come straight from raw data, and real data isn't always aligned to the target precision (ground clearance `4.48`, a subscription at `$49.99`) — so even with the right `step`, dragging would start from that odd fraction and every subsequent stop would drift by the same offset (`49.99, 50.99, 51.99, ...`). Fixed by floor/ceil-ing the domain bounds to the field's step grid in `computeDomains`. Also had to guard that against a classic float bug — `6.6 / 0.1` is `65.99999999999999` in JS, not `66`, which would floor an already-clean value down to the previous step — with a `1e-9` epsilon nudge before flooring/ceiling.
 
 Verified: sliders for the affected fields only stop on clean values, and detail/compare/card display for all of them (e.g. Mustang Mach-E GT: `10.5 kW`, `5.6s`, `5.7 in`, `4.8 cf`, `$50/mo` from a raw `$49.99`) is clean with no stray decimals.
+
+---
+
+# TODO: Dual-range slider stuck-thumb bug (2026-08-20)
+
+Reported: dragging a slider's low and high handles to the same value at the *top* of the range (e.g. Max Passengers to 7–7) made it impossible to drag the low handle back down — every attempt just re-grabbed the high handle instead, which is clamped to never go below the low one, so it looked frozen. Same setup at the *bottom* of the range worked fine.
+
+Root cause: the two handles are separate overlapping `<input type=range>` elements (`.range-min` / `.range-max`), stacked absolutely on top of each other. With equal DOM stacking (no `z-index` set), the later element in the markup (`.range-max`) always wins hit-testing when both thumbs sit at the same track position — regardless of which one the values would suggest you're reaching for. That's why the bottom end (where `.range-max` being on top is what you want, to drag it up) worked, and the top end (where you'd need `.range-min` on top, to drag it down) didn't.
+
+Fixed in `js/filters.js`'s `updateVisual()`: whichever thumb's value is in the upper half of the field's domain now gets `z-index: 3` (the other drops to `1`), recomputed on every drag. This only matters when the thumbs are close enough to visually overlap — for normal, well-separated positions it's a no-op.
+
+Verified both directions on Max Passengers: dragged 7–7 down to 4–7 (previously stuck), and 4–4 up to 4–7 (already worked, confirmed still does).

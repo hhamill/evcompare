@@ -274,6 +274,17 @@ export function renderFilterSidebar(container, domains, filterState, onChange) {
           fill.style.left = pct(min) + "%";
           fill.style.width = Math.max(0, pct(max) - pct(min)) + "%";
           valuesEl.innerHTML = `<span>${fmt(min)}</span><span>${fmt(max)}</span>`;
+
+          // Both thumbs are two overlapping <input>s at the same track position; whichever is
+          // later in the DOM (max) always wins clicks by default, so once min catches up to max
+          // (e.g. dragged both to the top of the range) min becomes physically unreachable —
+          // every drag just grabs max again, which is clamped to never go below min, so it looks
+          // stuck. Give whichever thumb is in the upper half of the domain priority instead, so
+          // the one you'd actually be reaching for at each end is the one that's clickable.
+          const midpoint = (domain.min + domain.max) / 2;
+          const minOnTop = min > midpoint;
+          minInput.style.zIndex = minOnTop ? 3 : 1;
+          maxInput.style.zIndex = minOnTop ? 1 : 3;
         }
         updateVisual();
 

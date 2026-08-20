@@ -1,5 +1,5 @@
 import { FIELDS } from "./fields.js?v=2";
-import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=4";
+import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=5";
 import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=4";
 import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=2";
 
