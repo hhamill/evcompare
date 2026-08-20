@@ -281,13 +281,25 @@ input { font-family: inherit; }
 /* ---------- Compare ---------- */
 .compare-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
 .compare-header h2 { font-size: 18px; margin-right: auto; }
-.compare-scroll { overflow-x: auto; border: 1px solid var(--border-soft); border-radius: var(--radius-md); }
+/* overflow-x:auto here is needed so wide tables scroll sideways with the row-label column
+   pinned via position:sticky;left:0 below — but per the CSS overflow spec, giving an element
+   overflow-x anything other than visible forces overflow-y's *used* value to auto too, even
+   if left unset. That default vertical scrollbox has no bounded height, so it never actually
+   scrolls — which quietly breaks the header's position:sticky;top, since sticky positions
+   relative to its nearest scrolling ancestor, and this element only ever *looks* like a
+   non-scrolling one. Bounding the height and setting overflow-y:auto explicitly embraces
+   that forced behavior instead of fighting it: the table now scrolls in its own contained
+   viewport (like a spreadheet), and the sticky header pins correctly to *that*. */
+.compare-scroll {
+  overflow-x: auto; overflow-y: auto; max-height: calc(100vh - 190px);
+  border: 1px solid var(--border-soft); border-radius: var(--radius-md);
+}
 .compare-table { border-collapse: collapse; width: 100%; min-width: 640px; }
 .compare-table th, .compare-table td {
   padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border-soft); font-size: 13px; white-space: nowrap;
 }
 .compare-table thead th {
-  position: sticky; top: 60px; background: var(--bg-elevated); z-index: 5; vertical-align: top; padding-top: 14px;
+  position: sticky; top: 0; background: var(--bg-elevated); z-index: 5; vertical-align: top; padding-top: 14px;
 }
 .compare-table tbody th {
   position: sticky; left: 0; background: var(--bg); z-index: 4; color: var(--text-dim); font-weight: 600; white-space: normal; min-width: 180px;
@@ -421,7 +433,22 @@ input { font-family: inherit; }
   .topbar { flex-wrap: wrap; gap: 10px; }
   .topbar-search { order: 3; max-width: none; flex: 1 1 100%; }
   .content { padding: 16px; }
-  .compare-table thead th { position: static; }
+
+  /* The topbar wraps to two rows on mobile (search drops to its own line), so there's less
+     room above the table than on desktop — give it a smaller offset. */
+  .compare-scroll { max-height: calc(100vh - 260px); }
+
+  /* Keep the sticky header (inherited from the base rule), but compact it: icon/trim/price/
+     button take up real vertical space that's scarce on a phone, and the row-label column
+     already tells you which spec you're looking at — the header's only remaining job while
+     scrolled is "which column is which car," so just the name covers that. */
+  .compare-col-icon,
+  .compare-table thead .compare-col-trim,
+  .compare-table thead .compare-col-price,
+  .compare-table thead .compare-col-view-btn {
+    display: none;
+  }
+  .compare-col-header { padding-top: 10px; padding-bottom: 10px; }
 
   /* iOS Safari auto-zooms the page on focusing any input with font-size below 16px. */
   .topbar-search input, .enum-filter-input { font-size: 16px; }
