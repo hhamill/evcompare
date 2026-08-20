@@ -4,7 +4,7 @@
 // set BASE_PATH to "/evcompare" (match your repo name) so generated links include it. Leave it ""
 // for a user/org root page (https://user.github.io/) or a custom domain at the root. If you change
 // this, also update `pathSegmentsToKeep` in 404.html to match (0 = root, 1 = one path segment kept).
-export const BASE_PATH = "";
+export const BASE_PATH = "/evcompare";
 
 function slugify(str) {
   return String(str)
