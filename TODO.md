@@ -188,3 +188,13 @@ The corner where a horizontal and vertical scrollbar meet is a separate pseudo-e
 Added a "Sort by" dropdown above the card grid: Price (low→high / high→low), Range (longest/shortest first), 0–60 (fastest/slowest first), Max Passengers (most/fewest first), plus the original default order. Scoped exactly as asked — it only ever touches `js/app.js`'s card-grid render call; the auto-compare and manual-compare table column order is untouched regardless of what's selected (verified: sorted the grid by "Max Passengers: Most first," then searched down to a 2-result auto-compare view, and the columns still came out in original catalog order, not passenger-sorted).
 
 Cars missing a given spec (e.g. no listed 0-60 time) sink to the bottom of the sort regardless of direction, rather than clustering at the top on an ascending sort via `undefined`/`NaN` comparison weirdness. "Sort by" is independent of "Reset filters" — clearing filters doesn't reset your sort choice, matching how most shopping sites treat the two as separate controls.
+
+---
+
+# TODO: "Compare all" button (2026-08-20)
+
+Added a "Compare all (N)" button next to the "Similar Vehicles" heading in the detail modal. Click it and it: replaces whatever's currently in the compare selection (not additive — a clean slate, as asked) with the car you're viewing plus its similar-vehicle matches, closes the modal, and jumps straight to the compare grid.
+
+Naturally hidden when there are none — `renderSimilarSection` in `js/render.js` already returns nothing at all (no section, no button) when `findSimilarCars` comes back empty, so no extra condition was needed. In practice that's a rare case at our current catalog size (128 cars) — the similarity search's own fallback logic widens its net until it finds matches, so it's more of a defensive guarantee than something you'll normally see.
+
+Verified: pre-selected an unrelated car for comparison, then opened a different car's detail and hit "Compare all" — the compare grid showed exactly the 5 cars from that button (the anchor + its 4 matches), with the earlier unrelated selection correctly gone rather than appended. Works the same on mobile.

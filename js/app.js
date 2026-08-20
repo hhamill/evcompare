@@ -1,6 +1,6 @@
 import { FIELDS } from "./fields.js?v=4";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=7";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=11";
+import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=12";
 import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=2";
 
 const AUTO_COMPARE_THRESHOLD = 5;
@@ -217,6 +217,16 @@ function sortCars(cars, sortKey) {
   return [...withValue, ...withoutValue];
 }
 
+// "Compare all" in the detail modal's Similar Vehicles section: replaces whatever's
+// currently selected (not additive — a fresh start, per the request) with this car plus
+// its similar-vehicle matches, then jumps straight to the compare view.
+function compareAllSimilar(ids) {
+  state.compareSet = new Set(ids);
+  state.view = "compare";
+  closeModal();
+  renderAll();
+}
+
 function toggleCompare(id, shouldAdd) {
   if (shouldAdd) {
     if (state.compareSet.size >= MAX_COMPARE) {
@@ -245,6 +255,7 @@ function openDetail(car, { historyMode = "push" } = {}) {
       },
       allCars: state.cars,
       onSelectCar: nextCar => openDetail(nextCar),
+      onCompareAll: compareAllSimilar,
     });
   };
   renderModal();

@@ -204,6 +204,8 @@ function renderSimilarSection(anchor, allCars) {
   const matches = findSimilarCars(anchor, allCars, { limit: 4 });
   if (matches.length === 0) return "";
 
+  const compareAllIds = [anchor.id, ...matches.map(m => m.car.id)];
+
   const tiles = matches.map(({ car, diff }) => {
     const priceDeltaText = fmtPriceDelta(diff.priceDelta);
     const rangeDeltaText = fmtRangeDelta(diff.rangeDelta);
@@ -234,14 +236,17 @@ function renderSimilarSection(anchor, allCars) {
 
   return `
     <div class="modal-section similar-section">
-      <h4>Similar Vehicles</h4>
+      <div class="similar-section-header">
+        <h4>Similar Vehicles</h4>
+        <button id="compareAllBtn" class="btn btn-sm btn-primary" data-ids="${compareAllIds.join(",")}">Compare all (${compareAllIds.length})</button>
+      </div>
       <p class="similar-hint">Close matches on price and specs — click one to compare it in this view.</p>
       <div class="similar-grid">${tiles}</div>
     </div>
   `;
 }
 
-export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCars, onSelectCar }) {
+export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCars, onSelectCar, onCompareAll }) {
   const groups = {};
   for (const field of FIELDS) {
     if (field.key === "msrp") continue;
@@ -286,5 +291,10 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
         if (target) onSelectCar(target);
       });
     });
+  }
+
+  const compareAllBtn = body.querySelector("#compareAllBtn");
+  if (compareAllBtn && onCompareAll) {
+    compareAllBtn.addEventListener("click", () => onCompareAll(compareAllBtn.dataset.ids.split(",")));
   }
 }

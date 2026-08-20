@@ -451,7 +451,11 @@ input { font-family: inherit; }
   margin: 28px -28px -28px; padding: 20px 28px 28px;
   background: var(--bg-card); border-top: 1px solid var(--border);
 }
-.similar-section h4 { color: var(--accent); }
+.similar-section h4 { color: var(--accent); margin-bottom: 0; }
+.similar-section-header {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px 14px;
+  flex-wrap: wrap; margin-bottom: 8px;
+}
 
 /* ---------- Scrollbars ---------- */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
