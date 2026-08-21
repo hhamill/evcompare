@@ -76,6 +76,7 @@ const el = {
   modalBody: document.getElementById("modalBody"),
   modalCloseBtn: document.getElementById("modalCloseBtn"),
   themeToggleBtn: document.getElementById("themeToggleBtn"),
+  brandHome: document.getElementById("brandHome"),
 };
 
 // Cycles auto (follow system) -> light -> dark -> auto. Applied as early as possible (before
@@ -158,6 +159,17 @@ function bindGlobalEvents() {
 
   el.clearCompareBtn.addEventListener("click", () => {
     state.compareSet.clear();
+    state.view = "results";
+    renderAll();
+    leaveCompareUrl();
+  });
+
+  // The one universal escape hatch: closes any open modal, drops back to the results
+  // view, and resets the URL to "/" regardless of what it currently is — including an
+  // invalid/unmatched deep link (e.g. a typo'd car slug), which nothing else in the nav
+  // gives you a direct way out of.
+  el.brandHome.addEventListener("click", () => {
+    closeModal({ updateHistory: false });
     state.view = "results";
     renderAll();
     leaveCompareUrl();
