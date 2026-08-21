@@ -137,9 +137,11 @@ function pageFor(car) {
   const title = `${car.modelYear} ${car.make} ${car.model} ${car.trim}`;
   const url = canonicalUrl(car);
   const summary = summaryLine(car);
+  // Doesn't restate the site name here — the title suffix and og:site_name already carry that,
+  // and "compare...EVs...EV Compare" back to back read as redundant when actually spoken aloud.
   const description = summary
-    ? `${title}: ${summary}. Compare specs against other EVs on EV Compare.`
-    : `${title} specs, price, and comparison on EV Compare.`;
+    ? `${title}: ${summary}. Full specs and side-by-side comparisons.`
+    : `${title}: full specs, price, and comparisons.`;
   const similar = findSimilarCars(car, cars, { limit: 4 });
   const ld = jsonLdFor(car, url, similar);
   const breadcrumbLd = breadcrumbLdFor(car, url);
@@ -163,7 +165,7 @@ function pageFor(car) {
 <meta property="og:url" content="${esc(url)}" />
 <meta property="og:image" content="${esc(ogImage)}" />
 <meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:height" content="600" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(title)}" />

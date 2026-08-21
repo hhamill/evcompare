@@ -183,52 +183,55 @@ if (mode === "icon") {
   const w = 8 * px, h = 12 * px;
   drawBoltIcon(ctx, (300 - w) / 2, (300 - h) / 2, px);
 } else if (mode === "og") {
+  // 1200x600 (2:1) rather than 1200x630 (1.91:1) — still squarely within the standard OG/
+  // Twitter range (Twitter's own docs prefer 2:1 for summary_large_image), just shorter so the
+  // content fills the frame instead of floating in a lot of dark empty space top-to-bottom.
   canvas.width = 1200;
-  canvas.height = 630;
+  canvas.height = 600;
 
   ctx.fillStyle = "#0b0d12";
-  ctx.fillRect(0, 0, 1200, 630);
+  ctx.fillRect(0, 0, 1200, 600);
 
   // Retro horizon glow — a few violet bars narrowing toward a vanishing point, filling the
   // gap between the title and the cars. Kept well clear of the tagline text below the cars
   // (no grid lines crossing that zone) so it reads as atmosphere, not clutter.
   const horizonBars = [
-    [430, 170, 340, 6, "#221839"],
-    [470, 178, 260, 6, "#2c1e4a"],
-    [510, 186, 180, 6, "#38255c"],
-    [550, 194, 100, 6, "#48306f"],
+    [430, 122, 340, 6, "#221839"],
+    [470, 130, 260, 6, "#2c1e4a"],
+    [510, 138, 180, 6, "#38255c"],
+    [550, 146, 100, 6, "#48306f"],
   ];
   for (const [x, y, w, h, color] of horizonBars) {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, w, h);
   }
   ctx.fillStyle = "#1c2540";
-  ctx.fillRect(0, 445, 1200, 2);
+  ctx.fillRect(0, 369, 1200, 2);
 
-  const px = 10;
-  const carAX = 130, carBX = 770, carY = 240;
+  const px = 11;
+  const carAX = 110, carBX = 760, carY = 190;
   const carW = CAR_RIGHT[0].length * px, carH = CAR_RIGHT.length * px;
 
   ctx.fillStyle = "rgba(0,0,0,0.35)";
   ctx.beginPath();
-  ctx.ellipse(carAX + carW / 2, carY + carH + 24, 150, 16, 0, 0, Math.PI * 2);
+  ctx.ellipse(carAX + carW / 2, carY + carH + 22, 155, 16, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.beginPath();
-  ctx.ellipse(carBX + carW / 2, carY + carH + 24, 150, 16, 0, 0, Math.PI * 2);
+  ctx.ellipse(carBX + carW / 2, carY + carH + 22, 155, 16, 0, 0, Math.PI * 2);
   ctx.fill();
 
   drawSprite(ctx, CAR_RIGHT, carAX, carY, px);
   drawSprite(ctx, CAR_LEFT, carBX, carY, px);
-  drawBoltGlow(ctx, (carAX + carW + carBX) / 2, carY + carH / 2, 10);
+  drawBoltGlow(ctx, (carAX + carW + carBX) / 2, carY + carH / 2, 11);
 
   ctx.textAlign = "center";
   ctx.fillStyle = "#eef1f6";
   ctx.font = "800 64px -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif";
-  ctx.fillText("EV COMPARE", 600, 130);
+  ctx.fillText("EV COMPARE", 600, 100);
 
   ctx.fillStyle = "#9aa4b6";
   ctx.font = "500 28px -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif";
-  ctx.fillText("Filter and compare electric vehicles side by side", 600, 545);
+  ctx.fillText("Filter and compare electric vehicles side by side", 600, 505);
 } else if (mode === "header") {
   // A small standalone composition for the topbar, not a crop of the wide "og" scene — the two
   // cars there are spaced out for a 1200-wide banner (roughly 4.5:1 just for the pair), so
