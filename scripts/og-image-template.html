@@ -45,29 +45,37 @@ const COLORS = {
   b: "#5aa2ff",   // car B body (--accent-2)
   d: "#3a6fc4",   // car B shadow
   l: "#b9d6ff",   // car B highlight
-  W: "#eef1f6",   // window
+  W: "#eef1f6",   // near window (windshield side)
+  V: "#8fb8cc",   // far window (rear glass, slightly darker/duller)
+  X: "#ffffff",   // window reflection accent
   K: "#4a5164",   // tire (mid-gray — visible against the dark background)
   k: "#9aa4b6",   // hubcap highlight
   H: "#fff3b0",   // headlight
   R: "#ff6b6b",   // taillight
 };
 
-// 24 wide x 12 tall, facing RIGHT (headlight at the far column). Deliberately blocky/stepped
-// (flat tiers, right-angle corners) rather than a smooth curve, to read as 8-bit rather than
-// just a small rounded blob.
+// 30 wide x 15 tall, facing RIGHT (headlight at the far column). Second pass at this sprite —
+// the original 24x12 version read as too pointy/triangular (the roof-to-hood and hood-to-nose
+// transitions were single-step tapers). This one uses a proper stepped "shoulder" (two width
+// tiers between the cabin and the full-width body) for a rounder silhouette, a two-tone window
+// (near/far glass) with a reflection pixel, and a door-line panel break, closer to how a hand-
+// drawn 8-bit car sprite actually breaks up its panels rather than one flat block of body color.
 const CAR_RIGHT = [
-  "........LLLLLL..........",
-  "........LWWWWL..........",
-  "......BBLWWWWLBB........",
-  "......BBBBBBBBBBB.......",
-  "....BBBBBBBBBBBBBBB.....",
-  "....BBBBBBBBBBBBBBBBBB..",
-  "..RDBBBBBBBBBBBBBBBBBBHH",
-  "..RDBBBBBBBBBBBBBBBBBBHH",
-  "..DDBBBBBBBBBBBBBBBBBBDD",
-  "..DDDDDDDDDDDDDDDDDDDDDD",
-  ".KKKKK............KKKKK.",
-  ".KKkKK............KKkKK.",
+  "..........LLLLLLLL............",
+  ".........BVVVVBWWWB...........",
+  ".........BVVVVBWXWB...........",
+  ".......BBBBBBBBBBBBBB.........",
+  ".....BBBBBBBBBBBBBBBBBBB......",
+  "..RBBBBBBBBBBBBBBBBBBBBBBBBBH.",
+  "..RBBBBBBBBBBBBBBDBBBBBBBBBBH.",
+  "..RBBBBBBBBBBBBBBDBBBBBBBBBBH.",
+  "...BBBBBBBBBBBBBBBBBBBBBBBBB..",
+  "...DDDDDDDDDDDDDDDDDDDDDDDDD..",
+  "...DDDDDDDDDDDDDDDDDDDDDDDDD..",
+  "....KKKKKKK.........KKKKKKK...",
+  "....K.kkk.K.........K.kkk.K...",
+  "....K.kkk.K.........K.kkk.K...",
+  "....KKKKKKK.........KKKKKKK...",
 ];
 
 function mirror(row) { return row.split("").reverse().join(""); }
@@ -90,21 +98,38 @@ function drawSprite(ctx, grid, ox, oy, px) {
   }
 }
 
+const BOLT_SHAPE = [
+  "..LL",
+  ".LL.",
+  "LLLL",
+  "..LL",
+  ".LL.",
+  "LL..",
+];
+
 function drawBolt(ctx, ox, oy, px, color) {
-  const bolt = [
-    "..LL",
-    ".LL.",
-    "LLLL",
-    "..LL",
-    ".LL.",
-    "LL..",
-  ];
-  for (let y = 0; y < bolt.length; y++) {
-    for (let x = 0; x < bolt[y].length; x++) {
-      if (bolt[y][x] === ".") continue;
+  for (let y = 0; y < BOLT_SHAPE.length; y++) {
+    for (let x = 0; x < BOLT_SHAPE[y].length; x++) {
+      if (BOLT_SHAPE[y][x] === ".") continue;
       ctx.fillStyle = color;
       ctx.fillRect(ox + x * px, oy + y * px, px, px);
     }
+  }
+}
+
+// Same proven zigzag as drawBolt, drawn three times at decreasing size and increasing
+// brightness (outer orange -> mid yellow -> white core), centered on one point — a layered
+// glow instead of one flat color. (cx, cy) is the shape's visual center, not a top-left corner.
+function drawBoltGlow(ctx, cx, cy, basePx) {
+  const layers = [
+    { mult: 1.4, color: "#ff9900" },
+    { mult: 1.15, color: "#ffe066" },
+    { mult: 1.0, color: "#ffffff" },
+  ];
+  const gw = BOLT_SHAPE[0].length, gh = BOLT_SHAPE.length;
+  for (const { mult, color } of layers) {
+    const px = basePx * mult;
+    drawBolt(ctx, cx - (gw * px) / 2, cy - (gh * px) / 2, px, color);
   }
 }
 
@@ -161,24 +186,40 @@ if (mode === "icon") {
   canvas.width = 1200;
   canvas.height = 630;
 
-  const grad = ctx.createRadialGradient(600, 180, 60, 600, 315, 900);
-  grad.addColorStop(0, "#161f1a");
-  grad.addColorStop(1, "#0b0d12");
-  ctx.fillStyle = grad;
+  ctx.fillStyle = "#0b0d12";
   ctx.fillRect(0, 0, 1200, 630);
 
-  const px = 12;
+  // Retro horizon glow — a few violet bars narrowing toward a vanishing point, filling the
+  // gap between the title and the cars. Kept well clear of the tagline text below the cars
+  // (no grid lines crossing that zone) so it reads as atmosphere, not clutter.
+  const horizonBars = [
+    [430, 170, 340, 6, "#221839"],
+    [470, 178, 260, 6, "#2c1e4a"],
+    [510, 186, 180, 6, "#38255c"],
+    [550, 194, 100, 6, "#48306f"],
+  ];
+  for (const [x, y, w, h, color] of horizonBars) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, w, h);
+  }
+  ctx.fillStyle = "#1c2540";
+  ctx.fillRect(0, 445, 1200, 2);
+
+  const px = 10;
+  const carAX = 130, carBX = 770, carY = 240;
+  const carW = CAR_RIGHT[0].length * px, carH = CAR_RIGHT.length * px;
+
   ctx.fillStyle = "rgba(0,0,0,0.35)";
   ctx.beginPath();
-  ctx.ellipse(130 + 12 * px, 400, 150, 16, 0, 0, Math.PI * 2);
+  ctx.ellipse(carAX + carW / 2, carY + carH + 24, 150, 16, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.beginPath();
-  ctx.ellipse(700 + 12 * px, 400, 150, 16, 0, 0, Math.PI * 2);
+  ctx.ellipse(carBX + carW / 2, carY + carH + 24, 150, 16, 0, 0, Math.PI * 2);
   ctx.fill();
 
-  drawSprite(ctx, CAR_RIGHT, 130, 230, px);
-  drawSprite(ctx, CAR_LEFT, 700, 230, px);
-  drawBolt(ctx, 555, 250, px, "#eef1f6");
+  drawSprite(ctx, CAR_RIGHT, carAX, carY, px);
+  drawSprite(ctx, CAR_LEFT, carBX, carY, px);
+  drawBoltGlow(ctx, (carAX + carW + carBX) / 2, carY + carH / 2, 10);
 
   ctx.textAlign = "center";
   ctx.fillStyle = "#eef1f6";
@@ -209,20 +250,27 @@ if (mode === "icon") {
   canvas.width = 512;
   canvas.height = 512;
 
-  const grad = ctx.createRadialGradient(256, 220, 40, 256, 256, 360);
-  grad.addColorStop(0, "#161f1a");
-  grad.addColorStop(1, "#0b0d12");
-  ctx.fillStyle = grad;
+  ctx.fillStyle = "#0b0d12";
   ctx.fillRect(0, 0, 512, 512);
+  const horizonBars = [
+    [156, 132, 200, 4, "#221839"],
+    [176, 138, 160, 4, "#2c1e4a"],
+    [196, 144, 120, 4, "#38255c"],
+    [216, 150, 80, 4, "#48306f"],
+  ];
+  for (const [x, y, w, h, color] of horizonBars) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, w, h);
+  }
 
   // Just car A, centered, for a larger brand-mark asset (README/social-profile scale — the
   // browser-tab favicon itself stays the simple bolt SVG already in index.html, since a full
   // sprite this detailed won't read at 16-32px).
-  const px = 14;
+  const px = 11;
   const w = CAR_RIGHT[0].length * px;
   const h = CAR_RIGHT.length * px;
   const ox = (512 - w) / 2;
-  const oy = (512 - h) / 2 - 10;
+  const oy = (512 - h) / 2 - 6;
 
   ctx.fillStyle = "rgba(0,0,0,0.35)";
   ctx.beginPath();
