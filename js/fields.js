@@ -33,7 +33,7 @@ function fmtNum(value, formatter) {
 // `compareBetter: "higher" | "lower"` marks a numeric field as having a genuinely
 // uncontroversial "better" direction, so the compare table can highlight the winning
 // value(s) — used only where there's broad consensus (price, range, charging speed,
-// 0-60, horsepower, USB ports, self-driving cost). Left unset for fields that are more
+// 0-60, horsepower, USB ports, hands-free driving cost). Left unset for fields that are more
 // about tradeoffs than a clear win (doors, wheel size, cargo volume, ground clearance,
 // tow capacity, passenger count) — those stay neutral rather than implying a value
 // judgment that doesn't hold for every shopper.
@@ -98,8 +98,8 @@ export const FIELDS = [
     format: v => fmtNum(v, n => `${roundTo(n, 0)}`) },
   { key: "usbPortsTotal", label: "USB Ports (total)", group: "Tech & Safety", type: "range", step: 1, compareBetter: "higher", get: c => c.techFeatures?.usbPorts?.total,
     format: v => fmtNum(v, n => `${roundTo(n, 0)}`) },
-  { key: "selfDriving", label: "Self-Driving Capability", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.selfDriving?.available },
-  { key: "selfDrivingCost", label: "Self-Driving Subscription", group: "Tech & Safety", type: "range", step: 1, compareBetter: "lower", get: c => c.driverAssist?.selfDriving?.subscriptionUsdPerMonth,
+  { key: "handsFreeDriving", label: "Hands-Free Driving", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.handsFreeDriving?.available },
+  { key: "handsFreeDrivingCost", label: "Hands-Free Driving Subscription", group: "Tech & Safety", type: "range", step: 1, compareBetter: "lower", get: c => c.driverAssist?.handsFreeDriving?.subscriptionUsdPerMonth,
     format: v => fmtNum(v, n => (roundTo(n, 0) === 0 ? "Included" : `$${roundTo(n, 0)}/mo`)) },
   { key: "collisionAvoidanceAutoBrake", label: "Collision Avoidance Auto-Brake", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.collisionAvoidanceAutoBrake },
   { key: "laneKeepAssist", label: "Lane Keep Assist", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.laneKeepAssist },

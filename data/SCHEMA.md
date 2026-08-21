@@ -50,10 +50,10 @@ Each entry in `evs.json` is one **trim** of one model (a single model year, e.g.
     "usbPorts": { "typeC": 4, "typeA": 0, "total": 4 }
   },
   "driverAssist": {
-    "selfDriving": {
-      "available": true,
-      "name": "Full Self-Driving (Supervised)",
-      "subscriptionUsdPerMonth": 99
+    "handsFreeDriving": {
+      "available": true,                    // true if the system lets you take hands off the wheel under at least some real conditions (even if geo-limited or highway-only for now) — the "if," not the "where." Distinct from adaptiveCruiseControl below, which covers hands-on Level 2 systems (BMW Driving Assistant Professional, Porsche InnoDrive, etc.) that never go hands-free.
+      "name": "BlueCruise",
+      "subscriptionUsdPerMonth": 49.99
     },
     "collisionAvoidanceAutoBrake": true,
     "laneKeepAssist": true,

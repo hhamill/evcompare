@@ -1,4 +1,4 @@
-import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=5";
+import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=6";
 import { findSimilarCars } from "./similar.js?v=5";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
@@ -60,7 +60,7 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
     }).join("");
 
     const badges = [];
-    if (car.driverAssist?.selfDriving?.available) badges.push("Self-Driving");
+    if (car.driverAssist?.handsFreeDriving?.available) badges.push("Hands-Free Driving");
     if (car.isThreeRow) badges.push("3-Row");
     if (car.allWheelDriveAvailable) badges.push("AWD Avail.");
 
