@@ -69,7 +69,7 @@ function summaryLine(car) {
   return parts.join(" · ");
 }
 
-function jsonLdFor(car, url) {
+function jsonLdFor(car, url, similar) {
   const additionalProperty = [];
   const addProp = (name, value, unit) => {
     if (!isReal(value)) return;
@@ -108,11 +108,6 @@ function jsonLdFor(car, url) {
   }
   if (car.onSaleDate) ld.releaseDate = car.onSaleDate;
 
-  // Reuses the app's own similarity algorithm (the same one behind the "Similar Vehicles"
-  // section and "Compare all" button) rather than a fixed comparison page per pair — there's
-  // no shareable URL for an arbitrary comparison, but every car already has a small, real,
-  // meaningful set of similar cars we can point to.
-  const similar = findSimilarCars(car, cars, { limit: 4 });
   if (similar.length) {
     ld.isSimilarTo = similar.map(({ car: c }) => ({
       "@type": "Car",
@@ -145,8 +140,10 @@ function pageFor(car) {
   const description = summary
     ? `${title}: ${summary}. Compare specs against other EVs on EV Compare.`
     : `${title} specs, price, and comparison on EV Compare.`;
-  const ld = jsonLdFor(car, url);
+  const similar = findSimilarCars(car, cars, { limit: 4 });
+  const ld = jsonLdFor(car, url, similar);
   const breadcrumbLd = breadcrumbLdFor(car, url);
+  const ogImage = `${SITE_BASE_URL}/assets/og-image.png`;
 
   return `<!doctype html>
 <html lang="en">
@@ -156,6 +153,7 @@ function pageFor(car) {
 <title>${esc(title)} — Specs &amp; Price | ${SITE_NAME}</title>
 <meta name="description" content="${esc(description)}" />
 <meta name="robots" content="index,follow" />
+<meta name="theme-color" content="#4ee08a" />
 <link rel="canonical" href="${esc(url)}" />
 
 <meta property="og:type" content="product" />
@@ -163,10 +161,14 @@ function pageFor(car) {
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(description)}" />
 <meta property="og:url" content="${esc(url)}" />
+<meta property="og:image" content="${esc(ogImage)}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:description" content="${esc(description)}" />
+<meta name="twitter:image" content="${esc(ogImage)}" />
 
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 <script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
@@ -186,6 +188,11 @@ function pageFor(car) {
 <noscript>
   <h1>${esc(title)}</h1>
   <p>${esc(summary)}</p>
+  <p><a href="/">&larr; All EVs on ${esc(SITE_NAME)}</a></p>
+  ${similar.length ? `<p>Similar vehicles:</p>
+  <ul>
+${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.modelYear} ${c.make} ${c.model} ${c.trim}`)}</a></li>`).join("\n")}
+  </ul>` : ""}
 </noscript>
 
 <div class="app">
@@ -330,7 +337,7 @@ function main() {
   mkdirSync(DIST, { recursive: true });
 
   // Copy the existing static site as-is, except index.html gets homepage JSON-LD injected.
-  for (const item of ["404.html", "css", "js", "data"]) {
+  for (const item of ["404.html", "css", "js", "data", "assets"]) {
     cpSync(path.join(ROOT, item), path.join(DIST, item), { recursive: true });
   }
   writeFileSync(path.join(DIST, "index.html"), buildHomepage());

@@ -1,0 +1,90 @@
+<!--
+  Source template for assets/og-image.png (the site-wide Open Graph / Twitter Card / Discord
+  unfurl image). Not part of the build — this is a one-time hand-authored asset, regenerated
+  manually when the branding changes, not on every deploy.
+
+  To regenerate: edit this file, then run (no npm dependencies needed, just local Chrome):
+
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --hide-scrollbars --window-size=1200,630 \
+      --screenshot="assets/og-image.png" \
+      "file://$(pwd)/scripts/og-image-template.html"
+
+  1200x630 is the standard OG image size (1.91:1), which is also what Twitter's
+  summary_large_image card and Discord's embed expect.
+-->
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  html, body {
+    margin: 0; padding: 0; width: 1200px; height: 630px;
+    background: radial-gradient(circle at 18% 15%, #161f1a 0%, #0b0d12 55%), #0b0d12;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+  }
+  .wrap {
+    width: 1200px; height: 630px;
+    display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+    padding: 0 90px;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .bolt {
+    font-size: 96px;
+    line-height: 1;
+    margin-bottom: 28px;
+    filter: drop-shadow(0 0 40px rgba(78,224,138,0.45));
+  }
+  .name {
+    font-size: 76px;
+    font-weight: 800;
+    color: #eef1f6;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px 0;
+  }
+  .name span { color: #4ee08a; }
+  .tagline {
+    font-size: 32px;
+    color: #9aa4b6;
+    margin: 0 0 40px 0;
+    max-width: 820px;
+    line-height: 1.4;
+  }
+  .stats {
+    display: flex;
+    gap: 36px;
+  }
+  .stat {
+    background: #161a23;
+    border: 1px solid #232838;
+    border-radius: 14px;
+    padding: 18px 28px;
+    font-size: 24px;
+    color: #eef1f6;
+    font-weight: 600;
+  }
+  .stat b { color: #4ee08a; font-weight: 800; }
+  .grid-glow {
+    position: absolute;
+    right: -120px; top: -120px;
+    width: 560px; height: 560px;
+    background: radial-gradient(circle, rgba(78,224,138,0.18) 0%, rgba(78,224,138,0) 70%);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="grid-glow"></div>
+    <div class="bolt">⚡</div>
+    <div class="name">EV <span>Compare</span></div>
+    <div class="tagline">Filter and compare electric vehicles by price, range, charging speed, and dozens of other specs.</div>
+    <div class="stats">
+      <div class="stat">Price &amp; range</div>
+      <div class="stat">Charging speed</div>
+      <div class="stat">Side-by-side specs</div>
+    </div>
+  </div>
+</body>
+</html>
