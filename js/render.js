@@ -7,15 +7,41 @@ function fieldByKey(key) {
   return FIELDS.find(f => f.key === key);
 }
 
+// Car data is hand-researched from external sources rather than programmatically validated,
+// so it isn't safe to assume it never contains characters that would break out of the
+// innerHTML/attribute context it's interpolated into below. Mirrors scripts/prerender.mjs's
+// own esc() helper, which already does this for the static/prerendered pages — this closes
+// the same gap for the client-rendered path everyone actually sees and interacts with.
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[c]));
+}
+
+// Only allow http(s) links to render as actual <a href>s — a manufacturer/review link
+// should never resolve to a javascript: URL or similar, and this also catches malformed
+// values (missing scheme, stray whitespace) that aren't real absolute URLs at all.
+function safeHref(url) {
+  if (typeof url !== "string") return null;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:" ? url : null;
+  } catch {
+    return null;
+  }
+}
+
 function fmtVal(field, value) {
-  if (field.format) return field.format(value);
-  if (value === undefined || value === null || value === "") return "—";
-  if (typeof value === "boolean") return value ? "Yes" : "No";
-  return String(value);
+  let out;
+  if (field.format) out = field.format(value);
+  else if (value === undefined || value === null || value === "") out = "—";
+  else if (typeof value === "boolean") out = value ? "Yes" : "No";
+  else out = String(value);
+  return esc(out);
 }
 
 export function carTitle(car) {
-  return `${car.make} ${car.model}`;
+  return `${esc(car.make)} ${esc(car.model)}`;
 }
 
 export function renderCardGrid(container, cars, { compareSet, onToggleCompare, onOpenDetail }) {
@@ -44,7 +70,7 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
           <div class="ev-card-icon">${bodyIcon(car.bodyStyle)}</div>
           <div>
             <div class="ev-card-title">${carTitle(car)}</div>
-            <div class="ev-card-trim">${car.modelYear} · ${car.trim}</div>
+            <div class="ev-card-trim">${car.modelYear} · ${esc(car.trim)}</div>
           </div>
         </div>
         <div class="ev-card-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
@@ -89,11 +115,11 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
   const headRow = document.createElement("tr");
   headRow.innerHTML = `<th></th>` + cars.map(car => `
     <th class="compare-col-header">
-      ${onRemove ? `<button class="compare-col-remove" data-id="${car.id}" aria-label="Remove">&times;</button>` : ""}
+      ${onRemove ? `<button class="compare-col-remove" data-id="${esc(car.id)}" aria-label="Remove">&times;</button>` : ""}
       <div class="compare-col-title"><span class="compare-col-icon">${bodyIcon(car.bodyStyle)}</span> ${carTitle(car)}</div>
-      <div class="compare-col-trim">${car.modelYear} · ${car.trim}</div>
+      <div class="compare-col-trim">${car.modelYear} · ${esc(car.trim)}</div>
       <div class="compare-col-price${bestPrice !== null && car.msrp !== bestPrice ? " compare-col-price-not-cheapest" : ""}">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
-      ${onOpenDetail ? `<button class="btn btn-sm compare-col-view-btn" data-id="${car.id}">View details</button>` : ""}
+      ${onOpenDetail ? `<button class="btn btn-sm compare-col-view-btn" data-id="${esc(car.id)}">View details</button>` : ""}
     </th>
   `).join("");
   thead.appendChild(headRow);
@@ -166,8 +192,10 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
   const linkRow = document.createElement("tr");
   linkRow.innerHTML = `<th>Links</th>` + cars.map(car => {
     const links = [];
-    if (car.links?.review) links.push(`<a href="${car.links.review}" target="_blank" rel="noopener">Review</a>`);
-    if (car.links?.manufacturerSpec) links.push(`<a href="${car.links.manufacturerSpec}" target="_blank" rel="noopener">Specs</a>`);
+    const review = safeHref(car.links?.review);
+    const spec = safeHref(car.links?.manufacturerSpec);
+    if (review) links.push(`<a href="${esc(review)}" target="_blank" rel="noopener">Review</a>`);
+    if (spec) links.push(`<a href="${esc(spec)}" target="_blank" rel="noopener">Specs</a>`);
     return `<td>${links.join(" ") || "—"}</td>`;
   }).join("");
   tbody.appendChild(linkRow);
@@ -219,12 +247,12 @@ function renderSimilarSection(anchor, allCars) {
     diff.lost.slice(0, 2).forEach(label => badges.push(`<span class="diff-badge diff-loss">− ${label}</span>`));
 
     return `
-      <div class="similar-card" data-id="${car.id}">
+      <div class="similar-card" data-id="${esc(car.id)}">
         <div class="similar-card-top">
           <span class="similar-card-icon">${bodyIcon(car.bodyStyle)}</span>
           <div>
             <div class="similar-card-title">${carTitle(car)}</div>
-            <div class="similar-card-trim">${car.modelYear} · ${car.trim}</div>
+            <div class="similar-card-trim">${car.modelYear} · ${esc(car.trim)}</div>
           </div>
         </div>
         <div class="similar-card-price">
@@ -240,7 +268,7 @@ function renderSimilarSection(anchor, allCars) {
     <div class="modal-section similar-section">
       <div class="similar-section-header">
         <h4>Similar Vehicles</h4>
-        <button id="compareAllBtn" class="btn btn-sm btn-primary" data-ids="${compareAllIds.join(",")}">Compare all (${compareAllIds.length})</button>
+        <button id="compareAllBtn" class="btn btn-sm btn-primary" data-ids="${esc(compareAllIds.join(","))}">Compare all (${compareAllIds.length})</button>
       </div>
       <p class="similar-hint">Close matches on price and specs — click one to compare it in this view.</p>
       <div class="similar-grid">${tiles}</div>
@@ -267,18 +295,22 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
   }).join("");
 
   const links = [];
-  if (car.links?.manufacturerSpec) links.push(`<a href="${car.links.manufacturerSpec}" target="_blank" rel="noopener">Manufacturer specs ↗</a>`);
-  if (car.links?.review) links.push(`<a href="${car.links.review}" target="_blank" rel="noopener">Review ↗</a>`);
-  if (car.links?.epaWindowSticker) links.push(`<a href="${car.links.epaWindowSticker}" target="_blank" rel="noopener">EPA window sticker ↗</a>`);
-  if (car.range?.source) links.push(`<a href="${car.range.source}" target="_blank" rel="noopener">fueleconomy.gov ↗</a>`);
+  const manufacturerSpecHref = safeHref(car.links?.manufacturerSpec);
+  const reviewHref = safeHref(car.links?.review);
+  const epaStickerHref = safeHref(car.links?.epaWindowSticker);
+  const rangeSourceHref = safeHref(car.range?.source);
+  if (manufacturerSpecHref) links.push(`<a href="${esc(manufacturerSpecHref)}" target="_blank" rel="noopener">Manufacturer specs ↗</a>`);
+  if (reviewHref) links.push(`<a href="${esc(reviewHref)}" target="_blank" rel="noopener">Review ↗</a>`);
+  if (epaStickerHref) links.push(`<a href="${esc(epaStickerHref)}" target="_blank" rel="noopener">EPA window sticker ↗</a>`);
+  if (rangeSourceHref) links.push(`<a href="${esc(rangeSourceHref)}" target="_blank" rel="noopener">fueleconomy.gov ↗</a>`);
 
   body.innerHTML = `
     <div class="modal-title">${bodyIcon(car.bodyStyle)} ${carTitle(car)}</div>
-    <div class="modal-trim">${car.modelYear} · ${car.trim}</div>
+    <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
     <div class="modal-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
     ${sections}
     ${links.length ? `<div class="modal-section"><h4>Links</h4><div class="modal-links">${links.join("")}</div></div>` : ""}
-    ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${car.notes}</p></div>` : ""}
+    ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}
     <div class="modal-actions">
       <button id="modalCompareBtn" class="btn ${inCompare ? "btn-ghost" : "btn-primary"}">${inCompare ? "Remove from compare" : "Add to compare"}</button>
     </div>

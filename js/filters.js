@@ -1,5 +1,14 @@
 import { FIELDS, GROUP_ORDER } from "./fields.js?v=5";
 
+// Mirrors js/render.js's own esc() (and scripts/prerender.mjs's) — enum values here are
+// car data (make, body style, drivetrain, etc.), hand-researched rather than validated, so
+// they get the same treatment before landing in innerHTML/attribute context.
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[c]));
+}
+
 // Enum filter lists longer than this get a "Show all" toggle + type-to-filter box
 // instead of an inner scrollbar, so the sidebar only ever scrolls at the outer level.
 const ENUM_VISIBLE_COUNT = 6;
@@ -213,7 +222,7 @@ export function renderFilterSidebar(container, domains, filterState, onChange) {
           const row = document.createElement("label");
           row.className = "checkbox-row";
           const checked = selectedSet.has(val);
-          row.innerHTML = `<input type="checkbox" data-key="${field.key}" data-val="${String(val).replace(/"/g, '&quot;')}" ${checked ? "checked" : ""}/> <span>${val}</span>`;
+          row.innerHTML = `<input type="checkbox" data-key="${field.key}" data-val="${esc(val)}" ${checked ? "checked" : ""}/> <span>${esc(val)}</span>`;
           row.querySelector("input").addEventListener("change", e => {
             if (e.target.checked) selectedSet.add(val);
             else selectedSet.delete(val);
@@ -273,7 +282,7 @@ export function renderFilterSidebar(container, domains, filterState, onChange) {
           const pct = v => ((v - domain.min) / (domain.max - domain.min || 1)) * 100;
           fill.style.left = pct(min) + "%";
           fill.style.width = Math.max(0, pct(max) - pct(min)) + "%";
-          valuesEl.innerHTML = `<span>${fmt(min)}</span><span>${fmt(max)}</span>`;
+          valuesEl.innerHTML = `<span>${esc(fmt(min))}</span><span>${esc(fmt(max))}</span>`;
 
           // Both thumbs are two overlapping <input>s at the same track position; whichever is
           // later in the DOM (max) always wins clicks by default, so once min catches up to max
