@@ -410,3 +410,12 @@ User shared a reference SVG (a much more detailed 8-bit car-vs-car scene from an
 - **Redundant description text** — "Compare specs against other EVs on EV Compare" repeats "compare"/"EV(s)" back to back. Rather than renaming the brand (user floated "EVCompare" as one option but wasn't committed to it), just dropped the trailing "on EV Compare" from the description body entirely — the title suffix and `og:site_name` already carry that attribution, so the description didn't need to repeat it. Now reads e.g. "...0–60 in 4.9s. Full specs and side-by-side comparisons."
 
 **Verified**: regenerated `og-image.png` at the new 1200×600 size, rebuilt `dist/`, confirmed a sample car page's `<meta name="description">` and `og:image:height` both reflect the fix.
+
+# TODO: Added GoatCounter analytics (2026-08-21)
+
+User asked what a GoatCounter integration would require and whether it involved anything sensitive going into the (public) repo. It doesn't — the embed is a single async `<script data-goatcounter="...">` tag with no API key/secret; the site code in the URL is meant to be public (any visitor's browser already sends it, same category as a GA tracking ID).
+
+- Added the script tag to `index.html` right after the stylesheet link, and to `scripts/prerender.mjs`'s `pageFor()` template in the same spot — the usual two-copy pattern for anything in `<head>`. The homepage's prerendered output doesn't need a separate edit since `buildHomepage()` injects JSON-LD into the real `index.html` source rather than maintaining its own copy, so it picked the tag up automatically.
+- GoatCounter dashboard privacy is a separate, off-by-default setting on their end (not a repo concern) — adding the script doesn't publish the stats anywhere.
+
+**Verified**: rebuilt `dist/` clean, grepped both the homepage and a sample car page's output for the script tag to confirm both carry it.

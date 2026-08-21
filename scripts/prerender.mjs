@@ -185,6 +185,8 @@ function pageFor(car) {
   })(window.location);
 </script>
 <link rel="stylesheet" href="/css/styles.css?v=15" />
+<script data-goatcounter="https://evcompare.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 <noscript>
