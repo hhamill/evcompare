@@ -19,6 +19,7 @@ import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync } fr
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { BASE_PATH, carPath } from "../js/router.js";
+import { findSimilarCars } from "../js/similar.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -106,7 +107,33 @@ function jsonLdFor(car, url) {
     };
   }
   if (car.onSaleDate) ld.releaseDate = car.onSaleDate;
+
+  // Reuses the app's own similarity algorithm (the same one behind the "Similar Vehicles"
+  // section and "Compare all" button) rather than a fixed comparison page per pair — there's
+  // no shareable URL for an arbitrary comparison, but every car already has a small, real,
+  // meaningful set of similar cars we can point to.
+  const similar = findSimilarCars(car, cars, { limit: 4 });
+  if (similar.length) {
+    ld.isSimilarTo = similar.map(({ car: c }) => ({
+      "@type": "Car",
+      name: `${c.modelYear} ${c.make} ${c.model} ${c.trim}`,
+      url: canonicalUrl(c),
+    }));
+  }
   return ld;
+}
+
+function breadcrumbLdFor(car, url) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: SITE_NAME, item: `${SITE_BASE_URL}/` },
+      { "@type": "ListItem", position: 2, name: car.make },
+      { "@type": "ListItem", position: 3, name: car.model },
+      { "@type": "ListItem", position: 4, name: `${car.modelYear} ${car.trim}`, item: url },
+    ],
+  };
 }
 
 // ---------- per-car page ----------
@@ -119,6 +146,7 @@ function pageFor(car) {
     ? `${title}: ${summary}. Compare specs against other EVs on EV Compare.`
     : `${title} specs, price, and comparison on EV Compare.`;
   const ld = jsonLdFor(car, url);
+  const breadcrumbLd = breadcrumbLdFor(car, url);
 
   return `<!doctype html>
 <html lang="en">
@@ -141,6 +169,7 @@ function pageFor(car) {
 <meta name="twitter:description" content="${esc(description)}" />
 
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
+<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
 <script>
@@ -249,6 +278,40 @@ function pageFor(car) {
 `;
 }
 
+// ---------- homepage ----------
+
+function homepageJsonLd() {
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    url: `${SITE_BASE_URL}/`,
+    description: "Filter and compare electric vehicles by price, range, charging speed, and dozens of other specs.",
+  };
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "All EVs on EV Compare",
+    numberOfItems: cars.length,
+    itemListElement: cars.map((car, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: canonicalUrl(car),
+      name: `${car.modelYear} ${car.make} ${car.model} ${car.trim}`,
+    })),
+  };
+  return `<script type="application/ld+json">${JSON.stringify(website)}</script>\n<script type="application/ld+json">${JSON.stringify(itemList)}</script>`;
+}
+
+// Injects the homepage's JSON-LD into the source index.html right before </head> rather than
+// copying it byte-for-byte — the only place this build step adds content to a file that isn't
+// wholly generated from scratch, so keep this to a single, easy-to-audit string replace.
+function buildHomepage() {
+  const src = readFileSync(path.join(ROOT, "index.html"), "utf8");
+  if (!src.includes("</head>")) throw new Error("index.html has no </head> to inject JSON-LD before");
+  return src.replace("</head>", `${homepageJsonLd()}\n</head>`);
+}
+
 // ---------- sitemap / robots ----------
 
 function buildSitemap(urls) {
@@ -266,10 +329,11 @@ function main() {
   if (existsSync(DIST)) rmSync(DIST, { recursive: true, force: true });
   mkdirSync(DIST, { recursive: true });
 
-  // Copy the existing static site as-is.
-  for (const item of ["index.html", "404.html", "css", "js", "data"]) {
+  // Copy the existing static site as-is, except index.html gets homepage JSON-LD injected.
+  for (const item of ["404.html", "css", "js", "data"]) {
     cpSync(path.join(ROOT, item), path.join(DIST, item), { recursive: true });
   }
+  writeFileSync(path.join(DIST, "index.html"), buildHomepage());
 
   const urls = [`${SITE_BASE_URL}${BASE_PATH}/`];
   let count = 0;
