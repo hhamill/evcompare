@@ -6,6 +6,12 @@ import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=
 const AUTO_COMPARE_THRESHOLD = 5;
 const MAX_COMPARE = 6;
 
+// Mirrors scripts/prerender.mjs's SITE_NAME/title format so the tab title matches whether a
+// car page is reached via a hard load (prerendered <title>) or client-side "navigation" (pushState).
+const SITE_NAME = "EV Compare";
+const HOME_TITLE = "EV Compare — Find and compare electric vehicles";
+const titleFor = car => `${car.modelYear} ${car.make} ${car.model} ${car.trim} — Specs & Price | ${SITE_NAME}`;
+
 const state = {
   cars: [],
   domains: {},
@@ -261,12 +267,14 @@ function openDetail(car, { historyMode = "push" } = {}) {
   renderModal();
   el.modalBody.scrollTop = 0;
   el.detailModal.hidden = false;
+  document.title = titleFor(car);
   if (historyMode === "push") history.pushState({ carId: car.id }, "", carPath(car));
 }
 
 function closeModal({ updateHistory = true } = {}) {
   el.detailModal.hidden = true;
   state.activeDetailCar = null;
+  document.title = HOME_TITLE;
   // Replace, not push: closing shouldn't grow the stack either, so "back" from wherever
   // you land next still goes to wherever you were before you opened a car at all.
   if (updateHistory && location.pathname !== homePath()) history.replaceState({}, "", homePath());

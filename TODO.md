@@ -332,6 +332,8 @@ User bought `evcompare.org`, set it as the GitHub Pages custom domain (verified:
 
 **Update (later same day)**: user switched Pages source to GitHub Actions, pushed — the first real deploy ran successfully. Hit one snag getting there: GitHub Pages auto-commits a `CNAME` file to the repo whenever a custom domain is set/changed in Settings, so `origin/main` had diverged (3 GitHub-authored "Create/Delete/Create CNAME" commits) from the local work. Zero file overlap between the two histories (GitHub only ever touched `CNAME`; local work never did), so `git merge origin/main` resolved with no conflicts. Site is now live at `evcompare.org`.
 
+**Update (2026-08-21)**: user resolved the `www.evcompare.org` DNS setup on their own (outside this session — no code/config changes here). Both apex and `www` are now covered; the "not done yet" `www` notes above and in the prerendering section are closed out.
+
 # TODO: More JSON-LD — homepage catalog, breadcrumbs, similar-vehicle links (2026-08-21)
 
 Follow-up once the site was confirmed live: asked whether there was other worthwhile structured data beyond the per-car `Car`/`Offer` blocks already shipped. Landed on three additions, all cheap because they reuse data/logic the app already has — skipped a fourth option (dedicated comparison pages with their own JSON-LD) because it's a real feature gap, not a structured-data gap: the compare view has no shareable URL at all (pure client-side `Set` + localStorage), and prerendering every possible car combination isn't remotely tractable at 149 cars.
@@ -419,3 +421,12 @@ User asked what a GoatCounter integration would require and whether it involved 
 - GoatCounter dashboard privacy is a separate, off-by-default setting on their end (not a repo concern) — adding the script doesn't publish the stats anywhere.
 
 **Verified**: rebuilt `dist/` clean, grepped both the homepage and a sample car page's output for the script tag to confirm both carry it.
+
+# TODO: Tab title didn't update on client-side "navigation" (2026-08-21)
+
+User noticed: clicking a car opens the detail modal and silently pushState's its URL, but the tab title stays "EV Compare" — only a hard load of that same URL (e.g. the prerendered page) showed the real title. `document.title` was never touched anywhere in `js/app.js`; the correct-looking title on a direct load was coming entirely from the prerendered `<title>` tag, not any client-side logic.
+
+- `js/app.js`: added `HOME_TITLE`/`titleFor(car)`, mirroring `scripts/prerender.mjs`'s `SITE_NAME` + per-car title format exactly (`"{year} {make} {model} {trim} — Specs & Price | EV Compare"`) so the title reads identically whether the page was hard-loaded or reached via client nav. `openDetail()` sets `document.title = titleFor(car)`; `closeModal()` sets it back to `HOME_TITLE` — both cover every call site (clicking a car, "similar vehicle" jumps, browser back/forward via `popstate`, closing the modal by backdrop/Escape/back button).
+- Bumped `app.js` v25→v26 in both `index.html` and `scripts/prerender.mjs`.
+
+**Verified**: served the site locally, clicked into a car and confirmed the tab title changed to the car's title, then closed the modal and confirmed it reverted to the homepage title — checked via the actual tab title, not just visual inspection. Rebuilt `dist/` clean.
