@@ -188,6 +188,23 @@ if (mode === "icon") {
   ctx.fillStyle = "#9aa4b6";
   ctx.font = "500 28px -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif";
   ctx.fillText("Filter and compare electric vehicles side by side", 600, 545);
+} else if (mode === "header") {
+  // A small standalone composition for the topbar, not a crop of the wide "og" scene — the two
+  // cars there are spaced out for a 1200-wide banner (roughly 4.5:1 just for the pair), so
+  // cropping down to an icon-ish ratio would either clip most of both cars or shrink them to
+  // nothing. Same CAR_RIGHT/CAR_LEFT/bolt data and drawSprite/drawBolt functions as "og" though
+  // — just laid out tighter, at a smaller px scale, so it can't visually diverge from the real
+  // artwork. Transparent background so it sits naturally on the topbar in either theme.
+  document.body.style.background = "transparent"; // override the shared dark <body> rule above
+  const px = 3;
+  const carW = CAR_RIGHT[0].length * px, carH = CAR_RIGHT.length * px; // 72 x 36
+  const gap = 16;
+  canvas.width = carW * 2 + gap + 8;
+  canvas.height = carH + 8;
+
+  drawSprite(ctx, CAR_RIGHT, 4, 4, px);
+  drawSprite(ctx, CAR_LEFT, 4 + carW + gap, 4, px);
+  drawBolt(ctx, 4 + carW + gap / 2 - 6, 4 + carH / 2 - 9, 3, "#eef1f6");
 } else {
   canvas.width = 512;
   canvas.height = 512;
