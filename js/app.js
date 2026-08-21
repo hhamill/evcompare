@@ -11,6 +11,29 @@ const MAX_COMPARE = 6;
 const SITE_NAME = "EV Compare";
 const HOME_TITLE = "EV Compare — Find and compare electric vehicles";
 const titleFor = car => `${car.modelYear} ${car.make} ${car.model} ${car.trim} — Specs & Price | ${SITE_NAME}`;
+const compareTitle = n => `Comparing ${n} vehicle${n === 1 ? "" : "s"} — ${SITE_NAME}`;
+
+// Compare has no prerendered pages of its own (not remotely tractable to prerender every
+// combination of 149 cars), so these paths are cosmetic/analytics-only — a direct hard load
+// of "/compare" just shows the homepage, same as any other unrecognized path. What they do
+// give us: a distinct URL + title per entry point, and (via trackPageview below) a distinct
+// GoatCounter pageview, so "clicked Compare" and "clicked Compare all from similar cars" show
+// up as different traffic instead of both looking like plain homepage views.
+const COMPARE_PATH = "/compare";
+const COMPARE_FROM_SIMILAR_PATH = "/compare/similar";
+
+// GoatCounter's count.js auto-fires one pageview on initial load using whatever
+// location/title were current at that point; it has no idea about our client-side view
+// changes afterwards. Calling count() with no args re-reads the *current* location/title,
+// so as long as this runs after we've already updated the URL/title, it records a proper
+// virtual pageview for that transition. No-ops quietly if the script hasn't loaded yet
+// (slow network) or was blocked (ad blockers commonly block analytics scripts) — this is
+// best-effort visibility, not something the app depends on.
+function trackPageview() {
+  if (window.goatcounter && typeof window.goatcounter.count === "function") {
+    window.goatcounter.count();
+  }
+}
 
 const state = {
   cars: [],
@@ -130,12 +153,14 @@ function bindGlobalEvents() {
   el.backToResultsBtn.addEventListener("click", () => {
     state.view = "results";
     renderAll();
+    leaveCompareUrl();
   });
 
   el.clearCompareBtn.addEventListener("click", () => {
     state.compareSet.clear();
     state.view = "results";
     renderAll();
+    leaveCompareUrl();
   });
 
   el.compareBarClearBtn.addEventListener("click", () => {
@@ -146,6 +171,7 @@ function bindGlobalEvents() {
   el.compareBarViewBtn.addEventListener("click", () => {
     state.view = "compare";
     renderAll();
+    enterCompareUrl(COMPARE_PATH);
   });
 
   el.modalCloseBtn.addEventListener("click", closeModal);
@@ -223,14 +249,30 @@ function sortCars(cars, sortKey) {
   return [...withValue, ...withoutValue];
 }
 
+// Replace (not push) for entering/leaving compare — like closeModal's own history writes,
+// this is a mode switch on the current page rather than a drill-down navigation, so it
+// shouldn't grow the back-button stack or need popstate to know how to reconstruct it.
+function enterCompareUrl(path) {
+  history.replaceState({}, "", path);
+  document.title = compareTitle(state.compareSet.size);
+  trackPageview();
+}
+
+function leaveCompareUrl() {
+  history.replaceState({}, "", homePath());
+  document.title = HOME_TITLE;
+  trackPageview();
+}
+
 // "Compare all" in the detail modal's Similar Vehicles section: replaces whatever's
 // currently selected (not additive — a fresh start, per the request) with this car plus
 // its similar-vehicle matches, then jumps straight to the compare view.
 function compareAllSimilar(ids) {
   state.compareSet = new Set(ids);
   state.view = "compare";
-  closeModal();
+  closeModal({ updateHistory: false });
   renderAll();
+  enterCompareUrl(COMPARE_FROM_SIMILAR_PATH);
 }
 
 function toggleCompare(id, shouldAdd) {
@@ -268,7 +310,10 @@ function openDetail(car, { historyMode = "push" } = {}) {
   el.modalBody.scrollTop = 0;
   el.detailModal.hidden = false;
   document.title = titleFor(car);
-  if (historyMode === "push") history.pushState({ carId: car.id }, "", carPath(car));
+  if (historyMode === "push") {
+    history.pushState({ carId: car.id }, "", carPath(car));
+    trackPageview();
+  }
 }
 
 function closeModal({ updateHistory = true } = {}) {
@@ -277,7 +322,10 @@ function closeModal({ updateHistory = true } = {}) {
   document.title = HOME_TITLE;
   // Replace, not push: closing shouldn't grow the stack either, so "back" from wherever
   // you land next still goes to wherever you were before you opened a car at all.
-  if (updateHistory && location.pathname !== homePath()) history.replaceState({}, "", homePath());
+  if (updateHistory && location.pathname !== homePath()) {
+    history.replaceState({}, "", homePath());
+    trackPageview();
+  }
 }
 
 // Shows/hides the header's left/right nav buttons based on whether the table actually
