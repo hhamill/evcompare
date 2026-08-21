@@ -1,7 +1,7 @@
 import { FIELDS } from "./fields.js?v=5";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=7";
 import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=13";
-import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=2";
+import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=4";
 
 const AUTO_COMPARE_THRESHOLD = 5;
 const MAX_COMPARE = 6;
@@ -80,7 +80,7 @@ function initTheme() {
 initTheme();
 
 async function init() {
-  const res = await fetch("data/evs.json");
+  const res = await fetch("/data/evs.json");
   const cars = await res.json();
   state.cars = cars;
   state.domains = computeDomains(cars);

@@ -11,7 +11,23 @@
 - **Lexus RZ** (both trims): filled in 0-60 (7.2s/4.1s), DC fast-charge (150kW), ground clearance (7.9in), and seat features. Still open: tow capacity and max folded-cargo — a general RZ cargo figure was found but didn't line up with this entry's already-sourced rear-cargo number closely enough to trust, so left null rather than risk a mismatched figure.
 - **VinFast VF8 (both trims) + VF9**: filled in DC/L2 charging speeds, wheel sizes (VF8 only), and cargo figures (rear/frunk for VF8, rear/max/frunk for VF9) that had been null since the original bulk-research pass.
 
-Remaining gaps across these 13 entries are now down to 25, concentrated in seat-comfort booleans (heated steering wheel/rear seats, ventilated seats) and a few tow-capacity/ground-clearance figures — the same category of "genuinely hard to source per-trim" data that's a known, accepted gap throughout the rest of this dataset. Not planning to chase those further without a specific reason to.
+Remaining gaps across these 13 entries are now down to 25, concentrated in seat-comfort booleans (heated steering wheel/rear seats, ventilated seats) and a few tow-capacity/ground-clearance figures — the same category of "genuinely hard to source per-trim" data that's a known, accepted gap throughout the rest of this dataset. Itemized below so this list is checkable without re-running the audit script:
+
+- [ ] Mercedes-Benz EQE SUV 500 4MATIC (2025) — `seats.heatedSteeringWheel`, `seats.heatedRearSeats`
+- [ ] Mercedes-Benz EQS SUV 450+ (2025) — `towCapacityLbs`
+- [ ] Mercedes-Benz EQS Sedan 450+ (2025) — `towCapacityLbs`, `groundClearanceIn`
+- [ ] Mercedes-Benz EQS Sedan 580 4MATIC (2025) — `towCapacityLbs`, `groundClearanceIn`
+- [ ] Volvo EC40 Single Motor Extended Range RWD (2026) — `seats.ventilatedAvailable`, `seats.heatedSteeringWheel`, `seats.heatedRearSeats`
+- [ ] Volvo EC40 Twin Motor AWD (2026) — `seats.ventilatedAvailable`, `seats.heatedSteeringWheel`, `seats.heatedRearSeats`
+- [ ] Lexus RZ 350e FWD (2026) — `cargo.maxCubicFeet`, `towCapacityLbs`
+- [ ] Lexus RZ 550e F SPORT AWD (2026) — `cargo.maxCubicFeet`, `towCapacityLbs`
+- [ ] VinFast VF8 Eco AWD (2025) — `seats.ventilatedAvailable`, `seats.heatedRearSeats`
+- [ ] VinFast VF8 Plus AWD (2025) — `seats.ventilatedAvailable`, `seats.heatedRearSeats`
+- [ ] VinFast VF9 Plus AWD (2025) — `wheelSizesIn`, `seats.ventilatedAvailable`, `seats.heatedSteeringWheel`, `seats.heatedRearSeats`
+
+Not planning to chase these further without a specific reason to — each was already searched for this session and came up empty on a reliable, US-specific, real source (not a vague/conflicting claim). Only fill one in if a genuinely solid source turns up; check the box and note the source when it does.
+
+Also still open from the Volvo EC40 research above: **Volvo EX40 is a real, distinct, on-sale model (~$55,150 starting) that isn't in this dataset at all** — worth adding as its own model in a future batch (not a fix to an existing entry).
 
 **2026-08-20**: Introduced a **three-state convention for numeric fields** — `null` (unknown/unresearched), `"N/A"` (the concept doesn't apply to this vehicle), `"Pending"` (known to be coming, just not published yet) — prompted by the user asking whether a pickup's missing cargo cubic feet (genuinely N/A) was being represented any differently from an unresearched cupholder count (genuinely unknown). It wasn't — both were plain `null` and rendered as the same "—" everywhere. Fixed:
 - `js/fields.js`: added an `fmtNum(value, formatter)` helper and routed all 14 range-type fields' `format` functions through it, so `"N/A"`/`"Pending"` display as themselves instead of falling through to number formatting (which would've produced `NaN`/garbage).
@@ -275,3 +291,41 @@ Added a "Compare all (N)" button next to the "Similar Vehicles" heading in the d
 Naturally hidden when there are none — `renderSimilarSection` in `js/render.js` already returns nothing at all (no section, no button) when `findSimilarCars` comes back empty, so no extra condition was needed. In practice that's a rare case at our current catalog size (128 cars) — the similarity search's own fallback logic widens its net until it finds matches, so it's more of a defensive guarantee than something you'll normally see.
 
 Verified: pre-selected an unrelated car for comparison, then opened a different car's detail and hit "Compare all" — the compare grid showed exactly the 5 cars from that button (the anchor + its 4 matches), with the earlier unrelated selection correctly gone rather than appended. Works the same on mobile.
+
+# TODO: Static prerendering + GitHub Actions deploy (2026-08-21)
+
+Semi-productionalizing: user wants a custom domain (`evcompare.org`, leaning `.org` over `.net` for the faint "impartial reference" connotation) and per-car pages that expose real content + schema.org structured data to crawlers/AI agents, since the site is a pure client-rendered SPA today (crawlers without JS just see an empty shell).
+
+**What shipped:**
+- **`scripts/prerender.mjs`** — a dependency-free Node build script (stdlib only, no npm install, no headless browser) that reads `data/evs.json` and writes one real static HTML page per trim at the same path `js/router.js`'s client-side router already uses (`/{modelYear}/{model-slug}/{trim-slug}/`). Each page gets a real `<title>`/meta description, Open Graph + Twitter Card tags, a `<link rel="canonical">`, and a `<script type="application/ld+json">` block using schema.org's `Car` type (brand/model/bodyType/fuelType/driveWheelConfiguration/seating/doors, an `Offer` with price when known, and an `additionalProperty` list for EV-specific specs like range/battery/charging speed/tow/ground clearance). Also emits `sitemap.xml` and `robots.txt` at the root.
+  - Reuses `carPath`/`BASE_PATH` directly from `js/router.js` (imported, not reimplemented) so the URL scheme can never drift between the client router and the prerender step.
+  - Respects the `null`/`"N/A"`/`"Pending"` three-state convention from `data/SCHEMA.md` — sentinel values are silently omitted from the structured data and the summary line rather than ever being emitted as a fake number (e.g. Porsche Cayenne Electric's `"Pending"` EPA range doesn't show up as a JSON-LD `additionalProperty` at all).
+  - The only thing to change when moving from `hhamill.github.io/evcompare` onto the `evcompare.org` custom domain is the `SITE_BASE_URL` constant at the top of the script — same migration list as the existing `<base>`/`BASE_PATH`/`pathSegmentsToKeep` trio already documented in the code.
+- **Human visitors get the full interactive app, not a static page** — each prerendered file includes the exact same `<div class="app">` shell and `<script type="module" src="js/app.js">` as `index.html`. `app.js`'s `init()` already calls `carForPath(state.pathIndex, location.pathname)` on load (this was already built for the deep-linking/back-button work earlier), so it opens the right car's detail modal automatically once JS runs — no prerender-specific client code needed. A `<noscript>` block covers the rare crawler that doesn't execute JS at all.
+- **Bug found + fixed while testing this**: `js/router.js`'s `carForPath` did an exact string match against `location.pathname`, but a prerendered page's directory-index URL naturally has a trailing slash (`.../gt-awd/`) while `carPath()` never produces one (`.../gt-awd`) — silent lookup miss, app fell back to showing the homepage instead of the car. Fixed by normalizing a trailing slash off the pathname before the lookup in `carForPath` itself, so it's fixed for real users manually typing a trailing-slash URL too, not just prerendered pages. Bumped `router.js` v2→v3, `app.js` v23→v24 (its own import line changed).
+- **`.github/workflows/deploy.yml`** — switches Pages deployment from "deploy from a branch" to the GitHub Actions deploy method: checkout → run the prerender script (no npm install step, since there are zero dependencies) → `actions/upload-pages-artifact` on `dist/` → `actions/deploy-pages`. Triggers on push to `main` or manually. This means `dist/`'s generated output never gets committed to the repo — it's built fresh on every deploy and only exists in the published artifact.
+- **`package.json`** (new, minimal) — just `{"type": "module"}` + a `prerender` script alias. Needed only so Node treats the existing `.js` files as ES modules when importing `router.js` from the prerender script (browsers already know this via `<script type="module">`; Node needs it spelled out). No dependencies, no lockfile.
+- **`.gitignore`** (new) — excludes `dist/`, `.DS_Store`, `node_modules/`.
+
+**Verified**: ran `node scripts/prerender.mjs` locally (149 pages + sitemap.xml/robots.txt generated), spot-checked the Mach-E GT page's JSON-LD is valid/well-formed JSON, confirmed a `"Pending"`-valued field (Porsche Cayenne Electric's EPA range) is correctly omitted rather than faked, and served `dist/` locally at the `/evcompare/` path to confirm end-to-end: the static `<title>`/meta tags are present in the raw HTML immediately, and the full interactive app boots and opens the correct car's detail modal automatically.
+
+**Still open / not done yet:**
+- The GitHub Actions workflow hasn't been run for real yet — needs the repo's Pages source switched from "Deploy from a branch" to "GitHub Actions" in Settings → Pages before the first push will actually deploy anything.
+- No `og:image`/`twitter:image` — this project has never stored per-car photos (uses emoji body-style icons instead), so link previews will show title/description text only, no image. Not fixed; would need either real car images or a generated placeholder card per trim.
+- `www.evcompare.org` isn't configured (user is deferring this) — apex-only for now, which is what everything below already assumes.
+
+# TODO: Custom domain migration + drop BASE_PATH entirely (2026-08-21)
+
+User bought `evcompare.org`, set it as the GitHub Pages custom domain (verified: "DNS valid for primary"), and the 4 A + 4 AAAA records at `@` were already correctly pointed at GitHub's IPs. Rather than just flipping the 4 `BASE_PATH`-related constants per the migration plan from the prerendering work above, went further and **removed the whole base-path/`<base href>` mechanism**, since the site is now committed to root deployment (no more `hhamill.github.io/evcompare/` project-page path to support) — one less class of "remember to flip 4 constants" bug going forward, and it also fully closes out the original deep-link/404.html asset-resolution issue rather than just working around it.
+
+**What changed:**
+- **`index.html`**: removed `<base href>` entirely; `css/styles.css` → `/css/styles.css`, `js/app.js` → `/js/app.js` (both now root-relative, i.e. always resolve against the domain root regardless of what `location.pathname` is or becomes via `history.replaceState`).
+- **`js/app.js`**: `fetch("data/evs.json")` → `fetch("/data/evs.json")` (same root-relative reasoning — this was the one other relative resource reference in the codebase, easy to miss since it's not an HTML tag).
+- **`js/router.js`**: `BASE_PATH` set to `""` permanently (root deploy is now the only supported target without further changes) — comment rewritten to explain it no longer affects asset loading, only generated route paths.
+- **`404.html`**: `pathSegmentsToKeep` → `0`.
+- **`scripts/prerender.mjs`**: `SITE_BASE_URL` → `https://evcompare.org`; removed the per-page `<base href>` and made its embedded css/js references root-relative too, matching `index.html`.
+- Bumped versions: `router.js` v3→v4, `app.js` v24→v25 (both its own import-line change and the fetch-path change).
+
+**Verified**: regenerated `dist/` clean, confirmed `sitemap.xml`/JSON-LD/canonical URLs all read `https://evcompare.org/...` with no `/evcompare` prefix anywhere, and served `dist/` locally at the domain root (no subpath) to check both critical paths — a prerendered deep-link page (`/2026/mustang-mach-e/gt-awd/`) opened the correct car's detail modal with zero console errors, and in-app client-side navigation (clicking "View details" from the card grid, no page reload) correctly pushed `/2024/zdx/a-spec-rwd` with no `/evcompare` prefix and no errors.
+
+**Not done yet**: the actual DNS `www` CNAME and Pages-source switch to GitHub Actions (see the two items just above) — this batch was purely the root-path code migration.

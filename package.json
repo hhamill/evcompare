@@ -1,0 +1,8 @@
+{
+  "name": "evcompare",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prerender": "node scripts/prerender.mjs"
+  }
+}

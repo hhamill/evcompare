@@ -1,10 +1,14 @@
 // Client-side path routing: /{modelYear}/{model-slug}/{trim-slug} maps to one car.
 //
-// If this site is deployed on a GitHub Pages *project* page (e.g. https://user.github.io/evcompare/),
-// set BASE_PATH to "/evcompare" (match your repo name) so generated links include it. Leave it ""
-// for a user/org root page (https://user.github.io/) or a custom domain at the root. If you change
-// this, also update `pathSegmentsToKeep` in 404.html to match (0 = root, 1 = one path segment kept).
-export const BASE_PATH = "/evcompare";
+// BASE_PATH only affects generated route paths (pushState targets, canonical URLs) — every actual
+// resource reference (css/js/fetch) in index.html and the prerendered pages is root-relative (a
+// leading "/"), not built from this constant, so there's no base-href juggling tied to this value
+// anymore. Leave "" for a domain/user-page root deploy (our actual deployment: evcompare.org). Only
+// set it back to "/evcompare" if this ever moves to a GitHub Pages *project* page again (e.g.
+// https://user.github.io/evcompare/ with no custom domain) — and if so, also restore root-relative
+// asset paths to be BASE_PATH-prefixed instead, and match `pathSegmentsToKeep` in 404.html (0 = root,
+// 1 = one path segment kept).
+export const BASE_PATH = "";
 
 function slugify(str) {
   return String(str)
@@ -33,7 +37,10 @@ export function buildCarPathIndex(cars) {
 }
 
 export function carForPath(pathIndex, pathname) {
-  return pathIndex.get(pathname) || null;
+  // carPath() never has a trailing slash, but a prerendered page's directory-index URL
+  // (".../gt-awd/") or a manually-typed one does — normalize so both match the same key.
+  const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  return pathIndex.get(normalized) || null;
 }
 
 export function homePath() {
