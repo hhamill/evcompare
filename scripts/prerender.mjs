@@ -173,7 +173,7 @@ function pageFor(car) {
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 <script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 8 12%22 shape-rendering=%22crispEdges%22><rect x=%224%22 y=%220%22 width=%223%22 height=%222%22 fill=%22%23fff3b0%22/><rect x=%227%22 y=%220%22 width=%221%22 height=%222%22 fill=%22%23e0a940%22/><rect x=%222%22 y=%222%22 width=%223%22 height=%222%22 fill=%22%23fff3b0%22/><rect x=%225%22 y=%222%22 width=%221%22 height=%222%22 fill=%22%23e0a940%22/><rect x=%220%22 y=%224%22 width=%227%22 height=%222%22 fill=%22%23fff3b0%22/><rect x=%227%22 y=%224%22 width=%221%22 height=%222%22 fill=%22%23e0a940%22/><rect x=%224%22 y=%226%22 width=%223%22 height=%222%22 fill=%22%23fff3b0%22/><rect x=%227%22 y=%226%22 width=%221%22 height=%222%22 fill=%22%23e0a940%22/><rect x=%222%22 y=%228%22 width=%223%22 height=%222%22 fill=%22%23fff3b0%22/><rect x=%225%22 y=%228%22 width=%221%22 height=%222%22 fill=%22%23e0a940%22/><rect x=%220%22 y=%2210%22 width=%223%22 height=%222%22 fill=%22%23fff3b0%22/><rect x=%223%22 y=%2210%22 width=%221%22 height=%222%22 fill=%22%23e0a940%22/></svg>" />
 <script>
   (function (l) {
     if (l.search[1] === "p" && l.search[2] === "=") {

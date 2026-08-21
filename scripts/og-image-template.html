@@ -108,12 +108,56 @@ function drawBolt(ctx, ox, oy, px, color) {
   }
 }
 
-const mode = location.hash === "#logo" ? "logo" : "og";
+// Standalone brand-mark bolt (favicon / topbar badge scale) — the same zigzag already proven
+// to read correctly as the small "vs" divider in the OG image (see `bolt` in drawBolt above),
+// just doubled in resolution (each cell -> 2x2) for more shading detail at this larger size.
+// 8 wide x 12 tall.
+const BOLT_ICON = [
+  "....FFFS",
+  "....FFFS",
+  "..FFFS..",
+  "..FFFS..",
+  "FFFFFFFS",
+  "FFFFFFFS",
+  "....FFFS",
+  "....FFFS",
+  "..FFFS..",
+  "..FFFS..",
+  "FFFS....",
+  "FFFS....",
+];
+const BOLT_ICON_COLORS = { ".": null, F: "#fff3b0", S: "#e0a940" };
+
+function drawBoltIcon(ctx, ox, oy, px) {
+  for (let y = 0; y < BOLT_ICON.length; y++) {
+    for (let x = 0; x < BOLT_ICON[y].length; x++) {
+      const c = BOLT_ICON_COLORS[BOLT_ICON[y][x]];
+      if (!c) continue;
+      ctx.fillStyle = c;
+      ctx.fillRect(ox + x * px, oy + y * px, px, px);
+    }
+  }
+}
+
+const mode = location.hash.slice(1) || "og";
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
-if (mode === "og") {
+if (mode === "icon") {
+  // Preview only, at large scale, on the same diagonal gradient the real .brand-mark badge
+  // uses — for checking legibility before deriving the actual SVG markup from BOLT_ICON.
+  canvas.width = 300;
+  canvas.height = 300;
+  const grad = ctx.createLinearGradient(0, 0, 300, 300);
+  grad.addColorStop(0, "#4ee08a");
+  grad.addColorStop(1, "#5aa2ff");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 300, 300);
+  const px = 300 / 16;
+  const w = 8 * px, h = 12 * px;
+  drawBoltIcon(ctx, (300 - w) / 2, (300 - h) / 2, px);
+} else if (mode === "og") {
   canvas.width = 1200;
   canvas.height = 630;
 
