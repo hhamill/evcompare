@@ -169,7 +169,14 @@ input { font-family: inherit; }
 .sidebar-close { display: none; }
 .sidebar-backdrop { display: none; }
 
-.content { flex: 1; min-width: 0; padding: 20px 24px 80px; }
+.content { flex: 1; min-width: 0; padding: 20px 24px; }
+/* Clearance so the floating compare-bar pill doesn't sit on top of the last row of
+   cards — scoped to the results view specifically, not .content as a whole, since the
+   compare view's own .compare-scroll is already a self-contained scroll region with its
+   own bounded height; adding this same bottom padding there just pushed the page's total
+   height past the viewport by a fixed amount, creating a second, near-useless outer
+   scrollbar alongside the real one. */
+#viewResults { padding-bottom: 80px; }
 
 /* ---------- Filter groups ---------- */
 .filter-group { margin-bottom: 6px; border-bottom: 1px solid var(--border-soft); }
