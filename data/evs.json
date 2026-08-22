@@ -38,7 +38,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 358,
-        "topSpeedMph": null
+        "topSpeedMph": 131
       },
       "charging": {
         "portType": "CCS1",
@@ -124,7 +124,7 @@
       "performance": {
         "zeroTo60Sec": 4.9,
         "horsepowerHp": 499,
-        "topSpeedMph": null
+        "topSpeedMph": 131
       },
       "charging": {
         "portType": "CCS1",
@@ -257,7 +257,7 @@
         "maxCubicFeet": 53.1,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 2200,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.audiusa.com/us/web/en/models/q4/q4-e-tron/2025/overview.html",
@@ -298,7 +298,7 @@
       "performance": {
         "zeroTo60Sec": 5,
         "horsepowerHp": 335,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "CCS1",
@@ -607,7 +607,7 @@
         "maxCubicFeet": 60.2,
         "frunkCubicFeet": 2.3
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 4400,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://media.audiusa.com/models/sq6-e-tron",
@@ -694,7 +694,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 1.8
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://media.audiusa.com/models/e-tron-gt-rs-e-tron-gt",
@@ -780,7 +780,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 1.8
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://media.audiusa.com/models/e-tron-gt-rs-e-tron-gt",
@@ -867,7 +867,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 3527,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/bmw-i-series/i4/bmw-i4-gran-coupe.html",
@@ -954,7 +954,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 3527,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/m-series/bmw-i4-m60/bmw-i4-m60-gran-coupe.html",
@@ -995,7 +995,7 @@
       "performance": {
         "zeroTo60Sec": 5.7,
         "horsepowerHp": 335,
-        "topSpeedMph": null
+        "topSpeedMph": 120
       },
       "charging": {
         "portType": "NACS",
@@ -1041,7 +1041,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 3307,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/bmw-i-series/i5/bmw-i5-overview.html",
@@ -1082,7 +1082,7 @@
       "performance": {
         "zeroTo60Sec": 3.6,
         "horsepowerHp": 593,
-        "topSpeedMph": null
+        "topSpeedMph": 143
       },
       "charging": {
         "portType": "NACS",
@@ -1128,7 +1128,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 4409,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/m-series/bmw-i5-m60/bmw-i5-m60xdrive-overview.html",
@@ -1169,7 +1169,7 @@
       "performance": {
         "zeroTo60Sec": 4.5,
         "horsepowerHp": 536,
-        "topSpeedMph": null
+        "topSpeedMph": 149
       },
       "charging": {
         "portType": "CCS1",
@@ -1735,7 +1735,7 @@
         "maxCubicFeet": 60.8,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 7,
       "links": {
         "manufacturerSpec": "https://www.cadillac.com/electric/lyriq",
@@ -1858,7 +1858,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 300,
-        "topSpeedMph": null
+        "topSpeedMph": 110
       },
       "charging": {
         "portType": "CCS1",
@@ -1945,7 +1945,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 300,
-        "topSpeedMph": null
+        "topSpeedMph": 110
       },
       "charging": {
         "portType": "CCS1",
@@ -2032,7 +2032,7 @@
       "performance": {
         "zeroTo60Sec": 3.7,
         "horsepowerHp": 615,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -2118,7 +2118,7 @@
       "performance": {
         "zeroTo60Sec": 3.7,
         "horsepowerHp": 615,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -2422,7 +2422,7 @@
         "maxCubicFeet": 56.3,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.chevrolet.com/electric/bolt-ev",
@@ -2507,7 +2507,7 @@
         "maxCubicFeet": 56.3,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.chevrolet.com/electric/bolt-ev",
@@ -2594,7 +2594,7 @@
         "maxCubicFeet": 57.2,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 1500,
       "groundClearanceIn": 6.4,
       "links": {
         "manufacturerSpec": "https://www.chevrolet.com/electric/previous-year/equinox-ev",
@@ -2680,7 +2680,7 @@
         "maxCubicFeet": 57.2,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 1500,
       "groundClearanceIn": 6.4,
       "links": {
         "manufacturerSpec": "https://www.chevrolet.com/electric/previous-year/equinox-ev",
@@ -2721,7 +2721,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 510,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "NACS",
@@ -2807,7 +2807,7 @@
       "performance": {
         "zeroTo60Sec": 4.5,
         "horsepowerHp": 754,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "NACS",
@@ -2892,7 +2892,7 @@
       "performance": {
         "zeroTo60Sec": 3.3,
         "horsepowerHp": 670,
-        "topSpeedMph": null
+        "topSpeedMph": 134
       },
       "charging": {
         "portType": "CCS1",
@@ -2937,7 +2937,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.dodge.com/charger.html",
@@ -3023,7 +3023,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.dodge.com/charger.html",
@@ -3109,7 +3109,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 4.48,
       "links": {
         "manufacturerSpec": "https://www.fiatusa.com/models/500e-red",
@@ -3150,7 +3150,7 @@
       "performance": {
         "zeroTo60Sec": 3.8,
         "horsepowerHp": 580,
-        "topSpeedMph": null
+        "topSpeedMph": 110
       },
       "charging": {
         "portType": "NACS",
@@ -3237,7 +3237,7 @@
       "performance": {
         "zeroTo60Sec": 3.8,
         "horsepowerHp": 580,
-        "topSpeedMph": null
+        "topSpeedMph": 110
       },
       "charging": {
         "portType": "NACS",
@@ -3370,7 +3370,7 @@
         "maxCubicFeet": 59.7,
         "frunkCubicFeet": 4.8
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 5.7,
       "links": {
         "manufacturerSpec": "https://www.ford.com/suvs/mach-e/models/select/",
@@ -3456,7 +3456,7 @@
         "maxCubicFeet": 59.1,
         "frunkCubicFeet": 4.8
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.ford.com/suvs/mach-e/models/premium/",
@@ -3543,7 +3543,7 @@
         "maxCubicFeet": 59.7,
         "frunkCubicFeet": 4.8
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 5.2,
       "links": {
         "manufacturerSpec": "https://www.ford.com/suvs/mach-e/models/gt/",
@@ -3584,7 +3584,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 1000,
-        "topSpeedMph": null
+        "topSpeedMph": 106
       },
       "charging": {
         "portType": "NACS",
@@ -3670,7 +3670,7 @@
       "performance": {
         "zeroTo60Sec": 4.5,
         "horsepowerHp": 605,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "NACS",
@@ -3755,7 +3755,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 645,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "NACS",
@@ -3883,7 +3883,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.genesis.com/us/en/electrified-g80/",
@@ -4182,7 +4182,7 @@
       "performance": {
         "zeroTo60Sec": 6.7,
         "horsepowerHp": 220,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "CCS1",
@@ -4223,14 +4223,14 @@
         "maxCubicFeet": 57.7,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 1500,
       "groundClearanceIn": 8,
       "links": {
         "manufacturerSpec": "https://automobiles.honda.com/prologue",
         "review": "https://www.caranddriver.com/honda/prologue",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Honda&baseModel=Prologue&srchtyp=ymm&pageno=1&rowLimit=50"
       },
-      "notes": "Built on GM's Ultium platform, sharing underpinnings with the Chevy Blazer EV and Cadillac Lyriq. No frunk — there's a small ~0.8 cu ft underfloor storage bin behind the rear cargo floor instead. Honda's 1,500 lb max tow rating appears tied to AWD/tow-package trims; it's unclear whether base FWD EX is tow-rated at all."
+      "notes": "Built on GM's Ultium platform, sharing underpinnings with the Chevy Blazer EV and Cadillac Lyriq. No frunk — there's a small ~0.8 cu ft underfloor storage bin behind the rear cargo floor instead. All Prologue trims — EX, Touring, and Elite, FWD or AWD — share the same 1,500 lb max tow rating."
     },
     {
       "id": "honda-prologue-2025-elite-awd",
@@ -4264,7 +4264,7 @@
       "performance": {
         "zeroTo60Sec": 6.4,
         "horsepowerHp": 300,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "CCS1",
@@ -4728,7 +4728,7 @@
         "maxCubicFeet": 86.9,
         "frunkCubicFeet": 2
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 3500,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-9",
@@ -4852,7 +4852,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 133,
-        "topSpeedMph": null
+        "topSpeedMph": 106
       },
       "charging": {
         "portType": "CCS1",
@@ -4938,7 +4938,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 201,
-        "topSpeedMph": null
+        "topSpeedMph": 106
       },
       "charging": {
         "portType": "CCS1",
@@ -5024,7 +5024,7 @@
       "performance": {
         "zeroTo60Sec": 3.6,
         "horsepowerHp": 650,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "CCS1",
@@ -5238,7 +5238,7 @@
         "maxCubicFeet": 46.7,
         "frunkCubicFeet": 1.8
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 2700,
       "groundClearanceIn": 6.1,
       "links": {
         "manufacturerSpec": "https://www.kia.com/us/en/ev6/specs-compare",
@@ -5750,7 +5750,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://pressroom.lexus.com/vehicle/2027-lexus-es-electric/",
@@ -5836,7 +5836,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://pressroom.lexus.com/vehicle/2027-lexus-es-electric/",
@@ -6094,7 +6094,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 10
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://lucidmotors.com/air-pure",
@@ -6182,7 +6182,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 10
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://lucidmotors.com/air-grand-touring",
@@ -6223,7 +6223,7 @@
       "performance": {
         "zeroTo60Sec": 3.4,
         "horsepowerHp": 828,
-        "topSpeedMph": null
+        "topSpeedMph": 155
       },
       "charging": {
         "portType": "NACS",
@@ -6311,7 +6311,7 @@
       "performance": {
         "zeroTo60Sec": 5.4,
         "horsepowerHp": 308,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "CCS1",
@@ -6445,7 +6445,7 @@
         "maxCubicFeet": 61.8,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/eqb/suv/eqb250w",
@@ -6486,7 +6486,7 @@
       "performance": {
         "zeroTo60Sec": 5.8,
         "horsepowerHp": 288,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "CCS1",
@@ -6532,7 +6532,7 @@
         "maxCubicFeet": 61.8,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/eqb/suv/eqb350w4",
@@ -6573,7 +6573,7 @@
       "performance": {
         "zeroTo60Sec": 4.7,
         "horsepowerHp": 402,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -6706,7 +6706,7 @@
         "maxCubicFeet": 55,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 3500,
       "groundClearanceIn": 6.5,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/class/eqe/suv",
@@ -6793,7 +6793,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/eqe/sedan/eqe350v",
@@ -6880,7 +6880,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/eqe/sedan/eqe500v4",
@@ -6921,7 +6921,7 @@
       "performance": {
         "zeroTo60Sec": 4.4,
         "horsepowerHp": 536,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -7054,7 +7054,7 @@
         "maxCubicFeet": 74.2,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 3500,
       "groundClearanceIn": 7.3,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/class/eqs/suv",
@@ -7141,7 +7141,7 @@
         "maxCubicFeet": 63,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/class/eqs/sedan",
@@ -7314,7 +7314,7 @@
         "maxCubicFeet": 59.7,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 1500,
       "groundClearanceIn": 6.3,
       "links": {
         "manufacturerSpec": "https://www.nissanusa.com/vehicles/discontinued/ariya.html",
@@ -7442,7 +7442,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 214,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "NACS",
@@ -7527,7 +7527,7 @@
       "performance": {
         "zeroTo60Sec": null,
         "horsepowerHp": 214,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "NACS",
@@ -7658,7 +7658,7 @@
         "maxCubicFeet": 38.7,
         "frunkCubicFeet": 1.2
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 2000,
       "groundClearanceIn": 5.9,
       "links": {
         "manufacturerSpec": "https://www.polestar.com/us/polestar-2/specifications/",
@@ -7744,7 +7744,7 @@
         "maxCubicFeet": 38.7,
         "frunkCubicFeet": 1.2
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 2000,
       "groundClearanceIn": 6.3,
       "links": {
         "manufacturerSpec": "https://www.polestar.com/us/polestar-2/specifications/",
@@ -8094,7 +8094,7 @@
         "maxCubicFeet": 54.2,
         "frunkCubicFeet": 0.5
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 3500,
       "groundClearanceIn": 6.5,
       "links": {
         "manufacturerSpec": "https://www.polestar.com/us/polestar-4-models/polestar-4-coupe/",
@@ -8222,7 +8222,7 @@
       "performance": {
         "zeroTo60Sec": 3.1,
         "horsepowerHp": 630,
-        "topSpeedMph": null
+        "topSpeedMph": 162
       },
       "charging": {
         "portType": "CCS1",
@@ -8355,7 +8355,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 3
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 5,
       "links": {
         "manufacturerSpec": "https://www.porsche.com/usa/models/taycan/taycan-range/",
@@ -8441,7 +8441,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 3
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": null,
       "links": {
         "manufacturerSpec": "https://www.porsche.com/usa/models/taycan/taycan-range/",
@@ -8482,7 +8482,7 @@
       "performance": {
         "zeroTo60Sec": 4.5,
         "horsepowerHp": 533,
-        "topSpeedMph": null
+        "topSpeedMph": 110
       },
       "charging": {
         "portType": "NACS",
@@ -8568,7 +8568,7 @@
       "performance": {
         "zeroTo60Sec": 2.6,
         "horsepowerHp": 1025,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "NACS",
@@ -8785,7 +8785,7 @@
         "maxCubicFeet": 79.4,
         "frunkCubicFeet": 5.2
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 4400,
       "groundClearanceIn": 9.6,
       "links": {
         "manufacturerSpec": "https://rivian.com/r2",
@@ -8957,7 +8957,7 @@
         "maxCubicFeet": 63.5,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 8.3,
       "links": {
         "manufacturerSpec": "https://www.subaru.com/vehicles/solterra/2025/specs-trim.html",
@@ -9043,7 +9043,7 @@
         "maxCubicFeet": 63.5,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 8.3,
       "links": {
         "manufacturerSpec": "https://www.subaru.com/vehicles/solterra/2025/specs-trim.html",
@@ -9084,7 +9084,7 @@
       "performance": {
         "zeroTo60Sec": 4.1,
         "horsepowerHp": 600,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "NACS",
@@ -9169,7 +9169,7 @@
       "performance": {
         "zeroTo60Sec": 2.6,
         "horsepowerHp": 845,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "NACS",
@@ -9727,7 +9727,7 @@
         "maxCubicFeet": 56.9,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 8.2,
       "links": {
         "manufacturerSpec": "https://www.toyota.com/bz/",
@@ -9812,7 +9812,7 @@
         "maxCubicFeet": 56.9,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 8.2,
       "links": {
         "manufacturerSpec": "https://www.toyota.com/bz/",
@@ -9853,7 +9853,7 @@
       "performance": {
         "zeroTo60Sec": 5.5,
         "horsepowerHp": 349,
-        "topSpeedMph": null
+        "topSpeedMph": 124
       },
       "charging": {
         "portType": "CCS1",
@@ -9939,7 +9939,7 @@
       "performance": {
         "zeroTo60Sec": 5.5,
         "horsepowerHp": 402,
-        "topSpeedMph": null
+        "topSpeedMph": 124
       },
       "charging": {
         "portType": "CCS1",
@@ -10025,7 +10025,7 @@
       "performance": {
         "zeroTo60Sec": 6.7,
         "horsepowerHp": 402,
-        "topSpeedMph": null
+        "topSpeedMph": 124
       },
       "charging": {
         "portType": "CCS1",
@@ -10277,7 +10277,7 @@
       "performance": {
         "zeroTo60Sec": 7.1,
         "horsepowerHp": 282,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "CCS1",
@@ -10359,7 +10359,7 @@
       "performance": {
         "zeroTo60Sec": 5.7,
         "horsepowerHp": 335,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "CCS1",
@@ -11134,7 +11134,7 @@
       "performance": {
         "zeroTo60Sec": 8.4,
         "horsepowerHp": 266,
-        "topSpeedMph": null
+        "topSpeedMph": 85
       },
       "charging": {
         "portType": "CCS1",
@@ -11265,7 +11265,7 @@
         "maxCubicFeet": 81.7,
         "frunkCubicFeet": 11.3
       },
-      "towCapacityLbs": null,
+      "towCapacityLbs": 7500,
       "groundClearanceIn": "N/A",
       "links": {
         "manufacturerSpec": "https://www.gmc.com/electric/hummer-ev/suv",
@@ -11306,7 +11306,7 @@
       "performance": {
         "zeroTo60Sec": 3.25,
         "horsepowerHp": 641,
-        "topSpeedMph": null
+        "topSpeedMph": 162
       },
       "charging": {
         "portType": "NACS",
@@ -11567,7 +11567,7 @@
       "performance": {
         "zeroTo60Sec": 4.6,
         "horsepowerHp": 579,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "CCS1",
@@ -11653,7 +11653,7 @@
       "performance": {
         "zeroTo60Sec": 6.6,
         "horsepowerHp": 268,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "NACS",
@@ -11738,7 +11738,7 @@
       "performance": {
         "zeroTo60Sec": 4.8,
         "horsepowerHp": 349,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "NACS",
@@ -11823,7 +11823,7 @@
       "performance": {
         "zeroTo60Sec": 4.5,
         "horsepowerHp": 435,
-        "topSpeedMph": null
+        "topSpeedMph": 143
       },
       "charging": {
         "portType": "NACS",
@@ -11908,7 +11908,7 @@
       "performance": {
         "zeroTo60Sec": 2.4,
         "horsepowerHp": 1139,
-        "topSpeedMph": null
+        "topSpeedMph": 162
       },
       "charging": {
         "portType": "NACS",
@@ -12164,7 +12164,7 @@
       "performance": {
         "zeroTo60Sec": 4.7,
         "horsepowerHp": 338,
-        "topSpeedMph": null
+        "topSpeedMph": 101
       },
       "charging": {
         "portType": "NACS",
@@ -12677,7 +12677,7 @@
       "performance": {
         "zeroTo60Sec": 4.4,
         "horsepowerHp": 444,
-        "topSpeedMph": null
+        "topSpeedMph": 125
       },
       "charging": {
         "portType": "NACS",
@@ -12763,7 +12763,7 @@
       "performance": {
         "zeroTo60Sec": 3.8,
         "horsepowerHp": 670,
-        "topSpeedMph": null
+        "topSpeedMph": 155
       },
       "charging": {
         "portType": "NACS",
