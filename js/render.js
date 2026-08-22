@@ -1,4 +1,4 @@
-import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=6";
+import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=7";
 import { findSimilarCars } from "./similar.js?v=5";
 import { carPath } from "./router.js?v=5";
 

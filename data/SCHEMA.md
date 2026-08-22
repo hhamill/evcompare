@@ -58,7 +58,8 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
     "maxDcKw": 250,
     "level2Kw": 11.5,
     "vehicleToLoad": false,          // V2L / bidirectional power outlet
-    "heatPump": true
+    "heatPump": true,
+    "nacsAdapter": { "available": true, "costUsd": 200 }  // CCS1 vehicles only — omit entirely for NACS-native ones, don't set to a false/null placeholder. costUsd: a number for a purchased adapter, 0 if included/standard, null if available but the manufacturer hasn't published a price yet (e.g. Subaru Solterra as of this research). available: false means the manufacturer has no approved adapter at all (e.g. VinFast, and the Audi Q4 e-tron specifically despite other Audi e-trons having one) — not "hasn't been researched."
   },
   "techFeatures": {
     "appleCarPlay": false,

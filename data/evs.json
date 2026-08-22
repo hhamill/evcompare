@@ -45,7 +45,8 @@
         "maxDcKw": 190,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 225 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -130,7 +131,8 @@
         "maxDcKw": 190,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 225 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -215,7 +217,8 @@
         "maxDcKw": 175,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": false
+        "heatPump": false,
+        "nacsAdapter": { "available": false, "costUsd": null }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -302,7 +305,8 @@
         "maxDcKw": 175,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": false
+        "heatPump": false,
+        "nacsAdapter": { "available": false, "costUsd": null }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -389,7 +393,8 @@
         "maxDcKw": 270,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -476,7 +481,8 @@
         "maxDcKw": null,
         "level2Kw": null,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -562,7 +568,8 @@
         "maxDcKw": 270,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -648,7 +655,8 @@
         "maxDcKw": 320,
         "level2Kw": null,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -734,7 +742,8 @@
         "maxDcKw": 320,
         "level2Kw": null,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -819,7 +828,8 @@
         "maxDcKw": 205,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 175 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -905,7 +915,8 @@
         "maxDcKw": 205,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 175 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -1165,7 +1176,8 @@
         "maxDcKw": 195,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 175 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -1252,7 +1264,8 @@
         "maxDcKw": 195,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 175 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -1340,7 +1353,8 @@
         "maxDcKw": 195,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 175 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -1514,7 +1528,8 @@
         "maxDcKw": 350,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -1599,7 +1614,8 @@
         "maxDcKw": 350,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -1684,7 +1700,8 @@
         "maxDcKw": 190,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -1766,7 +1783,8 @@
         "maxDcKw": 190,
         "level2Kw": 19.2,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -1847,7 +1865,8 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": false,
@@ -1933,7 +1952,8 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": false,
@@ -2019,7 +2039,8 @@
         "maxDcKw": 190,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -2104,7 +2125,8 @@
         "maxDcKw": 190,
         "level2Kw": 19.2,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -2189,7 +2211,8 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": false,
@@ -2275,7 +2298,8 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": false,
@@ -2531,7 +2555,8 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": false,
@@ -2617,7 +2642,8 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
         "appleCarPlay": false,
@@ -2873,7 +2899,8 @@
         "maxDcKw": 183,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -2958,7 +2985,8 @@
         "maxDcKw": 183,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3043,7 +3071,8 @@
         "maxDcKw": null,
         "level2Kw": null,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3301,7 +3330,8 @@
         "maxDcKw": 115,
         "level2Kw": 10.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3388,7 +3418,8 @@
         "maxDcKw": 150,
         "level2Kw": 10.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3473,7 +3504,8 @@
         "maxDcKw": 150,
         "level2Kw": 10.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3813,7 +3845,8 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3898,7 +3931,8 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3983,7 +4017,8 @@
         "maxDcKw": 350,
         "level2Kw": 10.9,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -4068,7 +4103,8 @@
         "maxDcKw": 350,
         "level2Kw": 10.9,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -4153,7 +4189,8 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 225 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -4234,7 +4271,8 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 225 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -4821,7 +4859,8 @@
         "maxDcKw": 100,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -4906,7 +4945,8 @@
         "maxDcKw": 100,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -4991,7 +5031,8 @@
         "maxDcKw": null,
         "level2Kw": 11.5,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -5074,7 +5115,8 @@
         "maxDcKw": 203,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6013,7 +6055,8 @@
         "maxDcKw": null,
         "level2Kw": 19.2,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 220 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6099,7 +6142,8 @@
         "maxDcKw": 300,
         "level2Kw": 19.2,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 220 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6274,7 +6318,8 @@
         "maxDcKw": 130,
         "level2Kw": 7.4,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 175 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6360,7 +6405,8 @@
         "maxDcKw": 100,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6447,7 +6493,8 @@
         "maxDcKw": 100,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6533,7 +6580,8 @@
         "maxDcKw": 170,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6619,7 +6667,8 @@
         "maxDcKw": 170,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6705,7 +6754,8 @@
         "maxDcKw": 170,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6791,7 +6841,8 @@
         "maxDcKw": 170,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6877,7 +6928,8 @@
         "maxDcKw": 200,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -6963,7 +7015,8 @@
         "maxDcKw": 200,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7049,7 +7102,8 @@
         "maxDcKw": 200,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7135,7 +7189,8 @@
         "maxDcKw": 200,
         "level2Kw": 9.6,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7221,7 +7276,8 @@
         "maxDcKw": 130,
         "level2Kw": 7.4,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 235 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7306,7 +7362,8 @@
         "maxDcKw": 130,
         "level2Kw": 7.4,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 235 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7562,7 +7619,8 @@
         "maxDcKw": 205,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7648,7 +7706,8 @@
         "maxDcKw": 205,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7733,7 +7792,8 @@
         "maxDcKw": 250,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7820,7 +7880,8 @@
         "maxDcKw": 250,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7905,7 +7966,8 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7992,7 +8054,8 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -8079,7 +8142,8 @@
         "maxDcKw": 270,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -8165,7 +8229,8 @@
         "maxDcKw": 270,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -8251,7 +8316,8 @@
         "maxDcKw": 320,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -8337,7 +8403,8 @@
         "maxDcKw": 320,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -8852,7 +8919,8 @@
         "maxDcKw": 100,
         "level2Kw": 6.6,
         "vehicleToLoad": false,
-        "heatPump": false
+        "heatPump": false,
+        "nacsAdapter": { "available": true, "costUsd": null }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -8937,7 +9005,8 @@
         "maxDcKw": 100,
         "level2Kw": 6.6,
         "vehicleToLoad": false,
-        "heatPump": false
+        "heatPump": false,
+        "nacsAdapter": { "available": true, "costUsd": null }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -9791,7 +9860,8 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": false, "costUsd": null }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -9876,7 +9946,8 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": false, "costUsd": null }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -9961,7 +10032,8 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": false, "costUsd": null }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10040,7 +10112,8 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10125,7 +10198,8 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10210,7 +10284,8 @@
         "maxDcKw": 135,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": false
+        "heatPump": false,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10291,7 +10366,8 @@
         "maxDcKw": 175,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10374,7 +10450,8 @@
         "maxDcKw": 200,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10459,7 +10536,8 @@
         "maxDcKw": 200,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10544,7 +10622,8 @@
         "maxDcKw": 153,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10630,7 +10709,8 @@
         "maxDcKw": 153,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10888,7 +10968,8 @@
         "maxDcKw": 350,
         "level2Kw": 11.5,
         "vehicleToLoad": true,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -10974,7 +11055,8 @@
         "maxDcKw": 350,
         "level2Kw": 11.5,
         "vehicleToLoad": true,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -11059,7 +11141,8 @@
         "maxDcKw": 176,
         "level2Kw": 10.5,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -11315,7 +11398,8 @@
         "maxDcKw": 270,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -11402,7 +11486,8 @@
         "maxDcKw": 270,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -11489,7 +11574,8 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": null,
+        "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -11570,7 +11656,7 @@
         "topSpeedMph": null
       },
       "charging": {
-        "portType": "CCS1",
+        "portType": "NACS",
         "maxDcKw": 320,
         "level2Kw": 9.6,
         "vehicleToLoad": null,
@@ -11618,7 +11704,7 @@
         "review": "https://www.edmunds.com/mercedes-benz/cla/2026/electric/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50031"
       },
-      "notes": "Mercedes' first EV on the new MB.EA platform — distinct from the EQB/EQE/EQS entries (those are on EVA2, this is a smaller/newer architecture). An 85 kWh battery with a new silicon-oxide-blend anode gives an unusually long 374-mile EPA range for the battery size. Base trim seats are MB-Tex synthetic leather, not genuine."
+      "notes": "Mercedes' first EV on the new MB.EA platform — distinct from the EQB/EQE/EQS entries (those are on EVA2, this is a smaller/newer architecture). An 85 kWh battery with a new silicon-oxide-blend anode gives an unusually long 374-mile EPA range for the battery size. Base trim seats are MB-Tex synthetic leather, not genuine. First Mercedes-Benz with a native NACS DC fast-charging port standard from the factory (paired with a separate J1772 port for AC) — comes standard with an included CCS-to-NACS adapter for accessing non-Tesla CCS networks too."
     },
     {
       "id": "mercedes-benz-cla-2026-350-4matic",
@@ -11655,7 +11741,7 @@
         "topSpeedMph": null
       },
       "charging": {
-        "portType": "CCS1",
+        "portType": "NACS",
         "maxDcKw": 320,
         "level2Kw": 9.6,
         "vehicleToLoad": null,
@@ -11703,7 +11789,7 @@
         "review": "https://www.edmunds.com/mercedes-benz/cla/2026/electric/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50032"
       },
-      "notes": "Mercedes' first EV on the new MB.EA platform — distinct from the EQB/EQE/EQS entries (those are on EVA2, this is a smaller/newer architecture). An 85 kWh battery with a new silicon-oxide-blend anode gives an unusually long 374-mile EPA range for the battery size. Base trim seats are MB-Tex synthetic leather, not genuine."
+      "notes": "Mercedes' first EV on the new MB.EA platform — distinct from the EQB/EQE/EQS entries (those are on EVA2, this is a smaller/newer architecture). An 85 kWh battery with a new silicon-oxide-blend anode gives an unusually long 374-mile EPA range for the battery size. Base trim seats are MB-Tex synthetic leather, not genuine. First Mercedes-Benz with a native NACS DC fast-charging port standard from the factory (paired with a separate J1772 port for AC) — comes standard with an included CCS-to-NACS adapter for accessing non-Tesla CCS networks too."
     },
     {
       "id": "porsche-cayenne-electric-2026-base",
@@ -11740,7 +11826,7 @@
         "topSpeedMph": null
       },
       "charging": {
-        "portType": "CCS1",
+        "portType": "NACS",
         "maxDcKw": 400,
         "level2Kw": 11,
         "vehicleToLoad": null,
@@ -11788,7 +11874,7 @@
         "review": "https://www.edmunds.com/porsche/cayenne/2026/electric/",
         "epaWindowSticker": "https://www.edmunds.com/porsche/cayenne/2026/mpg/"
       },
-      "notes": "New full-size electric SUV body style for Porsche (larger than the Macan Electric), on sale since March 2026. EPA range isn't yet certified — Porsche and reviewers cite WLTP-based estimates in the 300-340 mile range, but no official EPA figure has been published yet. All trims are dual-motor AWD, no RWD option. Ground clearance varies 6.9-9.6 in across the adaptive air suspension's four ride-height modes; 7.5 in ('Normal' mode) is shown here."
+      "notes": "New full-size electric SUV body style for Porsche (larger than the Macan Electric), on sale since March 2026. EPA range isn't yet certified — Porsche and reviewers cite WLTP-based estimates in the 300-340 mile range, but no official EPA figure has been published yet. All trims are dual-motor AWD, no RWD option. Ground clearance varies 6.9-9.6 in across the adaptive air suspension's four ride-height modes; 7.5 in ('Normal' mode) is shown here. First Porsche with a native NACS DC fast-charging port (paired with a separate J1772 port for AC) — comes standard with an included NACS-to-CCS1 adapter for accessing non-Tesla CCS networks too."
     },
     {
       "id": "porsche-cayenne-electric-2026-turbo",
@@ -11825,7 +11911,7 @@
         "topSpeedMph": null
       },
       "charging": {
-        "portType": "CCS1",
+        "portType": "NACS",
         "maxDcKw": 400,
         "level2Kw": 11,
         "vehicleToLoad": null,
@@ -11873,7 +11959,7 @@
         "review": "https://www.edmunds.com/porsche/cayenne/2026/electric/",
         "epaWindowSticker": "https://www.edmunds.com/porsche/cayenne/2026/mpg/"
       },
-      "notes": "New full-size electric SUV body style for Porsche (larger than the Macan Electric), on sale since March 2026. EPA range isn't yet certified — Porsche and reviewers cite WLTP-based estimates in the 300-340 mile range, but no official EPA figure has been published yet. All trims are dual-motor AWD, no RWD option. Ground clearance varies 6.9-9.6 in across the adaptive air suspension's four ride-height modes; 7.5 in ('Normal' mode) is shown here."
+      "notes": "New full-size electric SUV body style for Porsche (larger than the Macan Electric), on sale since March 2026. EPA range isn't yet certified — Porsche and reviewers cite WLTP-based estimates in the 300-340 mile range, but no official EPA figure has been published yet. All trims are dual-motor AWD, no RWD option. Ground clearance varies 6.9-9.6 in across the adaptive air suspension's four ride-height modes; 7.5 in ('Normal' mode) is shown here. First Porsche with a native NACS DC fast-charging port (paired with a separate J1772 port for AC) — comes standard with an included NACS-to-CCS1 adapter for accessing non-Tesla CCS networks too."
     },
     {
       "id": "mercedes-maybach-eqs-suv-2026-680-4matic",
@@ -11914,7 +12000,8 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": true
+        "heatPump": true,
+        "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
         "appleCarPlay": true,

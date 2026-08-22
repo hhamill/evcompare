@@ -60,6 +60,9 @@ export const FIELDS = [
     format: v => fmtNum(v, n => `${roundTo(n, 1)} kW`) },
   { key: "vehicleToLoad", label: "Vehicle-to-Load (V2L)", group: "Range & Charging", type: "boolean", get: c => c.charging?.vehicleToLoad },
   { key: "heatPump", label: "Heat Pump", group: "Range & Charging", type: "boolean", get: c => c.charging?.heatPump },
+  { key: "nacsAdapterAvailable", label: "NACS Adapter Available", group: "Range & Charging", type: "boolean", get: c => c.charging?.nacsAdapter?.available },
+  { key: "nacsAdapterCost", label: "NACS Adapter Cost", group: "Range & Charging", type: "range", step: 1, compareBetter: "lower", get: c => c.charging?.nacsAdapter?.costUsd,
+    format: v => fmtNum(v, n => (roundTo(n, 0) === 0 ? "Included" : `$${roundTo(n, 0)}`)) },
 
   // ---- Performance & Drivetrain ----
   { key: "drivetrain", label: "Drivetrain", group: "Performance & Drivetrain", type: "enum", get: c => c.drivetrain },

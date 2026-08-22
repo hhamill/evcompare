@@ -1,4 +1,4 @@
-import { FIELDS } from "./fields.js?v=6";
+import { FIELDS } from "./fields.js?v=7";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=8";
 import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=16";
 import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath } from "./router.js?v=5";
