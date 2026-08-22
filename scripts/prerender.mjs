@@ -18,6 +18,7 @@
 import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
 import { BASE_PATH, carPath } from "../js/router.js";
 import { findSimilarCars } from "../js/similar.js";
 
@@ -28,7 +29,15 @@ const DIST = path.join(ROOT, "dist");
 const SITE_BASE_URL = "https://evcompare.org";
 const SITE_NAME = "EV Compare";
 
-const cars = JSON.parse(readFileSync(path.join(ROOT, "data", "evs.json"), "utf8"));
+const { license, attribution, models: cars } = JSON.parse(readFileSync(path.join(ROOT, "data", "evs.json"), "utf8"));
+
+// Content hash of the models array only (never the wrapper it sits in — hashing the whole
+// file would be self-referential, since the hash field is itself part of what's hashed).
+// Recomputed fresh on every build rather than trusted from the committed source file, so it
+// can never go stale/forgotten the way a manually-bumped value would — see data/SCHEMA.md.
+function hashModels(models) {
+  return "sha256:" + createHash("sha256").update(JSON.stringify(models)).digest("hex");
+}
 
 // ---------- helpers ----------
 
@@ -283,7 +292,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
 
 </div>
 
-<script type="module" src="/js/app.js?v=30"></script>
+<script type="module" src="/js/app.js?v=31"></script>
 </body>
 </html>
 `;
@@ -340,11 +349,28 @@ function main() {
   if (existsSync(DIST)) rmSync(DIST, { recursive: true, force: true });
   mkdirSync(DIST, { recursive: true });
 
-  // Copy the existing static site as-is, except index.html gets homepage JSON-LD injected.
+  // Copy the existing static site as-is, except index.html gets homepage JSON-LD injected
+  // and data/evs.json gets a freshly-computed hash (see below) rather than whatever value
+  // happened to be committed in the source file.
   for (const item of ["404.html", "css", "js", "data", "assets"]) {
     cpSync(path.join(ROOT, item), path.join(DIST, item), { recursive: true });
   }
   writeFileSync(path.join(DIST, "index.html"), buildHomepage());
+
+  // Rewrite the copied evs.json with a hash computed from *this build's* models array, and
+  // drop a tiny sibling file with just that hash — a third party who already has a local
+  // copy can check data/current.json (a few dozen bytes) instead of re-downloading the
+  // whole dataset just to find out nothing changed.
+  const generatedAt = new Date().toISOString();
+  const dataHash = hashModels(cars);
+  writeFileSync(
+    path.join(DIST, "data", "evs.json"),
+    JSON.stringify({ hash: dataHash, license, attribution, url: SITE_BASE_URL, generatedAt, count: cars.length, models: cars }, null, 2) + "\n"
+  );
+  writeFileSync(
+    path.join(DIST, "data", "current.json"),
+    JSON.stringify({ current: dataHash, count: cars.length, generatedAt }, null, 2) + "\n"
+  );
 
   const urls = [`${SITE_BASE_URL}${BASE_PATH}/`];
   let count = 0;

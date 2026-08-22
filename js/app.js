@@ -3,7 +3,6 @@ import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar
 import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=15";
 import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=4";
 
-const AUTO_COMPARE_THRESHOLD = 5;
 const MAX_COMPARE = 6;
 
 // Mirrors scripts/prerender.mjs's SITE_NAME/title format so the tab title matches whether a
@@ -111,7 +110,7 @@ initTheme();
 
 async function init() {
   const res = await fetch("/data/evs.json");
-  const cars = await res.json();
+  const { models: cars } = await res.json();
   state.cars = cars;
   state.domains = computeDomains(cars);
   state.filterState = defaultFilterState(state.domains);
@@ -358,22 +357,15 @@ function renderResultsView() {
   const activeCount = countActiveFilters(state.filterState, state.domains);
   el.filtersToggleBtn.textContent = activeCount > 0 ? `Filters (${activeCount})` : "Filters";
 
-  const autoCompare = filtered.length > 0 && filtered.length <= AUTO_COMPARE_THRESHOLD;
-
-  if (state.view === "compare" || autoCompare) {
+  if (state.view === "compare") {
     el.viewResults.hidden = true;
     el.viewCompare.hidden = false;
-    const carsToShow = autoCompare && state.view !== "compare"
-      ? filtered
-      : state.cars.filter(c => state.compareSet.has(c.id));
-    const allowRemove = !(autoCompare && state.view !== "compare");
+    const carsToShow = state.cars.filter(c => state.compareSet.has(c.id));
     el.compareCount.textContent = carsToShow.length;
     renderCompareTable(el.compareTable, carsToShow, {
-      onRemove: allowRemove ? (id => { state.compareSet.delete(id); renderAll(); }) : null,
+      onRemove: id => { state.compareSet.delete(id); renderAll(); },
       onOpenDetail: openDetail,
     });
-    el.backToResultsBtn.hidden = autoCompare && state.view !== "compare";
-    el.clearCompareBtn.hidden = !allowRemove;
     updateCompareScrollNav();
   } else {
     el.viewResults.hidden = false;
@@ -386,7 +378,7 @@ function renderResultsView() {
   }
 
   const n = state.compareSet.size;
-  el.compareBar.hidden = n === 0 || state.view === "compare" || autoCompare;
+  el.compareBar.hidden = n === 0 || state.view === "compare";
   el.compareBarText.textContent = `${n} selected for comparison`;
 }
 

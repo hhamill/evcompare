@@ -1,10 +1,27 @@
 # EV Compare — Data Schema
 
-Each entry in `evs.json` is one **trim** of one model (a single model year, e.g. "2025 Tesla Model Y Long Range AWD"). Popular models should have 1-2 representative trims (e.g. base RWD + top AWD/Performance) rather than every possible configuration.
+`evs.json`'s top level is a small wrapper, not a bare array:
+
+```jsonc
+{
+  "hash": "sha256:...",     // content hash of `models` only (never of this wrapper — that would be self-referential, since the hash is itself part of what it would be hashing). The value committed in source is whatever it was as of the last time someone ran the build locally; it's cosmetic — the authoritative one is recomputed fresh by scripts/prerender.mjs on every deploy, so it can never go stale/forgotten the way a manually-bumped value would.
+  "license": "CC0-1.0",     // public domain dedication — the underlying specs aren't copyrightable anyway (facts aren't), and this makes reuse unambiguous
+  "attribution": "EV Compare (evcompare.org) — appreciated, not required",  // a courtesy note, not a condition of the license the way CC BY's attribution requirement would be — CC0 grants full reuse with zero obligations regardless of whether this is honored
+  "url": "https://evcompare.org",
+  "generatedAt": "2026-08-21T...",  // ISO timestamp, refreshed on every build
+  "count": 149,
+  "models": [ /* one entry per trim, shape below */ ]
+}
+```
+
+A third party that already has a local copy can check `data/current.json` (`{"current": "<hash>", "count", "generatedAt"}`, a few dozen bytes) instead of re-downloading the whole dataset just to find out nothing changed — that file and `evs.json`'s own `hash` field are always written together, so they always agree.
+
+Each entry in `models` is one **trim** of one model (a single model year, e.g. "2025 Tesla Model Y Long Range AWD"). Popular models should have 1-2 representative trims (e.g. base RWD + top AWD/Performance) rather than every possible configuration.
 
 ```jsonc
 {
   "id": "tesla-model-y-2025-long-range-awd",   // kebab-case unique id
+  "lastVerifiedDate": "2026-08-21",  // ISO date this specific entry's specs were last confirmed against a real source (manufacturer spec sheet, fueleconomy.gov, etc.) — not shown in the app, just internal provenance. Bump it when re-researching/correcting this entry's specs; don't bump it for unrelated changes (a notes-wording pass, a schema/UI change) that didn't touch its actual data.
   "make": "Tesla",
   "model": "Model Y",
   "trim": "Long Range AWD",
