@@ -222,6 +222,7 @@ function bindGlobalEvents() {
   el.compareBarViewBtn.addEventListener("click", () => {
     state.view = "compare";
     renderAll();
+    resetCompareScroll();
     enterCompareUrl(COMPARE_PATH);
   });
 
@@ -265,10 +266,12 @@ function bindGlobalEvents() {
       state.compareSet = new Set(foundCars.map(c => c.id));
       state.view = "compare";
       document.title = compareTitle(foundCars.length);
+      renderAll();
+      resetCompareScroll();
     } else {
       state.view = "results";
+      renderAll();
     }
-    renderAll();
   });
 }
 
@@ -339,6 +342,7 @@ function compareAllSimilar(ids) {
   state.view = "compare";
   closeModal({ updateHistory: false });
   renderAll();
+  resetCompareScroll();
   enterCompareUrl(COMPARE_FROM_SIMILAR_PATH);
 }
 
@@ -374,8 +378,15 @@ function openDetail(car, { historyMode = "push" } = {}) {
     });
   };
   renderModal();
-  el.modalBody.scrollTop = 0;
+  // Unhide *before* resetting scroll, not after — while the modal is still `hidden` there's
+  // no layout box to scroll, so the assignment silently does nothing; once it becomes
+  // visible again the browser restores whatever offset it had before being hidden, not
+  // whatever was "written" in the meantime. This bit us specifically on close-then-reopen
+  // (scroll to the bottom of car A, close, open car B — B opened already scrolled to the
+  // bottom) since renderModal()'s content swap alone doesn't touch modalBody's own scroll
+  // offset, only its children.
   el.detailModal.hidden = false;
+  el.modalBody.scrollTop = 0;
   document.title = titleFor(car);
   if (historyMode === "push") {
     history.pushState({ carId: car.id }, "", carPath(car));
@@ -393,6 +404,16 @@ function closeModal({ updateHistory = true } = {}) {
     history.replaceState({}, "", homePath());
     trackPageview();
   }
+}
+
+// .compare-scroll is a persistent element that only ever gets its *content* (the <table>)
+// swapped out — its own scrollTop/scrollLeft otherwise carry over untouched across renders,
+// same as the detail modal's scroll body did (see openDetail's comment). Call this right
+// after renderAll() has already unhidden #viewCompare — same "unhide before resetting
+// scroll" ordering fix, since the assignment is a no-op while the element has no layout box.
+function resetCompareScroll() {
+  el.compareScroll.scrollTop = 0;
+  el.compareScroll.scrollLeft = 0;
 }
 
 // Shows/hides the header's left/right nav buttons based on whether the table actually

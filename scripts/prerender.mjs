@@ -293,7 +293,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
 
 </div>
 
-<script type="module" src="/js/app.js?v=33"></script>
+<script type="module" src="/js/app.js?v=34"></script>
 </body>
 </html>
 `;
