@@ -264,6 +264,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
             <button id="compareScrollLeftBtn" class="compare-scroll-nav-btn" aria-label="Scroll left">&lsaquo;</button>
             <button id="compareScrollRightBtn" class="compare-scroll-nav-btn" aria-label="Scroll right">&rsaquo;</button>
           </div>
+          <button id="shareCompareBtn" class="btn btn-ghost">Share</button>
           <button id="clearCompareBtn" class="btn btn-ghost">Clear all</button>
         </div>
         <div class="compare-scroll">
@@ -292,7 +293,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
 
 </div>
 
-<script type="module" src="/js/app.js?v=31"></script>
+<script type="module" src="/js/app.js?v=33"></script>
 </body>
 </html>
 `;

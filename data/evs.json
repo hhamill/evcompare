@@ -8,6 +8,7 @@
   "models": [
     {
       "id": "acura-zdx-2024-a-spec-rwd",
+      "catalogId": 1,
       "lastVerifiedDate": "2026-08-21",
       "make": "Acura",
       "model": "ZDX",
@@ -92,6 +93,7 @@
     },
     {
       "id": "acura-zdx-2024-type-s-awd",
+      "catalogId": 2,
       "lastVerifiedDate": "2026-08-21",
       "make": "Acura",
       "model": "ZDX",
@@ -176,6 +178,7 @@
     },
     {
       "id": "audi-q4-e-tron-2025-premium-45",
+      "catalogId": 3,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "Q4 e-tron",
@@ -262,6 +265,7 @@
     },
     {
       "id": "audi-q4-e-tron-2025-premium-plus-55-quattro",
+      "catalogId": 4,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "Q4 e-tron",
@@ -348,6 +352,7 @@
     },
     {
       "id": "audi-q6-e-tron-2025-premium-quattro",
+      "catalogId": 5,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "Q6 e-tron",
@@ -434,6 +439,7 @@
     },
     {
       "id": "audi-q8-e-tron-2025-premium-quattro",
+      "catalogId": 6,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "Q8 e-tron",
@@ -519,6 +525,7 @@
     },
     {
       "id": "audi-sq6-e-tron-2025-premium-quattro",
+      "catalogId": 7,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "SQ6 e-tron",
@@ -604,6 +611,7 @@
     },
     {
       "id": "audi-s-e-tron-gt-2025-premium-plus-quattro",
+      "catalogId": 8,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "e-tron GT",
@@ -689,6 +697,7 @@
     },
     {
       "id": "audi-rs-e-tron-gt-2025",
+      "catalogId": 9,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "e-tron GT",
@@ -773,6 +782,7 @@
     },
     {
       "id": "bmw-i4-2026-edrive40",
+      "catalogId": 10,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
       "model": "i4",
@@ -858,6 +868,7 @@
     },
     {
       "id": "bmw-i4-2026-m60-xdrive",
+      "catalogId": 11,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
       "model": "i4",
@@ -943,6 +954,7 @@
     },
     {
       "id": "bmw-i5-2026-edrive40",
+      "catalogId": 12,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
       "model": "i5",
@@ -1029,6 +1041,7 @@
     },
     {
       "id": "bmw-i5-2026-m60-xdrive",
+      "catalogId": 13,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
       "model": "i5",
@@ -1115,6 +1128,7 @@
     },
     {
       "id": "bmw-i7-2026-xdrive60",
+      "catalogId": 14,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
       "model": "i7",
@@ -1201,6 +1215,7 @@
     },
     {
       "id": "bmw-ix-2026-xdrive60",
+      "catalogId": 15,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
       "model": "iX",
@@ -1288,6 +1303,7 @@
     },
     {
       "id": "bmw-ix-2026-m70-xdrive",
+      "catalogId": 16,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
       "model": "iX",
@@ -1374,6 +1390,7 @@
     },
     {
       "id": "bmw-ix3-2027-50-xdrive",
+      "catalogId": 17,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
       "model": "iX3",
@@ -1460,6 +1477,7 @@
     },
     {
       "id": "cadillac-escalade-iq-2026-luxury-awd",
+      "catalogId": 18,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
       "model": "Escalade IQ",
@@ -1544,6 +1562,7 @@
     },
     {
       "id": "cadillac-escalade-iq-2026-premium-sport-awd",
+      "catalogId": 19,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
       "model": "Escalade IQ",
@@ -1628,6 +1647,7 @@
     },
     {
       "id": "cadillac-lyriq-2025-luxury-rwd",
+      "catalogId": 20,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
       "model": "Lyriq",
@@ -1709,6 +1729,7 @@
     },
     {
       "id": "cadillac-lyriq-2025-sport-awd",
+      "catalogId": 21,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
       "model": "Lyriq",
@@ -1789,6 +1810,7 @@
     },
     {
       "id": "cadillac-optiq-2025-luxury-awd",
+      "catalogId": 22,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
       "model": "Optiq",
@@ -1874,6 +1896,7 @@
     },
     {
       "id": "cadillac-optiq-2025-sport-awd",
+      "catalogId": 23,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
       "model": "Optiq",
@@ -1959,6 +1982,7 @@
     },
     {
       "id": "cadillac-vistiq-2026-luxury-awd",
+      "catalogId": 24,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
       "model": "Vistiq",
@@ -2043,6 +2067,7 @@
     },
     {
       "id": "cadillac-vistiq-2026-platinum-awd",
+      "catalogId": 25,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
       "model": "Vistiq",
@@ -2127,6 +2152,7 @@
     },
     {
       "id": "chevrolet-blazer-ev-2026-lt-fwd",
+      "catalogId": 26,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
       "model": "Blazer EV",
@@ -2212,6 +2238,7 @@
     },
     {
       "id": "chevrolet-blazer-ev-2026-lt-awd",
+      "catalogId": 27,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
       "model": "Blazer EV",
@@ -2297,6 +2324,7 @@
     },
     {
       "id": "chevrolet-bolt-2027-lt",
+      "catalogId": 28,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
       "model": "Bolt",
@@ -2381,6 +2409,7 @@
     },
     {
       "id": "chevrolet-bolt-2027-rs",
+      "catalogId": 29,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
       "model": "Bolt",
@@ -2465,6 +2494,7 @@
     },
     {
       "id": "chevrolet-equinox-ev-2026-lt-fwd",
+      "catalogId": 30,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
       "model": "Equinox EV",
@@ -2550,6 +2580,7 @@
     },
     {
       "id": "chevrolet-equinox-ev-2026-rs-awd",
+      "catalogId": 31,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
       "model": "Equinox EV",
@@ -2634,6 +2665,7 @@
     },
     {
       "id": "chevrolet-silverado-ev-2026-wt-standard-range",
+      "catalogId": 32,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
       "model": "Silverado EV",
@@ -2719,6 +2751,7 @@
     },
     {
       "id": "chevrolet-silverado-ev-2026-rst-max-range",
+      "catalogId": 33,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
       "model": "Silverado EV",
@@ -2803,6 +2836,7 @@
     },
     {
       "id": "dodge-charger-daytona-2025-scat-pack-awd",
+      "catalogId": 34,
       "lastVerifiedDate": "2026-08-21",
       "make": "Dodge",
       "model": "Charger Daytona",
@@ -2887,6 +2921,7 @@
     },
     {
       "id": "dodge-charger-daytona-2025-rt-awd",
+      "catalogId": 35,
       "lastVerifiedDate": "2026-08-21",
       "make": "Dodge",
       "model": "Charger Daytona",
@@ -2971,6 +3006,7 @@
     },
     {
       "id": "fiat-500e-2025-red",
+      "catalogId": 36,
       "lastVerifiedDate": "2026-08-21",
       "make": "Fiat",
       "model": "500e",
@@ -3055,6 +3091,7 @@
     },
     {
       "id": "ford-f-150-lightning-2026-flash",
+      "catalogId": 37,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
       "model": "F-150 Lightning",
@@ -3141,6 +3178,7 @@
     },
     {
       "id": "ford-f-150-lightning-2026-platinum",
+      "catalogId": 38,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
       "model": "F-150 Lightning",
@@ -3226,6 +3264,7 @@
     },
     {
       "id": "ford-mustang-mach-e-2026-select-rwd",
+      "catalogId": 39,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
       "model": "Mustang Mach-E",
@@ -3312,6 +3351,7 @@
     },
     {
       "id": "ford-mustang-mach-e-2026-premium-awd",
+      "catalogId": 40,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
       "model": "Mustang Mach-E",
@@ -3396,6 +3436,7 @@
     },
     {
       "id": "ford-mustang-mach-e-2026-gt-awd",
+      "catalogId": 41,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
       "model": "Mustang Mach-E",
@@ -3481,6 +3522,7 @@
     },
     {
       "id": "gmc-hummer-ev-2026-pickup-3x",
+      "catalogId": 42,
       "lastVerifiedDate": "2026-08-21",
       "make": "GMC",
       "model": "Hummer EV Pickup",
@@ -3566,6 +3608,7 @@
     },
     {
       "id": "gmc-sierra-ev-2026-elevation-standard-range",
+      "catalogId": 43,
       "lastVerifiedDate": "2026-08-21",
       "make": "GMC",
       "model": "Sierra EV",
@@ -3650,6 +3693,7 @@
     },
     {
       "id": "gmc-sierra-ev-2026-denali-extended-range",
+      "catalogId": 44,
       "lastVerifiedDate": "2026-08-21",
       "make": "GMC",
       "model": "Sierra EV",
@@ -3732,6 +3776,7 @@
     },
     {
       "id": "genesis-electrified-g80-2025-advanced-awd",
+      "catalogId": 45,
       "lastVerifiedDate": "2026-08-21",
       "make": "Genesis",
       "model": "Electrified G80",
@@ -3816,6 +3861,7 @@
     },
     {
       "id": "genesis-electrified-gv70-2025-advanced-awd",
+      "catalogId": 46,
       "lastVerifiedDate": "2026-08-21",
       "make": "Genesis",
       "model": "Electrified GV70",
@@ -3900,6 +3946,7 @@
     },
     {
       "id": "genesis-gv60-2025-standard-rwd",
+      "catalogId": 47,
       "lastVerifiedDate": "2026-08-21",
       "make": "Genesis",
       "model": "GV60",
@@ -3984,6 +4031,7 @@
     },
     {
       "id": "genesis-gv60-2025-performance-awd",
+      "catalogId": 48,
       "lastVerifiedDate": "2026-08-21",
       "make": "Genesis",
       "model": "GV60",
@@ -4068,6 +4116,7 @@
     },
     {
       "id": "honda-prologue-2025-ex-fwd",
+      "catalogId": 49,
       "lastVerifiedDate": "2026-08-21",
       "make": "Honda",
       "model": "Prologue",
@@ -4148,6 +4197,7 @@
     },
     {
       "id": "honda-prologue-2025-elite-awd",
+      "catalogId": 50,
       "lastVerifiedDate": "2026-08-21",
       "make": "Honda",
       "model": "Prologue",
@@ -4228,6 +4278,7 @@
     },
     {
       "id": "hyundai-ioniq-5-2026-se-standard-range-rwd",
+      "catalogId": 51,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Ioniq 5",
@@ -4312,6 +4363,7 @@
     },
     {
       "id": "hyundai-ioniq-5-2026-limited-awd",
+      "catalogId": 52,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Ioniq 5",
@@ -4396,6 +4448,7 @@
     },
     {
       "id": "hyundai-ioniq-6-2025-se-standard-range-rwd",
+      "catalogId": 53,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Ioniq 6",
@@ -4480,6 +4533,7 @@
     },
     {
       "id": "hyundai-ioniq-6-2025-limited-awd",
+      "catalogId": 54,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Ioniq 6",
@@ -4564,6 +4618,7 @@
     },
     {
       "id": "hyundai-ioniq-9-2026-s-rwd",
+      "catalogId": 55,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Ioniq 9",
@@ -4646,6 +4701,7 @@
     },
     {
       "id": "hyundai-ioniq-9-2026-calligraphy-awd",
+      "catalogId": 56,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Ioniq 9",
@@ -4728,6 +4784,7 @@
     },
     {
       "id": "hyundai-kona-electric-2025-se-fwd",
+      "catalogId": 57,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Kona Electric",
@@ -4812,6 +4869,7 @@
     },
     {
       "id": "hyundai-kona-electric-2025-limited-fwd",
+      "catalogId": 58,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Kona Electric",
@@ -4896,6 +4954,7 @@
     },
     {
       "id": "jeep-recon-2026-moab-4wd",
+      "catalogId": 59,
       "lastVerifiedDate": "2026-08-21",
       "make": "Jeep",
       "model": "Recon",
@@ -4978,6 +5037,7 @@
     },
     {
       "id": "jeep-wagoneer-s-2025-launch-edition-awd",
+      "catalogId": 60,
       "lastVerifiedDate": "2026-08-21",
       "make": "Jeep",
       "model": "Wagoneer S",
@@ -5062,6 +5122,7 @@
     },
     {
       "id": "kia-ev6-2026-light-rwd",
+      "catalogId": 61,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
       "model": "EV6",
@@ -5146,6 +5207,7 @@
     },
     {
       "id": "kia-ev6-2026-gt-line-awd",
+      "catalogId": 62,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
       "model": "EV6",
@@ -5231,6 +5293,7 @@
     },
     {
       "id": "kia-ev9-2026-light-rwd",
+      "catalogId": 63,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
       "model": "EV9",
@@ -5315,6 +5378,7 @@
     },
     {
       "id": "kia-ev9-2026-wind-awd",
+      "catalogId": 64,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
       "model": "EV9",
@@ -5399,6 +5463,7 @@
     },
     {
       "id": "kia-niro-ev-2025-wind-fwd",
+      "catalogId": 65,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
       "model": "Niro EV",
@@ -5483,6 +5548,7 @@
     },
     {
       "id": "kia-niro-ev-2025-wave-fwd",
+      "catalogId": 66,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
       "model": "Niro EV",
@@ -5567,6 +5633,7 @@
     },
     {
       "id": "lexus-es-2027-350e-fwd",
+      "catalogId": 67,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lexus",
       "model": "ES",
@@ -5652,6 +5719,7 @@
     },
     {
       "id": "lexus-es-2027-500e-awd",
+      "catalogId": 68,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lexus",
       "model": "ES",
@@ -5737,6 +5805,7 @@
     },
     {
       "id": "lexus-rz-2026-350e-fwd",
+      "catalogId": 69,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lexus",
       "model": "RZ",
@@ -5822,6 +5891,7 @@
     },
     {
       "id": "lexus-rz-2026-550e-f-sport-awd",
+      "catalogId": 70,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lexus",
       "model": "RZ",
@@ -5906,6 +5976,7 @@
     },
     {
       "id": "lucid-air-2025-pure-rwd",
+      "catalogId": 71,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lucid",
       "model": "Air",
@@ -5991,6 +6062,7 @@
     },
     {
       "id": "lucid-air-2025-grand-touring-awd",
+      "catalogId": 72,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lucid",
       "model": "Air",
@@ -6077,6 +6149,7 @@
     },
     {
       "id": "lucid-gravity-2026-grand-touring-awd",
+      "catalogId": 73,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lucid",
       "model": "Gravity",
@@ -6164,6 +6237,7 @@
     },
     {
       "id": "mini-countryman-electric-2025-se-all4",
+      "catalogId": 74,
       "lastVerifiedDate": "2026-08-21",
       "make": "MINI",
       "model": "Countryman Electric",
@@ -6249,6 +6323,7 @@
     },
     {
       "id": "mercedes-benz-eqb-2025-250-plus",
+      "catalogId": 75,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQB",
@@ -6335,6 +6410,7 @@
     },
     {
       "id": "mercedes-benz-eqb-2025-350-4matic",
+      "catalogId": 76,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQB",
@@ -6420,6 +6496,7 @@
     },
     {
       "id": "mercedes-benz-eqe-suv-2025-500-4matic",
+      "catalogId": 77,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQE SUV",
@@ -6505,6 +6582,7 @@
     },
     {
       "id": "mercedes-benz-eqe-suv-2025-350-plus",
+      "catalogId": 78,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQE SUV",
@@ -6590,6 +6668,7 @@
     },
     {
       "id": "mercedes-benz-eqe-sedan-2025-350-plus",
+      "catalogId": 79,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQE Sedan",
@@ -6675,6 +6754,7 @@
     },
     {
       "id": "mercedes-benz-eqe-sedan-2025-500-4matic",
+      "catalogId": 80,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQE Sedan",
@@ -6760,6 +6840,7 @@
     },
     {
       "id": "mercedes-benz-eqs-suv-2025-580-4matic",
+      "catalogId": 81,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQS SUV",
@@ -6845,6 +6926,7 @@
     },
     {
       "id": "mercedes-benz-eqs-suv-2025-450-plus",
+      "catalogId": 82,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQS SUV",
@@ -6930,6 +7012,7 @@
     },
     {
       "id": "mercedes-benz-eqs-sedan-2025-450-plus",
+      "catalogId": 83,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQS Sedan",
@@ -7015,6 +7098,7 @@
     },
     {
       "id": "mercedes-benz-eqs-sedan-2025-580-4matic",
+      "catalogId": 84,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "EQS Sedan",
@@ -7100,6 +7184,7 @@
     },
     {
       "id": "nissan-ariya-2025-engage-fwd",
+      "catalogId": 85,
       "lastVerifiedDate": "2026-08-21",
       "make": "Nissan",
       "model": "Ariya",
@@ -7184,6 +7269,7 @@
     },
     {
       "id": "nissan-ariya-2025-platinum-plus-e-4orce-awd",
+      "catalogId": 86,
       "lastVerifiedDate": "2026-08-21",
       "make": "Nissan",
       "model": "Ariya",
@@ -7269,6 +7355,7 @@
     },
     {
       "id": "nissan-leaf-2026-s-plus-fwd",
+      "catalogId": 87,
       "lastVerifiedDate": "2026-08-21",
       "make": "Nissan",
       "model": "Leaf",
@@ -7353,6 +7440,7 @@
     },
     {
       "id": "nissan-leaf-2026-sv-plus-fwd",
+      "catalogId": 88,
       "lastVerifiedDate": "2026-08-21",
       "make": "Nissan",
       "model": "Leaf",
@@ -7437,6 +7525,7 @@
     },
     {
       "id": "polestar-2-2025-single-motor-long-range-rwd",
+      "catalogId": 89,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
       "model": "2",
@@ -7522,6 +7611,7 @@
     },
     {
       "id": "polestar-2-2025-dual-motor-long-range-awd",
+      "catalogId": 90,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
       "model": "2",
@@ -7606,6 +7696,7 @@
     },
     {
       "id": "polestar-3-2025-long-range-dual-motor-awd",
+      "catalogId": 91,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
       "model": "3",
@@ -7692,6 +7783,7 @@
     },
     {
       "id": "polestar-3-2025-long-range-dual-motor-performance-pack-awd",
+      "catalogId": 92,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
       "model": "3",
@@ -7776,6 +7868,7 @@
     },
     {
       "id": "polestar-4-2026-long-range-single-motor-rwd",
+      "catalogId": 93,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
       "model": "4",
@@ -7862,6 +7955,7 @@
     },
     {
       "id": "polestar-4-2026-long-range-dual-motor-awd",
+      "catalogId": 94,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
       "model": "4",
@@ -7948,6 +8042,7 @@
     },
     {
       "id": "porsche-macan-electric-2025-4-awd",
+      "catalogId": 95,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
       "model": "Macan Electric",
@@ -8033,6 +8128,7 @@
     },
     {
       "id": "porsche-macan-electric-2025-turbo-awd",
+      "catalogId": 96,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
       "model": "Macan Electric",
@@ -8118,6 +8214,7 @@
     },
     {
       "id": "porsche-taycan-2025-base-rwd",
+      "catalogId": 97,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
       "model": "Taycan",
@@ -8203,6 +8300,7 @@
     },
     {
       "id": "porsche-taycan-2025-turbo-s-awd",
+      "catalogId": 98,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
       "model": "Taycan",
@@ -8287,6 +8385,7 @@
     },
     {
       "id": "rivian-r1s-2025-dual-motor-awd-large-pack",
+      "catalogId": 99,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
       "model": "R1S",
@@ -8372,6 +8471,7 @@
     },
     {
       "id": "rivian-r1s-2025-quad-motor-awd-max-pack",
+      "catalogId": 100,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
       "model": "R1S",
@@ -8457,6 +8557,7 @@
     },
     {
       "id": "rivian-r1t-2025-adventure-dual-motor-awd-large-pack",
+      "catalogId": 101,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
       "model": "R1T",
@@ -8542,6 +8643,7 @@
     },
     {
       "id": "rivian-r2-2027-premium-awd",
+      "catalogId": 102,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
       "model": "R2",
@@ -8627,6 +8729,7 @@
     },
     {
       "id": "rivian-r2-2027-performance-awd",
+      "catalogId": 103,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
       "model": "R2",
@@ -8712,6 +8815,7 @@
     },
     {
       "id": "subaru-solterra-2025-premium-awd",
+      "catalogId": 104,
       "lastVerifiedDate": "2026-08-21",
       "make": "Subaru",
       "model": "Solterra",
@@ -8796,6 +8900,7 @@
     },
     {
       "id": "subaru-solterra-2025-touring-awd",
+      "catalogId": 105,
       "lastVerifiedDate": "2026-08-21",
       "make": "Subaru",
       "model": "Solterra",
@@ -8880,6 +8985,7 @@
     },
     {
       "id": "tesla-cybertruck-2026-awd",
+      "catalogId": 106,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Cybertruck",
@@ -8964,6 +9070,7 @@
     },
     {
       "id": "tesla-cybertruck-2026-cyberbeast",
+      "catalogId": 107,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Cybertruck",
@@ -9048,6 +9155,7 @@
     },
     {
       "id": "tesla-model-3-2026-standard-rwd",
+      "catalogId": 108,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model 3",
@@ -9133,6 +9241,7 @@
     },
     {
       "id": "tesla-model-3-2026-performance-awd",
+      "catalogId": 109,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model 3",
@@ -9217,6 +9326,7 @@
     },
     {
       "id": "tesla-model-x-2026-plaid-awd",
+      "catalogId": 110,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model X",
@@ -9302,6 +9412,7 @@
     },
     {
       "id": "tesla-model-y-2026-standard-rwd",
+      "catalogId": 111,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model Y",
@@ -9387,6 +9498,7 @@
     },
     {
       "id": "tesla-model-y-2026-premium-awd",
+      "catalogId": 112,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model Y",
@@ -9472,6 +9584,7 @@
     },
     {
       "id": "toyota-bz-2026-xle-fwd",
+      "catalogId": 113,
       "lastVerifiedDate": "2026-08-21",
       "make": "Toyota",
       "model": "bZ",
@@ -9556,6 +9669,7 @@
     },
     {
       "id": "toyota-bz-2026-limited-awd",
+      "catalogId": 114,
       "lastVerifiedDate": "2026-08-21",
       "make": "Toyota",
       "model": "bZ",
@@ -9640,6 +9754,7 @@
     },
     {
       "id": "vinfast-vf8-2025-eco-awd",
+      "catalogId": 115,
       "lastVerifiedDate": "2026-08-21",
       "make": "VinFast",
       "model": "VF8",
@@ -9724,6 +9839,7 @@
     },
     {
       "id": "vinfast-vf8-2025-plus-awd",
+      "catalogId": 116,
       "lastVerifiedDate": "2026-08-21",
       "make": "VinFast",
       "model": "VF8",
@@ -9808,6 +9924,7 @@
     },
     {
       "id": "vinfast-vf9-2025-plus-awd",
+      "catalogId": 117,
       "lastVerifiedDate": "2026-08-21",
       "make": "VinFast",
       "model": "VF9",
@@ -9886,6 +10003,7 @@
     },
     {
       "id": "volkswagen-id-buzz-2025-pro-s-rwd",
+      "catalogId": 118,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volkswagen",
       "model": "ID. Buzz",
@@ -9970,6 +10088,7 @@
     },
     {
       "id": "volkswagen-id-buzz-2025-pro-s-plus-4motion-awd",
+      "catalogId": 119,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volkswagen",
       "model": "ID. Buzz",
@@ -10054,6 +10173,7 @@
     },
     {
       "id": "volkswagen-id4-2025-standard-rwd",
+      "catalogId": 120,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volkswagen",
       "model": "ID.4",
@@ -10134,6 +10254,7 @@
     },
     {
       "id": "volkswagen-id4-2025-pro-s-awd",
+      "catalogId": 121,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volkswagen",
       "model": "ID.4",
@@ -10216,6 +10337,7 @@
     },
     {
       "id": "volvo-ec40-2026-single-motor-rwd",
+      "catalogId": 122,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
       "model": "EC40",
@@ -10300,6 +10422,7 @@
     },
     {
       "id": "volvo-ec40-2026-twin-motor-awd",
+      "catalogId": 123,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
       "model": "EC40",
@@ -10384,6 +10507,7 @@
     },
     {
       "id": "volvo-ex30-2025-single-motor-extended-range",
+      "catalogId": 124,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
       "model": "EX30",
@@ -10469,6 +10593,7 @@
     },
     {
       "id": "volvo-ex30-2025-twin-motor-performance",
+      "catalogId": 125,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
       "model": "EX30",
@@ -10554,6 +10679,7 @@
     },
     {
       "id": "volvo-ex60-2027-p6-plus",
+      "catalogId": 126,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
       "model": "EX60",
@@ -10639,6 +10765,7 @@
     },
     {
       "id": "volvo-ex60-2027-p10-awd-plus",
+      "catalogId": 127,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
       "model": "EX60",
@@ -10724,6 +10851,7 @@
     },
     {
       "id": "volvo-ex90-2026-twin-motor-awd",
+      "catalogId": 128,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
       "model": "EX90",
@@ -10809,6 +10937,7 @@
     },
     {
       "id": "volvo-ex90-2026-twin-motor-performance-awd",
+      "catalogId": 129,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
       "model": "EX90",
@@ -10893,6 +11022,7 @@
     },
     {
       "id": "ford-e-transit-2026-cargo-van-low-roof",
+      "catalogId": 130,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
       "model": "E-Transit",
@@ -10977,6 +11107,7 @@
     },
     {
       "id": "gmc-hummer-ev-suv-2026-3x",
+      "catalogId": 131,
       "lastVerifiedDate": "2026-08-21",
       "make": "GMC",
       "model": "Hummer EV SUV",
@@ -11062,6 +11193,7 @@
     },
     {
       "id": "hyundai-ioniq-5-n-2026",
+      "catalogId": 132,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
       "model": "Ioniq 5 N",
@@ -11146,6 +11278,7 @@
     },
     {
       "id": "audi-a6-e-tron-2027-premium",
+      "catalogId": 133,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "A6 e-tron",
@@ -11232,6 +11365,7 @@
     },
     {
       "id": "audi-a6-e-tron-2027-premium-plus-quattro",
+      "catalogId": 134,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
       "model": "A6 e-tron",
@@ -11318,6 +11452,7 @@
     },
     {
       "id": "mercedes-benz-g-class-2026-g580-eq-technology",
+      "catalogId": 135,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "G-Class",
@@ -11402,6 +11537,7 @@
     },
     {
       "id": "mercedes-benz-cla-2026-250-plus",
+      "catalogId": 136,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "CLA",
@@ -11486,6 +11622,7 @@
     },
     {
       "id": "mercedes-benz-cla-2026-350-4matic",
+      "catalogId": 137,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
       "model": "CLA",
@@ -11570,6 +11707,7 @@
     },
     {
       "id": "porsche-cayenne-electric-2026-base",
+      "catalogId": 138,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
       "model": "Cayenne Electric",
@@ -11654,6 +11792,7 @@
     },
     {
       "id": "porsche-cayenne-electric-2026-turbo",
+      "catalogId": 139,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
       "model": "Cayenne Electric",
@@ -11738,6 +11877,7 @@
     },
     {
       "id": "mercedes-maybach-eqs-suv-2026-680-4matic",
+      "catalogId": 140,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Maybach",
       "model": "EQS SUV",
@@ -11822,6 +11962,7 @@
     },
     {
       "id": "subaru-uncharted-2026-premium",
+      "catalogId": 141,
       "lastVerifiedDate": "2026-08-21",
       "make": "Subaru",
       "model": "Uncharted",
@@ -11906,6 +12047,7 @@
     },
     {
       "id": "subaru-uncharted-2026-gt",
+      "catalogId": 142,
       "lastVerifiedDate": "2026-08-21",
       "make": "Subaru",
       "model": "Uncharted",
@@ -11990,6 +12132,7 @@
     },
     {
       "id": "lucid-gravity-2026-touring-awd",
+      "catalogId": 143,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lucid",
       "model": "Gravity",
@@ -12075,6 +12218,7 @@
     },
     {
       "id": "toyota-bz-woodland-2026-woodland",
+      "catalogId": 144,
       "lastVerifiedDate": "2026-08-21",
       "make": "Toyota",
       "model": "bZ Woodland",
@@ -12159,6 +12303,7 @@
     },
     {
       "id": "toyota-bz-woodland-2026-woodland-premium",
+      "catalogId": 145,
       "lastVerifiedDate": "2026-08-21",
       "make": "Toyota",
       "model": "bZ Woodland",
@@ -12243,6 +12388,7 @@
     },
     {
       "id": "tesla-model-s-2026-awd",
+      "catalogId": 146,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model S",
@@ -12328,6 +12474,7 @@
     },
     {
       "id": "tesla-model-s-2026-plaid-awd",
+      "catalogId": 147,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model S",
@@ -12413,6 +12560,7 @@
     },
     {
       "id": "tesla-model-y-2026-l",
+      "catalogId": 148,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model Y",
@@ -12498,6 +12646,7 @@
     },
     {
       "id": "tesla-model-x-2026-awd",
+      "catalogId": 149,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
       "model": "Model X",

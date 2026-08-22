@@ -21,6 +21,7 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
 ```jsonc
 {
   "id": "tesla-model-y-2025-long-range-awd",   // kebab-case unique id
+  "catalogId": 149,  // small permanent integer, assigned once. Used only to keep shareable comparison URLs short (/compare/12-87-34 instead of full ids) — never shown in the app. Assign the next unused number (current max + 1) to a newly added car; NEVER reassign or reuse a retired car's number, even after it's removed from `models` — an old shared link should never end up silently pointing at a different car later.
   "lastVerifiedDate": "2026-08-21",  // ISO date this specific entry's specs were last confirmed against a real source (manufacturer spec sheet, fueleconomy.gov, etc.) — not shown in the app, just internal provenance. Bump it when re-researching/correcting this entry's specs; don't bump it for unrelated changes (a notes-wording pass, a schema/UI change) that didn't touch its actual data.
   "make": "Tesla",
   "model": "Model Y",

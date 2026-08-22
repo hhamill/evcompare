@@ -1,5 +1,6 @@
 import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=6";
 import { findSimilarCars } from "./similar.js?v=5";
+import { carPath } from "./router.js?v=5";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
 
@@ -29,6 +30,17 @@ function safeHref(url) {
   } catch {
     return null;
   }
+}
+
+// Mirrors js/app.js's own copyToClipboard — same "flash the button's label" confirmation,
+// duplicated rather than threaded through as a callback since it's small and self-contained
+// (no app state involved).
+function copyToClipboard(text, btn) {
+  const original = btn.textContent;
+  navigator.clipboard?.writeText(text).then(() => {
+    btn.textContent = "Copied!";
+    setTimeout(() => { btn.textContent = original; }, 1500);
+  }).catch(() => {});
 }
 
 function fmtVal(field, value) {
@@ -313,10 +325,14 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
     ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}
     <div class="modal-actions">
       <button id="modalCompareBtn" class="btn ${inCompare ? "btn-ghost" : "btn-primary"}">${inCompare ? "Remove from compare" : "Add to compare"}</button>
+      <button id="modalShareBtn" class="btn btn-ghost">Share</button>
     </div>
     ${allCars ? renderSimilarSection(car, allCars) : ""}
   `;
   body.querySelector("#modalCompareBtn").addEventListener("click", () => onToggleCompare(car.id));
+  body.querySelector("#modalShareBtn").addEventListener("click", e => {
+    copyToClipboard(`${location.origin}${carPath(car)}`, e.currentTarget);
+  });
 
   if (allCars && onSelectCar) {
     body.querySelectorAll(".similar-card").forEach(el => {

@@ -46,3 +46,29 @@ export function carForPath(pathIndex, pathname) {
 export function homePath() {
   return BASE_PATH ? `${BASE_PATH}/` : "/";
 }
+
+// Shareable comparison links: /compare/{catalogId}-{catalogId}-... — deliberately path
+// segments, not a query string, so this rides the exact same 404.html deep-link mechanism
+// already proven for car pages above, rather than exercising the query-string-preserving
+// branch of that redirect trick, which nothing else in this app has ever used or tested.
+// No static file backs this route (can't prerender every combination of 149+ cars), so a
+// hard reload/crawler hit falls back to the homepage — same accepted tradeoff as /compare
+// itself; catalogId exists purely to keep this URL short, not for anything else.
+const COMPARE_PREFIX = `${BASE_PATH}/compare/`;
+
+export function compareSharePath(catalogIds) {
+  return `${COMPARE_PREFIX}${catalogIds.join("-")}`;
+}
+
+// Returns an array of positive integers, or null if pathname isn't a "/compare/<ids>" share
+// link at all (including the plain "/compare" and "/compare/similar" analytics-only paths —
+// "similar" fails to parse as a number, so this correctly falls through without touching them).
+export function compareIdsFromPath(pathname) {
+  const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  if (!normalized.startsWith(COMPARE_PREFIX)) return null;
+  const rest = normalized.slice(COMPARE_PREFIX.length);
+  if (!rest) return null;
+  const ids = rest.split("-").map(Number);
+  if (ids.some(n => !Number.isInteger(n) || n <= 0)) return null;
+  return ids;
+}

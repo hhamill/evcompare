@@ -1,7 +1,7 @@
 import { FIELDS } from "./fields.js?v=6";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=8";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=15";
-import { carPath, buildCarPathIndex, carForPath, homePath } from "./router.js?v=4";
+import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=16";
+import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath } from "./router.js?v=5";
 
 const MAX_COMPARE = 6;
 
@@ -34,6 +34,18 @@ function trackPageview() {
   }
 }
 
+// Shared "Share" button behavior: copy a URL, flash the button's own label to confirm it
+// worked instead of a separate toast. navigator.clipboard needs a secure context (fine —
+// the site is HTTPS-only) and can still reject in rare cases (permissions policy, an
+// unfocused document); a silent failure just means nothing got copied, not a broken button.
+function copyToClipboard(text, btn) {
+  const original = btn.textContent;
+  navigator.clipboard?.writeText(text).then(() => {
+    btn.textContent = "Copied!";
+    setTimeout(() => { btn.textContent = original; }, 1500);
+  }).catch(() => {});
+}
+
 const state = {
   cars: [],
   domains: {},
@@ -43,6 +55,7 @@ const state = {
   view: "results", // "results" | "compare"
   activeDetailCar: null,
   pathIndex: null,
+  catalogIndex: null,
   sortKey: "default",
 };
 
@@ -67,6 +80,7 @@ const el = {
   resetFiltersBtn: document.getElementById("resetFiltersBtn"),
   backToResultsBtn: document.getElementById("backToResultsBtn"),
   clearCompareBtn: document.getElementById("clearCompareBtn"),
+  shareCompareBtn: document.getElementById("shareCompareBtn"),
   compareBar: document.getElementById("compareBar"),
   compareBarText: document.getElementById("compareBarText"),
   compareBarClearBtn: document.getElementById("compareBarClearBtn"),
@@ -115,6 +129,20 @@ async function init() {
   state.domains = computeDomains(cars);
   state.filterState = defaultFilterState(state.domains);
   state.pathIndex = buildCarPathIndex(cars);
+  state.catalogIndex = new Map(cars.map(c => [c.catalogId, c]));
+
+  // A shared comparison link — reconstruct before the first render so there's no flash of
+  // the homepage first. A car since removed from the dataset just gets skipped; the rest of
+  // the comparison still loads if at least one id resolves.
+  const sharedIds = compareIdsFromPath(location.pathname);
+  if (sharedIds) {
+    const foundCars = sharedIds.map(id => state.catalogIndex.get(id)).filter(Boolean);
+    if (foundCars.length) {
+      state.compareSet = new Set(foundCars.map(c => c.id));
+      state.view = "compare";
+      document.title = compareTitle(foundCars.length);
+    }
+  }
 
   renderFilterSidebar(el.sidebar, state.domains, state.filterState, () => {
     state.view = "results";
@@ -161,6 +189,18 @@ function bindGlobalEvents() {
     state.view = "results";
     renderAll();
     leaveCompareUrl();
+  });
+
+  el.shareCompareBtn.addEventListener("click", () => {
+    const ids = state.cars
+      .filter(c => state.compareSet.has(c.id))
+      .map(c => c.catalogId)
+      .filter(id => id != null);
+    if (!ids.length) return;
+    const path = compareSharePath(ids);
+    history.replaceState({}, "", path);
+    trackPageview();
+    copyToClipboard(`${location.origin}${path}`, el.shareCompareBtn);
   });
 
   // The one universal escape hatch: closes any open modal, drops back to the results
@@ -211,8 +251,24 @@ function bindGlobalEvents() {
 
   window.addEventListener("popstate", () => {
     const car = carForPath(state.pathIndex, location.pathname);
-    if (car) openDetail(car, { historyMode: "none" });
-    else closeModal({ updateHistory: false });
+    if (car) {
+      openDetail(car, { historyMode: "none" });
+      return;
+    }
+    // Only reachable by hard-loading a shared /compare/<ids> link and then navigating away
+    // (opening a car pushes a real history entry) — everything else that touches this URL
+    // uses replaceState, so it never sits in the back-stack on its own otherwise.
+    const sharedIds = compareIdsFromPath(location.pathname);
+    const foundCars = sharedIds ? sharedIds.map(id => state.catalogIndex.get(id)).filter(Boolean) : [];
+    closeModal({ updateHistory: false });
+    if (foundCars.length) {
+      state.compareSet = new Set(foundCars.map(c => c.id));
+      state.view = "compare";
+      document.title = compareTitle(foundCars.length);
+    } else {
+      state.view = "results";
+    }
+    renderAll();
   });
 }
 
