@@ -127,15 +127,19 @@ function jsonLdFor(car, url, similar) {
   return ld;
 }
 
+// Google requires every ListItem in a BreadcrumbList to carry an `item` URL (except
+// optionally the last one) — this site has no separate make/model listing pages to link
+// intermediate crumbs to (it's a single-page app with client-side filtering, not a real
+// crawlable page per make/model), so the breadcrumb only reflects pages that actually exist:
+// the homepage and this car's own page. Search Console flagged the old 4-level version
+// ("Missing field 'item'") for exactly this reason.
 function breadcrumbLdFor(car, url) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: SITE_NAME, item: `${SITE_BASE_URL}/` },
-      { "@type": "ListItem", position: 2, name: car.make },
-      { "@type": "ListItem", position: 3, name: car.model },
-      { "@type": "ListItem", position: 4, name: `${car.modelYear} ${car.trim}`, item: url },
+      { "@type": "ListItem", position: 2, name: `${car.modelYear} ${car.make} ${car.model} ${car.trim}`, item: url },
     ],
   };
 }
