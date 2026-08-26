@@ -188,7 +188,7 @@ function pageFor(car) {
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 <script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%234ee08a%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%235aa2ff%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%230b0d12%22/></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%2316a35e%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%230b0d12%22/></svg>" />
 <script>
   (function (l) {
     if (l.search[1] === "p" && l.search[2] === "=") {
@@ -216,7 +216,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
 
   <header class="topbar">
     <button type="button" class="brand" id="brandHome" aria-label="EV Compare — go to homepage">
-      <span class="brand-mark"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><defs><clipPath id="brandMarkClip"><circle cx="16" cy="16" r="15"/></clipPath></defs><g clip-path="url(#brandMarkClip)"><rect width="16" height="32" fill="#4ee08a"/><rect x="16" width="16" height="32" fill="#5aa2ff"/></g><polygon points="18.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8" fill="#0b0d12"/></svg></span>
+      <span class="brand-mark"><svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><defs><clipPath id="brandMarkClip"><circle cx="16" cy="16" r="15"/></clipPath></defs><g clip-path="url(#brandMarkClip)"><rect width="16" height="32" fill="var(--accent)"/><rect x="16" width="16" height="32" fill="var(--accent-2)"/></g><polygon points="18.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8" fill="var(--accent-contrast)"/></svg></span>
       <span class="brand-name">EV Compare</span>
     </button>
     <div class="topbar-search">
