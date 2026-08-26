@@ -123,6 +123,12 @@ function initTheme() {
 initTheme();
 
 async function init() {
+  // Static per-car pages render a server-side fallback intro (title + summary sentence) so
+  // crawlers/clients that don't run JS still get real content — see scripts/prerender.mjs.
+  // Once JS is running at all, the real detail modal (or homepage fallback) takes over, so
+  // drop it here unconditionally; a no-op on the homepage, where it doesn't exist.
+  document.getElementById("staticCarIntro")?.remove();
+
   const res = await fetch("/data/evs.json");
   const { models: cars } = await res.json();
   state.cars = cars;

@@ -111,6 +111,13 @@ input { font-family: inherit; }
 .brand-mark svg { display: block; }
 .brand-name { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
 
+/* Server-rendered fallback for a single car page — real content for crawlers/clients that
+   don't run JS. app.js removes this as soon as it boots, since the detail modal (or the
+   redirect-to-homepage fallback for a since-removed car) takes over from there. */
+.static-car-intro { padding: 20px 24px 0; }
+.static-car-intro h1 { font-size: 20px; font-weight: 700; margin: 0 0 6px; }
+.static-car-intro p { color: var(--text-dim); font-size: 14px; line-height: 1.5; margin: 0; }
+
 .topbar-search { flex: 1; max-width: 420px; }
 .topbar-search input {
   width: 100%; padding: 9px 14px;

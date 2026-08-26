@@ -92,6 +92,7 @@ function jsonLdFor(car, url, similar) {
     vehicleModelDate: String(car.modelYear),
     bodyType: car.bodyStyle,
     fuelType: "Electric",
+    description: carSummarySentence(car),
     url,
   };
   if (isReal(car.doors)) ld.numberOfDoors = car.doors;
@@ -187,7 +188,7 @@ function pageFor(car) {
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=19" />
+<link rel="stylesheet" href="/css/styles.css?v=20" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -219,6 +220,11 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
       <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle color theme"></button>
     </div>
   </header>
+
+  <div id="staticCarIntro" class="static-car-intro">
+    <h1>${esc(title)}</h1>
+    <p>${esc(summary)} Full specs below.</p>
+  </div>
 
   <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
 
@@ -288,7 +294,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
 
 </div>
 
-<script type="module" src="/js/app.js?v=35"></script>
+<script type="module" src="/js/app.js?v=36"></script>
 </body>
 </html>
 `;
