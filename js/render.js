@@ -1,12 +1,8 @@
-import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence } from "./fields.js?v=8";
-import { findSimilarCars } from "./similar.js?v=5";
+import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey } from "./fields.js?v=9";
+import { findSimilarCars } from "./similar.js?v=6";
 import { carPath } from "./router.js?v=5";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
-
-function fieldByKey(key) {
-  return FIELDS.find(f => f.key === key);
-}
 
 // Car data is hand-researched from external sources rather than programmatically validated,
 // so it isn't safe to assume it never contains characters that would break out of the
@@ -41,15 +37,6 @@ function copyToClipboard(text, btn) {
     btn.textContent = "Copied!";
     setTimeout(() => { btn.textContent = original; }, 1500);
   }).catch(() => {});
-}
-
-function fmtVal(field, value) {
-  let out;
-  if (field.format) out = field.format(value);
-  else if (value === undefined || value === null || value === "") out = "—";
-  else if (typeof value === "boolean") out = value ? "Yes" : "No";
-  else out = String(value);
-  return esc(out);
 }
 
 export function carTitle(car) {

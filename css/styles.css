@@ -111,12 +111,17 @@ input { font-family: inherit; }
 .brand-mark svg { display: block; }
 .brand-name { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
 
-/* Server-rendered fallback for a single car page — real content for crawlers/clients that
-   don't run JS. app.js removes this as soon as it boots, since the detail modal (or the
-   redirect-to-homepage fallback for a since-removed car) takes over from there. */
-.static-car-intro { padding: 20px 24px 0; }
-.static-car-intro h1 { font-size: 20px; font-weight: 700; margin: 0 0 6px; }
-.static-car-intro p { color: var(--text-dim); font-size: 14px; line-height: 1.5; margin: 0; }
+/* Server-rendered fallback for a single car page — a complete, real rendering of the car's
+   title, price, full spec table, links, and similar vehicles for crawlers/clients that don't
+   run JS. Reuses .modal-* classes directly (title/trim/price/summary/section/grid/row/links)
+   since the content is structurally identical to the live detail modal, just non-interactive
+   and outside a modal backdrop. app.js removes this whole block as soon as it boots, since the
+   real modal (or the redirect-to-homepage fallback for a since-removed car) takes over. */
+.static-car-detail { padding: 20px 24px 0; max-width: 640px; }
+.static-similar-list { list-style: none; padding: 0; margin: 0; font-size: 13px; }
+.static-similar-list li { padding: 6px 0; border-bottom: 1px dashed var(--border-soft); }
+.static-similar-list a { color: var(--accent-2); text-decoration: none; }
+.static-similar-list a:hover { text-decoration: underline; }
 
 .topbar-search { flex: 1; max-width: 420px; }
 .topbar-search input {

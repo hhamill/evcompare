@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { BASE_PATH, carPath } from "../js/router.js";
 import { findSimilarCars } from "../js/similar.js";
-import { carSummarySentence } from "../js/fields.js";
+import { FIELDS, GROUP_ORDER, carSummarySentence, fmtVal, fieldByKey } from "../js/fields.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -48,6 +48,19 @@ function esc(str) {
   return String(str).replace(/[&<>"']/g, c => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   }[c]));
+}
+
+// Mirrors js/render.js's own safeHref — only allow http(s) links through, so a malformed or
+// unexpected value in the hand-researched dataset can never resolve to a javascript: URL or
+// similar when interpolated straight into an <a href>.
+function safeHref(url) {
+  if (typeof url !== "string") return null;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:" ? url : null;
+  } catch {
+    return null;
+  }
 }
 
 // carPath() returns the real browser-visible path, e.g. "/evcompare/2026/mach-e/gt-awd" —
@@ -139,6 +152,42 @@ function breadcrumbLdFor(car, url) {
 
 // ---------- per-car page ----------
 
+// A plain, non-interactive rendering of the same spec sections the live detail modal builds
+// (js/render.js's renderDetailModal) — same FIELDS/GROUP_ORDER grouping and the same shared
+// fmtVal() formatting, so the static page can never show a value the modal wouldn't. The HTML
+// structure itself is necessarily duplicated (this runs in Node, render.js manipulates a real
+// DOM), but every actual value/label comes from the one shared source of truth.
+function staticSpecSections(car) {
+  const groups = {};
+  for (const field of FIELDS) {
+    if (field.key === "msrp") continue;
+    if (!groups[field.group]) groups[field.group] = [];
+    groups[field.group].push(field);
+  }
+  return GROUP_ORDER.map(groupName => {
+    const fields = groups[groupName];
+    if (!fields) return "";
+    const rows = fields.map(f => {
+      const v = f.get(car);
+      return `<div class="modal-row"><span class="k">${esc(f.label)}</span><span class="v">${fmtVal(f, v)}</span></div>`;
+    }).join("");
+    return `<div class="modal-section"><h4>${esc(groupName)}</h4><div class="modal-grid">${rows}</div></div>`;
+  }).join("");
+}
+
+function staticLinksBlock(car) {
+  const links = [];
+  const manufacturerSpecHref = safeHref(car.links?.manufacturerSpec);
+  const reviewHref = safeHref(car.links?.review);
+  const epaStickerHref = safeHref(car.links?.epaWindowSticker);
+  const rangeSourceHref = safeHref(car.range?.source);
+  if (manufacturerSpecHref) links.push(`<a href="${esc(manufacturerSpecHref)}" target="_blank" rel="noopener">Manufacturer specs ↗</a>`);
+  if (reviewHref) links.push(`<a href="${esc(reviewHref)}" target="_blank" rel="noopener">Review ↗</a>`);
+  if (epaStickerHref) links.push(`<a href="${esc(epaStickerHref)}" target="_blank" rel="noopener">EPA window sticker ↗</a>`);
+  if (rangeSourceHref) links.push(`<a href="${esc(rangeSourceHref)}" target="_blank" rel="noopener">fueleconomy.gov ↗</a>`);
+  return links.length ? `<div class="modal-section"><h4>Links</h4><div class="modal-links">${links.join("")}</div></div>` : "";
+}
+
 function pageFor(car) {
   const title = `${car.modelYear} ${car.make} ${car.model} ${car.trim}`;
   const url = canonicalUrl(car);
@@ -188,21 +237,11 @@ function pageFor(car) {
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=20" />
+<link rel="stylesheet" href="/css/styles.css?v=21" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
-<noscript>
-  <h1>${esc(title)}</h1>
-  <p>${esc(summary)}</p>
-  <p><a href="/">&larr; All EVs on ${esc(SITE_NAME)}</a></p>
-  ${similar.length ? `<p>Similar vehicles:</p>
-  <ul>
-${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.modelYear} ${c.make} ${c.model} ${c.trim}`)}</a></li>`).join("\n")}
-  </ul>` : ""}
-</noscript>
-
 <div class="app">
 
   <header class="topbar">
@@ -221,9 +260,21 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
     </div>
   </header>
 
-  <div id="staticCarIntro" class="static-car-intro">
-    <h1>${esc(title)}</h1>
-    <p>${esc(summary)} Full specs below.</p>
+  <div id="staticCarDetail" class="static-car-detail">
+    <h1 class="modal-title">${esc(title)}</h1>
+    <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
+    <div class="modal-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+    <p class="modal-summary">${esc(summary)} Full specs below.</p>
+    ${staticSpecSections(car)}
+    ${staticLinksBlock(car)}
+    ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}
+    <p><a href="/">&larr; All EVs on ${esc(SITE_NAME)}</a></p>
+    ${similar.length ? `<div class="modal-section">
+      <h4>Similar Vehicles</h4>
+      <ul class="static-similar-list">
+${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`${c.modelYear} ${c.make} ${c.model} ${c.trim}`)}</a> — ${fmtVal(fieldByKey("msrp"), c.msrp)}</li>`).join("\n")}
+      </ul>
+    </div>` : ""}
   </div>
 
   <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
@@ -294,7 +345,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
 
 </div>
 
-<script type="module" src="/js/app.js?v=36"></script>
+<script type="module" src="/js/app.js?v=37"></script>
 </body>
 </html>
 `;

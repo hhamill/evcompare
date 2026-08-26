@@ -14,6 +14,32 @@ function roundTo(value, decimals) {
   return Math.round(value * factor) / factor;
 }
 
+// Car data is hand-researched from external sources rather than programmatically validated,
+// so it isn't safe to assume it never contains characters that would break out of the
+// innerHTML/attribute context it's interpolated into. Mirrors the same small helper already
+// duplicated in render.js/filters.js/prerender.mjs for their own direct interpolation needs.
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[c]));
+}
+
+// Formats one field's raw value into display text, escaped and ready to interpolate — shared
+// by the live card grid/modal (render.js) and the static per-car page's spec table
+// (prerender.mjs), so a value's on-screen formatting can never quietly drift between the two.
+export function fmtVal(field, value) {
+  let out;
+  if (field.format) out = field.format(value);
+  else if (value === undefined || value === null || value === "") out = "—";
+  else if (typeof value === "boolean") out = value ? "Yes" : "No";
+  else out = String(value);
+  return esc(out);
+}
+
+export function fieldByKey(key) {
+  return FIELDS.find(f => f.key === key);
+}
+
 // Numeric ("range"-type) fields carry three distinct non-value states, not just one:
 //   null      — unknown: we looked and couldn't confirm a real number.
 //   "N/A"     — not applicable: the concept doesn't exist for this vehicle (e.g. enclosed

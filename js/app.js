@@ -1,6 +1,6 @@
-import { FIELDS } from "./fields.js?v=8";
-import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=8";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=17";
+import { FIELDS } from "./fields.js?v=9";
+import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=9";
+import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=18";
 import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath } from "./router.js?v=5";
 
 const MAX_COMPARE = 6;
@@ -123,11 +123,12 @@ function initTheme() {
 initTheme();
 
 async function init() {
-  // Static per-car pages render a server-side fallback intro (title + summary sentence) so
-  // crawlers/clients that don't run JS still get real content — see scripts/prerender.mjs.
-  // Once JS is running at all, the real detail modal (or homepage fallback) takes over, so
-  // drop it here unconditionally; a no-op on the homepage, where it doesn't exist.
-  document.getElementById("staticCarIntro")?.remove();
+  // Static per-car pages render a full server-side fallback (title, summary, complete spec
+  // table, links, similar vehicles) so crawlers/clients that don't run JS get real, complete
+  // content — see scripts/prerender.mjs. Once JS is running at all, the real interactive
+  // detail modal (or homepage fallback) takes over, so drop it here unconditionally; a no-op
+  // on the homepage, where it doesn't exist.
+  document.getElementById("staticCarDetail")?.remove();
 
   const res = await fetch("/data/evs.json");
   const { models: cars } = await res.json();
