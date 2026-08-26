@@ -1,8 +1,14 @@
 <!--
   Source template for assets/og-image.png (the site-wide Open Graph / Twitter Card / Discord
-  unfurl image) and assets/logo.png (the app's brand mark / favicon source). Not part of the
-  build — these are one-time hand-authored assets, regenerated manually when the branding
-  changes, not on every deploy.
+  unfurl image) and assets/logo.png (a square, larger-scale render of the same scene, for
+  README/social-profile use). Not part of the build — these are one-time hand-authored assets,
+  regenerated manually when the branding changes, not on every deploy.
+
+  The actual browser-tab favicon and topbar brand-mark are a separate, unrelated design (a
+  circle split green/blue with a bolt through the middle) — plain hand-written SVG markup
+  living directly in index.html and scripts/prerender.mjs, not generated from this file. This
+  template's two-car race scene is still the OG-banner/social-profile artwork; the two designs
+  intentionally don't match right now (2026-08-23) — revisit if that divergence stops working.
 
   Two 8-bit pixel-art EVs face off left-to-right, drawn on a <canvas> from plain pixel-grid
   arrays (see CAR_RIGHT/CAR_LEFT below) and scaled up with imageSmoothingEnabled=false for
@@ -137,52 +143,12 @@ function drawBoltGlow(ctx, cx, cy, basePx) {
 // to read correctly as the small "vs" divider in the OG image (see `bolt` in drawBolt above),
 // just doubled in resolution (each cell -> 2x2) for more shading detail at this larger size.
 // 8 wide x 12 tall.
-const BOLT_ICON = [
-  "....FFFS",
-  "....FFFS",
-  "..FFFS..",
-  "..FFFS..",
-  "FFFFFFFS",
-  "FFFFFFFS",
-  "....FFFS",
-  "....FFFS",
-  "..FFFS..",
-  "..FFFS..",
-  "FFFS....",
-  "FFFS....",
-];
-const BOLT_ICON_COLORS = { ".": null, F: "#fff3b0", S: "#e0a940" };
-
-function drawBoltIcon(ctx, ox, oy, px) {
-  for (let y = 0; y < BOLT_ICON.length; y++) {
-    for (let x = 0; x < BOLT_ICON[y].length; x++) {
-      const c = BOLT_ICON_COLORS[BOLT_ICON[y][x]];
-      if (!c) continue;
-      ctx.fillStyle = c;
-      ctx.fillRect(ox + x * px, oy + y * px, px, px);
-    }
-  }
-}
-
 const mode = location.hash.slice(1) || "og";
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
-if (mode === "icon") {
-  // Preview only, at large scale, on the same diagonal gradient the real .brand-mark badge
-  // uses — for checking legibility before deriving the actual SVG markup from BOLT_ICON.
-  canvas.width = 300;
-  canvas.height = 300;
-  const grad = ctx.createLinearGradient(0, 0, 300, 300);
-  grad.addColorStop(0, "#4ee08a");
-  grad.addColorStop(1, "#5aa2ff");
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, 300, 300);
-  const px = 300 / 16;
-  const w = 8 * px, h = 12 * px;
-  drawBoltIcon(ctx, (300 - w) / 2, (300 - h) / 2, px);
-} else if (mode === "og") {
+if (mode === "og") {
   // 1200x600 (2:1) rather than 1200x630 (1.91:1) — still squarely within the standard OG/
   // Twitter range (Twitter's own docs prefer 2:1 for summary_large_image), just shorter so the
   // content fills the frame instead of floating in a lot of dark empty space top-to-bottom.
@@ -232,23 +198,6 @@ if (mode === "icon") {
   ctx.fillStyle = "#9aa4b6";
   ctx.font = "500 28px -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif";
   ctx.fillText("Filter and compare electric vehicles side by side", 600, 505);
-} else if (mode === "header") {
-  // A small standalone composition for the topbar, not a crop of the wide "og" scene — the two
-  // cars there are spaced out for a 1200-wide banner (roughly 4.5:1 just for the pair), so
-  // cropping down to an icon-ish ratio would either clip most of both cars or shrink them to
-  // nothing. Same CAR_RIGHT/CAR_LEFT/bolt data and drawSprite/drawBolt functions as "og" though
-  // — just laid out tighter, at a smaller px scale, so it can't visually diverge from the real
-  // artwork. Transparent background so it sits naturally on the topbar in either theme.
-  document.body.style.background = "transparent"; // override the shared dark <body> rule above
-  const px = 3;
-  const carW = CAR_RIGHT[0].length * px, carH = CAR_RIGHT.length * px; // 72 x 36
-  const gap = 16;
-  canvas.width = carW * 2 + gap + 8;
-  canvas.height = carH + 8;
-
-  drawSprite(ctx, CAR_RIGHT, 4, 4, px);
-  drawSprite(ctx, CAR_LEFT, 4 + carW + gap, 4, px);
-  drawBolt(ctx, 4 + carW + gap / 2 - 6, 4 + carH / 2 - 9, 3, "#eef1f6");
 } else {
   canvas.width = 512;
   canvas.height = 512;
@@ -266,9 +215,9 @@ if (mode === "icon") {
     ctx.fillRect(x, y, w, h);
   }
 
-  // Just car A, centered, for a larger brand-mark asset (README/social-profile scale — the
-  // browser-tab favicon itself stays the simple bolt SVG already in index.html, since a full
-  // sprite this detailed won't read at 16-32px).
+  // Just car A, centered — this is a square, larger-scale render of the race scene for
+  // README/social-profile use (the favicon/topbar mark is the separate split-circle design,
+  // see the top-of-file comment).
   const px = 11;
   const w = CAR_RIGHT[0].length * px;
   const h = CAR_RIGHT.length * px;
