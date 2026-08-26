@@ -1,4 +1,4 @@
-import { FIELDS, GROUP_ORDER, bodyIcon } from "./fields.js?v=7";
+import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence } from "./fields.js?v=8";
 import { findSimilarCars } from "./similar.js?v=5";
 import { carPath } from "./router.js?v=5";
 
@@ -320,6 +320,7 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
     <div class="modal-title">${bodyIcon(car.bodyStyle)} ${carTitle(car)}</div>
     <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
     <div class="modal-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+    <p class="modal-summary">${esc(carSummarySentence(car))} Full specs below.</p>
     ${sections}
     ${links.length ? `<div class="modal-section"><h4>Links</h4><div class="modal-links">${links.join("")}</div></div>` : ""}
     ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}

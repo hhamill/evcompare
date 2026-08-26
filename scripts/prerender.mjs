@@ -21,6 +21,7 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { BASE_PATH, carPath } from "../js/router.js";
 import { findSimilarCars } from "../js/similar.js";
+import { carSummarySentence } from "../js/fields.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -68,15 +69,6 @@ const DRIVE_CONFIG = {
   RWD: "https://schema.org/RearWheelDriveConfiguration",
   FWD: "https://schema.org/FrontWheelDriveConfiguration",
 };
-
-function summaryLine(car) {
-  const parts = [];
-  if (isReal(car.msrp)) parts.push(`$${Math.round(car.msrp).toLocaleString()}`);
-  if (isReal(car.range?.epaMiles)) parts.push(`${car.range.epaMiles} mi EPA range`);
-  if (isReal(car.performance?.horsepowerHp)) parts.push(`${car.performance.horsepowerHp} hp`);
-  if (isReal(car.performance?.zeroTo60Sec)) parts.push(`0–60 in ${car.performance.zeroTo60Sec}s`);
-  return parts.join(" · ");
-}
 
 function jsonLdFor(car, url, similar) {
   const additionalProperty = [];
@@ -149,12 +141,10 @@ function breadcrumbLdFor(car, url) {
 function pageFor(car) {
   const title = `${car.modelYear} ${car.make} ${car.model} ${car.trim}`;
   const url = canonicalUrl(car);
-  const summary = summaryLine(car);
+  const summary = carSummarySentence(car);
   // Doesn't restate the site name here — the title suffix and og:site_name already carry that,
   // and "compare...EVs...EV Compare" back to back read as redundant when actually spoken aloud.
-  const description = summary
-    ? `${title}: ${summary}. Full specs and side-by-side comparisons.`
-    : `${title}: full specs, price, and comparisons.`;
+  const description = `${summary} Full specs and side-by-side comparisons.`;
   const similar = findSimilarCars(car, cars, { limit: 4 });
   const ld = jsonLdFor(car, url, similar);
   const breadcrumbLd = breadcrumbLdFor(car, url);
@@ -197,7 +187,7 @@ function pageFor(car) {
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=18" />
+<link rel="stylesheet" href="/css/styles.css?v=19" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -243,6 +233,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
 
     <main class="content">
       <div id="viewResults" class="view">
+        <p class="intro-line">View and compare electric vehicles sold in the US. Click a model or use the filters to get started.</p>
         <div class="results-toolbar">
           <label for="sortSelect" class="results-toolbar-label">Sort by</label>
           <select id="sortSelect" class="sort-select">
@@ -297,7 +288,7 @@ ${similar.map(({ car: c }) => `    <li><a href="${esc(carPath(c))}/">${esc(`${c.
 
 </div>
 
-<script type="module" src="/js/app.js?v=34"></script>
+<script type="module" src="/js/app.js?v=35"></script>
 </body>
 </html>
 `;

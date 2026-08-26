@@ -139,3 +139,30 @@ export const BODY_ICONS = {
 export function bodyIcon(style) {
   return BODY_ICONS[style] || "⚡";
 }
+
+// Builds a one-sentence, plain-English description of a car from its core specs — shared by
+// the detail modal (render.js) and the static per-car page's meta description / no-JS
+// fallback (prerender.mjs), so the two stay in sync instead of drifting into separate,
+// hand-written blurbs that could disagree with each other. Deliberately returns just the
+// descriptive sentence with no trailing CTA — "full specs below" is only true in the modal
+// (where a spec table genuinely follows); the meta description and no-JS fallback don't have
+// one, so each call site appends whatever ending actually fits its own context.
+export function carSummarySentence(car) {
+  const isReal = v => v != null && v !== "N/A" && v !== "Pending";
+  const name = `${car.modelYear} ${car.make} ${car.model} ${car.trim}`;
+
+  let subject = "an electric vehicle";
+  if (car.bodyStyle) {
+    subject = isReal(car.maxPassengers)
+      ? `a ${car.maxPassengers}-seat ${car.bodyStyle}`
+      : `${car.bodyStyle === "SUV" ? "an" : "a"} ${car.bodyStyle}`;
+  }
+
+  const details = [];
+  if (isReal(car.range?.epaMiles)) details.push(`${car.range.epaMiles} miles of estimated range`);
+  if (isReal(car.msrp)) details.push(`an MSRP of $${Math.round(car.msrp).toLocaleString()}`);
+
+  let sentence = `The ${name} is ${subject}`;
+  if (details.length) sentence += ` with ${details.join(" and ")}`;
+  return sentence + ".";
+}
