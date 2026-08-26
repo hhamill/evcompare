@@ -188,7 +188,7 @@ function pageFor(car) {
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 <script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%2316a35e%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%230b0d12%22/></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%2316a35e%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%23ffffff%22/></svg>" />
 <script>
   (function (l) {
     if (l.search[1] === "p" && l.search[2] === "=") {
