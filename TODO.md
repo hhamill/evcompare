@@ -863,9 +863,9 @@ a different trim, a different model year, or a EU-spec page. If nothing solid tu
 Tick each box and record the value + source as it lands, so this is resumable mid-batch.
 
 ### Batch A — Cadillac (3)
-- [ ] `cadillac-lyriq-2025-luxury-rwd` — 2025 Lyriq Luxury RWD (365hp RWD)
-- [ ] `cadillac-optiq-2025-luxury-awd` — 2025 Optiq Luxury AWD (300hp AWD)
-- [ ] `cadillac-optiq-2025-sport-awd` — 2025 Optiq Sport AWD (300hp AWD)
+- [x] `cadillac-lyriq-2025-luxury-rwd` — **5.7s** (Car and Driver, via SlashGear)
+- [x] `cadillac-optiq-2025-luxury-awd` — **5.9s** (Edmunds tested; Hagerty/MotorWeek agree)
+- [x] `cadillac-optiq-2025-sport-awd` — **5.9s** (same 300hp AWD powertrain as Luxury)
 
 ### Batch B — GM trucks (3)
 - [ ] `chevrolet-silverado-ev-2026-wt-standard-range` — 2026 Silverado EV WT Std Range (510hp)
@@ -897,3 +897,17 @@ stays `null` with a note — that's the correct outcome, not a failure.
 
 ## Results
 _(appended per batch as work proceeds)_
+
+**Batch A — Cadillac — done, 3/3.** Two traps worth knowing for the remaining batches:
+
+- The first search for the Lyriq RWD returned **4.8s**, which is wrong — that's near the AWD
+  figure. Summaries conflate trims freely when a model has several powertrains. Confirmed
+  5.7s (RWD, 365hp) vs 4.6s (AWD, 515hp) from Car and Driver before recording.
+- The Optiq's powertrain **changed between model years**: 300hp AWD in 2025 (our records),
+  440hp in 2026. A 2026-sourced figure would have been wrong for a 2025 record. Always check
+  the model year on the source page.
+
+Added `scripts/set-spec.mjs` to make these edits rather than hand-editing a 400KB file: it
+edits one line in place, refuses to overwrite a non-null value without `--force` (so a batch
+is safe to re-run after an interruption), and bumps that record's `lastVerifiedDate` — which
+also means the sitemap's per-URL `lastmod` starts carrying real signal for the first time.

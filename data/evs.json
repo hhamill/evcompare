@@ -1687,7 +1687,7 @@
       "id": "cadillac-lyriq-2025-luxury-rwd",
       "url": "https://evcompare.org/2025/lyriq/luxury-rwd/",
       "catalogId": 20,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "Cadillac",
       "model": "Lyriq",
       "trim": "Luxury RWD",
@@ -1714,7 +1714,7 @@
         "source": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Cadillac&baseModel=LYRIQ&srchtyp=ymm&pageno=1"
       },
       "performance": {
-        "zeroTo60Sec": null,
+        "zeroTo60Sec": 5.7,
         "horsepowerHp": 365,
         "topSpeedMph": null
       },
@@ -1854,7 +1854,7 @@
       "id": "cadillac-optiq-2025-luxury-awd",
       "url": "https://evcompare.org/2025/optiq/luxury-awd/",
       "catalogId": 22,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "Cadillac",
       "model": "Optiq",
       "trim": "Luxury AWD",
@@ -1881,7 +1881,7 @@
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49951"
       },
       "performance": {
-        "zeroTo60Sec": null,
+        "zeroTo60Sec": 5.9,
         "horsepowerHp": 300,
         "topSpeedMph": 110
       },
@@ -1942,7 +1942,7 @@
       "id": "cadillac-optiq-2025-sport-awd",
       "url": "https://evcompare.org/2025/optiq/sport-awd/",
       "catalogId": 23,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "Cadillac",
       "model": "Optiq",
       "trim": "Sport AWD",
@@ -1969,7 +1969,7 @@
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49951"
       },
       "performance": {
-        "zeroTo60Sec": null,
+        "zeroTo60Sec": 5.9,
         "horsepowerHp": 300,
         "topSpeedMph": 110
       },
