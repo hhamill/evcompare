@@ -339,6 +339,21 @@ body.compare-view #resetFiltersBtn { display: none; }
 .load-error h3 { color: var(--text); margin-bottom: 6px; }
 .load-error p { font-size: 14px; margin: 0 0 16px; }
 
+/* ---------- Body-style silhouettes ---------- */
+/* bodyIcon() in fields.js emits an inline <svg class="body-icon"> whose shapes are 72 x 30.7,
+   so width drives height. Sized per context here rather than in the markup: the same glyph
+   appears in a 40px card tile, a 30px similar-vehicle tile, and inline beside two different
+   titles. Fill is currentColor, so each context's text colour carries it. */
+.body-icon { display: block; width: 32px; height: auto; flex-shrink: 0; }
+.ev-card-icon .body-icon { width: 34px; }
+.similar-card-icon .body-icon { width: 25px; }
+
+/* These two sit inline next to title text rather than inside a tile, so they need to be
+   inline-block and optically centred against the cap height. */
+.compare-col-icon { display: inline-block; vertical-align: middle; margin-right: 3px; }
+.compare-col-icon .body-icon { width: 22px; }
+.modal-title .body-icon { display: inline-block; vertical-align: middle; width: 30px; margin-right: 8px; }
+
 /* ---------- Card grid ---------- */
 .intro-line { font-size: 14px; color: var(--text-dim); line-height: 1.5; margin: 0 0 16px; }
 .results-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 14px; }
@@ -370,7 +385,6 @@ body.compare-view #resetFiltersBtn { display: none; }
   width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 22%, transparent), color-mix(in srgb, var(--accent-2) 18%, transparent));
-  font-size: 19px;
 }
 .ev-card-title { font-size: 15px; font-weight: 700; line-height: 1.25; }
 .ev-card-trim { font-size: 12.5px; color: var(--text-dim); margin-top: 2px; }
@@ -546,7 +560,7 @@ body.compare-view #resetFiltersBtn { display: none; }
 }
 .similar-card-top { display: flex; gap: 10px; align-items: flex-start; }
 .similar-card-icon {
-  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; font-size: 15px;
+  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 22%, transparent), color-mix(in srgb, var(--accent-2) 18%, transparent));
 }

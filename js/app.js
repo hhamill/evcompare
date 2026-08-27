@@ -1,6 +1,6 @@
-import { FIELDS } from "./fields.js?v=9";
+import { FIELDS, BODY_SPRITE } from "./fields.js?v=11";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js?v=10";
-import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=23";
+import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=24";
 import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath } from "./router.js?v=5";
 
 const MAX_COMPARE = 6;
@@ -138,6 +138,8 @@ async function init() {
   // detail modal (or homepage fallback) takes over, so drop it here unconditionally; a no-op
   // on the homepage, where it doesn't exist.
   document.getElementById("staticCarDetail")?.remove();
+
+  mountBodySprite();
 
   // ~400KB over the wire with nothing to show until it lands. Previously the user watched an
   // empty grid beside a count reading "0 vehicles" — indistinguishable from "no matches" —
@@ -309,6 +311,18 @@ function bindGlobalEvents() {
 // wrapped, so the sidebar overshot the viewport and its last few pixels were unreachable.
 // ResizeObserver rather than a resize listener: the topbar also changes height when compare
 // mode hides the search field, which fires no window resize.
+// The <symbol> sprite every body-style icon points at via <use>. Mounted once, before
+// anything renders: a <use> whose target isn't in the document at paint time renders nothing
+// and does NOT retroactively resolve when the symbol turns up later.
+function mountBodySprite() {
+  if (document.getElementById("bodySprite")) return;
+  const holder = document.createElement("div");
+  holder.id = "bodySprite";
+  holder.hidden = true;
+  holder.innerHTML = BODY_SPRITE;
+  document.body.appendChild(holder);
+}
+
 function syncTopbarHeight() {
   const apply = () => {
     const h = el.topbar.getBoundingClientRect().height;

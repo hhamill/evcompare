@@ -1,4 +1,4 @@
-import { FIELDS } from "./fields.js?v=9";
+import { FIELDS } from "./fields.js?v=11";
 
 // Similar-vehicle finder: ranks other cars against one "anchor" car and
 // summarizes what's different (price/range deltas, features gained/lost).
