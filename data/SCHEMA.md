@@ -111,6 +111,27 @@ it. Verify against the manufacturer before relying on a value — every record c
 and a `lastVerifiedDate` for exactly that. The published wrapper repeats this in its `disclaimer`
 field so it travels with the file.
 
+## The wrapper
+
+`models` sits inside a small wrapper carrying licence and provenance metadata. It is written
+by `npm run sync-urls` here and regenerated at publish, from one shared definition in
+`scripts/dataset-meta.mjs`, so the copy taken from GitHub and the copy downloaded from the
+site carry identical terms:
+
+- **`hash`** — SHA-256 over the `models` array *alone*. Deliberately excludes the wrapper: a
+  file containing a hash of itself could never be stable, and this way adding metadata like
+  `terms` doesn't churn the value consumers check against. Mirrored in `data/current.json`.
+- **`license`**, **`attribution`** — CC0-1.0; attribution appreciated, never required.
+- **`disclaimer`**, **`terms`** — the no-warranty notice and a link to the full terms. Carried
+  in the file itself because a notice that lives only on a web page is worthless to someone
+  holding the JSON alone.
+- **`url`**, **`datasetPage`**, **`documentation`** — the site, the dataset landing page, and
+  this file, so a consumer holding only the JSON can find their way back.
+- **`count`** — number of records.
+- **`generatedAt`** — build timestamp. **Publish-only**; it is not in the committed copy, where
+  it would mean nothing (git already records when this file changed) and would churn the repo
+  on every sync.
+
 ## Generated fields
 
 `dist/data/evs.json` is not a copy of this file — `scripts/prerender.mjs` rewrites it with

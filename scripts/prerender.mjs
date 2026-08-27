@@ -23,6 +23,7 @@ import { BASE_PATH, carPath } from "../js/router.js";
 import { findSimilarCars } from "../js/similar.js";
 import { buildHubs, hubCars, hubsForCar } from "../js/hubs.js";
 import { hubPath } from "../js/router.js";
+import { datasetWrapper, WARRANTY_HTML, DISCLAIMER_TEXT } from "./dataset-meta.mjs";
 import { FIELDS, GROUP_ORDER, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "../js/fields.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -210,24 +211,6 @@ function staticLinksBlock(car) {
 // intro line differ between page types.
 // Single source for the inline favicon, shared by pageShell and the standalone data page —
 // which had none, so browsers fell back to a /favicon.ico that doesn't exist.
-// The warranty disclaimer, written once. "may contain" rather than "contains": asserting the
-// data *does* contain errors is both stronger than we know and an odd thing to volunteer.
-const WARRANTY_HTML = `<p><strong>This data is provided as is.</strong> It is compiled by hand from manufacturer
-      specifications, EPA listings and published reviews, and may contain errors or omissions.
-      Figures that were correct when verified may since have changed — manufacturers revise
-      specifications, and EPA ratings are re-certified. Every vehicle carries its own source
-      links and a last-verified date so you can check the trail yourself.</p>
-    <p>It is offered without warranty of any kind, express or implied, including fitness for a
-      particular purpose. Verify any figure against the manufacturer before relying on it,
-      particularly for a purchase decision. No liability is accepted for any use of this data.
-      (CC0 itself disclaims warranties in the same terms; this just says so plainly.)</p>`;
-
-const DISCLAIMER_TEXT = "Provided as is, without warranty of any kind. Compiled by hand from manufacturer "
-  + "specifications, EPA listings and published reviews; it may contain errors or omissions, and "
-  + "figures correct when verified may since have changed. Verify against the manufacturer before "
-  + "relying on any value. No liability is accepted for any use of this data. "
-  + "Full terms: https://evcompare.org/terms/";
-
 const FAVICON = `<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%230f7a46%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%23ffffff%22/></svg>" />`;
 
 const OG_IMAGE = `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`;
@@ -854,7 +837,19 @@ function main() {
     return { id, url, ...rest };
   });
 
+  // The committed wrapper can drift the same way the urls can — most likely by rewording the
+  // disclaimer in dataset-meta.mjs and forgetting to re-sync. Published output is regenerated
+  // either way; this only flags the repo copy.
+  const srcWrapper = JSON.parse(readFileSync(path.join(ROOT, "data", "evs.json"), "utf8"));
+  delete srcWrapper.models;
+  const expectedWrapper = datasetWrapper({ hash: srcWrapper.hash, count: cars.length });
+  const wrapperStale = JSON.stringify(srcWrapper) !== JSON.stringify(expectedWrapper);
+
   const missingUrls = cars.filter(c => !c.url).length;
+  if (wrapperStale) {
+    console.warn(`  ! data/evs.json's wrapper is out of date (licence/terms/disclaimer metadata).`);
+    console.warn(`    Run: npm run sync-urls`);
+  }
   if (staleUrls.length || missingUrls) {
     console.warn(`  ! data/evs.json urls are out of date (${staleUrls.length} stale, ${missingUrls} missing).`);
     console.warn(`    The published dataset is correct — these are recomputed — but the copy in the`);
@@ -867,20 +862,7 @@ function main() {
   const dataHash = hashModels(publishedModels);
   writeFileSync(
     path.join(DIST, "data", "evs.json"),
-    JSON.stringify({
-      hash: dataHash,
-      license,
-      attribution,
-      // Travels inside the file on purpose: the disclaimer is worthless if it only lives on a
-      // web page the person holding this JSON never saw.
-      disclaimer: DISCLAIMER_TEXT,
-      url: SITE_BASE_URL,
-      datasetPage: `${SITE_BASE_URL}${BASE_PATH}/data/`,
-      documentation: `${SITE_BASE_URL}${BASE_PATH}/data/SCHEMA.md`,
-      generatedAt,
-      count: cars.length,
-      models: publishedModels,
-    }, null, 2) + "\n"
+    JSON.stringify({ ...datasetWrapper({ hash: dataHash, count: cars.length, generatedAt }), models: publishedModels }, null, 2) + "\n"
   );
   writeFileSync(
     path.join(DIST, "data", "current.json"),

@@ -1,9 +1,12 @@
 {
-  "hash": "sha256:e52bf7cc051e5ed73e0c5da3caef22fc72190912f7ccf6b6604ab024a686f440",
+  "hash": "sha256:ec095b83a89ce5861a6167cd8f25df2e925782eb31d44aed460a1a6057931b89",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
+  "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
+  "terms": "https://evcompare.org/terms/",
   "url": "https://evcompare.org",
-  "generatedAt": "2026-08-22T17:09:16.072Z",
+  "datasetPage": "https://evcompare.org/data/",
+  "documentation": "https://evcompare.org/data/SCHEMA.md",
   "count": 149,
   "models": [
     {

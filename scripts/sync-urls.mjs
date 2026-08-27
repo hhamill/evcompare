@@ -15,10 +15,11 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { createHash } from "node:crypto";
 import { carPath } from "../js/router.js";
+import { datasetWrapper, SITE } from "./dataset-meta.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SITE = "https://evcompare.org";
 const FILE = path.join(ROOT, "data", "evs.json");
 
 const raw = readFileSync(FILE, "utf8");
@@ -47,10 +48,33 @@ for (let i = 0; i < lines.length; i++) {
   }
 }
 
-const result = out.join("\n");
+let result = out.join("\n");
+
+// Rewrite the wrapper too. The committed copy previously carried a hash left over from
+// whenever it was last hand-set — by now describing nothing — and lacked the disclaimer,
+// terms and pointer fields the published copy gained. Someone taking this file from GitHub
+// should get the same terms as someone downloading it from the site.
+//
+// Safe to regenerate wholesale, unlike `models`: the wrapper is machine-written, so there is
+// no hand-formatting to preserve. The models array is left strictly alone.
+const parsed = JSON.parse(result);
+const hash = "sha256:" + createHash("sha256").update(JSON.stringify(parsed.models)).digest("hex");
+const wrapper = datasetWrapper({ hash, count: parsed.models.length });
+const wrapperLines = Object.entries(wrapper)
+  .map(([k, v]) => `  ${JSON.stringify(k)}: ${JSON.stringify(v)},`)
+  .join("\n");
+
+const modelsAt = result.indexOf('  "models": [');
+if (modelsAt === -1) throw new Error('could not find the "models" key to splice the wrapper before');
+result = `{\n${wrapperLines}\n${result.slice(modelsAt)}`;
+
 if (result === raw) {
-  console.log(`data/evs.json already in sync (${unchanged} urls)`);
+  console.log(`data/evs.json already in sync (${unchanged} urls, wrapper current)`);
 } else {
   writeFileSync(FILE, result);
-  console.log(`data/evs.json: ${added} url(s) added, ${updated} updated, ${unchanged} unchanged`);
+  const parts = [];
+  if (added) parts.push(`${added} url(s) added`);
+  if (updated) parts.push(`${updated} url(s) updated`);
+  parts.push(`wrapper rewritten (hash ${hash.slice(0, 15)}…)`);
+  console.log(`data/evs.json: ${parts.join(", ")}`);
 }
