@@ -210,6 +210,24 @@ function staticLinksBlock(car) {
 // intro line differ between page types.
 // Single source for the inline favicon, shared by pageShell and the standalone data page —
 // which had none, so browsers fell back to a /favicon.ico that doesn't exist.
+// The warranty disclaimer, written once. "may contain" rather than "contains": asserting the
+// data *does* contain errors is both stronger than we know and an odd thing to volunteer.
+const WARRANTY_HTML = `<p><strong>This data is provided as is.</strong> It is compiled by hand from manufacturer
+      specifications, EPA listings and published reviews, and may contain errors or omissions.
+      Figures that were correct when verified may since have changed — manufacturers revise
+      specifications, and EPA ratings are re-certified. Every vehicle carries its own source
+      links and a last-verified date so you can check the trail yourself.</p>
+    <p>It is offered without warranty of any kind, express or implied, including fitness for a
+      particular purpose. Verify any figure against the manufacturer before relying on it,
+      particularly for a purchase decision. No liability is accepted for any use of this data.
+      (CC0 itself disclaims warranties in the same terms; this just says so plainly.)</p>`;
+
+const DISCLAIMER_TEXT = "Provided as is, without warranty of any kind. Compiled by hand from manufacturer "
+  + "specifications, EPA listings and published reviews; it may contain errors or omissions, and "
+  + "figures correct when verified may since have changed. Verify against the manufacturer before "
+  + "relying on any value. No liability is accepted for any use of this data. "
+  + "Full terms: https://evcompare.org/terms/";
+
 const FAVICON = `<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%230f7a46%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%23ffffff%22/></svg>" />`;
 
 const OG_IMAGE = `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`;
@@ -434,7 +452,8 @@ function footerNavHtml() {
     <nav class="hub-links hub-links-footer" aria-label="Browse by make">
       ${hubNavHtml(HUBSETS.makes, "By make:")}
     </nav>
-    <p class="hub-links-footer doc-link">The data behind this site is
+    <p class="hub-links-footer doc-link">Specifications may contain errors — see
+      <a href="${BASE_PATH}/terms/">terms of use</a>. The data behind this site is
       <a href="${BASE_PATH}/data/">free to download and use (CC0)</a>.</p>`;
 }
 
@@ -598,35 +617,31 @@ function datasetLd(meta, sizes) {
   };
 }
 
-function buildDataPage(meta, sizes) {
-  const url = `${SITE_BASE_URL}${BASE_PATH}/data/`;
-  const description = `Hand-researched specifications for ${meta.count} US electric vehicles, free to use for any purpose under CC0.`;
-  const groups = GROUP_ORDER.map(g => {
-    const fs = FIELDS.filter(f => f.group === g);
-    return `      <div class="ds-group"><h3>${esc(g)}</h3><p>${fs.map(f => esc(f.label)).join(" &middot; ")}</p></div>`;
-  }).join("\n");
-
+// Shell for the standalone documentation pages (/data/, /terms/). They are deliberately not
+// the app shell — a filter sidebar and card grid around prose would be noise — but they do
+// share one head so a third doc page can't drift from the other two.
+function docShell(o) {
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>EV Dataset — Free CC0 Electric Vehicle Specifications | ${SITE_NAME}</title>
-<meta name="description" content="${esc(description)}" />
+<title>${esc(o.pageTitle)}</title>
+<meta name="description" content="${esc(o.description)}" />
 <meta name="robots" content="index,follow" />
 <meta name="theme-color" content="#4ee08a" />
-<link rel="canonical" href="${esc(url)}" />
+<link rel="canonical" href="${esc(o.url)}" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="${esc(SITE_NAME)}" />
-<meta property="og:title" content="EV Compare dataset — ${meta.count} US electric vehicles, CC0" />
-<meta property="og:description" content="${esc(description)}" />
-<meta property="og:url" content="${esc(url)}" />
+<meta property="og:title" content="${esc(o.ogTitle)}" />
+<meta property="og:description" content="${esc(o.description)}" />
+<meta property="og:url" content="${esc(o.url)}" />
 <meta property="og:image" content="${esc(OG_IMAGE)}" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="EV Compare dataset — ${meta.count} US electric vehicles, CC0" />
-<meta name="twitter:description" content="${esc(description)}" />
+<meta name="twitter:title" content="${esc(o.ogTitle)}" />
+<meta name="twitter:description" content="${esc(o.description)}" />
 <meta name="twitter:image" content="${esc(OG_IMAGE)}" />
-<script type="application/ld+json">${JSON.stringify(datasetLd(meta, sizes))}</script>
+${o.jsonLd ? `<script type="application/ld+json">${JSON.stringify(o.jsonLd)}</script>` : ""}
 ${FAVICON}
 <link rel="stylesheet" href="/css/styles.css?v=37" />
 </head>
@@ -638,7 +653,28 @@ ${FAVICON}
     </a>
   </header>
   <main class="doc">
-    <h1>The EV Compare dataset</h1>
+${o.body}
+  </main>
+</div>
+</body>
+</html>
+`;
+}
+
+function buildDataPage(meta, sizes) {
+  const url = `${SITE_BASE_URL}${BASE_PATH}/data/`;
+  const description = `Hand-researched specifications for ${meta.count} US electric vehicles, free to use for any purpose under CC0.`;
+  const groups = GROUP_ORDER.map(g => {
+    const fs = FIELDS.filter(f => f.group === g);
+    return `      <div class="ds-group"><h3>${esc(g)}</h3><p>${fs.map(f => esc(f.label)).join(" &middot; ")}</p></div>`;
+  }).join("\n");
+
+  return docShell({
+    pageTitle: `EV Dataset — Free CC0 Electric Vehicle Specifications | ${SITE_NAME}`,
+    ogTitle: `EV Compare dataset — ${meta.count} US electric vehicles, CC0`,
+    description, url,
+    jsonLd: datasetLd(meta, sizes),
+    body: `    <h1>The EV Compare dataset</h1>
     <p class="doc-lede">Specifications for <strong>${meta.count} electric vehicles</strong> sold in the United States —
       range, battery, charging, performance, seating, cargo and driver-assist data, hand-researched against
       manufacturer specs, EPA listings and published reviews. Every vehicle carries its own source links and a
@@ -649,15 +685,7 @@ ${FAVICON}
       no attribution required. A credit to ${esc(SITE_NAME)} is appreciated, never demanded.</p>
 
     <h2>No warranty</h2>
-    <p><strong>This data is provided as is.</strong> It is compiled by hand from manufacturer
-      specifications, EPA listings and published reviews, and it contains errors and omissions.
-      Figures that were correct when verified may since have changed — manufacturers revise
-      specifications, and EPA ratings are re-certified. Every vehicle carries its own source
-      links and a last-verified date so you can check the trail yourself.</p>
-    <p>It is offered without warranty of any kind, express or implied, including fitness for a
-      particular purpose. Verify any figure against the manufacturer before relying on it,
-      particularly for a purchase decision. No liability is accepted for any use of this data.
-      (CC0 itself disclaims warranties in the same terms; this just says so plainly.)</p>
+    ${WARRANTY_HTML}
 
     <h2>Download</h2>
     <table class="doc-table">
@@ -694,12 +722,52 @@ ${groups}
       hasn't posted for a car already on sale. Treating all three as zero will give you wrong averages.
       <a href="${BASE_PATH}/data/SCHEMA.md">SCHEMA.md</a> covers this per field.</p>
 
-    <p class="doc-back"><a href="${BASE_PATH}/">&larr; Browse all ${meta.count} vehicles on ${esc(SITE_NAME)}</a></p>
-  </main>
-</div>
-</body>
-</html>
-`;
+    <p class="doc-back"><a href="${BASE_PATH}/">&larr; Browse all ${meta.count} vehicles on ${esc(SITE_NAME)}</a></p>`,
+  });
+}
+
+function buildTermsPage(meta) {
+  const url = `${SITE_BASE_URL}${BASE_PATH}/terms/`;
+  const description = "How to use EV Compare: specifications are provided as is without warranty, "
+    + "the underlying dataset is public domain, and manufacturer names belong to their owners.";
+  return docShell({
+    pageTitle: `Terms of Use | ${SITE_NAME}`,
+    ogTitle: `Terms of use — ${SITE_NAME}`,
+    description, url,
+    jsonLd: null,
+    body: `    <h1>Terms of use</h1>
+    <p class="doc-lede">${esc(SITE_NAME)} is a free reference for comparing electric vehicles sold in the
+      United States. It publishes specifications and comparisons; it does not sell cars, take
+      advertising, or recommend one vehicle over another.</p>
+
+    <h2>Accuracy and warranty</h2>
+    ${WARRANTY_HTML}
+
+    <h2>Not advice</h2>
+    <p>Nothing here is purchasing, financial or legal advice. Specifications vary by trim,
+      option pack, model year and market, and a figure that matches one configuration may not
+      match the one in front of you. Confirm anything that matters with the manufacturer or
+      dealer before you commit to a purchase.</p>
+
+    <h2>The data</h2>
+    <p>The dataset behind this site is released into the public domain under
+      <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0&nbsp;1.0</a> — free to use for
+      any purpose, commercial included, with no permission or attribution required. It is
+      documented and downloadable on the <a href="${BASE_PATH}/data/">dataset page</a>. The same
+      no-warranty terms above apply to it.</p>
+
+    <h2>Trademarks</h2>
+    <p>Manufacturer, model and trim names are trademarks of their respective owners and are used
+      here only to identify the vehicles being described. ${esc(SITE_NAME)} is not affiliated with,
+      endorsed by, or sponsored by any manufacturer.</p>
+
+    <h2>Links to other sites</h2>
+    <p>Vehicle pages link out to manufacturer specifications, EPA listings and independent
+      reviews so you can check a figure at its source. Those sites are not under our control and
+      we are not responsible for their content or accuracy.</p>
+
+    <p class="doc-back"><a href="${BASE_PATH}/">&larr; Browse all ${meta.count} vehicles on ${esc(SITE_NAME)}</a></p>`,
+  });
 }
 
 // ---------- sitemap / robots ----------
@@ -805,10 +873,7 @@ function main() {
       attribution,
       // Travels inside the file on purpose: the disclaimer is worthless if it only lives on a
       // web page the person holding this JSON never saw.
-      disclaimer: "Provided as is, without warranty of any kind. Compiled by hand from manufacturer "
-        + "specifications, EPA listings and published reviews; it contains errors and omissions, and "
-        + "figures correct when verified may since have changed. Verify against the manufacturer before "
-        + "relying on any value. No liability is accepted for any use of this data.",
+      disclaimer: DISCLAIMER_TEXT,
       url: SITE_BASE_URL,
       datasetPage: `${SITE_BASE_URL}${BASE_PATH}/data/`,
       documentation: `${SITE_BASE_URL}${BASE_PATH}/data/SCHEMA.md`,
@@ -866,6 +931,10 @@ function main() {
   );
   sitemapEntries.push({ loc: `${SITE_BASE_URL}${BASE_PATH}/data/`, lastmod: mostRecentVerified });
 
+  mkdirSync(path.join(DIST, "terms"), { recursive: true });
+  writeFileSync(path.join(DIST, "terms", "index.html"), buildTermsPage({ count: cars.length }));
+  sitemapEntries.push({ loc: `${SITE_BASE_URL}${BASE_PATH}/terms/`, lastmod: mostRecentVerified });
+
   writeFileSync(path.join(DIST, "sitemap.xml"), buildSitemap(sitemapEntries));
   writeFileSync(path.join(DIST, "robots.txt"), buildRobots());
   writeFileSync(
@@ -873,7 +942,7 @@ function main() {
     buildLlmsTxt({ count: cars.length, lastVerified: mostRecentVerified })
   );
 
-  console.log(`Prerendered ${count} car pages + ${hubCount} hub pages + data/ + sitemap.xml/robots.txt into dist/`);
+  console.log(`Prerendered ${count} car pages + ${hubCount} hub pages + data/ + terms/ + sitemap.xml/robots.txt into dist/`);
 }
 
 main();
