@@ -8,6 +8,7 @@
   "models": [
     {
       "id": "acura-zdx-2024-a-spec-rwd",
+      "url": "https://evcompare.org/2024/zdx/a-spec-rwd/",
       "catalogId": 1,
       "lastVerifiedDate": "2026-08-21",
       "make": "Acura",
@@ -94,6 +95,7 @@
     },
     {
       "id": "acura-zdx-2024-type-s-awd",
+      "url": "https://evcompare.org/2024/zdx/type-s-awd/",
       "catalogId": 2,
       "lastVerifiedDate": "2026-08-21",
       "make": "Acura",
@@ -180,6 +182,7 @@
     },
     {
       "id": "audi-q4-e-tron-2025-premium-45",
+      "url": "https://evcompare.org/2025/q4-e-tron/premium-45/",
       "catalogId": 3,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -268,6 +271,7 @@
     },
     {
       "id": "audi-q4-e-tron-2025-premium-plus-55-quattro",
+      "url": "https://evcompare.org/2025/q4-e-tron/premium-plus-55-quattro/",
       "catalogId": 4,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -356,6 +360,7 @@
     },
     {
       "id": "audi-q6-e-tron-2025-premium-quattro",
+      "url": "https://evcompare.org/2025/q6-e-tron/premium-quattro/",
       "catalogId": 5,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -444,6 +449,7 @@
     },
     {
       "id": "audi-q8-e-tron-2025-premium-quattro",
+      "url": "https://evcompare.org/2025/q8-e-tron/premium-quattro/",
       "catalogId": 6,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -531,6 +537,7 @@
     },
     {
       "id": "audi-sq6-e-tron-2025-premium-quattro",
+      "url": "https://evcompare.org/2025/sq6-e-tron/premium-quattro/",
       "catalogId": 7,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -618,6 +625,7 @@
     },
     {
       "id": "audi-s-e-tron-gt-2025-premium-plus-quattro",
+      "url": "https://evcompare.org/2025/e-tron-gt/s-e-tron-gt-premium-plus-quattro/",
       "catalogId": 8,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -705,6 +713,7 @@
     },
     {
       "id": "audi-rs-e-tron-gt-2025",
+      "url": "https://evcompare.org/2025/e-tron-gt/rs-e-tron-gt-performance/",
       "catalogId": 9,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -791,6 +800,7 @@
     },
     {
       "id": "bmw-i4-2026-edrive40",
+      "url": "https://evcompare.org/2026/i4/edrive40/",
       "catalogId": 10,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
@@ -878,6 +888,7 @@
     },
     {
       "id": "bmw-i4-2026-m60-xdrive",
+      "url": "https://evcompare.org/2026/i4/m60-xdrive/",
       "catalogId": 11,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
@@ -965,6 +976,7 @@
     },
     {
       "id": "bmw-i5-2026-edrive40",
+      "url": "https://evcompare.org/2026/i5/edrive40/",
       "catalogId": 12,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
@@ -1052,6 +1064,7 @@
     },
     {
       "id": "bmw-i5-2026-m60-xdrive",
+      "url": "https://evcompare.org/2026/i5/m60-xdrive/",
       "catalogId": 13,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
@@ -1139,6 +1152,7 @@
     },
     {
       "id": "bmw-i7-2026-xdrive60",
+      "url": "https://evcompare.org/2026/i7/xdrive60/",
       "catalogId": 14,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
@@ -1227,6 +1241,7 @@
     },
     {
       "id": "bmw-ix-2026-xdrive60",
+      "url": "https://evcompare.org/2026/ix/xdrive60/",
       "catalogId": 15,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
@@ -1316,6 +1331,7 @@
     },
     {
       "id": "bmw-ix-2026-m70-xdrive",
+      "url": "https://evcompare.org/2026/ix/m70-xdrive/",
       "catalogId": 16,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
@@ -1404,6 +1420,7 @@
     },
     {
       "id": "bmw-ix3-2027-50-xdrive",
+      "url": "https://evcompare.org/2027/ix3/50-xdrive/",
       "catalogId": 17,
       "lastVerifiedDate": "2026-08-21",
       "make": "BMW",
@@ -1491,6 +1508,7 @@
     },
     {
       "id": "cadillac-escalade-iq-2026-luxury-awd",
+      "url": "https://evcompare.org/2026/escalade-iq/luxury-awd/",
       "catalogId": 18,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
@@ -1577,6 +1595,7 @@
     },
     {
       "id": "cadillac-escalade-iq-2026-premium-sport-awd",
+      "url": "https://evcompare.org/2026/escalade-iq/premium-sport-awd/",
       "catalogId": 19,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
@@ -1663,6 +1682,7 @@
     },
     {
       "id": "cadillac-lyriq-2025-luxury-rwd",
+      "url": "https://evcompare.org/2025/lyriq/luxury-rwd/",
       "catalogId": 20,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
@@ -1746,6 +1766,7 @@
     },
     {
       "id": "cadillac-lyriq-2025-sport-awd",
+      "url": "https://evcompare.org/2025/lyriq/sport-awd/",
       "catalogId": 21,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
@@ -1828,6 +1849,7 @@
     },
     {
       "id": "cadillac-optiq-2025-luxury-awd",
+      "url": "https://evcompare.org/2025/optiq/luxury-awd/",
       "catalogId": 22,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
@@ -1915,6 +1937,7 @@
     },
     {
       "id": "cadillac-optiq-2025-sport-awd",
+      "url": "https://evcompare.org/2025/optiq/sport-awd/",
       "catalogId": 23,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
@@ -2002,6 +2025,7 @@
     },
     {
       "id": "cadillac-vistiq-2026-luxury-awd",
+      "url": "https://evcompare.org/2026/vistiq/luxury-awd/",
       "catalogId": 24,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
@@ -2088,6 +2112,7 @@
     },
     {
       "id": "cadillac-vistiq-2026-platinum-awd",
+      "url": "https://evcompare.org/2026/vistiq/platinum-awd/",
       "catalogId": 25,
       "lastVerifiedDate": "2026-08-21",
       "make": "Cadillac",
@@ -2174,6 +2199,7 @@
     },
     {
       "id": "chevrolet-blazer-ev-2026-lt-fwd",
+      "url": "https://evcompare.org/2026/blazer-ev/lt-fwd/",
       "catalogId": 26,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
@@ -2261,6 +2287,7 @@
     },
     {
       "id": "chevrolet-blazer-ev-2026-lt-awd",
+      "url": "https://evcompare.org/2026/blazer-ev/lt-awd/",
       "catalogId": 27,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
@@ -2348,6 +2375,7 @@
     },
     {
       "id": "chevrolet-bolt-2027-lt",
+      "url": "https://evcompare.org/2027/bolt/lt/",
       "catalogId": 28,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
@@ -2433,6 +2461,7 @@
     },
     {
       "id": "chevrolet-bolt-2027-rs",
+      "url": "https://evcompare.org/2027/bolt/rs/",
       "catalogId": 29,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
@@ -2518,6 +2547,7 @@
     },
     {
       "id": "chevrolet-equinox-ev-2026-lt-fwd",
+      "url": "https://evcompare.org/2026/equinox-ev/lt-fwd/",
       "catalogId": 30,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
@@ -2605,6 +2635,7 @@
     },
     {
       "id": "chevrolet-equinox-ev-2026-rs-awd",
+      "url": "https://evcompare.org/2026/equinox-ev/rs-awd/",
       "catalogId": 31,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
@@ -2691,6 +2722,7 @@
     },
     {
       "id": "chevrolet-silverado-ev-2026-wt-standard-range",
+      "url": "https://evcompare.org/2026/silverado-ev/wt-standard-range/",
       "catalogId": 32,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
@@ -2777,6 +2809,7 @@
     },
     {
       "id": "chevrolet-silverado-ev-2026-rst-max-range",
+      "url": "https://evcompare.org/2026/silverado-ev/rst-max-range/",
       "catalogId": 33,
       "lastVerifiedDate": "2026-08-21",
       "make": "Chevrolet",
@@ -2862,6 +2895,7 @@
     },
     {
       "id": "dodge-charger-daytona-2025-scat-pack-awd",
+      "url": "https://evcompare.org/2025/charger-daytona/scat-pack-awd/",
       "catalogId": 34,
       "lastVerifiedDate": "2026-08-21",
       "make": "Dodge",
@@ -2948,6 +2982,7 @@
     },
     {
       "id": "dodge-charger-daytona-2025-rt-awd",
+      "url": "https://evcompare.org/2025/charger-daytona/r-t-awd/",
       "catalogId": 35,
       "lastVerifiedDate": "2026-08-21",
       "make": "Dodge",
@@ -3034,6 +3069,7 @@
     },
     {
       "id": "fiat-500e-2025-red",
+      "url": "https://evcompare.org/2025/500e/500e-red/",
       "catalogId": 36,
       "lastVerifiedDate": "2026-08-21",
       "make": "Fiat",
@@ -3120,6 +3156,7 @@
     },
     {
       "id": "ford-f-150-lightning-2026-flash",
+      "url": "https://evcompare.org/2026/f-150-lightning/flash/",
       "catalogId": 37,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
@@ -3207,6 +3244,7 @@
     },
     {
       "id": "ford-f-150-lightning-2026-platinum",
+      "url": "https://evcompare.org/2026/f-150-lightning/platinum/",
       "catalogId": 38,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
@@ -3293,6 +3331,7 @@
     },
     {
       "id": "ford-mustang-mach-e-2026-select-rwd",
+      "url": "https://evcompare.org/2026/mustang-mach-e/select-rwd/",
       "catalogId": 39,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
@@ -3381,6 +3420,7 @@
     },
     {
       "id": "ford-mustang-mach-e-2026-premium-awd",
+      "url": "https://evcompare.org/2026/mustang-mach-e/premium-awd-extended-range/",
       "catalogId": 40,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
@@ -3467,6 +3507,7 @@
     },
     {
       "id": "ford-mustang-mach-e-2026-gt-awd",
+      "url": "https://evcompare.org/2026/mustang-mach-e/gt-awd/",
       "catalogId": 41,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
@@ -3554,6 +3595,7 @@
     },
     {
       "id": "gmc-hummer-ev-2026-pickup-3x",
+      "url": "https://evcompare.org/2026/hummer-ev-pickup/3x/",
       "catalogId": 42,
       "lastVerifiedDate": "2026-08-21",
       "make": "GMC",
@@ -3640,6 +3682,7 @@
     },
     {
       "id": "gmc-sierra-ev-2026-elevation-standard-range",
+      "url": "https://evcompare.org/2026/sierra-ev/elevation-standard-range/",
       "catalogId": 43,
       "lastVerifiedDate": "2026-08-21",
       "make": "GMC",
@@ -3725,6 +3768,7 @@
     },
     {
       "id": "gmc-sierra-ev-2026-denali-extended-range",
+      "url": "https://evcompare.org/2026/sierra-ev/denali-extended-range/",
       "catalogId": 44,
       "lastVerifiedDate": "2026-08-21",
       "make": "GMC",
@@ -3808,6 +3852,7 @@
     },
     {
       "id": "genesis-electrified-g80-2025-advanced-awd",
+      "url": "https://evcompare.org/2025/electrified-g80/advanced-awd/",
       "catalogId": 45,
       "lastVerifiedDate": "2026-08-21",
       "make": "Genesis",
@@ -3894,6 +3939,7 @@
     },
     {
       "id": "genesis-electrified-gv70-2025-advanced-awd",
+      "url": "https://evcompare.org/2025/electrified-gv70/advanced-awd/",
       "catalogId": 46,
       "lastVerifiedDate": "2026-08-21",
       "make": "Genesis",
@@ -3980,6 +4026,7 @@
     },
     {
       "id": "genesis-gv60-2025-standard-rwd",
+      "url": "https://evcompare.org/2025/gv60/standard-rwd/",
       "catalogId": 47,
       "lastVerifiedDate": "2026-08-21",
       "make": "Genesis",
@@ -4066,6 +4113,7 @@
     },
     {
       "id": "genesis-gv60-2025-performance-awd",
+      "url": "https://evcompare.org/2025/gv60/performance-awd/",
       "catalogId": 48,
       "lastVerifiedDate": "2026-08-21",
       "make": "Genesis",
@@ -4152,6 +4200,7 @@
     },
     {
       "id": "honda-prologue-2025-ex-fwd",
+      "url": "https://evcompare.org/2025/prologue/ex-fwd/",
       "catalogId": 49,
       "lastVerifiedDate": "2026-08-21",
       "make": "Honda",
@@ -4234,6 +4283,7 @@
     },
     {
       "id": "honda-prologue-2025-elite-awd",
+      "url": "https://evcompare.org/2025/prologue/elite-awd/",
       "catalogId": 50,
       "lastVerifiedDate": "2026-08-21",
       "make": "Honda",
@@ -4316,6 +4366,7 @@
     },
     {
       "id": "hyundai-ioniq-5-2026-se-standard-range-rwd",
+      "url": "https://evcompare.org/2026/ioniq-5/se-standard-range-rwd/",
       "catalogId": 51,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -4401,6 +4452,7 @@
     },
     {
       "id": "hyundai-ioniq-5-2026-limited-awd",
+      "url": "https://evcompare.org/2026/ioniq-5/limited-awd/",
       "catalogId": 52,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -4486,6 +4538,7 @@
     },
     {
       "id": "hyundai-ioniq-6-2025-se-standard-range-rwd",
+      "url": "https://evcompare.org/2025/ioniq-6/se-standard-range-rwd/",
       "catalogId": 53,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -4571,6 +4624,7 @@
     },
     {
       "id": "hyundai-ioniq-6-2025-limited-awd",
+      "url": "https://evcompare.org/2025/ioniq-6/limited-awd/",
       "catalogId": 54,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -4656,6 +4710,7 @@
     },
     {
       "id": "hyundai-ioniq-9-2026-s-rwd",
+      "url": "https://evcompare.org/2026/ioniq-9/s-rwd/",
       "catalogId": 55,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -4739,6 +4794,7 @@
     },
     {
       "id": "hyundai-ioniq-9-2026-calligraphy-awd",
+      "url": "https://evcompare.org/2026/ioniq-9/calligraphy-awd/",
       "catalogId": 56,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -4822,6 +4878,7 @@
     },
     {
       "id": "hyundai-kona-electric-2025-se-fwd",
+      "url": "https://evcompare.org/2025/kona-electric/se-fwd/",
       "catalogId": 57,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -4908,6 +4965,7 @@
     },
     {
       "id": "hyundai-kona-electric-2025-limited-fwd",
+      "url": "https://evcompare.org/2025/kona-electric/limited-fwd/",
       "catalogId": 58,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -4994,6 +5052,7 @@
     },
     {
       "id": "jeep-recon-2026-moab-4wd",
+      "url": "https://evcompare.org/2026/recon/moab-4wd/",
       "catalogId": 59,
       "lastVerifiedDate": "2026-08-21",
       "make": "Jeep",
@@ -5078,6 +5137,7 @@
     },
     {
       "id": "jeep-wagoneer-s-2025-launch-edition-awd",
+      "url": "https://evcompare.org/2025/wagoneer-s/launch-edition-awd/",
       "catalogId": 60,
       "lastVerifiedDate": "2026-08-21",
       "make": "Jeep",
@@ -5164,6 +5224,7 @@
     },
     {
       "id": "kia-ev6-2026-light-rwd",
+      "url": "https://evcompare.org/2026/ev6/light-rwd/",
       "catalogId": 61,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
@@ -5249,6 +5310,7 @@
     },
     {
       "id": "kia-ev6-2026-gt-line-awd",
+      "url": "https://evcompare.org/2026/ev6/gt-line-awd/",
       "catalogId": 62,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
@@ -5335,6 +5397,7 @@
     },
     {
       "id": "kia-ev9-2026-light-rwd",
+      "url": "https://evcompare.org/2026/ev9/light-rwd/",
       "catalogId": 63,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
@@ -5420,6 +5483,7 @@
     },
     {
       "id": "kia-ev9-2026-wind-awd",
+      "url": "https://evcompare.org/2026/ev9/wind-awd/",
       "catalogId": 64,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
@@ -5505,6 +5569,7 @@
     },
     {
       "id": "kia-niro-ev-2025-wind-fwd",
+      "url": "https://evcompare.org/2025/niro-ev/wind-fwd/",
       "catalogId": 65,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
@@ -5590,6 +5655,7 @@
     },
     {
       "id": "kia-niro-ev-2025-wave-fwd",
+      "url": "https://evcompare.org/2025/niro-ev/wave-fwd/",
       "catalogId": 66,
       "lastVerifiedDate": "2026-08-21",
       "make": "Kia",
@@ -5675,6 +5741,7 @@
     },
     {
       "id": "lexus-es-2027-350e-fwd",
+      "url": "https://evcompare.org/2027/es/350e-fwd/",
       "catalogId": 67,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lexus",
@@ -5761,6 +5828,7 @@
     },
     {
       "id": "lexus-es-2027-500e-awd",
+      "url": "https://evcompare.org/2027/es/500e-awd/",
       "catalogId": 68,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lexus",
@@ -5847,6 +5915,7 @@
     },
     {
       "id": "lexus-rz-2026-350e-fwd",
+      "url": "https://evcompare.org/2026/rz/350e-fwd/",
       "catalogId": 69,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lexus",
@@ -5933,6 +6002,7 @@
     },
     {
       "id": "lexus-rz-2026-550e-f-sport-awd",
+      "url": "https://evcompare.org/2026/rz/550e-f-sport-awd/",
       "catalogId": 70,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lexus",
@@ -6018,6 +6088,7 @@
     },
     {
       "id": "lucid-air-2025-pure-rwd",
+      "url": "https://evcompare.org/2025/air/pure-rwd/",
       "catalogId": 71,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lucid",
@@ -6105,6 +6176,7 @@
     },
     {
       "id": "lucid-air-2025-grand-touring-awd",
+      "url": "https://evcompare.org/2025/air/grand-touring-awd/",
       "catalogId": 72,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lucid",
@@ -6193,6 +6265,7 @@
     },
     {
       "id": "lucid-gravity-2026-grand-touring-awd",
+      "url": "https://evcompare.org/2026/gravity/grand-touring-awd/",
       "catalogId": 73,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lucid",
@@ -6281,6 +6354,7 @@
     },
     {
       "id": "mini-countryman-electric-2025-se-all4",
+      "url": "https://evcompare.org/2025/countryman-electric/se-all4/",
       "catalogId": 74,
       "lastVerifiedDate": "2026-08-21",
       "make": "MINI",
@@ -6368,6 +6442,7 @@
     },
     {
       "id": "mercedes-benz-eqb-2025-250-plus",
+      "url": "https://evcompare.org/2025/eqb/250/",
       "catalogId": 75,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -6456,6 +6531,7 @@
     },
     {
       "id": "mercedes-benz-eqb-2025-350-4matic",
+      "url": "https://evcompare.org/2025/eqb/350-4matic/",
       "catalogId": 76,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -6543,6 +6619,7 @@
     },
     {
       "id": "mercedes-benz-eqe-suv-2025-500-4matic",
+      "url": "https://evcompare.org/2025/eqe-suv/500-4matic/",
       "catalogId": 77,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -6630,6 +6707,7 @@
     },
     {
       "id": "mercedes-benz-eqe-suv-2025-350-plus",
+      "url": "https://evcompare.org/2025/eqe-suv/350/",
       "catalogId": 78,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -6717,6 +6795,7 @@
     },
     {
       "id": "mercedes-benz-eqe-sedan-2025-350-plus",
+      "url": "https://evcompare.org/2025/eqe-sedan/350/",
       "catalogId": 79,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -6804,6 +6883,7 @@
     },
     {
       "id": "mercedes-benz-eqe-sedan-2025-500-4matic",
+      "url": "https://evcompare.org/2025/eqe-sedan/500-4matic/",
       "catalogId": 80,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -6891,6 +6971,7 @@
     },
     {
       "id": "mercedes-benz-eqs-suv-2025-580-4matic",
+      "url": "https://evcompare.org/2025/eqs-suv/580-4matic/",
       "catalogId": 81,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -6978,6 +7059,7 @@
     },
     {
       "id": "mercedes-benz-eqs-suv-2025-450-plus",
+      "url": "https://evcompare.org/2025/eqs-suv/450/",
       "catalogId": 82,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -7065,6 +7147,7 @@
     },
     {
       "id": "mercedes-benz-eqs-sedan-2025-450-plus",
+      "url": "https://evcompare.org/2025/eqs-sedan/450/",
       "catalogId": 83,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -7152,6 +7235,7 @@
     },
     {
       "id": "mercedes-benz-eqs-sedan-2025-580-4matic",
+      "url": "https://evcompare.org/2025/eqs-sedan/580-4matic/",
       "catalogId": 84,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -7239,6 +7323,7 @@
     },
     {
       "id": "nissan-ariya-2025-engage-fwd",
+      "url": "https://evcompare.org/2025/ariya/engage-fwd/",
       "catalogId": 85,
       "lastVerifiedDate": "2026-08-21",
       "make": "Nissan",
@@ -7325,6 +7410,7 @@
     },
     {
       "id": "nissan-ariya-2025-platinum-plus-e-4orce-awd",
+      "url": "https://evcompare.org/2025/ariya/platinum-e-4orce-awd/",
       "catalogId": 86,
       "lastVerifiedDate": "2026-08-21",
       "make": "Nissan",
@@ -7412,6 +7498,7 @@
     },
     {
       "id": "nissan-leaf-2026-s-plus-fwd",
+      "url": "https://evcompare.org/2026/leaf/s-fwd/",
       "catalogId": 87,
       "lastVerifiedDate": "2026-08-21",
       "make": "Nissan",
@@ -7497,6 +7584,7 @@
     },
     {
       "id": "nissan-leaf-2026-sv-plus-fwd",
+      "url": "https://evcompare.org/2026/leaf/sv-fwd/",
       "catalogId": 88,
       "lastVerifiedDate": "2026-08-21",
       "make": "Nissan",
@@ -7582,6 +7670,7 @@
     },
     {
       "id": "polestar-2-2025-single-motor-long-range-rwd",
+      "url": "https://evcompare.org/2025/2/long-range-single-motor/",
       "catalogId": 89,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
@@ -7669,6 +7758,7 @@
     },
     {
       "id": "polestar-2-2025-dual-motor-long-range-awd",
+      "url": "https://evcompare.org/2025/2/long-range-dual-motor-with-performance-pack/",
       "catalogId": 90,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
@@ -7755,6 +7845,7 @@
     },
     {
       "id": "polestar-3-2025-long-range-dual-motor-awd",
+      "url": "https://evcompare.org/2025/3/long-range-dual-motor-awd/",
       "catalogId": 91,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
@@ -7843,6 +7934,7 @@
     },
     {
       "id": "polestar-3-2025-long-range-dual-motor-performance-pack-awd",
+      "url": "https://evcompare.org/2025/3/long-range-dual-motor-performance-pack-awd/",
       "catalogId": 92,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
@@ -7929,6 +8021,7 @@
     },
     {
       "id": "polestar-4-2026-long-range-single-motor-rwd",
+      "url": "https://evcompare.org/2026/4/long-range-single-motor-rwd/",
       "catalogId": 93,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
@@ -8017,6 +8110,7 @@
     },
     {
       "id": "polestar-4-2026-long-range-dual-motor-awd",
+      "url": "https://evcompare.org/2026/4/long-range-dual-motor-awd/",
       "catalogId": 94,
       "lastVerifiedDate": "2026-08-21",
       "make": "Polestar",
@@ -8105,6 +8199,7 @@
     },
     {
       "id": "porsche-macan-electric-2025-4-awd",
+      "url": "https://evcompare.org/2025/macan-electric/4/",
       "catalogId": 95,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
@@ -8192,6 +8287,7 @@
     },
     {
       "id": "porsche-macan-electric-2025-turbo-awd",
+      "url": "https://evcompare.org/2025/macan-electric/turbo/",
       "catalogId": 96,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
@@ -8279,6 +8375,7 @@
     },
     {
       "id": "porsche-taycan-2025-base-rwd",
+      "url": "https://evcompare.org/2025/taycan/taycan-performance-battery-rwd/",
       "catalogId": 97,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
@@ -8366,6 +8463,7 @@
     },
     {
       "id": "porsche-taycan-2025-turbo-s-awd",
+      "url": "https://evcompare.org/2025/taycan/turbo-s/",
       "catalogId": 98,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
@@ -8452,6 +8550,7 @@
     },
     {
       "id": "rivian-r1s-2025-dual-motor-awd-large-pack",
+      "url": "https://evcompare.org/2025/r1s/dual-motor-awd-large-pack/",
       "catalogId": 99,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
@@ -8538,6 +8637,7 @@
     },
     {
       "id": "rivian-r1s-2025-quad-motor-awd-max-pack",
+      "url": "https://evcompare.org/2025/r1s/quad-motor-awd-max-pack/",
       "catalogId": 100,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
@@ -8624,6 +8724,7 @@
     },
     {
       "id": "rivian-r1t-2025-adventure-dual-motor-awd-large-pack",
+      "url": "https://evcompare.org/2025/r1t/adventure-dual-motor-awd-large-pack/",
       "catalogId": 101,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
@@ -8710,6 +8811,7 @@
     },
     {
       "id": "rivian-r2-2027-premium-awd",
+      "url": "https://evcompare.org/2027/r2/premium-awd/",
       "catalogId": 102,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
@@ -8796,6 +8898,7 @@
     },
     {
       "id": "rivian-r2-2027-performance-awd",
+      "url": "https://evcompare.org/2027/r2/performance-awd/",
       "catalogId": 103,
       "lastVerifiedDate": "2026-08-21",
       "make": "Rivian",
@@ -8882,6 +8985,7 @@
     },
     {
       "id": "subaru-solterra-2025-premium-awd",
+      "url": "https://evcompare.org/2025/solterra/premium-awd/",
       "catalogId": 104,
       "lastVerifiedDate": "2026-08-21",
       "make": "Subaru",
@@ -8968,6 +9072,7 @@
     },
     {
       "id": "subaru-solterra-2025-touring-awd",
+      "url": "https://evcompare.org/2025/solterra/touring-awd/",
       "catalogId": 105,
       "lastVerifiedDate": "2026-08-21",
       "make": "Subaru",
@@ -9054,6 +9159,7 @@
     },
     {
       "id": "tesla-cybertruck-2026-awd",
+      "url": "https://evcompare.org/2026/cybertruck/awd/",
       "catalogId": 106,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -9139,6 +9245,7 @@
     },
     {
       "id": "tesla-cybertruck-2026-cyberbeast",
+      "url": "https://evcompare.org/2026/cybertruck/cyberbeast/",
       "catalogId": 107,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -9224,6 +9331,7 @@
     },
     {
       "id": "tesla-model-3-2026-standard-rwd",
+      "url": "https://evcompare.org/2026/model-3/standard-rwd/",
       "catalogId": 108,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -9310,6 +9418,7 @@
     },
     {
       "id": "tesla-model-3-2026-performance-awd",
+      "url": "https://evcompare.org/2026/model-3/performance-awd/",
       "catalogId": 109,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -9395,6 +9504,7 @@
     },
     {
       "id": "tesla-model-x-2026-plaid-awd",
+      "url": "https://evcompare.org/2026/model-x/plaid-awd/",
       "catalogId": 110,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -9481,6 +9591,7 @@
     },
     {
       "id": "tesla-model-y-2026-standard-rwd",
+      "url": "https://evcompare.org/2026/model-y/standard-rwd/",
       "catalogId": 111,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -9567,6 +9678,7 @@
     },
     {
       "id": "tesla-model-y-2026-premium-awd",
+      "url": "https://evcompare.org/2026/model-y/premium-awd/",
       "catalogId": 112,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -9653,6 +9765,7 @@
     },
     {
       "id": "toyota-bz-2026-xle-fwd",
+      "url": "https://evcompare.org/2026/bz/xle-fwd/",
       "catalogId": 113,
       "lastVerifiedDate": "2026-08-21",
       "make": "Toyota",
@@ -9738,6 +9851,7 @@
     },
     {
       "id": "toyota-bz-2026-limited-awd",
+      "url": "https://evcompare.org/2026/bz/limited-awd/",
       "catalogId": 114,
       "lastVerifiedDate": "2026-08-21",
       "make": "Toyota",
@@ -9823,6 +9937,7 @@
     },
     {
       "id": "vinfast-vf8-2025-eco-awd",
+      "url": "https://evcompare.org/2025/vf8/eco-awd/",
       "catalogId": 115,
       "lastVerifiedDate": "2026-08-21",
       "make": "VinFast",
@@ -9909,6 +10024,7 @@
     },
     {
       "id": "vinfast-vf8-2025-plus-awd",
+      "url": "https://evcompare.org/2025/vf8/plus-awd/",
       "catalogId": 116,
       "lastVerifiedDate": "2026-08-21",
       "make": "VinFast",
@@ -9995,6 +10111,7 @@
     },
     {
       "id": "vinfast-vf9-2025-plus-awd",
+      "url": "https://evcompare.org/2025/vf9/plus-awd/",
       "catalogId": 117,
       "lastVerifiedDate": "2026-08-21",
       "make": "VinFast",
@@ -10075,6 +10192,7 @@
     },
     {
       "id": "volkswagen-id-buzz-2025-pro-s-rwd",
+      "url": "https://evcompare.org/2025/id-buzz/pro-s/",
       "catalogId": 118,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volkswagen",
@@ -10161,6 +10279,7 @@
     },
     {
       "id": "volkswagen-id-buzz-2025-pro-s-plus-4motion-awd",
+      "url": "https://evcompare.org/2025/id-buzz/pro-s-plus-4motion/",
       "catalogId": 119,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volkswagen",
@@ -10247,6 +10366,7 @@
     },
     {
       "id": "volkswagen-id4-2025-standard-rwd",
+      "url": "https://evcompare.org/2025/id-4/standard-rwd/",
       "catalogId": 120,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volkswagen",
@@ -10329,6 +10449,7 @@
     },
     {
       "id": "volkswagen-id4-2025-pro-s-awd",
+      "url": "https://evcompare.org/2025/id-4/pro-s-awd/",
       "catalogId": 121,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volkswagen",
@@ -10413,6 +10534,7 @@
     },
     {
       "id": "volvo-ec40-2026-single-motor-rwd",
+      "url": "https://evcompare.org/2026/ec40/single-motor-extended-range-rwd/",
       "catalogId": 122,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
@@ -10499,6 +10621,7 @@
     },
     {
       "id": "volvo-ec40-2026-twin-motor-awd",
+      "url": "https://evcompare.org/2026/ec40/twin-motor-awd/",
       "catalogId": 123,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
@@ -10585,6 +10708,7 @@
     },
     {
       "id": "volvo-ex30-2025-single-motor-extended-range",
+      "url": "https://evcompare.org/2025/ex30/single-motor-extended-range/",
       "catalogId": 124,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
@@ -10672,6 +10796,7 @@
     },
     {
       "id": "volvo-ex30-2025-twin-motor-performance",
+      "url": "https://evcompare.org/2025/ex30/twin-motor-performance/",
       "catalogId": 125,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
@@ -10759,6 +10884,7 @@
     },
     {
       "id": "volvo-ex60-2027-p6-plus",
+      "url": "https://evcompare.org/2027/ex60/p6-plus-single-motor-rwd/",
       "catalogId": 126,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
@@ -10845,6 +10971,7 @@
     },
     {
       "id": "volvo-ex60-2027-p10-awd-plus",
+      "url": "https://evcompare.org/2027/ex60/p10-awd-plus-dual-motor-awd/",
       "catalogId": 127,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
@@ -10931,6 +11058,7 @@
     },
     {
       "id": "volvo-ex90-2026-twin-motor-awd",
+      "url": "https://evcompare.org/2026/ex90/twin-motor-awd/",
       "catalogId": 128,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
@@ -11018,6 +11146,7 @@
     },
     {
       "id": "volvo-ex90-2026-twin-motor-performance-awd",
+      "url": "https://evcompare.org/2026/ex90/twin-motor-performance-awd-ultra/",
       "catalogId": 129,
       "lastVerifiedDate": "2026-08-21",
       "make": "Volvo",
@@ -11104,6 +11233,7 @@
     },
     {
       "id": "ford-e-transit-2026-cargo-van-low-roof",
+      "url": "https://evcompare.org/2026/e-transit/cargo-van-low-roof-rwd/",
       "catalogId": 130,
       "lastVerifiedDate": "2026-08-21",
       "make": "Ford",
@@ -11190,6 +11320,7 @@
     },
     {
       "id": "gmc-hummer-ev-suv-2026-3x",
+      "url": "https://evcompare.org/2026/hummer-ev-suv/3x/",
       "catalogId": 131,
       "lastVerifiedDate": "2026-08-21",
       "make": "GMC",
@@ -11276,6 +11407,7 @@
     },
     {
       "id": "hyundai-ioniq-5-n-2026",
+      "url": "https://evcompare.org/2026/ioniq-5-n/n/",
       "catalogId": 132,
       "lastVerifiedDate": "2026-08-21",
       "make": "Hyundai",
@@ -11361,6 +11493,7 @@
     },
     {
       "id": "audi-a6-e-tron-2027-premium",
+      "url": "https://evcompare.org/2027/a6-e-tron/premium/",
       "catalogId": 133,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -11449,6 +11582,7 @@
     },
     {
       "id": "audi-a6-e-tron-2027-premium-plus-quattro",
+      "url": "https://evcompare.org/2027/a6-e-tron/premium-plus-quattro/",
       "catalogId": 134,
       "lastVerifiedDate": "2026-08-21",
       "make": "Audi",
@@ -11537,6 +11671,7 @@
     },
     {
       "id": "mercedes-benz-g-class-2026-g580-eq-technology",
+      "url": "https://evcompare.org/2026/g-class/g-580-w-eq-technology/",
       "catalogId": 135,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -11623,6 +11758,7 @@
     },
     {
       "id": "mercedes-benz-cla-2026-250-plus",
+      "url": "https://evcompare.org/2026/cla/250-w-eq-technology/",
       "catalogId": 136,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -11708,6 +11844,7 @@
     },
     {
       "id": "mercedes-benz-cla-2026-350-4matic",
+      "url": "https://evcompare.org/2026/cla/350-4matic-w-eq-technology/",
       "catalogId": 137,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Benz",
@@ -11793,6 +11930,7 @@
     },
     {
       "id": "porsche-cayenne-electric-2026-base",
+      "url": "https://evcompare.org/2026/cayenne-electric/base/",
       "catalogId": 138,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
@@ -11878,6 +12016,7 @@
     },
     {
       "id": "porsche-cayenne-electric-2026-turbo",
+      "url": "https://evcompare.org/2026/cayenne-electric/turbo/",
       "catalogId": 139,
       "lastVerifiedDate": "2026-08-21",
       "make": "Porsche",
@@ -11963,6 +12102,7 @@
     },
     {
       "id": "mercedes-maybach-eqs-suv-2026-680-4matic",
+      "url": "https://evcompare.org/2026/eqs-suv/680-4matic/",
       "catalogId": 140,
       "lastVerifiedDate": "2026-08-21",
       "make": "Mercedes-Maybach",
@@ -12049,6 +12189,7 @@
     },
     {
       "id": "subaru-uncharted-2026-premium",
+      "url": "https://evcompare.org/2026/uncharted/premium/",
       "catalogId": 141,
       "lastVerifiedDate": "2026-08-21",
       "make": "Subaru",
@@ -12134,6 +12275,7 @@
     },
     {
       "id": "subaru-uncharted-2026-gt",
+      "url": "https://evcompare.org/2026/uncharted/gt/",
       "catalogId": 142,
       "lastVerifiedDate": "2026-08-21",
       "make": "Subaru",
@@ -12219,6 +12361,7 @@
     },
     {
       "id": "lucid-gravity-2026-touring-awd",
+      "url": "https://evcompare.org/2026/gravity/touring-awd/",
       "catalogId": 143,
       "lastVerifiedDate": "2026-08-21",
       "make": "Lucid",
@@ -12305,6 +12448,7 @@
     },
     {
       "id": "toyota-bz-woodland-2026-woodland",
+      "url": "https://evcompare.org/2026/bz-woodland/woodland/",
       "catalogId": 144,
       "lastVerifiedDate": "2026-08-21",
       "make": "Toyota",
@@ -12390,6 +12534,7 @@
     },
     {
       "id": "toyota-bz-woodland-2026-woodland-premium",
+      "url": "https://evcompare.org/2026/bz-woodland/woodland-premium/",
       "catalogId": 145,
       "lastVerifiedDate": "2026-08-21",
       "make": "Toyota",
@@ -12475,6 +12620,7 @@
     },
     {
       "id": "tesla-model-s-2026-awd",
+      "url": "https://evcompare.org/2026/model-s/awd/",
       "catalogId": 146,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -12561,6 +12707,7 @@
     },
     {
       "id": "tesla-model-s-2026-plaid-awd",
+      "url": "https://evcompare.org/2026/model-s/plaid-awd/",
       "catalogId": 147,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -12647,6 +12794,7 @@
     },
     {
       "id": "tesla-model-y-2026-l",
+      "url": "https://evcompare.org/2026/model-y/l/",
       "catalogId": 148,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",
@@ -12733,6 +12881,7 @@
     },
     {
       "id": "tesla-model-x-2026-awd",
+      "url": "https://evcompare.org/2026/model-x/awd/",
       "catalogId": 149,
       "lastVerifiedDate": "2026-08-21",
       "make": "Tesla",

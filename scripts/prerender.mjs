@@ -762,10 +762,25 @@ function main() {
   // all — no way to point a reader back even if they want to. Derived at build time from
   // carPath() rather than stored in the source file, so it can never disagree with the page
   // that actually exists.
+  // `url` is pulled out of `rest` deliberately: data/evs.json now carries a committed copy
+  // (see scripts/sync-urls.mjs, which exists so the GitHub copy of the file isn't a dead end),
+  // and spreading it back in would let a stale committed value override the computed one —
+  // exactly the drift this recomputation exists to prevent.
+  const staleUrls = [];
   const publishedModels = cars.map(car => {
-    const { id, ...rest } = car;
-    return { id, url: canonicalUrl(car), ...rest };
+    const { id, url: committed, ...rest } = car;
+    const url = canonicalUrl(car);
+    if (committed && committed !== url) staleUrls.push({ id, committed, url });
+    return { id, url, ...rest };
   });
+
+  const missingUrls = cars.filter(c => !c.url).length;
+  if (staleUrls.length || missingUrls) {
+    console.warn(`  ! data/evs.json urls are out of date (${staleUrls.length} stale, ${missingUrls} missing).`);
+    console.warn(`    The published dataset is correct — these are recomputed — but the copy in the`);
+    console.warn(`    repo is what people get from GitHub. Run: npm run sync-urls`);
+    for (const u of staleUrls.slice(0, 3)) console.warn(`      ${u.id}: ${u.committed} -> ${u.url}`);
+  }
 
   // Hash the models as published, not as sourced: the value in current.json is what a
   // consumer checks against the file they downloaded, so it has to describe that file.

@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prerender": "node scripts/prerender.mjs"
+    "prerender": "node scripts/prerender.mjs",
+    "sync-urls": "node scripts/sync-urls.mjs"
   }
 }
