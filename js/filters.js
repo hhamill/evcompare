@@ -1,4 +1,4 @@
-import { FIELDS, GROUP_ORDER } from "./fields.js?v=11";
+import { FIELDS, GROUP_ORDER } from "./fields.js?v=12";
 
 // Mirrors js/render.js's own esc() (and scripts/prerender.mjs's) — enum values here are
 // car data (make, body style, drivetrain, etc.), hand-researched rather than validated, so

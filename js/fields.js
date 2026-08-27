@@ -196,8 +196,16 @@ export function bodyIcon(style) {
 // descriptive sentence with no trailing CTA — "full specs below" is only true in the modal
 // (where a spec table genuinely follows); the meta description and no-JS fallback don't have
 // one, so each call site appends whatever ending actually fits its own context.
+// A numeric field actually holds a number — not null (unknown), "N/A" (doesn't apply) or
+// "Pending" (real but unpublished). Exported because callers outside the summary need the
+// same test: render.js decides whether the summary will state a price before it hides the
+// standalone price element, and those two must not drift apart.
+export function isRealValue(v) {
+  return v != null && v !== "N/A" && v !== "Pending";
+}
+
 export function carSummarySentence(car) {
-  const isReal = v => v != null && v !== "N/A" && v !== "Pending";
+  const isReal = isRealValue;
   const name = `${car.modelYear} ${car.make} ${car.model} ${car.trim}`;
 
   let subject = "an electric vehicle";

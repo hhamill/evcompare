@@ -1,4 +1,4 @@
-import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey } from "./fields.js?v=11";
+import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "./fields.js?v=12";
 import { findSimilarCars } from "./similar.js?v=6";
 import { carPath } from "./router.js?v=5";
 
@@ -136,7 +136,7 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
             <div class="ev-card-trim">${car.modelYear} · ${esc(car.trim)}</div>
           </div>
         </div>
-        <div class="ev-card-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+        <div class="ev-card-price"><span class="sr-only">Price: </span>${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
       </div>
       ${badges.length ? `<div class="ev-card-badges">${badges.map(b => typeof b === "string" ? `<span class="badge">${b}</span>` : `<span class="badge badge-${b.kind}"><span class="sr-only">${b.srPrefix}</span>${esc(b.text)}</span>`).join("")}</div>` : ""}
       <div class="ev-card-stats">${stats}</div>
@@ -321,7 +321,7 @@ function renderSimilarSection(anchor, allCars) {
           </div>
         </div>
         <div class="similar-card-price">
-          ${fmtVal(fieldByKey("msrp"), car.msrp)}
+          <span class="sr-only">Price: </span>${fmtVal(fieldByKey("msrp"), car.msrp)}
           ${priceDeltaText ? `<span class="similar-price-delta">${priceDeltaText} vs. this car</span>` : ""}
         </div>
         <div class="similar-diff-list">${badges.join("")}</div>
@@ -375,7 +375,14 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
       <button id="modalShareBtn" class="btn btn-ghost btn-sm icon-btn">${SHARE_ICON} Share</button>
     </div>
     <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
-    <div class="modal-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+    ${/* The summary sentence directly below states the price in context ("...and an MSRP of
+         $64,500"), so announcing this standalone number too is pure repetition. It only does
+         so when the price is a real number, though: for null/"N/A"/"Pending" the sentence
+         omits price entirely, and then this element is the *only* place a screen reader
+         learns the price is unpublished — so it stays announced, with a label. */""}
+    <div class="modal-price"${isRealValue(car.msrp) ? ' aria-hidden="true"' : ""}>${
+      isRealValue(car.msrp) ? "" : '<span class="sr-only">Price: </span>'
+    }${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
     <p class="modal-summary">${esc(carSummarySentence(car))} Full specs below.</p>
     ${sections}
     ${links.length ? `<div class="modal-section"><h4>Links</h4><div class="modal-links">${links.join("")}</div></div>` : ""}

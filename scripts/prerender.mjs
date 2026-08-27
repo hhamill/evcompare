@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { BASE_PATH, carPath } from "../js/router.js";
 import { findSimilarCars } from "../js/similar.js";
-import { FIELDS, GROUP_ORDER, carSummarySentence, fmtVal, fieldByKey } from "../js/fields.js";
+import { FIELDS, GROUP_ORDER, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "../js/fields.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -270,7 +270,9 @@ function pageFor(car) {
   <div id="staticCarDetail" class="static-car-detail">
     <h1 class="modal-title">${esc(title)}</h1>
     <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
-    <div class="modal-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+    <div class="modal-price"${isRealValue(car.msrp) ? ` aria-hidden="true"` : ""}>${
+      isRealValue(car.msrp) ? "" : `<span class="sr-only">Price: </span>`
+    }${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
     <p class="modal-summary">${esc(summary)} Full specs below.</p>
     ${staticSpecSections(car)}
     ${staticLinksBlock(car)}
@@ -354,7 +356,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
 
 </div>
 
-<script type="module" src="/js/app.js?v=48"></script>
+<script type="module" src="/js/app.js?v=49"></script>
 </body>
 </html>
 `;
