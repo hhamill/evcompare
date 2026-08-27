@@ -1,6 +1,6 @@
 import { FIELDS } from "./fields.js?v=9";
-import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=9";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=21";
+import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js?v=10";
+import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=23";
 import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath } from "./router.js?v=5";
 
 const MAX_COMPARE = 6;
@@ -46,6 +46,10 @@ function copyToClipboard(text, btn) {
   }).catch(() => {});
 }
 
+// init() can run more than once (Retry on the load-error state), but the global listeners
+// must only ever be attached once. See init().
+let listenersBound = false;
+
 const state = {
   cars: [],
   domains: {},
@@ -77,6 +81,7 @@ const el = {
   compareScrollRightBtn: document.getElementById("compareScrollRightBtn"),
   compareCount: document.getElementById("compareCount"),
   resultCount: document.getElementById("resultCount"),
+  activeFilters: document.getElementById("activeFilters"),
   searchInput: document.getElementById("searchInput"),
   sortSelect: document.getElementById("sortSelect"),
   resetFiltersBtn: document.getElementById("resetFiltersBtn"),
@@ -110,7 +115,9 @@ function applyTheme(theme) {
   if (theme === "auto") document.documentElement.removeAttribute("data-theme");
   else document.documentElement.setAttribute("data-theme", theme);
   el.themeToggleBtn.textContent = THEME_ICONS[theme];
-  el.themeToggleBtn.title = `Theme: ${THEME_LABELS[theme]} (click to change)`;
+  const description = `Theme: ${THEME_LABELS[theme]} (click to change)`;
+  el.themeToggleBtn.title = description;
+  el.themeToggleBtn.setAttribute("aria-label", description);
 }
 
 function initTheme() {
@@ -132,8 +139,23 @@ async function init() {
   // on the homepage, where it doesn't exist.
   document.getElementById("staticCarDetail")?.remove();
 
-  const res = await fetch("/data/evs.json");
-  const { models: cars } = await res.json();
+  // ~400KB over the wire with nothing to show until it lands. Previously the user watched an
+  // empty grid beside a count reading "0 vehicles" — indistinguishable from "no matches" —
+  // and a failed fetch left the page blank forever with only an unhandled rejection to show
+  // for it. Skeleton first, real error state on failure, retry without a full page reload.
+  renderSkeletonGrid(el.cardGrid);
+  el.resultCount.textContent = "Loading vehicles…";
+
+  let cars;
+  try {
+    const res = await fetch("/data/evs.json");
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    ({ models: cars } = await res.json());
+  } catch {
+    el.resultCount.textContent = "";
+    renderLoadError(el.cardGrid, () => init());
+    return;
+  }
   state.cars = cars;
   state.domains = computeDomains(cars);
   state.filterState = defaultFilterState(state.domains);
@@ -153,12 +175,16 @@ async function init() {
     }
   }
 
-  renderFilterSidebar(el.sidebar, state.domains, state.filterState, () => {
-    state.view = "results";
-    renderAll();
-  });
+  rebuildSidebar();
 
-  bindGlobalEvents();
+  // Guarded because init() is also the Retry handler on the load-error state: without this,
+  // a retry would bind a second copy of every global listener (and a second ResizeObserver),
+  // so afterwards a single click on Reset/Compare would fire its handler twice.
+  if (!listenersBound) {
+    bindGlobalEvents();
+    syncTopbarHeight();
+    listenersBound = true;
+  }
   renderAll();
 
   const carFromUrl = carForPath(state.pathIndex, location.pathname);
@@ -176,16 +202,7 @@ function bindGlobalEvents() {
     renderResultsView();
   });
 
-  el.resetFiltersBtn.addEventListener("click", () => {
-    state.filterState = defaultFilterState(state.domains);
-    state.searchText = "";
-    el.searchInput.value = "";
-    renderFilterSidebar(el.sidebar, state.domains, state.filterState, () => {
-      state.view = "results";
-      renderAll();
-    });
-    renderAll();
-  });
+  el.resetFiltersBtn.addEventListener("click", resetFilters);
 
   el.backToResultsBtn.addEventListener("click", () => {
     state.view = "results";
@@ -250,12 +267,15 @@ function bindGlobalEvents() {
   el.sidebarCloseBtn.addEventListener("click", closeSidebar);
   el.sidebarBackdrop.addEventListener("click", closeSidebar);
 
-  el.compareScrollLeftBtn.addEventListener("click", () => {
-    el.compareScroll.scrollBy({ left: -280, behavior: "smooth" });
+  // `behavior: "smooth"` is set in JS, so the prefers-reduced-motion block in styles.css
+  // has no say over it — check the query directly instead. Read per click rather than
+  // cached, so changing the OS setting takes effect without a reload.
+  const scrollCompareBy = left => el.compareScroll.scrollBy({
+    left,
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
   });
-  el.compareScrollRightBtn.addEventListener("click", () => {
-    el.compareScroll.scrollBy({ left: 280, behavior: "smooth" });
-  });
+  el.compareScrollLeftBtn.addEventListener("click", () => scrollCompareBy(-280));
+  el.compareScrollRightBtn.addEventListener("click", () => scrollCompareBy(280));
   el.compareScroll.addEventListener("scroll", updateCompareScrollNav);
   window.addEventListener("resize", updateCompareScrollNav);
 
@@ -282,6 +302,84 @@ function bindGlobalEvents() {
       renderAll();
     }
   });
+}
+
+// The sidebar's sticky offset and the compare table's max-height are both measured from the
+// topbar. Hardcoding 60px left them 5.5px out on desktop and far more once the topbar
+// wrapped, so the sidebar overshot the viewport and its last few pixels were unreachable.
+// ResizeObserver rather than a resize listener: the topbar also changes height when compare
+// mode hides the search field, which fires no window resize.
+function syncTopbarHeight() {
+  const apply = () => {
+    const h = el.topbar.getBoundingClientRect().height;
+    if (h > 0) document.documentElement.style.setProperty("--topbar-h", `${h}px`);
+  };
+  apply();
+  if (typeof ResizeObserver === "function") new ResizeObserver(apply).observe(el.topbar);
+  else window.addEventListener("resize", apply);
+}
+
+function rebuildSidebar() {
+  renderFilterSidebar(el.sidebar, state.domains, state.filterState, () => {
+    // Filtering doesn't apply to the compare table (it shows an explicit hand-picked
+    // selection), so any filter change drops back to the results. Reachable now only via a
+    // shared /compare link left open in a stale tab — compare mode hides the filter chrome
+    // entirely — but it still has to take the URL back with it, which it previously didn't.
+    if (state.view === "compare") leaveCompareUrl();
+    state.view = "results";
+    renderAll();
+  });
+}
+
+function resetFilters() {
+  state.filterState = defaultFilterState(state.domains);
+  state.searchText = "";
+  el.searchInput.value = "";
+  rebuildSidebar();
+  renderAll();
+}
+
+// Chip row above the results: what's currently narrowing them, one removable chip per
+// applied value. Built with textContent rather than innerHTML because the text embeds car
+// data (make names, etc.) that the rest of this codebase is careful to escape.
+function renderActiveFilters(chips) {
+  el.activeFilters.innerHTML = "";
+  el.activeFilters.hidden = chips.length === 0;
+  if (!chips.length) return;
+
+  const label = document.createElement("span");
+  label.className = "active-filters-label";
+  label.textContent = "Filtered by";
+  el.activeFilters.appendChild(label);
+
+  for (const chip of chips) {
+    const wrap = document.createElement("span");
+    wrap.className = "filter-chip";
+
+    const text = document.createElement("span");
+    text.textContent = chip.text;
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "filter-chip-remove";
+    remove.textContent = "\u00d7";
+    remove.setAttribute("aria-label", `Remove filter: ${chip.text}`);
+    remove.addEventListener("click", () => {
+      clearFilter(state.filterState, state.domains, chip.key, chip.value);
+      rebuildSidebar();
+      renderAll();
+    });
+
+    wrap.append(text, remove);
+    el.activeFilters.appendChild(wrap);
+  }
+
+  const clearAll = document.createElement("button");
+  clearAll.type = "button";
+  clearAll.className = "filter-chip-clear";
+  clearAll.textContent = "Clear all";
+  clearAll.addEventListener("click", resetFilters);
+  el.activeFilters.appendChild(clearAll);
 }
 
 function openSidebar() {
@@ -448,10 +546,21 @@ function renderResultsView() {
   const filtered = getFilteredCars();
   el.resultCount.textContent = `${filtered.length} vehicle${filtered.length === 1 ? "" : "s"}`;
 
-  const activeCount = countActiveFilters(state.filterState, state.domains);
-  el.filtersToggleBtn.textContent = activeCount > 0 ? `Filters (${activeCount})` : "Filters";
+  const chips = describeActiveFilters(state.filterState, state.domains);
+  el.filtersToggleBtn.textContent = chips.length > 0 ? `Filters (${chips.length})` : "Filters";
+  renderActiveFilters(chips);
+  // Nothing to reset is a state worth showing rather than a click that silently does nothing.
+  el.resetFiltersBtn.disabled = chips.length === 0 && !state.searchText;
+
+  // Drives the compare-mode chrome hiding in styles.css. Filters, search and the vehicle
+  // count all describe the results list, none of which the compare table reflects.
+  document.body.classList.toggle("compare-view", state.view === "compare");
 
   if (state.view === "compare") {
+    // Compare mode hides the drawer in CSS, but body.sidebar-open-lock (overflow:hidden)
+    // is JS-side state and would otherwise survive, locking page scroll with no visible
+    // drawer to close.
+    closeSidebar();
     el.viewResults.hidden = true;
     el.viewCompare.hidden = false;
     const carsToShow = state.cars.filter(c => state.compareSet.has(c.id));

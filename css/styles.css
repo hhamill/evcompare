@@ -8,7 +8,7 @@
   --border-soft: #1d222c;
   --text: #eef1f6;
   --text-dim: #9aa4b6;
-  --text-faint: #616b7d;
+  --text-faint: #7d8798;
   --accent: #4ee08a;
   --accent-dim: #2c8f5c;
   --accent-contrast: #06110a;
@@ -18,7 +18,12 @@
   --radius-md: 14px;
   --radius-lg: 20px;
   --shadow: 0 8px 30px rgba(0,0,0,0.35);
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+  /* Real rendered height of the sticky .topbar. Kept exact by syncTopbarHeight() in
+     app.js, which re-measures on resize — the topbar wraps to two rows under 880px,
+     so this is not a constant and hardcoding one left the sidebar overshooting the
+     viewport by the difference. This value is only the pre-JS fallback. */
+  --topbar-h: 66px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* Light tokens apply when the system prefers light and the user hasn't picked a theme
@@ -35,9 +40,9 @@
     --border-soft: #e7eaf2;
     --text: #161a23;
     --text-dim: #545e70;
-    --text-faint: #8791a3;
-    --accent: #16a35e;
-    --accent-dim: #0f7a46;
+    --text-faint: #656f81;
+    --accent: #0f7a46;
+    --accent-dim: #0b5c34;
     --accent-contrast: #ffffff;
     --accent-2: #2a6fdb;
     --shadow: 0 8px 30px rgba(20,30,50,0.08);
@@ -52,9 +57,9 @@
   --border-soft: #e7eaf2;
   --text: #161a23;
   --text-dim: #545e70;
-  --text-faint: #8791a3;
-  --accent: #16a35e;
-  --accent-dim: #0f7a46;
+  --text-faint: #656f81;
+  --accent: #0f7a46;
+  --accent-dim: #0b5c34;
   --accent-contrast: #ffffff;
   --accent-2: #2a6fdb;
   --shadow: 0 8px 30px rgba(20,30,50,0.08);
@@ -68,7 +73,7 @@
   --border-soft: #1d222c;
   --text: #eef1f6;
   --text-dim: #9aa4b6;
-  --text-faint: #616b7d;
+  --text-faint: #7d8798;
   --accent: #4ee08a;
   --accent-dim: #2c8f5c;
   --accent-contrast: #06110a;
@@ -88,6 +93,16 @@ body {
 h1, h2, h3, h4 { margin: 0; font-weight: 650; letter-spacing: -0.01em; }
 button { font-family: inherit; }
 input { font-family: inherit; }
+
+/* ---------- Focus ---------- */
+/* One ring for every focusable thing, keyboard-only. --accent-2 rather than --accent: it
+   clears AA against every surface in both themes, and it doesn't collide with the green
+   that already means "winning value" in the compare table. :focus-visible is what keeps
+   this off mouse clicks, so no rule anywhere needs to suppress outlines wholesale. */
+:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
 
 .app { min-height: 100%; display: flex; flex-direction: column; }
 
@@ -128,13 +143,12 @@ input { font-family: inherit; }
   width: 100%; padding: 9px 14px;
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: 10px; color: var(--text); font-size: 14px;
-  outline: none; transition: border-color .15s;
+  transition: border-color .15s;
 }
 .topbar-search input:focus { border-color: var(--accent); }
 .topbar-search input::placeholder { color: var(--text-faint); }
 
 .topbar-actions { display: flex; align-items: center; gap: 14px; margin-left: auto; flex-shrink: 0; }
-.result-count { color: var(--text-dim); font-size: 13px; white-space: nowrap; }
 
 .theme-toggle-btn {
   display: inline-flex; align-items: center; justify-content: center;
@@ -150,13 +164,14 @@ input { font-family: inherit; }
   padding: 8px 14px; border-radius: 9px; font-size: 13px; font-weight: 600;
   cursor: pointer; transition: all .15s; white-space: nowrap;
 }
-.btn:hover { background: var(--bg-card-hover); }
+.btn:hover:not(:disabled) { background: var(--bg-card-hover); }
+.btn:disabled { opacity: .45; cursor: default; }
 .btn-ghost { background: transparent; }
-.btn-ghost:hover { background: var(--bg-card); }
+.btn-ghost:hover:not(:disabled) { background: var(--bg-card); }
 .btn-primary {
   background: var(--accent); border-color: var(--accent); color: var(--accent-contrast);
 }
-.btn-primary:hover { background: var(--accent-dim); border-color: var(--accent-dim); }
+.btn-primary:hover:not(:disabled) { background: var(--accent-dim); border-color: var(--accent-dim); }
 .btn-sm { padding: 5px 10px; font-size: 12px; }
 
 /* ---------- Layout ---------- */
@@ -164,8 +179,8 @@ input { font-family: inherit; }
 .sidebar {
   width: 300px; flex-shrink: 0;
   border-right: 1px solid var(--border-soft);
-  height: calc(100vh - 60px);
-  position: sticky; top: 60px;
+  height: calc(100dvh - var(--topbar-h));
+  position: sticky; top: var(--topbar-h);
   overflow-y: auto;
   padding: 18px 16px 100px;
   background: var(--bg-elevated);
@@ -186,6 +201,12 @@ input { font-family: inherit; }
    height past the viewport by a fixed amount, creating a second, near-useless outer
    scrollbar alongside the real one. */
 #viewResults { padding-bottom: 80px; }
+
+/* ---------- Compare mode: filter chrome doesn't apply ---------- */
+body.compare-view .sidebar,
+body.compare-view .topbar-search,
+body.compare-view .filters-toggle-btn,
+body.compare-view #resetFiltersBtn { display: none; }
 
 /* ---------- Filter groups ---------- */
 .filter-group { margin-bottom: 6px; border-bottom: 1px solid var(--border-soft); }
@@ -251,7 +272,7 @@ input { font-family: inherit; }
 .enum-filter-input {
   width: 100%; padding: 6px 10px; margin-bottom: 6px;
   background: var(--bg); border: 1px solid var(--border); border-radius: 7px;
-  color: var(--text); font-size: 12.5px; outline: none; transition: border-color .15s;
+  color: var(--text); font-size: 12.5px; transition: border-color .15s;
 }
 .enum-filter-input:focus { border-color: var(--accent); }
 .enum-filter-input::placeholder { color: var(--text-faint); }
@@ -262,13 +283,72 @@ input { font-family: inherit; }
 }
 .enum-expand-btn:hover { text-decoration: underline; }
 
+/* ---------- Active filter chips ---------- */
+/* The sidebar's own state is the only record of what's applied, and it scrolls out of view
+   (and doesn't exist at all under 880px). These sit directly above the results so what's
+   narrowing them is always visible, and each one is individually removable — the sidebar
+   alone offered no undo short of hunting down the control you'd touched. */
+.active-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; }
+.active-filters[hidden] { display: none; }
+.active-filters-label { font-size: 12.5px; color: var(--text-dim); font-weight: 600; }
+.filter-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12.5px; font-weight: 600; color: var(--text);
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 999px; padding: 4px 6px 4px 12px;
+}
+.filter-chip-remove {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; flex-shrink: 0; padding: 0;
+  border: none; border-radius: 50%; background: transparent;
+  color: var(--text-faint); font-size: 15px; line-height: 1; cursor: pointer;
+  transition: background .15s, color .15s;
+}
+.filter-chip-remove:hover { background: var(--border); color: var(--text); }
+.filter-chip-clear {
+  border: none; background: transparent; color: var(--accent-2);
+  font-size: 12.5px; font-weight: 600; cursor: pointer; padding: 4px 2px;
+}
+.filter-chip-clear:hover { text-decoration: underline; }
+
+/* ---------- Loading skeleton ---------- */
+/* The dataset is a ~400KB fetch with nothing rendered until it lands. Before this, a slow
+   connection showed an empty grid next to a count reading "0 vehicles" — which reads as
+   "no matches", not "loading". Mirrors .ev-card's own box so the swap doesn't reflow. */
+.skeleton-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
+.skeleton-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: 16px; display: flex; flex-direction: column; gap: 10px; min-height: 186px;
+}
+.skeleton-line { height: 10px; border-radius: 999px; background: var(--border); }
+.skeleton-shimmer {
+  background: linear-gradient(90deg, var(--border) 25%, var(--bg-card-hover) 50%, var(--border) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.4s ease-in-out infinite;
+}
+@keyframes skeleton-pulse {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.skeleton-row { display: flex; gap: 10px; align-items: center; }
+.skeleton-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--border); flex-shrink: 0; }
+
+/* Data failed to load entirely — the fetch previously had no catch at all, so this state
+   used to be a permanently blank page with an unhandled rejection in the console. */
+.load-error { text-align: center; padding: 64px 20px; color: var(--text-dim); }
+.load-error h3 { color: var(--text); margin-bottom: 6px; }
+.load-error p { font-size: 14px; margin: 0 0 16px; }
+
 /* ---------- Card grid ---------- */
 .intro-line { font-size: 14px; color: var(--text-dim); line-height: 1.5; margin: 0 0 16px; }
-.results-toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-.results-toolbar-label { font-size: 12.5px; color: var(--text-dim); font-weight: 600; }
+.results-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 14px; }
+.results-toolbar-label { font-size: 12.5px; color: var(--text-dim); font-weight: 600; white-space: nowrap; }
+/* Sits with the results it describes instead of across the page in the topbar. This is
+   also the aria-live region, so filter/search changes get announced. */
+.result-count { color: var(--text-dim); font-size: 13px; white-space: nowrap; margin-left: auto; }
 .sort-select {
   padding: 7px 30px 7px 12px; background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text); font-size: 13px; cursor: pointer; outline: none;
+  border-radius: 8px; color: var(--text); font-size: 13px; cursor: pointer;
   appearance: none; -webkit-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239aa4b6' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-repeat: no-repeat; background-position: right 12px center;
@@ -282,7 +362,9 @@ input { font-family: inherit; }
   padding: 16px; cursor: pointer; transition: border-color .15s, transform .15s;
   display: flex; flex-direction: column; gap: 10px;
 }
-.ev-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+@media (hover: hover) {
+  .ev-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
+}
 .ev-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .ev-card-icon {
   width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
@@ -295,7 +377,7 @@ input { font-family: inherit; }
 .ev-card-price { font-size: 13px; color: var(--accent); font-weight: 700; white-space: nowrap; }
 .ev-card-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; margin-top: 2px; }
 .ev-stat { display: flex; flex-direction: column; }
-.ev-stat-label { font-size: 10.5px; color: var(--text-faint); text-transform: uppercase; letter-spacing: .04em; }
+.ev-stat-label { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: .04em; }
 .ev-stat-value { font-size: 13px; font-weight: 600; }
 .ev-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 8px; border-top: 1px solid var(--border-soft); }
 .ev-card-add { display: flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--text-dim); }
@@ -306,12 +388,12 @@ input { font-family: inherit; }
   border: 1px solid var(--border);
 }
 
-.empty-state { text-align: center; padding: 80px 20px; color: var(--text-faint); }
+.empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 20px; color: var(--text-dim); }
 .empty-state h3 { color: var(--text-dim); margin-bottom: 6px; }
 
 /* ---------- Compare ---------- */
-.compare-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-.compare-header h2 { font-size: 18px; margin-right: auto; }
+.compare-header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 16px; }
+.compare-header h2 { font-size: 18px; margin-right: auto; min-width: 0; }
 /* A native horizontal scrollbar on a tall, capped-height table sits at that table's own
    bottom edge — reachable in principle, but easy to lose track of and awkward to grab on
    some setups. These buttons live up here in the header, which is never capped/scrolled,
@@ -338,7 +420,7 @@ input { font-family: inherit; }
    that forced behavior instead of fighting it: the table now scrolls in its own contained
    viewport (like a spreadheet), and the sticky header pins correctly to *that*. */
 .compare-scroll {
-  overflow-x: auto; overflow-y: auto; max-height: calc(100vh - 190px);
+  overflow-x: auto; overflow-y: auto; max-height: calc(100dvh - var(--topbar-h) - 130px);
   border: 1px solid var(--border-soft); border-radius: var(--radius-md);
 }
 .compare-table { border-collapse: collapse; width: 100%; min-width: 640px; }
@@ -459,7 +541,9 @@ input { font-family: inherit; }
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);
   padding: 12px; cursor: pointer; transition: border-color .15s, transform .15s;
 }
-.similar-card:hover { border-color: var(--accent-dim); transform: translateY(-1px); }
+@media (hover: hover) {
+  .similar-card:hover { border-color: var(--accent-dim); transform: translateY(-1px); }
+}
 .similar-card-top { display: flex; gap: 10px; align-items: flex-start; }
 .similar-card-icon {
   width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0; font-size: 15px;
@@ -504,13 +588,23 @@ input { font-family: inherit; }
 /* ---------- Responsive ---------- */
 @media (max-width: 880px) {
   .layout { flex-direction: column; }
-  .topbar { flex-wrap: wrap; gap: 10px; }
-  .topbar-search { order: 3; max-width: none; flex: 1 1 100%; }
   .content { padding: 16px; }
 
-  /* The topbar wraps to two rows on mobile (search drops to its own line), so there's less
-     room above the table than on desktop — give it a smaller offset. */
-  .compare-scroll { max-height: calc(100vh - 260px); }
+  /* The topbar used to wrap to three rows here — 149px of a 812px phone viewport (18%),
+     permanently sticky. Everything below collapses it to one row (~56px): the wordmark
+     drops to just the mark, search shares the row instead of claiming its own, and Reset
+     goes away because the active-filter chips above the results now carry both the
+     "what's applied" signal and a Clear all. The vehicle count moved next to the sort
+     control (see .results-toolbar), which is where it belongs at every width. */
+  .topbar { flex-wrap: nowrap; gap: 10px; padding: 11px 12px; }
+  .brand-name { display: none; }
+  .topbar-search { max-width: none; flex: 1 1 auto; min-width: 0; }
+  .topbar-actions { gap: 8px; }
+  #resetFiltersBtn { display: none; }
+
+  /* --topbar-h covers the header itself; this subtracts the compare header + content
+     padding above the table, which is tighter here than on desktop. */
+  .compare-scroll { max-height: calc(100dvh - var(--topbar-h) - 110px); }
 
   /* Keep the sticky header (inherited from the base rule), but compact it: the icon is
      decorative, and price is already visible before you scroll — dropping just those two
@@ -522,6 +616,7 @@ input { font-family: inherit; }
   .compare-table thead .compare-col-price {
     display: none;
   }
+  .compare-header h2 { font-size: 16px; }
   .compare-col-header { padding-top: 10px; padding-bottom: 10px; }
   .compare-col-trim { margin-top: 1px; }
   .compare-col-view-btn { margin-top: 6px; padding: 4px 8px; font-size: 11px; }
@@ -571,4 +666,19 @@ input { font-family: inherit; }
   .compare-col-header, .compare-table thead th:not(:first-child) { width: 150px; min-width: 150px; }
   .compare-col-title { font-size: 13px; }
   .compare-table tr.group-row th, .compare-table tr.group-row td { font-size: 10px; }
+}
+
+/* ---------- Reduced motion ---------- */
+/* Last in the file so it wins over every transition/animation declared above, including the
+   ones inside the media queries. Keeps `forwards`-style end states intact by collapsing
+   durations rather than setting `animation: none`, and leaves opacity/color changes to
+   happen instantly rather than removing the feedback altogether. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .ev-card:hover, .similar-card:hover { transform: none; }
 }

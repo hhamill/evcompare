@@ -2,7 +2,12 @@ import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey }
 import { findSimilarCars } from "./similar.js?v=6";
 import { carPath } from "./router.js?v=5";
 
-const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
+// "msrp" used to sit here too, printing the same number a second time directly under the
+// green price in the card header. The freed slot goes to 0-60, which actually varies across
+// the catalog. drivetrain stays because it's now the only place AWD is stated on a card
+// (see the badge rule below), and maxPassengers stays because it's what you're scanning for
+// the moment you need more than five seats.
+const CARD_STAT_KEYS = ["epaRange", "zeroTo60", "drivetrain", "maxPassengers"];
 
 // The standard "share" glyph (an upward arrow escaping an open-top tray) — no single emoji
 // reads unambiguously as "share" across platforms, so this is hand-drawn to match the rest of
@@ -48,7 +53,50 @@ export function carTitle(car) {
   return `${esc(car.make)} ${esc(car.model)}`;
 }
 
+// Placeholder grid shown while /data/evs.json is in flight. Purely decorative, so the whole
+// block is aria-hidden — the real "what's happening" signal for assistive tech is the
+// aria-live result count, which app.js sets to "Loading vehicles…" over the same window.
+// Card count is arbitrary; it just needs to fill a first screen at typical widths.
+export function renderSkeletonGrid(container, count = 9) {
+  const card = `
+    <div class="skeleton-card">
+      <div class="skeleton-row">
+        <div class="skeleton-icon skeleton-shimmer"></div>
+        <div style="flex:1; min-width:0;">
+          <div class="skeleton-line skeleton-shimmer" style="width:62%"></div>
+          <div class="skeleton-line skeleton-shimmer" style="width:40%; margin-top:8px; height:8px;"></div>
+        </div>
+      </div>
+      <div class="skeleton-line skeleton-shimmer" style="width:28%; height:16px; border-radius:999px;"></div>
+      <div class="skeleton-row" style="gap:24px; margin-top:2px;">
+        <div style="flex:1"><div class="skeleton-line skeleton-shimmer" style="width:70%; height:8px;"></div>
+          <div class="skeleton-line skeleton-shimmer" style="width:45%; margin-top:7px;"></div></div>
+        <div style="flex:1"><div class="skeleton-line skeleton-shimmer" style="width:70%; height:8px;"></div>
+          <div class="skeleton-line skeleton-shimmer" style="width:45%; margin-top:7px;"></div></div>
+      </div>
+      <div class="skeleton-line skeleton-shimmer" style="width:100%; height:8px; margin-top:auto;"></div>
+    </div>`;
+  container.className = "skeleton-grid";
+  container.setAttribute("aria-hidden", "true");
+  container.innerHTML = card.repeat(count);
+}
+
+// Terminal state for a failed dataset fetch. Retry re-runs the same load path rather than
+// reloading the document, so a transient network blip doesn't cost a full page boot.
+export function renderLoadError(container, onRetry) {
+  container.className = "load-error";
+  container.removeAttribute("aria-hidden");
+  container.innerHTML = `
+    <h3>Couldn't load vehicle data</h3>
+    <p>Check your connection and try again.</p>
+    <button class="btn btn-primary" data-role="retry">Retry</button>`;
+  container.querySelector('[data-role="retry"]').addEventListener("click", onRetry);
+}
+
 export function renderCardGrid(container, cars, { compareSet, onToggleCompare, onOpenDetail }) {
+  // Reclaim the container from renderSkeletonGrid/renderLoadError, which repurpose it.
+  container.className = "card-grid";
+  container.removeAttribute("aria-hidden");
   container.innerHTML = "";
   if (cars.length === 0) {
     container.innerHTML = `<div class="empty-state"><h3>No vehicles match your filters</h3><p>Try loosening a filter or resetting them.</p></div>`;
@@ -66,7 +114,11 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
     const badges = [];
     if (car.driverAssist?.handsFreeDriving?.available) badges.push("Hands-Free Driving");
     if (car.isThreeRow) badges.push("3-Row");
-    if (car.allWheelDriveAvailable) badges.push("AWD Avail.");
+    // Only when the trim itself isn't already AWD. Unconditionally, this fired on 101 of 149
+    // cars — including every AWD trim, where it restated the Drivetrain stat two rows down
+    // and told you nothing. Restricted to non-AWD trims it carries a real, non-obvious fact:
+    // this particular trim is RWD/FWD, but you can order the same model with AWD.
+    if (car.allWheelDriveAvailable && car.drivetrain !== "AWD") badges.push("AWD Avail.");
 
     card.innerHTML = `
       <div class="ev-card-top">
@@ -79,7 +131,7 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
         </div>
         <div class="ev-card-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
       </div>
-      <div class="ev-card-badges">${badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>
+      ${badges.length ? `<div class="ev-card-badges">${badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>` : ""}
       <div class="ev-card-stats">${stats}</div>
       <div class="ev-card-footer">
         <label class="ev-card-add" data-role="add-label">

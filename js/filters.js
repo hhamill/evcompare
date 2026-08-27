@@ -124,20 +124,66 @@ export function matchesFilters(car, filterState, domains, searchText) {
   return true;
 }
 
-export function countActiveFilters(filterState, domains) {
-  let n = 0;
+// Enumerates every applied constraint as a removable descriptor, for the chip row above the
+// results. Multi-select enums emit one chip *per selected value* rather than one per field,
+// so "Make: Audi, BMW, Kia" can be narrowed a make at a time instead of all-or-nothing.
+//
+// Returns plain text (never markup) — the caller sets it via textContent, so unlike the
+// innerHTML paths elsewhere in this file there's nothing here to escape.
+export function describeActiveFilters(filterState, domains) {
+  const chips = [];
   for (const field of FIELDS) {
     const v = filterState[field.key];
-    if (field.type === "enum" || field.type === "enumMulti") {
-      if (v && v.size > 0) n++;
+    if (field.type === "enum") {
+      if (v && v.size > 0) {
+        for (const value of v) chips.push({ key: field.key, value, text: `${field.label}: ${value}` });
+      }
+    } else if (field.type === "enumMulti") {
+      if (v && v.size > 0) {
+        // format() on these fields takes the whole array (wheel sizes render as `19", 20"`),
+        // so hand it a one-element array to get a single value formatted the same way.
+        for (const value of v) {
+          const shown = field.format ? field.format([value]) : String(value);
+          chips.push({ key: field.key, value, text: `${field.label}: ${shown}` });
+        }
+      }
     } else if (field.type === "boolean") {
-      if (v === true) n++;
+      // The label alone is the whole constraint here — a chip reading "Heat Pump: Yes" says
+      // no more than "Heat Pump", since false is the same as unset for these.
+      if (v === true) chips.push({ key: field.key, value: null, text: field.label });
     } else if (field.type === "range") {
       const d = domains[field.key];
-      if (d && (v[0] > d.min || v[1] < d.max)) n++;
+      if (!d) continue;
+      const [lo, hi] = v;
+      const loMoved = lo > d.min;
+      const hiMoved = hi < d.max;
+      if (!loMoved && !hiMoved) continue;
+      const fmt = n => (field.format ? field.format(n) : String(n));
+      let shown;
+      if (loMoved && hiMoved) shown = `${fmt(lo)} – ${fmt(hi)}`;
+      else if (loMoved) shown = `${fmt(lo)}+`;
+      else shown = `Up to ${fmt(hi)}`;
+      chips.push({ key: field.key, value: null, text: `${field.label}: ${shown}` });
     }
   }
-  return n;
+  return chips;
+}
+
+// Undoes exactly one chip. `value` is the specific enum entry to drop (the rest of that
+// field's selection survives); null means clear the whole field, which is the only
+// meaningful operation for booleans and ranges.
+export function clearFilter(filterState, domains, key, value) {
+  const field = FIELDS.find(f => f.key === key);
+  if (!field) return;
+  if (field.type === "enum" || field.type === "enumMulti") {
+    if (value === null) filterState[key] = new Set();
+    else filterState[key].delete(value);
+  } else if (field.type === "boolean") {
+    filterState[key] = false;
+  } else if (field.type === "range") {
+    const d = domains[key];
+    filterState[key] = d ? [d.min, d.max] : [0, 0];
+  }
 }
 
 // ---------- Sidebar rendering ----------

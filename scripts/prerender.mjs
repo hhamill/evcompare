@@ -236,7 +236,7 @@ function pageFor(car) {
 <script type="application/ld+json">${JSON.stringify(ld)}</script>
 <script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%2316a35e%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%23ffffff%22/></svg>" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%230f7a46%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%23ffffff%22/></svg>" />
 <script>
   (function (l) {
     if (l.search[1] === "p" && l.search[2] === "=") {
@@ -245,7 +245,7 @@ function pageFor(car) {
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=24" />
+<link rel="stylesheet" href="/css/styles.css?v=29" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -258,13 +258,12 @@ function pageFor(car) {
       <span class="brand-name">EV Compare</span>
     </button>
     <div class="topbar-search">
-      <input type="search" id="searchInput" placeholder="Search make or model…" autocomplete="off" />
+      <input type="search" id="searchInput" aria-label="Search vehicles by make or model" placeholder="Search make or model…" autocomplete="off" />
     </div>
     <div class="topbar-actions">
-      <span id="resultCount" class="result-count">0 vehicles</span>
       <button id="filtersToggleBtn" class="btn btn-ghost filters-toggle-btn" aria-expanded="false" aria-controls="sidebar">Filters</button>
       <button id="resetFiltersBtn" class="btn btn-ghost">Reset filters</button>
-      <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle color theme"></button>
+      <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Color theme"></button>
     </div>
   </header>
 
@@ -288,7 +287,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
   <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
 
   <div class="layout">
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Filters">
       <div class="sidebar-header">
         <h2>Filters</h2>
         <button id="sidebarCloseBtn" class="sidebar-close" aria-label="Close filters">&times;</button>
@@ -299,6 +298,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
     <main class="content">
       <div id="viewResults" class="view">
         <p class="intro-line">View and compare electric vehicles sold in the US. Click a model or use the filters to get started.</p>
+        <div id="activeFilters" class="active-filters" hidden></div>
         <div class="results-toolbar">
           <label for="sortSelect" class="results-toolbar-label">Sort by</label>
           <select id="sortSelect" class="sort-select">
@@ -312,6 +312,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
             <option value="maxPassengers-desc">Max Passengers: Most first</option>
             <option value="maxPassengers-asc">Max Passengers: Fewest first</option>
           </select>
+          <span id="resultCount" class="result-count" role="status" aria-live="polite"></span>
         </div>
         <div id="cardGrid" class="card-grid"></div>
       </div>
@@ -353,7 +354,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
 
 </div>
 
-<script type="module" src="/js/app.js?v=41"></script>
+<script type="module" src="/js/app.js?v=44"></script>
 </body>
 </html>
 `;
