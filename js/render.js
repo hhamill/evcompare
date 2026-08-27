@@ -311,7 +311,7 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
   body.innerHTML = `
     <div class="modal-header-row">
       <div class="modal-title">${bodyIcon(car.bodyStyle)} ${carTitle(car)}</div>
-      <button id="modalShareBtn" class="btn btn-ghost btn-sm modal-share-btn">${SHARE_ICON} Share</button>
+      <button id="modalShareBtn" class="btn btn-ghost btn-sm icon-btn">${SHARE_ICON} Share</button>
     </div>
     <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
     <div class="modal-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>

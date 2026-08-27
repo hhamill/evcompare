@@ -245,7 +245,7 @@ function pageFor(car) {
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=22" />
+<link rel="stylesheet" href="/css/styles.css?v=23" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -324,7 +324,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
             <button id="compareScrollLeftBtn" class="compare-scroll-nav-btn" aria-label="Scroll left">&lsaquo;</button>
             <button id="compareScrollRightBtn" class="compare-scroll-nav-btn" aria-label="Scroll right">&rsaquo;</button>
           </div>
-          <button id="shareCompareBtn" class="btn btn-ghost">Share</button>
+          <button id="shareCompareBtn" class="btn btn-ghost icon-btn"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1v9"/><path d="M4.5 4.5L8 1l3.5 3.5"/><path d="M3 7v6a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V7"/></svg> Share</button>
           <button id="clearCompareBtn" class="btn btn-ghost">Clear all</button>
         </div>
         <div class="compare-scroll">
@@ -353,7 +353,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
 
 </div>
 
-<script type="module" src="/js/app.js?v=38"></script>
+<script type="module" src="/js/app.js?v=39"></script>
 </body>
 </html>
 `;
