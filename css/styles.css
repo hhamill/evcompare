@@ -94,6 +94,23 @@ h1, h2, h3, h4 { margin: 0; font-weight: 650; letter-spacing: -0.01em; }
 button { font-family: inherit; }
 input { font-family: inherit; }
 
+/* ---------- Screen-reader-only text ---------- */
+/* Real text, removed from the visual layout but left in the accessibility tree. Used where a
+   visible label would be redundant to a sighted reader but the bare value isn't self-
+   explanatory read aloud — e.g. a pill reading just "SUV".
+   Deliberately NOT `aria-label` on the span: a bare <span> is role=generic, and ARIA
+   prohibits accessible names on generic elements. Chrome computes one anyway, so it looks
+   right in the a11y tree, but screen readers commonly drop it. Real text has no such
+   caveat. Avoids display:none/visibility:hidden, which remove it from the tree too. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ---------- Focus ---------- */
 /* One ring for every focusable thing, keyboard-only. --accent-2 rather than --accent: it
    clears AA against every surface in both themes, and it doesn't collide with the green
@@ -400,6 +417,15 @@ body.compare-view #resetFiltersBtn { display: none; }
 .badge {
   font-size: 10.5px; padding: 2px 7px; border-radius: 999px; background: var(--border-soft); color: var(--text-dim);
   border: 1px solid var(--border);
+}
+/* Body style: a category, not a feature, so it reads as a filled pill against the outline
+   feature badges. Text is --text rather than --accent deliberately — accent text on this
+   tint measures 3.71:1 in light mode, a fail; --text lands at 11.98 light / 15.99 dark.
+   The fill, not the text colour, is what carries the category distinction. */
+.badge-body {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--border));
+  color: var(--text); font-weight: 700;
 }
 
 .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 20px; color: var(--text-dim); }

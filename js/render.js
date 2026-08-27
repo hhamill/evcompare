@@ -111,7 +111,14 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
       return `<div class="ev-stat"><span class="ev-stat-label">${field.label}</span><span class="ev-stat-value">${fmtVal(field, field.get(car))}</span></div>`;
     }).join("");
 
+    // Body style leads, and unlike the rest it's a category rather than a feature — styled
+    // as a filled pill (.badge-body) to say so. It's the only place the style is stated in
+    // text: the silhouette carries it visually but is aria-hidden, so without this a screen
+    // reader gets no body style from a card at all.
     const badges = [];
+    // srPrefix is read aloud but not shown: on its own "SUV" is a non sequitur in the middle
+    // of a card, and the silhouette that gives it context is aria-hidden.
+    if (car.bodyStyle) badges.push({ text: car.bodyStyle, kind: "body", srPrefix: "Body style: " });
     if (car.driverAssist?.handsFreeDriving?.available) badges.push("Hands-Free Driving");
     if (car.isThreeRow) badges.push("3-Row");
     // Only when the trim itself isn't already AWD. Unconditionally, this fired on 101 of 149
@@ -131,7 +138,7 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
         </div>
         <div class="ev-card-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
       </div>
-      ${badges.length ? `<div class="ev-card-badges">${badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>` : ""}
+      ${badges.length ? `<div class="ev-card-badges">${badges.map(b => typeof b === "string" ? `<span class="badge">${b}</span>` : `<span class="badge badge-${b.kind}"><span class="sr-only">${b.srPrefix}</span>${esc(b.text)}</span>`).join("")}</div>` : ""}
       <div class="ev-card-stats">${stats}</div>
       <div class="ev-card-footer">
         <label class="ev-card-add" data-role="add-label">
