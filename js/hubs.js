@@ -23,7 +23,7 @@ function extreme(cars, key, dir) {
 }
 const name = car => `${car.modelYear} ${car.make} ${car.model}`;
 
-export const HUBS = [
+const PRACTICAL_HUBS = [
   {
     slug: "electric-suvs-with-three-rows",
     noun: "three-row electric SUVs",
@@ -168,8 +168,8 @@ export const HUBS = [
   },
 ];
 
-export function hubBySlug(slug) {
-  return HUBS.find(h => h.slug === slug) || null;
+export function hubBySlug(slug, hubs) {
+  return hubs.find(h => h.slug === slug) || null;
 }
 
 // Cars matching a hub, ordered by the spec the page is about — that ordering, and the matching
@@ -184,4 +184,85 @@ export function hubCars(hub, cars) {
     if (bv === null) return -1;
     return hub.order === "asc" ? av - bv : bv - av;
   });
+}
+
+// ---------- generated hubs ----------
+
+// Make and body-style hubs are derived from the dataset rather than hand-written, so adding a
+// marque to evs.json adds its landing page automatically. Together with the practical hubs
+// above these cover every car in the catalogue, which matters because the homepage grid is
+// JS-rendered: without a hub linking to it, a car page's only crawlable inbound links are the
+// four "similar vehicles" entries on its siblings.
+const MAKE_MIN = 4;   // below this a make page is too thin to be worth indexing
+const BODY_MIN = 5;   // Minivan (2) and Van (1) fall out; their cars are covered by make hubs
+
+const slugify = str => String(str).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+const plural = { SUV: "SUVs", Sedan: "sedans", Truck: "trucks", Hatchback: "hatchbacks",
+                 Crossover: "crossovers", Minivan: "minivans", Van: "vans" };
+
+function groupBy(cars, key) {
+  const out = new Map();
+  for (const c of cars) {
+    const v = key(c);
+    if (v) (out.get(v) ?? out.set(v, []).get(v)).push(c);
+  }
+  return out;
+}
+
+function makeHub(make, n) {
+  return {
+    slug: `${slugify(make)}-electric-cars`,
+    noun: `${make} EVs`,
+    h1: `${make} electric vehicles`,
+    title: `${make} Electric Cars — Every Model, Range & Price`,
+    blurb: `Every ${make} electric vehicle sold in the US, with range, price and charging side by side.`,
+    match: c => c.make === make,
+    highlight: "epaRange", order: "desc",
+    minCount: MAKE_MIN,
+    determines: [],
+    intro: (cars, total) => {
+      const r = extreme(cars, "epaRange", "desc"), p = extreme(cars, "msrp", "asc");
+      return `We track ${cars.length} ${make} electric vehicle${cars.length === 1 ? "" : "s"} out of ${total} EVs overall.`
+        + (r ? ` The longest-range is the ${name(r.car)} at ${r.text}.` : "")
+        + (p ? ` The most affordable starts at ${p.text}.` : "");
+    },
+  };
+}
+
+function bodyHub(body, n) {
+  const word = plural[body] ?? `${body}s`;
+  return {
+    slug: `electric-${slugify(word)}`,
+    noun: `electric ${word}`,
+    h1: `Electric ${word}`,
+    title: `Electric ${word} — Every Model Compared`,
+    blurb: `Every electric ${body.toLowerCase()} sold in the US, compared on range, price and charging.`,
+    match: c => c.bodyStyle === body,
+    highlight: "epaRange", order: "desc",
+    minCount: BODY_MIN,
+    // The body style is the page; a one-option Body Style list would be noise.
+    determines: [],
+    intro: (cars, total) => {
+      const r = extreme(cars, "epaRange", "desc"), p = extreme(cars, "msrp", "asc");
+      return `${cars.length} of the ${total} EVs we track are ${word}.`
+        + (r ? ` The longest-range is the ${name(r.car)} at ${r.text}.` : "")
+        + (p ? ` The most affordable starts at ${p.text}.` : "");
+    },
+  };
+}
+
+// Called once with the loaded dataset by both prerender and app.js, so the two always agree
+// on which hubs exist.
+export function buildHubs(cars) {
+  const makes = [...groupBy(cars, c => c.make)].filter(([, l]) => l.length >= MAKE_MIN)
+    .sort((a, b) => a[0].localeCompare(b[0])).map(([m, l]) => makeHub(m, l.length));
+  const bodies = [...groupBy(cars, c => c.bodyStyle)].filter(([, l]) => l.length >= BODY_MIN)
+    .sort((a, b) => b[1].length - a[1].length).map(([b, l]) => bodyHub(b, l.length));
+  return { practical: PRACTICAL_HUBS, bodies, makes, all: [...PRACTICAL_HUBS, ...bodies, ...makes] };
+}
+
+// The hubs a given car belongs to. Trivial precisely because hubs are predicates — with
+// hardcoded id lists this would need a reverse index kept in sync by hand.
+export function hubsForCar(car, hubs) {
+  return hubs.filter(h => h.match(car));
 }

@@ -2,7 +2,7 @@ import { FIELDS, BODY_SPRITE } from "./fields.js?v=12";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js?v=11";
 import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=29";
 import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath, hubSlugFromPath } from "./router.js?v=6";
-import { hubBySlug } from "./hubs.js?v=2";
+import { buildHubs, hubBySlug } from "./hubs.js?v=3";
 
 const MAX_COMPARE = 6;
 
@@ -60,6 +60,7 @@ const state = {
   view: "results", // "results" | "compare"
   activeDetailCar: null,
   hub: null,            // active hub landing page, or null on the homepage
+  hubs: [],             // every hub, built from the dataset (see js/hubs.js)
   pathIndex: null,
   catalogIndex: null,
   sortKey: "default",
@@ -164,7 +165,10 @@ async function init() {
     return;
   }
   state.cars = cars;
-  state.hub = hubBySlug(hubSlugFromPath(location.pathname));
+  // Built from the loaded dataset, exactly as prerender does, so the two always agree on
+  // which hubs exist — make and body-style hubs are derived, not hand-listed.
+  state.hubs = buildHubs(cars).all;
+  state.hub = hubBySlug(hubSlugFromPath(location.pathname), state.hubs);
   // Domains come from the hub's matched set, not all 149. That single argument is what makes
   // the sliders clamp to the scope: on /evs-under-40000 the price slider tops out at $40k, so
   // you can narrow further but never widen back out of the hub you're standing in.

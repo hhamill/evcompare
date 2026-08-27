@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { BASE_PATH, carPath } from "../js/router.js";
 import { findSimilarCars } from "../js/similar.js";
-import { HUBS, hubCars } from "../js/hubs.js";
+import { buildHubs, hubCars, hubsForCar } from "../js/hubs.js";
 import { hubPath } from "../js/router.js";
 import { FIELDS, GROUP_ORDER, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "../js/fields.js";
 
@@ -241,7 +241,7 @@ ${o.jsonLd.map(j => `<script type="application/ld+json">${JSON.stringify(j)}</sc
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=35" />
+<link rel="stylesheet" href="/css/styles.css?v=36" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -296,6 +296,7 @@ ${o.introHtml}
           <span id="resultCount" class="result-count" role="status" aria-live="polite"></span>
         </div>
         <div id="cardGrid" class="card-grid"></div>
+        ${o.footerNav ?? ""}
       </div>
 
       <div id="viewCompare" class="view" hidden>
@@ -335,7 +336,7 @@ ${o.introHtml}
 
 </div>
 
-<script type="module" src="/js/app.js?v=51"></script>
+<script type="module" src="/js/app.js?v=52"></script>
 </body>
 </html>
 `;
@@ -357,6 +358,12 @@ function staticCarBlock(car, title, summary, similar) {
     ${staticSpecSections(car)}
     ${staticLinksBlock(car)}
     ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}
+    ${(() => {
+      const belongs = hubsForCar(car, HUBS);
+      return belongs.length ? `<div class="modal-section"><h4>Also in</h4>
+      <p class="static-hub-links">${belongs.map(h => `<a href="${esc(hubPath(h))}/">${esc(h.h1)}</a>`).join(" &middot; ")}</p>
+    </div>` : "";
+    })()}
     <p><a href="/">&larr; All EVs on ${esc(SITE_NAME)}</a></p>
     ${similar.length ? `<div class="modal-section">
       <h4>Similar Vehicles</h4>
@@ -384,6 +391,7 @@ function pageFor(car) {
     ogType: "product",
     jsonLd: [jsonLdFor(car, url, similar), breadcrumbLdFor(car, url)],
     staticBlock: staticCarBlock(car, title, summary, similar),
+    footerNav: footerNavHtml(),
     // Stays a <p>: this page's <h1> is the car's own title inside #staticCarDetail above,
     // and a page gets one.
     introHtml: `        <p class="intro-line">View and compare electric vehicles sold in the US. Click a model or use the filters to get started.</p>`,
@@ -395,7 +403,28 @@ function pageFor(car) {
 // Below this, a hub is too thin to be worth indexing. It WARNS rather than skipping: once a
 // URL is indexed, having it start 404ing is worse than a thin page, and silently dropping it
 // means finding out from Search Console weeks later. A human decides.
-const HUB_MIN = 8;
+const HUB_MIN = 8;   // default floor; make/body hubs carry their own (see js/hubs.js)
+
+const HUBSETS = buildHubs(cars);
+const HUBS = HUBSETS.all;
+
+// Practical hubs ride at the top of the page; make and body-style hubs go in a footer nav.
+// 34 pills above the grid would bury the results, and a footer nav is the conventional place
+// for this kind of breadth linking anyway.
+function hubNavHtml(hubs, label) {
+  if (!hubs.length) return "";
+  const links = hubs.map(h => `<a href="${esc(hubPath(h))}/">${esc(h.h1)}</a>`).join("\n      ");
+  return `<span class="hub-links-label">${esc(label)}</span>\n      ${links}`;
+}
+
+function footerNavHtml() {
+  return `<nav class="hub-links hub-links-footer" aria-label="Browse by body style and make">
+      ${hubNavHtml(HUBSETS.bodies, "By body style:")}
+    </nav>
+    <nav class="hub-links hub-links-footer" aria-label="Browse by make">
+      ${hubNavHtml(HUBSETS.makes, "By make:")}
+    </nav>`;
+}
 
 function hubJsonLd(hub, url, matched) {
   return {
@@ -459,6 +488,7 @@ function pageForHub(hub, matched) {
     ogType: "website",
     jsonLd: [hubJsonLd(hub, url, matched), hubBreadcrumbLd(hub, url)],
     staticBlock: staticHubBlock(hub, matched, cars.length),
+    footerNav: footerNavHtml(),
     // Heading + generated intro live here, not in the static block: app.js removes that block
     // on boot, and taking the page's only <h1> with it would be a real regression for anyone
     // running JS. Only the list is disposable — the interactive grid replaces it.
@@ -504,11 +534,13 @@ function buildHomepage() {
   // Hub links are injected here rather than hardcoded in index.html so they can't drift from
   // js/hubs.js, and rendered server-side rather than by app.js so a crawler actually sees
   // them — a sitemap entry with no inbound link is a weak signal.
-  const links = HUBS.map(h =>
+  const links = HUBSETS.practical.map(h =>
     `<a href="${esc(hubPath(h))}/">${esc(h.h1)}</a>`).join("\n      ");
   return src
     .replace('<nav id="hubLinks" class="hub-links" aria-label="Browse by category"></nav>',
              `<nav id="hubLinks" class="hub-links" aria-label="Browse by category">\n      <span class="hub-links-label">Browse:</span>\n      ${links}\n    </nav>`)
+    .replace('<div id="cardGrid" class="card-grid"></div>',
+             `<div id="cardGrid" class="card-grid"></div>\n        ${footerNavHtml()}`)
     .replace("</head>", `${homepageJsonLd()}\n</head>`)
     .replaceAll("https://evcompare.org/assets/og-image.png", `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`);
 }
@@ -568,8 +600,9 @@ function main() {
   let hubCount = 0;
   for (const hub of HUBS) {
     const matched = hubCars(hub, cars);
-    if (matched.length < HUB_MIN) {
-      console.warn(`  ! hub /${hub.slug}/ has only ${matched.length} vehicles (min ${HUB_MIN}) — emitting anyway; review it`);
+    const floor = hub.minCount ?? HUB_MIN;
+    if (matched.length < floor) {
+      console.warn(`  ! hub /${hub.slug}/ has only ${matched.length} vehicles (min ${floor}) — emitting anyway; review it`);
     }
     const outDir = path.join(DIST, hub.slug);
     mkdirSync(outDir, { recursive: true });
