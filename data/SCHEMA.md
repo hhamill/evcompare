@@ -102,6 +102,14 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
 }
 ```
 
+## Scope: battery-electric only
+
+This dataset covers **battery-electric vehicles sold in the US**. Range-extended EVs (EREVs)
+and plug-in hybrids are deliberately excluded — if it has an engine, it doesn't belong here,
+however the manufacturer markets it. There is consequently no field for a range extender, fuel
+tank or engine, and none should be added without revisiting this decision. Absences like the
+Ram 1500 REV or Scout Traveler are the boundary working, not missing research.
+
 ## No warranty
 
 This data is provided as is. It is hand-compiled and may contain errors or omissions, and figures

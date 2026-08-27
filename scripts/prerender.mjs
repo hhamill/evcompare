@@ -667,6 +667,12 @@ function buildDataPage(meta, sizes) {
       Use it for anything — commercial work, research, training, a competing site — with no permission needed and
       no attribution required. A credit to ${esc(SITE_NAME)} is appreciated, never demanded.</p>
 
+    <h2>What counts as an EV here</h2>
+    <p><strong>Battery-electric vehicles only.</strong> Range-extended EVs (EREVs) and plug-in
+      hybrids are out of scope, however they're marketed — if it has an engine, it isn't in this
+      dataset. So the absence of, say, the Ram 1500 REV or the Scout Traveler is a deliberate
+      boundary rather than a gap in coverage.</p>
+
     <h2>No warranty</h2>
     ${WARRANTY_HTML}
 

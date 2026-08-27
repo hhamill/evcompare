@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "prerender": "node scripts/prerender.mjs",
-    "sync-urls": "node scripts/sync-urls.mjs"
+    "sync-urls": "node scripts/sync-urls.mjs",
+    "audit": "node scripts/audit-data.mjs"
   }
 }

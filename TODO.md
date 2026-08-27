@@ -828,8 +828,9 @@ This is a scope boundary, not an omission — but nothing currently says so, and
 no concept of a range extender, so a consumer of the CC0 dataset would read the absence as a
 gap rather than a decision.
 
-- [ ] State "battery-electric only; no EREVs or PHEVs" on `/data/` and in `SCHEMA.md`, so the
-      boundary is explicit to anyone taking the dataset.
+- [x] **Done 2026-08-27.** Stated on `/data/` ("What counts as an EV here") and in `SCHEMA.md`
+      ("Scope: battery-electric only"), both naming Ram 1500 REV / Scout Traveler explicitly so
+      the absence reads as a boundary rather than missing research.
 
 ## 5. Checks that passed (recorded so they don't get re-run)
 
@@ -978,3 +979,36 @@ don't publish 0-60 — that held.** The unfilled six are Kona, Uncharted, base-t
 trucks; every premium/performance trim resolved on the first search. Worth carrying into the
 heat-pump and ground-clearance batches: expect base and work trims to be the expensive ones,
 and budget for a partial close rather than treating leftovers as failure.
+
+
+# TODO: Automated data audit — `npm run audit` (2026-08-27)
+
+Added `scripts/audit-data.mjs` in response to trim drift proving to be the dominant failure
+mode of the 0-60 batch: three near-misses in two batches, every one caught only by hand
+(Lyriq RWD handed the AWD figure, Optiq handed a different model year's, Hummer 3X
+unresolvable between two configurations). The checks catch that class automatically:
+
+1. **Different power, identical 0-60** across trims of one model. Same power + same figure is
+   fine and common, so only differing power flags.
+2. **More power but slower** within a model — physically implausible.
+3. **Different drivetrain, identical range AND battery** — RWD and AWD essentially never post
+   the same EPA range.
+4. **Efficiency outside ~1.4–5.6 mi/kWh** — the real band runs from the Hummer (1.52) to the
+   Tesla Standard trims on LFP (5.35), so anything outside means range or battery is wrong.
+5. **Duplicate record identity.**
+
+Every check is a heuristic. A flag means "look at this", never "this is wrong".
+
+**Run it after every research batch.** Current state — 2 flags, both pre-existing, neither
+introduced by today's work:
+
+- [ ] **GMC Sierra EV: Elevation (605hp) and Denali Extended Range (645hp) both 4.5s.**
+      Probably a false positive: GMC was confirmed today to quote 4.5s for *both* the 645hp
+      Extended Range and the 760hp Max Range, so they genuinely publish one figure across power
+      levels. Confirm the Elevation figure has its own source rather than being inherited.
+- [ ] **VinFast VF8: Eco AWD (349hp) and Plus AWD (402hp) both 5.5s.** More suspicious — 53hp
+      apart with an identical figure, and the VF8 entries were bulk-researched (see the
+      2026-08-20 batch, which found several VF8 fields empty). Verify against a per-trim source.
+
+Worth extending when a new drift pattern shows up: the point is that each hand-caught mistake
+becomes a check, so the same class can't recur silently.
