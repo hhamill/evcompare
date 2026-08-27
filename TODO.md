@@ -718,3 +718,133 @@ User reported: searching (Ctrl/Cmd+F) for a spec while the detail modal is open 
 - Bumped `app.js` v40→v41.
 
 **Verified**: rebuilt `dist/`; opened a car's detail modal live and confirmed `document.querySelector('.topbar').inert`/`'.layout'.inert` are both `true` while it's open. Directly tested the actual mechanism find-in-page relies on: called `.focus()` on a background button (`resetFiltersBtn`) while the modal was open — the browser refused, `document.activeElement` stayed `BODY` — then closed the modal and confirmed the same button became focusable again (`inert` back to `false` on both elements). No console errors introduced; confirmed `app.js?v=41` loaded 200 OK.
+
+# TODO: Data sanity audit — classification, coverage gaps, scope (2026-08-27)
+
+User asked for a sanity check of the data itself: missing models/trims, missing fields worth
+sourcing, and anything failing a smell test. Findings and the queue that came out of it.
+
+## 1. `bodyStyle` "SUV" vs "Crossover" is not a real distinction — decide and fix
+
+The user spotted this (why is the Mach-E not a Crossover? why is EX30 an SUV but EC40 a
+Crossover?). It's worse than inconsistent: **no field in the dataset separates the two.**
+Every numeric range overlaps —
+
+| | Crossover (6) | SUV (95) |
+| --- | --- | --- |
+| ground clearance | 5.3–7.0 in | 5.2–9.8 in |
+| max cargo | 42.6–55.5 cu ft | 31.9–120 cu ft |
+| max passengers | 5 | 5–7 |
+| MSRP | $29,990–64,995 | $32,975–180,000 |
+
+and the specific pairs are *inverted*, not merely arbitrary:
+
+- **EX30 (SUV) vs EC40 (Crossover)** — same make, both 7.0in, but the EC40 has *more* cargo
+  (42.6 vs 31.9) while sitting in the smaller-sounding bucket.
+- **Mach-E (SUV) at 5.2in** is the lowest-riding vehicle in *either* bucket.
+- **Ioniq 5 (SUV) and EV6 (Crossover)** are E-GMP platform siblings at identical 6.1in.
+- 16 "SUV" records have less cargo than the largest "Crossover".
+
+The industry definition doesn't rescue it either: crossover = unibody, SUV = body-on-frame,
+and essentially every EV here is unibody — applied strictly, nearly all 95 SUVs are crossovers.
+
+**Recommended fix — don't invent our own rule, adopt EPA's.** `fueleconomy.gov` already
+assigns every US-market vehicle an official size class, it's the source we already cite for
+range, and it's on a **REST API** so this is a script rather than a research slog:
+
+```
+https://www.fueleconomy.gov/ws/rest/vehicle/{id}   ->  XML incl. <VClass>
+```
+
+Verified by hand against three records:
+
+| record | EPA `VClass` |
+| --- | --- |
+| Volvo EX30 (id 48450) | Small Sport Utility Vehicle 2WD |
+| Ford Mustang Mach-E (id 50204) | Small Sport Utility Vehicle 2WD |
+| Hyundai Ioniq 9 (id 49661) | Standard Sport Utility Vehicle 2WD |
+
+Note it resolves the exact case in dispute: EX30 and Mach-E land in the *same* class.
+
+- [ ] Add `epaSizeClass` as a new field, populated from the API. **126/149 records already
+      store a specific `id=` in `links.epaWindowSticker`** — those are scriptable. The other 23
+      need a manual lookup or an id backfill first.
+- [ ] Merge `Crossover` → `SUV` in `bodyStyle` (6 records). Keep `bodyStyle` as the *shape*
+      taxonomy — it drives the silhouettes, which are shape-based not size-based — and let
+      `epaSizeClass` carry size as a separate facet. Filtering then supports "SUV" + "Small",
+      which is what people actually shop for.
+- [ ] Drop the `Crossover` body-style hub and add size-class filtering/hubs once the field exists.
+
+**Caveat to accept going in:** EPA gives only two SUV tiers (Small / Standard), not
+small/mid/large. That's coarser than ideal but it is authoritative, citable, needs no judgment
+calls from us, and self-corrects if EPA reclassifies. Inventing our own three-tier rule means
+defending every borderline case forever — which is exactly the trap `bodyStyle` is in now.
+
+Also worth a look while we're in that API: it returns 100+ fields per vehicle and may cover
+some passenger/luggage-volume gaps for free.
+
+## 2. Research queue — fields worth sourcing, in priority order
+
+Counts are `null` (genuinely unresearched) out of 149.
+
+- [ ] **`performance.zeroTo60Sec` — 15 null.** Highest priority: it is one of the four stats on
+      every card since the 2026-08-27 card change, so those cards show "—" in a prime slot.
+      Manufacturer specs or a review will have it.
+- [ ] **`charging.heatPump` — 56 null.** Genuinely decision-relevant (cold-weather range) and
+      on manufacturer spec sheets.
+- [ ] **`groundClearanceIn` — 49 null** (+8 correctly `"N/A"` for air suspension). On spec sheets.
+      Known-hard cases already itemized in the 2026-08-20 batch above; don't re-chase those.
+
+Follow-on, harder:
+
+- [ ] **`charging.nacsAdapter.available` — 62 null / `.costUsd` — 69 null.** Feeds the
+      `/non-tesla-evs-with-nacs-port/` hub, which is the most citable page on the site. Harder
+      because manufacturers announce adapter programmes piecemeal and pricing changes.
+
+**Consider deleting rather than filling:** `techFeatures.cupholders` (139 null — 93% empty),
+`driverAssist.handsFreeDriving.subscriptionUsdPerMonth` (128), `techFeatures.usbPorts.total`
+(92). Tedious to source, nobody picks an EV on cupholder count, and a field that is 93% null
+is arguably worse than no field — it renders as a column of dashes in the compare table.
+
+## 3. Missing models and trims
+
+Model coverage is strong (29 makes / 83 models). **The real gap is trim depth: 1.8 trims per
+model** — 19 models list a single trim, only 2 list three. Real lineups run 3–5.
+
+- [ ] **Volvo EX40** — already flagged in the 2026-08-20 EC40 research above as a real,
+      distinct, on-sale model (~$55,150) missing entirely. Still missing. Worth doing first
+      since it's already researched enough to know it belongs.
+- [ ] **Kia EV4** — sedan, was slated for early-2026 US dealerships. Verify it actually shipped.
+- [ ] Trim-depth pass on the 19 single-trim models, prioritising high-volume ones
+      (Rivian R1T has one trim; BMW iX3, Jeep Wagoneer S, Genesis GV70/G80 likewise).
+
+## 4. Scope decision: BEV only — EREV and PHEV are out
+
+User's call, recorded so it doesn't get relitigated: **this site covers battery-electric
+vehicles only.** Range-extended EVs (Ram 1500 REV, Scout Traveler/Terra, and the growing 2026–27
+EREV wave) are out of scope, as are plug-in hybrids.
+
+This is a scope boundary, not an omission — but nothing currently says so, and `SCHEMA.md` has
+no concept of a range extender, so a consumer of the CC0 dataset would read the absence as a
+gap rather than a decision.
+
+- [ ] State "battery-electric only; no EREVs or PHEVs" on `/data/` and in `SCHEMA.md`, so the
+      boundary is explicit to anyone taking the dataset.
+
+## 5. Checks that passed (recorded so they don't get re-run)
+
+- **Efficiency outliers all verified real.** Ran EPA miles ÷ usable kWh across every record and
+  chased all five outliers. The Hummer (1.52 mi/kWh), E-Transit (1.77) and Lucid Air Pure
+  (5.00) are genuine characteristics.
+- **The Tesla Standard trims are correct — this was a false positive.** Model 3 Standard and
+  Model Y Standard both showing 321mi / 60kWh looked like a copy-paste (identical figures for a
+  sedan and an SUV; 5.35 mi/kWh would beat the Lucid). Checked both cited EPA stickers
+  (id 50251, id 50040): **both really are 321 miles**, and the 60 kWh is right too — it's a
+  64 kWh LFP pack, 60.5 usable. Don't "fix" these.
+- **No duplicate records** (same make+model+trim+year).
+
+## 6. Minor: `towCapacityLbs` uses `0` and `null` with no `"N/A"`
+
+34 records say `0`, 18 say `null`, none say `"N/A"`. If `0` means "confirmed not rated to tow"
+that's correct and useful. Worth confirming the 18 nulls are genuinely unresearched rather than
+the same fact recorded a second way — the three-state convention exists precisely for this.
