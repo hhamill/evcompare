@@ -336,7 +336,7 @@ ${o.introHtml}
 
 </div>
 
-<script type="module" src="/js/app.js?v=52"></script>
+<script type="module" src="/js/app.js?v=53"></script>
 </body>
 </html>
 `;

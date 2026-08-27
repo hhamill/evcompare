@@ -1,6 +1,7 @@
 import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "./fields.js?v=12";
 import { findSimilarCars } from "./similar.js?v=6";
-import { carPath } from "./router.js?v=5";
+import { carPath, hubPath } from "./router.js?v=6";
+import { hubsForCar } from "./hubs.js?v=3";
 
 // "msrp" used to sit here too, printing the same number a second time directly under the
 // green price in the card header. The freed slot goes to 0-60, which actually varies across
@@ -346,7 +347,7 @@ function renderSimilarSection(anchor, allCars) {
   `;
 }
 
-export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCars, onSelectCar, onCompareAll }) {
+export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCars, onSelectCar, onCompareAll, hubs = [] }) {
   const groups = {};
   for (const field of FIELDS) {
     if (field.key === "msrp") continue;
@@ -391,6 +392,16 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
     <p class="modal-summary">${esc(carSummarySentence(car))} Full specs below.</p>
     ${sections}
     ${links.length ? `<div class="modal-section"><h4>Links</h4><div class="modal-links">${links.join("")}</div></div>` : ""}
+    ${(() => {
+      // Mirrors the "Also in" block on the prerendered page. That one lives inside
+      // #staticCarDetail, which app.js removes on boot — so without this, the hub links a
+      // crawler sees are invisible to everyone actually using the site.
+      const belongs = hubsForCar(car, hubs);
+      if (!belongs.length) return "";
+      return `<div class="modal-section"><h4>Also in</h4><div class="modal-links">${
+        belongs.map(h => `<a href="${esc(hubPath(h))}/">${esc(h.h1)}</a>`).join("")
+      }</div></div>`;
+    })()}
     ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}
     <div class="modal-actions">
       <button id="modalCompareBtn" class="btn ${inCompare ? "btn-ghost" : "btn-primary"}">${inCompare ? "Remove from compare" : "Add to compare"}</button>
