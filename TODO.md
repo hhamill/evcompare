@@ -868,9 +868,13 @@ Tick each box and record the value + source as it lands, so this is resumable mi
 - [x] `cadillac-optiq-2025-sport-awd` — **5.9s** (same 300hp AWD powertrain as Luxury)
 
 ### Batch B — GM trucks (3)
-- [ ] `chevrolet-silverado-ev-2026-wt-standard-range` — 2026 Silverado EV WT Std Range (510hp)
-- [ ] `gmc-hummer-ev-2026-pickup-3x` — 2026 Hummer EV Pickup 3X (1000hp)
-- [ ] `gmc-sierra-ev-2026-denali-extended-range` — 2026 Sierra EV Denali Ext Range (645hp)
+- [ ] `chevrolet-silverado-ev-2026-wt-standard-range` — **left null.** Only figure findable is
+      "under 6 seconds, per company representatives" — a bound, not a number. Don't guess 5.9.
+- [ ] `gmc-hummer-ev-2026-pickup-3x` — **left null, and flagged a separate problem.** Figures
+      found were 3.3s (measured, a 3X test vehicle) and 2.8s (Carbon Fiber Edition, 24-module
+      battery) — different configurations, neither cleanly ours. See the horsepower note below.
+- [x] `gmc-sierra-ev-2026-denali-extended-range` — **4.5s** (GMC, tied explicitly to the 645hp
+      Extended Range; Max Range at 760hp is also 4.5s, so the figure isn't trim-ambiguous)
 
 ### Batch C — Hyundai (3)
 - [ ] `hyundai-ioniq-9-2026-s-rwd` — 2026 Ioniq 9 S RWD (215hp)
@@ -911,3 +915,24 @@ Added `scripts/set-spec.mjs` to make these edits rather than hand-editing a 400K
 edits one line in place, refuses to overwrite a non-null value without `--force` (so a batch
 is safe to re-run after an interruption), and bumps that record's `lastVerifiedDate` — which
 also means the sitemap's per-URL `lastmod` starts carrying real signal for the first time.
+
+**Batch B — GM trucks — 1/3, and a data bug found.**
+
+Only the Sierra closed. The other two are correct outcomes, not failures:
+
+- **Silverado EV WT Standard Range** — the only figure available anywhere is "under 6 seconds,
+  per company representatives". That's a bound, not a measurement. Recording 5.9 or 6.0 would
+  be inventing precision the source doesn't have.
+- **Hummer EV Pickup 3X** — every figure found belongs to a different configuration: 3.3s for a
+  measured 3X test vehicle, 2.8s for the Carbon Fiber Edition with the 24-module battery.
+
+- [ ] **Separate bug: our Hummer 3X record says `horsepowerHp: 1000`, which matches neither
+      2026 configuration** — the 3X is 830hp standard, or 1160hp with the optional 24-module
+      battery. 1000hp looks like a stale figure from an earlier model year (the original
+      Edition 1 was quoted at 1,000hp). Worth re-verifying the whole Hummer record, not just
+      this field, and it's probably why the 0-60 couldn't be matched to a configuration.
+
+Third trim-conflation trap in two batches, so it's the rule not the exception: **for any model
+sold in multiple powertrain configurations, confirm which one a figure belongs to before
+recording it.** So far: Lyriq (RWD vs AWD), Optiq (2025 vs 2026 power), Hummer (3X vs CFE, and
+830 vs 1160hp).

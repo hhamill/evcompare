@@ -3773,7 +3773,7 @@
       "id": "gmc-sierra-ev-2026-denali-extended-range",
       "url": "https://evcompare.org/2026/sierra-ev/denali-extended-range/",
       "catalogId": 44,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "GMC",
       "model": "Sierra EV",
       "trim": "Denali (Extended Range)",
@@ -3800,7 +3800,7 @@
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49658"
       },
       "performance": {
-        "zeroTo60Sec": null,
+        "zeroTo60Sec": 4.5,
         "horsepowerHp": 645,
         "topSpeedMph": 112
       },
