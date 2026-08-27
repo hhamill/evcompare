@@ -21,6 +21,7 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
 ```jsonc
 {
   "id": "tesla-model-y-2025-long-range-awd",   // kebab-case unique id
+  "url": "https://evcompare.org/2025/model-y/long-range-awd/",  // ADDED AT BUILD TIME — not present in this source file, and not something to hand-write. scripts/prerender.mjs derives it from carPath() when it publishes dist/data/evs.json, so it can never disagree with the page that actually exists. It is there so anyone reusing the dataset has a reference back per record: CC0 asks for nothing, but a record that links out to the manufacturer and fueleconomy.gov while carrying no reference to where it was compiled leaves a reader no way home even when whoever reused it would happily have pointed the way.
   "catalogId": 149,  // small permanent integer, assigned once. Used only to keep shareable comparison URLs short (/compare/12-87-34 instead of full ids) — never shown in the app. Assign the next unused number (current max + 1) to a newly added car; NEVER reassign or reuse a retired car's number, even after it's removed from `models` — an old shared link should never end up silently pointing at a different car later.
   "lastVerifiedDate": "2026-08-21",  // ISO date this specific entry's specs were last confirmed against a real source (manufacturer spec sheet, fueleconomy.gov, etc.) — not shown in the app, just internal provenance. Bump it when re-researching/correcting this entry's specs; don't bump it for unrelated changes (a notes-wording pass, a schema/UI change) that didn't touch its actual data.
   "make": "Tesla",
@@ -100,6 +101,19 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
   "notes": "Optional short freeform note about anything unusual."
 }
 ```
+
+## Fields added when the dataset is published
+
+`dist/data/evs.json` is not a copy of this file — `scripts/prerender.mjs` rewrites it with
+derived values that are deliberately kept out of source control, because they are computed
+from the site's own routing and would rot if hand-maintained:
+
+- **`models[].url`** — the canonical page for that vehicle (see above).
+- **`hash`** — SHA-256 over the published `models` array, mirrored in `data/current.json` so a
+  consumer can check for changes without re-downloading. It hashes the array *as published*,
+  including the derived `url` fields, so it describes the file you actually downloaded.
+- **`datasetPage` / `documentation`** — where to find the human landing page and this file.
+- **`generatedAt`**, **`count`** — build timestamp and record count.
 
 ## Rules for filling this out
 - Use only real, verifiable public data (manufacturer spec pages, fueleconomy.gov, EPA, Car and Driver / Edmunds / MotorTrend reviews). Do not invent numbers.

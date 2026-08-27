@@ -755,10 +755,34 @@ function main() {
   // copy can check data/current.json (a few dozen bytes) instead of re-downloading the
   // whole dataset just to find out nothing changed.
   const generatedAt = new Date().toISOString();
-  const dataHash = hashModels(cars);
+
+  // Every record carries a `url` back to its own page here. The dataset is CC0 and asks for
+  // nothing, but a record that links out to Acura, US News and fueleconomy.gov while holding
+  // no reference to where it was compiled gives anyone reusing it — an answer engine most of
+  // all — no way to point a reader back even if they want to. Derived at build time from
+  // carPath() rather than stored in the source file, so it can never disagree with the page
+  // that actually exists.
+  const publishedModels = cars.map(car => {
+    const { id, ...rest } = car;
+    return { id, url: canonicalUrl(car), ...rest };
+  });
+
+  // Hash the models as published, not as sourced: the value in current.json is what a
+  // consumer checks against the file they downloaded, so it has to describe that file.
+  const dataHash = hashModels(publishedModels);
   writeFileSync(
     path.join(DIST, "data", "evs.json"),
-    JSON.stringify({ hash: dataHash, license, attribution, url: SITE_BASE_URL, generatedAt, count: cars.length, models: cars }, null, 2) + "\n"
+    JSON.stringify({
+      hash: dataHash,
+      license,
+      attribution,
+      url: SITE_BASE_URL,
+      datasetPage: `${SITE_BASE_URL}${BASE_PATH}/data/`,
+      documentation: `${SITE_BASE_URL}${BASE_PATH}/data/SCHEMA.md`,
+      generatedAt,
+      count: cars.length,
+      models: publishedModels,
+    }, null, 2) + "\n"
   );
   writeFileSync(
     path.join(DIST, "data", "current.json"),
