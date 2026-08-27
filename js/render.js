@@ -93,13 +93,18 @@ export function renderLoadError(container, onRetry) {
   container.querySelector('[data-role="retry"]').addEventListener("click", onRetry);
 }
 
-export function renderCardGrid(container, cars, { compareSet, onToggleCompare, onOpenDetail }) {
+export function renderCardGrid(container, cars, { compareSet, onToggleCompare, onOpenDetail, scopeLabel = null }) {
   // Reclaim the container from renderSkeletonGrid/renderLoadError, which repurpose it.
   container.className = "card-grid";
   container.removeAttribute("aria-hidden");
   container.innerHTML = "";
   if (cars.length === 0) {
-    container.innerHTML = `<div class="empty-state"><h3>No vehicles match your filters</h3><p>Try loosening a filter or resetting them.</p></div>`;
+    // Hub-aware: on a scoped page the hub is usually the binding constraint, not the user's
+    // filter, so "try loosening a filter" would send them after the wrong thing.
+    container.innerHTML = scopeLabel
+      ? `<div class="empty-state"><h3>No ${esc(scopeLabel)} match these filters</h3>
+         <p>Try loosening a filter, or <a href="/">search all vehicles</a>.</p></div>`
+      : `<div class="empty-state"><h3>No vehicles match your filters</h3><p>Try loosening a filter or resetting them.</p></div>`;
     return;
   }
   for (const car of cars) {

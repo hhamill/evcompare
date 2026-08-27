@@ -21,6 +21,20 @@ export function carPath(car) {
   return `${BASE_PATH}/${car.modelYear}/${slugify(car.model)}/${slugify(car.trim)}`;
 }
 
+// Hub landing pages: /{hub-slug}. Unlike /compare, these ARE backed by real prerendered
+// files, so a crawler or hard reload gets the page itself rather than the 404.html fallback.
+export function hubPath(hub) {
+  return `${BASE_PATH}/${hub.slug}`;
+}
+
+// Matches a pathname to a hub slug. Tolerates the trailing slash the prerendered directories
+// are served under (/evs-that-tow/ and /evs-that-tow both land here).
+export function hubSlugFromPath(pathname) {
+  const base = BASE_PATH && pathname.startsWith(BASE_PATH) ? pathname.slice(BASE_PATH.length) : pathname;
+  const parts = base.split("/").filter(Boolean);
+  return parts.length === 1 ? parts[0] : null;
+}
+
 // Precompute path -> car once per dataset load so routing lookups are O(1).
 export function buildCarPathIndex(cars) {
   const map = new Map();

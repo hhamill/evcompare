@@ -21,6 +21,8 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 import { BASE_PATH, carPath } from "../js/router.js";
 import { findSimilarCars } from "../js/similar.js";
+import { HUBS, hubCars } from "../js/hubs.js";
+import { hubPath } from "../js/router.js";
 import { FIELDS, GROUP_ORDER, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "../js/fields.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -196,45 +198,39 @@ function staticLinksBlock(car) {
   return links.length ? `<div class="modal-section"><h4>Links</h4><div class="modal-links">${links.join("")}</div></div>` : "";
 }
 
-function pageFor(car) {
-  const title = `${car.modelYear} ${car.make} ${car.model} ${car.trim}`;
-  const url = canonicalUrl(car);
-  const summary = carSummarySentence(car);
-  // Doesn't restate the site name here — the title suffix and og:site_name already carry that,
-  // and "compare...EVs...EV Compare" back to back read as redundant when actually spoken aloud.
-  const description = `${summary} Full specs and side-by-side comparisons.`;
-  const similar = findSimilarCars(car, cars, { limit: 4 });
-  const ld = jsonLdFor(car, url, similar);
-  const breadcrumbLd = breadcrumbLdFor(car, url);
-  const ogImage = `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`;
+// Shared page shell for every prerendered page. Extracted from pageFor() so hub landing
+// pages emit byte-identical chrome (topbar, sidebar, compare view, modal) rather than a
+// second copy that quietly drifts. Only the head metadata, the no-JS static block and the
+// intro line differ between page types.
+const OG_IMAGE = `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`;
 
+function pageShell(o) {
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>${esc(title)} — Specs &amp; Price | ${SITE_NAME}</title>
-<meta name="description" content="${esc(description)}" />
+<title>${esc(o.pageTitle)}</title>
+<meta name="description" content="${esc(o.description)}" />
 <meta name="robots" content="index,follow" />
 <meta name="theme-color" content="#4ee08a" />
-<link rel="canonical" href="${esc(url)}" />
+<link rel="canonical" href="${esc(o.url)}" />
 
-<meta property="og:type" content="product" />
+<meta property="og:type" content="${esc(o.ogType)}" />
 <meta property="og:site_name" content="${esc(SITE_NAME)}" />
-<meta property="og:title" content="${esc(title)}" />
-<meta property="og:description" content="${esc(description)}" />
-<meta property="og:url" content="${esc(url)}" />
-<meta property="og:image" content="${esc(ogImage)}" />
+<meta property="og:title" content="${esc(o.ogTitle)}" />
+<meta property="og:description" content="${esc(o.description)}" />
+<meta property="og:url" content="${esc(o.url)}" />
+<meta property="og:image" content="${esc(OG_IMAGE)}" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="600" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="${esc(title)}" />
-<meta name="twitter:description" content="${esc(description)}" />
-<meta name="twitter:image" content="${esc(ogImage)}" />
+<meta name="twitter:title" content="${esc(o.ogTitle)}" />
+<meta name="twitter:description" content="${esc(o.description)}" />
+<meta name="twitter:image" content="${esc(OG_IMAGE)}" />
 
-<script type="application/ld+json">${JSON.stringify(ld)}</script>
-<script type="application/ld+json">${JSON.stringify(breadcrumbLd)}</script>
+${o.jsonLd.map(j => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join("\n")}
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%230f7a46%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%23ffffff%22/></svg>" />
 <script>
@@ -245,7 +241,7 @@ function pageFor(car) {
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=32" />
+<link rel="stylesheet" href="/css/styles.css?v=35" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -267,24 +263,7 @@ function pageFor(car) {
     </div>
   </header>
 
-  <div id="staticCarDetail" class="static-car-detail">
-    <h1 class="modal-title">${esc(title)}</h1>
-    <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
-    <div class="modal-price"${isRealValue(car.msrp) ? ` aria-hidden="true"` : ""}>${
-      isRealValue(car.msrp) ? "" : `<span class="sr-only">Price: </span>`
-    }${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
-    <p class="modal-summary">${esc(summary)} Full specs below.</p>
-    ${staticSpecSections(car)}
-    ${staticLinksBlock(car)}
-    ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}
-    <p><a href="/">&larr; All EVs on ${esc(SITE_NAME)}</a></p>
-    ${similar.length ? `<div class="modal-section">
-      <h4>Similar Vehicles</h4>
-      <ul class="static-similar-list">
-${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`${c.modelYear} ${c.make} ${c.model} ${c.trim}`)}</a> — ${fmtVal(fieldByKey("msrp"), c.msrp)}</li>`).join("\n")}
-      </ul>
-    </div>` : ""}
-  </div>
+${o.staticBlock}
 
   <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
 
@@ -299,7 +278,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
 
     <main class="content">
       <div id="viewResults" class="view">
-        <p class="intro-line">View and compare electric vehicles sold in the US. Click a model or use the filters to get started.</p>
+${o.introHtml}
         <div id="activeFilters" class="active-filters" hidden></div>
         <div class="results-toolbar">
           <label for="sortSelect" class="results-toolbar-label">Sort by</label>
@@ -356,10 +335,136 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
 
 </div>
 
-<script type="module" src="/js/app.js?v=49"></script>
+<script type="module" src="/js/app.js?v=51"></script>
 </body>
 </html>
 `;
+}
+
+
+
+// The no-JS fallback for a single car: a complete, real rendering of its title, price, full
+// spec table, links and similar vehicles, for crawlers and clients that don't run JS. app.js
+// removes it as soon as it boots.
+function staticCarBlock(car, title, summary, similar) {
+  return `  <div id="staticCarDetail" class="static-car-detail">
+    <h1 class="modal-title">${esc(title)}</h1>
+    <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
+    <div class="modal-price"${isRealValue(car.msrp) ? ` aria-hidden="true"` : ""}>${
+      isRealValue(car.msrp) ? "" : `<span class="sr-only">Price: </span>`
+    }${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+    <p class="modal-summary">${esc(summary)} Full specs below.</p>
+    ${staticSpecSections(car)}
+    ${staticLinksBlock(car)}
+    ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}
+    <p><a href="/">&larr; All EVs on ${esc(SITE_NAME)}</a></p>
+    ${similar.length ? `<div class="modal-section">
+      <h4>Similar Vehicles</h4>
+      <ul class="static-similar-list">
+${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`${c.modelYear} ${c.make} ${c.model} ${c.trim}`)}</a> — ${fmtVal(fieldByKey("msrp"), c.msrp)}</li>`).join("\n")}
+      </ul>
+    </div>` : ""}
+  </div>`;
+}
+
+function pageFor(car) {
+  const title = `${car.modelYear} ${car.make} ${car.model} ${car.trim}`;
+  const url = canonicalUrl(car);
+  const summary = carSummarySentence(car);
+  // Doesn't restate the site name here — the title suffix and og:site_name already carry that,
+  // and "compare...EVs...EV Compare" back to back read as redundant when actually spoken aloud.
+  const description = `${summary} Full specs and side-by-side comparisons.`;
+  const similar = findSimilarCars(car, cars, { limit: 4 });
+
+  return pageShell({
+    pageTitle: `${title} — Specs & Price | ${SITE_NAME}`,
+    ogTitle: title,
+    description,
+    url,
+    ogType: "product",
+    jsonLd: [jsonLdFor(car, url, similar), breadcrumbLdFor(car, url)],
+    staticBlock: staticCarBlock(car, title, summary, similar),
+    // Stays a <p>: this page's <h1> is the car's own title inside #staticCarDetail above,
+    // and a page gets one.
+    introHtml: `        <p class="intro-line">View and compare electric vehicles sold in the US. Click a model or use the filters to get started.</p>`,
+  });
+}
+
+// ---------- hub landing pages ----------
+
+// Below this, a hub is too thin to be worth indexing. It WARNS rather than skipping: once a
+// URL is indexed, having it start 404ing is worse than a thin page, and silently dropping it
+// means finding out from Search Console weeks later. A human decides.
+const HUB_MIN = 8;
+
+function hubJsonLd(hub, url, matched) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: hub.h1,
+    description: hub.blurb,
+    url,
+    isPartOf: { "@type": "WebSite", name: SITE_NAME, url: `${SITE_BASE_URL}${BASE_PATH}/` },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: matched.length,
+      itemListElement: matched.map((car, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: canonicalUrl(car),
+        name: `${car.modelYear} ${car.make} ${car.model} ${car.trim}`,
+      })),
+    },
+  };
+}
+
+function hubBreadcrumbLd(hub, url) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: SITE_NAME, item: `${SITE_BASE_URL}${BASE_PATH}/` },
+      { "@type": "ListItem", position: 2, name: hub.h1, item: url },
+    ],
+  };
+}
+
+// The no-JS fallback list. Leads with the spec the page is about, so a crawler (and a reader
+// without JS) gets the ordering the page promises rather than an arbitrary list.
+function staticHubBlock(hub, matched, total) {
+  const field = fieldByKey(hub.highlight);
+  const rows = matched.map(car => {
+    const name = `${car.modelYear} ${car.make} ${car.model} ${car.trim}`;
+    return `        <li><a href="${esc(carPath(car))}/">${esc(name)}</a>`
+      + ` — ${esc(field.label)}: ${fmtVal(field, field.get(car))}`
+      + ` · ${fmtVal(fieldByKey("msrp"), car.msrp)}</li>`;
+  }).join("\n");
+  return `  <div id="staticHubList" class="static-car-detail">
+    <h4>${esc(matched.length)} vehicles, sorted by ${esc(field.label)}</h4>
+    <ul class="static-similar-list">
+${rows}
+    </ul>
+    <p><a href="${BASE_PATH}/">&larr; All ${total} models on ${esc(SITE_NAME)}</a></p>
+  </div>`;
+}
+
+function pageForHub(hub, matched) {
+  const url = `${SITE_BASE_URL}${hubPath(hub)}/`;
+  const description = `${hub.blurb} ${matched.length} models, updated regularly.`;
+  return pageShell({
+    pageTitle: `${hub.title} | ${SITE_NAME}`,
+    ogTitle: hub.h1,
+    description,
+    url,
+    ogType: "website",
+    jsonLd: [hubJsonLd(hub, url, matched), hubBreadcrumbLd(hub, url)],
+    staticBlock: staticHubBlock(hub, matched, cars.length),
+    // Heading + generated intro live here, not in the static block: app.js removes that block
+    // on boot, and taking the page's only <h1> with it would be a real regression for anyone
+    // running JS. Only the list is disposable — the interactive grid replaces it.
+    introHtml: `        <h1 class="hub-title">${esc(hub.h1)}</h1>
+        <p class="intro-line">${esc(hub.intro(matched, cars.length, cars))}</p>`,
+  });
 }
 
 // ---------- homepage ----------
@@ -396,7 +501,14 @@ function homepageJsonLd() {
 function buildHomepage() {
   const src = readFileSync(path.join(ROOT, "index.html"), "utf8");
   if (!src.includes("</head>")) throw new Error("index.html has no </head> to inject JSON-LD before");
+  // Hub links are injected here rather than hardcoded in index.html so they can't drift from
+  // js/hubs.js, and rendered server-side rather than by app.js so a crawler actually sees
+  // them — a sitemap entry with no inbound link is a weak signal.
+  const links = HUBS.map(h =>
+    `<a href="${esc(hubPath(h))}/">${esc(h.h1)}</a>`).join("\n      ");
   return src
+    .replace('<nav id="hubLinks" class="hub-links" aria-label="Browse by category"></nav>',
+             `<nav id="hubLinks" class="hub-links" aria-label="Browse by category">\n      <span class="hub-links-label">Browse:</span>\n      ${links}\n    </nav>`)
     .replace("</head>", `${homepageJsonLd()}\n</head>`)
     .replaceAll("https://evcompare.org/assets/og-image.png", `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`);
 }
@@ -450,6 +562,23 @@ function main() {
 
   const mostRecentVerified = cars.reduce((max, c) => c.lastVerifiedDate > max ? c.lastVerifiedDate : max, cars[0].lastVerifiedDate);
   const sitemapEntries = [{ loc: `${SITE_BASE_URL}${BASE_PATH}/`, lastmod: mostRecentVerified }];
+
+  // Hub landing pages. lastmod is the most recent verification date *among that hub's own
+  // members*, so a hub only claims freshness its content actually earned.
+  let hubCount = 0;
+  for (const hub of HUBS) {
+    const matched = hubCars(hub, cars);
+    if (matched.length < HUB_MIN) {
+      console.warn(`  ! hub /${hub.slug}/ has only ${matched.length} vehicles (min ${HUB_MIN}) — emitting anyway; review it`);
+    }
+    const outDir = path.join(DIST, hub.slug);
+    mkdirSync(outDir, { recursive: true });
+    writeFileSync(path.join(outDir, "index.html"), pageForHub(hub, matched));
+    const lastmod = matched.reduce((max, c) => c.lastVerifiedDate > max ? c.lastVerifiedDate : max,
+                                   matched[0]?.lastVerifiedDate ?? mostRecentVerified);
+    sitemapEntries.push({ loc: `${SITE_BASE_URL}${hubPath(hub)}/`, lastmod });
+    hubCount++;
+  }
   let count = 0;
   for (const car of cars) {
     const rel = relFilePath(car);
@@ -463,7 +592,7 @@ function main() {
   writeFileSync(path.join(DIST, "sitemap.xml"), buildSitemap(sitemapEntries));
   writeFileSync(path.join(DIST, "robots.txt"), buildRobots());
 
-  console.log(`Prerendered ${count} car pages + sitemap.xml/robots.txt into dist/`);
+  console.log(`Prerendered ${count} car pages + ${hubCount} hub pages + sitemap.xml/robots.txt into dist/`);
 }
 
 main();

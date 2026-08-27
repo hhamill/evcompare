@@ -1,7 +1,8 @@
 import { FIELDS, BODY_SPRITE } from "./fields.js?v=12";
-import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js?v=10";
-import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=27";
-import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath } from "./router.js?v=5";
+import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js?v=11";
+import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=29";
+import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath, hubSlugFromPath } from "./router.js?v=6";
+import { hubBySlug } from "./hubs.js?v=2";
 
 const MAX_COMPARE = 6;
 
@@ -58,6 +59,7 @@ const state = {
   compareSet: new Set(),
   view: "results", // "results" | "compare"
   activeDetailCar: null,
+  hub: null,            // active hub landing page, or null on the homepage
   pathIndex: null,
   catalogIndex: null,
   sortKey: "default",
@@ -138,6 +140,9 @@ async function init() {
   // detail modal (or homepage fallback) takes over, so drop it here unconditionally; a no-op
   // on the homepage, where it doesn't exist.
   document.getElementById("staticCarDetail")?.remove();
+  // Hub landing pages ship the same no-JS fallback treatment: a real, ordered list for
+  // crawlers, dropped the moment the interactive grid can take over.
+  document.getElementById("staticHubList")?.remove();
 
   mountBodySprite();
 
@@ -159,7 +164,11 @@ async function init() {
     return;
   }
   state.cars = cars;
-  state.domains = computeDomains(cars);
+  state.hub = hubBySlug(hubSlugFromPath(location.pathname));
+  // Domains come from the hub's matched set, not all 149. That single argument is what makes
+  // the sliders clamp to the scope: on /evs-under-40000 the price slider tops out at $40k, so
+  // you can narrow further but never widen back out of the hub you're standing in.
+  state.domains = computeDomains(state.hub ? cars.filter(state.hub.match) : cars);
   state.filterState = defaultFilterState(state.domains);
   state.pathIndex = buildCarPathIndex(cars);
   state.catalogIndex = new Map(cars.map(c => [c.catalogId, c]));
@@ -333,6 +342,20 @@ function syncTopbarHeight() {
   else window.addEventListener("resize", apply);
 }
 
+// Booleans the hub forces come from the hub itself; enums collapse on their own once the
+// domain is hub-scoped, so a one-option list is just hidden.
+function hiddenFilterKeys() {
+  const hidden = new Set(state.hub?.determines ?? []);
+  if (state.hub) {
+    for (const field of FIELDS) {
+      if (field.type !== "enum" && field.type !== "enumMulti") continue;
+      const d = state.domains[field.key];
+      if (d && d.values.length <= 1) hidden.add(field.key);
+    }
+  }
+  return hidden;
+}
+
 function rebuildSidebar() {
   renderFilterSidebar(el.sidebar, state.domains, state.filterState, () => {
     // Filtering doesn't apply to the compare table (it shows an explicit hand-picked
@@ -342,7 +365,7 @@ function rebuildSidebar() {
     if (state.view === "compare") leaveCompareUrl();
     state.view = "results";
     renderAll();
-  });
+  }, hiddenFilterKeys());
 }
 
 function resetFilters() {
@@ -358,13 +381,34 @@ function resetFilters() {
 // data (make names, etc.) that the rest of this codebase is careful to escape.
 function renderActiveFilters(chips) {
   el.activeFilters.innerHTML = "";
-  el.activeFilters.hidden = chips.length === 0;
-  if (!chips.length) return;
+  el.activeFilters.hidden = chips.length === 0 && !state.hub;
+  if (el.activeFilters.hidden) return;
 
-  const label = document.createElement("span");
-  label.className = "active-filters-label";
-  label.textContent = "Filtered by";
-  el.activeFilters.appendChild(label);
+  // On a hub, the scope leads: a filled chip naming the page, then a plain link out to the
+  // full catalogue. That link is deliberately separate from "Reset filters" — reset clears
+  // filters *within* the hub, leaving is a navigation, and conflating the two would make
+  // reset quietly teleport you somewhere else.
+  if (state.hub) {
+    const scope = document.createElement("span");
+    scope.className = "filter-chip filter-chip-scope";
+    const scopeText = document.createElement("span");
+    scopeText.textContent = state.hub.h1;
+    scope.appendChild(scopeText);
+    el.activeFilters.appendChild(scope);
+
+    const all = document.createElement("a");
+    all.className = "filter-chip-clear";
+    all.href = homePath();
+    all.textContent = `All ${state.cars.length} models`;
+    el.activeFilters.appendChild(all);
+  }
+
+  if (chips.length) {
+    const label = document.createElement("span");
+    label.className = "active-filters-label";
+    label.textContent = state.hub ? "also filtered by" : "Filtered by";
+    el.activeFilters.appendChild(label);
+  }
 
   for (const chip of chips) {
     const wrap = document.createElement("span");
@@ -388,12 +432,14 @@ function renderActiveFilters(chips) {
     el.activeFilters.appendChild(wrap);
   }
 
-  const clearAll = document.createElement("button");
-  clearAll.type = "button";
-  clearAll.className = "filter-chip-clear";
-  clearAll.textContent = "Clear all";
-  clearAll.addEventListener("click", resetFilters);
-  el.activeFilters.appendChild(clearAll);
+  if (chips.length) {
+    const clearAll = document.createElement("button");
+    clearAll.type = "button";
+    clearAll.className = "filter-chip-clear";
+    clearAll.textContent = "Clear all";
+    clearAll.addEventListener("click", resetFilters);
+    el.activeFilters.appendChild(clearAll);
+  }
 }
 
 function openSidebar() {
@@ -410,8 +456,12 @@ function closeSidebar() {
   el.filtersToggleBtn.setAttribute("aria-expanded", "false");
 }
 
+// The hub is a base scope; filters and search narrow within it. Everything downstream (sort,
+// compare, the empty state) reads from here, so nothing else needs to know about hubs.
 function getFilteredCars() {
-  return state.cars.filter(c => matchesFilters(c, state.filterState, state.domains, state.searchText));
+  return state.cars.filter(c =>
+    (!state.hub || state.hub.match(c)) &&
+    matchesFilters(c, state.filterState, state.domains, state.searchText));
 }
 
 // Only used for the card grid, never the compare views — sorting there would reorder
@@ -591,6 +641,7 @@ function renderResultsView() {
       compareSet: state.compareSet,
       onToggleCompare: (id, checked) => toggleCompare(id, checked),
       onOpenDetail: openDetail,
+      scopeLabel: state.hub?.noun ?? null,
     });
   }
 

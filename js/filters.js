@@ -188,7 +188,12 @@ export function clearFilter(filterState, domains, key, value) {
 
 // ---------- Sidebar rendering ----------
 
-export function renderFilterSidebar(container, domains, filterState, onChange) {
+// hiddenKeys: field keys to omit entirely. On a hub page these are the controls the hub has
+// already decided — a "Three-Row Seating" toggle on /electric-suvs-with-three-rows does
+// nothing, and a Body Style list with one option is noise. Range fields are deliberately
+// never hidden this way: their sliders clamp to the hub-scoped domain instead, so you can
+// still narrow inside the hub (under $30k on the under-$40k page) but not widen out of it.
+export function renderFilterSidebar(container, domains, filterState, onChange, hiddenKeys = new Set()) {
   container.innerHTML = "";
   const byGroup = {};
   for (const field of FIELDS) {
@@ -212,6 +217,7 @@ export function renderFilterSidebar(container, domains, filterState, onChange) {
     body.className = "filter-group-body";
 
     for (const field of fields) {
+      if (hiddenKeys.has(field.key)) continue;
       const domain = domains[field.key];
       const wrap = document.createElement("div");
       wrap.className = "filter-field";

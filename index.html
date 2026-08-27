@@ -36,7 +36,7 @@
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=32" />
+<link rel="stylesheet" href="/css/styles.css?v=35" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -72,6 +72,10 @@
     <main class="content">
       <div id="viewResults" class="view">
         <h1 class="intro-line">View and compare electric vehicles sold in the US. Click a model or use the filters to get started.</h1>
+        <!-- Filled at build time from js/hubs.js — see buildHomepage() in scripts/prerender.mjs.
+             Left genuinely empty (not a comment inside) so .hub-links:empty collapses it when
+             this file is served directly, un-prerendered, in development. -->
+        <nav id="hubLinks" class="hub-links" aria-label="Browse by category"></nav>
         <div id="activeFilters" class="active-filters" hidden></div>
         <div class="results-toolbar">
           <label for="sortSelect" class="results-toolbar-label">Sort by</label>
@@ -128,6 +132,6 @@
 
 </div>
 
-<script type="module" src="/js/app.js?v=49"></script>
+<script type="module" src="/js/app.js?v=51"></script>
 </body>
 </html>
