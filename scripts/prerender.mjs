@@ -208,6 +208,10 @@ function staticLinksBlock(car) {
 // pages emit byte-identical chrome (topbar, sidebar, compare view, modal) rather than a
 // second copy that quietly drifts. Only the head metadata, the no-JS static block and the
 // intro line differ between page types.
+// Single source for the inline favicon, shared by pageShell and the standalone data page —
+// which had none, so browsers fell back to a /favicon.ico that doesn't exist.
+const FAVICON = `<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%230f7a46%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%23ffffff%22/></svg>" />`;
+
 const OG_IMAGE = `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`;
 
 function pageShell(o) {
@@ -238,7 +242,7 @@ function pageShell(o) {
 
 ${o.jsonLd.map(j => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join("\n")}
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><defs><clipPath id=%22fc%22><circle cx=%2216%22 cy=%2216%22 r=%2215%22/></clipPath></defs><g clip-path=%22url(%23fc)%22><rect width=%2216%22 height=%2232%22 fill=%22%230f7a46%22/><rect x=%2216%22 width=%2216%22 height=%2232%22 fill=%22%232a6fdb%22/></g><polygon points=%2218.4,8 10.4,17.6 15.2,17.6 13.6,24 21.6,12.8 16.8,12.8%22 fill=%22%23ffffff%22/></svg>" />
+${FAVICON}
 <script>
   (function (l) {
     if (l.search[1] === "p" && l.search[2] === "=") {
@@ -622,6 +626,7 @@ function buildDataPage(meta, sizes) {
 <meta name="twitter:description" content="${esc(description)}" />
 <meta name="twitter:image" content="${esc(OG_IMAGE)}" />
 <script type="application/ld+json">${JSON.stringify(datasetLd(meta, sizes))}</script>
+${FAVICON}
 <link rel="stylesheet" href="/css/styles.css?v=37" />
 </head>
 <body>
