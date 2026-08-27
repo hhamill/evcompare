@@ -345,6 +345,13 @@ input { font-family: inherit; }
 .compare-table th, .compare-table td {
   padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--border-soft); font-size: 13px; white-space: nowrap;
 }
+/* A vertical divider per car, from the header straight down through every data row, so each
+   car reads as one clear lane instead of a value's owner being ambiguous mid-table. Excludes
+   the first column (the sticky row-label column) on both the header row (an empty <th></th>)
+   and every body row (the label <th>), so it only ever falls between car columns. */
+.compare-table th:not(:first-child), .compare-table td:not(:first-child) {
+  border-left: 1px solid var(--border-soft);
+}
 .compare-table thead th {
   position: sticky; top: 0; background: var(--bg-elevated); z-index: 5; vertical-align: top; padding-top: 14px;
 }
@@ -361,6 +368,7 @@ input { font-family: inherit; }
   position: sticky; left: 0;
 }
 .compare-col-header { min-width: 200px; }
+.compare-col-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .compare-col-title { font-size: 14px; font-weight: 700; }
 .compare-col-trim { font-size: 12px; color: var(--text-dim); margin-top: 2px; font-weight: 400; white-space: normal; }
 .compare-col-price { font-size: 13px; color: var(--accent); font-weight: 700; margin-top: 6px; }
@@ -369,7 +377,7 @@ input { font-family: inherit; }
    the others instead to make the cheapest one stand out by contrast. */
 .compare-col-price-not-cheapest { color: var(--text-dim); font-weight: 600; }
 .compare-col-remove {
-  border: none; background: transparent; color: var(--text-faint); cursor: pointer; font-size: 16px; float: right;
+  border: none; background: transparent; color: var(--text-faint); cursor: pointer; font-size: 16px; line-height: 1; flex-shrink: 0;
 }
 .compare-col-remove:hover { color: var(--danger); }
 .cell-yes { color: var(--accent); font-weight: 700; }

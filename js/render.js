@@ -119,8 +119,10 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
   const headRow = document.createElement("tr");
   headRow.innerHTML = `<th></th>` + cars.map(car => `
     <th class="compare-col-header">
-      ${onRemove ? `<button class="compare-col-remove" data-id="${esc(car.id)}" aria-label="Remove">&times;</button>` : ""}
-      <div class="compare-col-title"><span class="compare-col-icon">${bodyIcon(car.bodyStyle)}</span> ${carTitle(car)}</div>
+      <div class="compare-col-header-row">
+        <div class="compare-col-title"><span class="compare-col-icon">${bodyIcon(car.bodyStyle)}</span> ${carTitle(car)}</div>
+        ${onRemove ? `<button class="compare-col-remove" data-id="${esc(car.id)}" aria-label="Remove">&times;</button>` : ""}
+      </div>
       <div class="compare-col-trim">${car.modelYear} · ${esc(car.trim)}</div>
       <div class="compare-col-price${bestPrice !== null && car.msrp !== bestPrice ? " compare-col-price-not-cheapest" : ""}">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
       ${onOpenDetail ? `<button class="btn btn-sm compare-col-view-btn" data-id="${esc(car.id)}">View details</button>` : ""}

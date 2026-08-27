@@ -245,7 +245,7 @@ function pageFor(car) {
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=23" />
+<link rel="stylesheet" href="/css/styles.css?v=24" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -353,7 +353,7 @@ ${similar.map(({ car: c }) => `        <li><a href="${esc(carPath(c))}/">${esc(`
 
 </div>
 
-<script type="module" src="/js/app.js?v=39"></script>
+<script type="module" src="/js/app.js?v=40"></script>
 </body>
 </html>
 `;
