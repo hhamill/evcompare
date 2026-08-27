@@ -877,9 +877,15 @@ Tick each box and record the value + source as it lands, so this is resumable mi
       Extended Range; Max Range at 760hp is also 4.5s, so the figure isn't trim-ambiguous)
 
 ### Batch C — Hyundai (3)
-- [ ] `hyundai-ioniq-9-2026-s-rwd` — 2026 Ioniq 9 S RWD (215hp)
-- [ ] `hyundai-kona-electric-2025-se-fwd` — 2025 Kona Electric SE FWD (133hp)
-- [ ] `hyundai-kona-electric-2025-limited-fwd` — 2025 Kona Electric Limited FWD (201hp)
+- [x] `hyundai-ioniq-9-2026-s-rwd` — **8.4s** (stated for the 215hp single-motor RWD S)
+- [ ] `hyundai-kona-electric-2025-se-fwd` — **left null.** No published figure found for the
+      133hp/48.6kWh standard-range car at all, in any model year. Don't re-search without a
+      new source.
+- [ ] `hyundai-kona-electric-2025-limited-fwd` — **left null, borderline.** Found 7.0s for the
+      201hp car, but from a *2024* InsideEVs test. Powertrain is reportedly unchanged for 2025,
+      so this is probably right — but that's inference, and the repo's own precedent (the
+      2026-08-20 Mach-E note) is to leave a cross-model-year figure null. Fill it if a
+      2025-specific source turns up.
 
 ### Batch D — Nissan Leaf (2)
 - [ ] `nissan-leaf-2026-s-plus-fwd` — 2026 Leaf S+ FWD (214hp)
@@ -936,3 +942,10 @@ Third trim-conflation trap in two batches, so it's the rule not the exception: *
 sold in multiple powertrain configurations, confirm which one a figure belongs to before
 recording it.** So far: Lyriq (RWD vs AWD), Optiq (2025 vs 2026 power), Hummer (3X vs CFE, and
 830 vs 1160hp).
+
+**Batch C — Hyundai — 1/3.** Ioniq 9 closed cleanly. Both Konas left null, for different
+reasons worth distinguishing: the SE (133hp) has **no** published 0-60 anywhere, while the
+Limited (201hp) has a 7.0s figure that is probably correct but comes from a 2024 test. The
+second is a judgment call I resolved conservatively — same call the 2026-08-20 Mach-E research
+made. If we ever decide cross-model-year figures are acceptable when the powertrain is
+demonstrably unchanged, revisit this one first; it's the strongest candidate.
