@@ -888,18 +888,24 @@ Tick each box and record the value + source as it lands, so this is resumable mi
       2025-specific source turns up.
 
 ### Batch D — Nissan Leaf (2)
-- [ ] `nissan-leaf-2026-s-plus-fwd` — 2026 Leaf S+ FWD (214hp)
-- [ ] `nissan-leaf-2026-sv-plus-fwd` — 2026 Leaf SV+ FWD (214hp)
+- [x] `nissan-leaf-2026-s-plus-fwd` — **7.2s** (measured, 2026 Leaf; S+/SV+ share the powertrain)
+- [x] `nissan-leaf-2026-sv-plus-fwd` — **7.2s** (same 214hp/72kWh powertrain as S+)
 
 ### Batch E — Toyota bZ / Subaru Uncharted (2)
-- [ ] `toyota-bz-2026-xle-fwd` — 2026 bZ XLE FWD (168hp)
-- [ ] `subaru-uncharted-2026-premium` — 2026 Uncharted Premium (221hp)
+- [x] `toyota-bz-2026-xle-fwd` — **8.0s** (stated for the 168hp base FWD)
+- [ ] `subaru-uncharted-2026-premium` — **left null; no figure exists.** Subaru did not provide
+      an acceleration estimate for the FWD Premium and no FWD car was available at the press
+      launch. Only the dual-motor Sport has a figure (~just under 5s). **Do not re-search** —
+      this isn't a gap in our research, it's unpublished.
 
 ### Batch F — Acura (1)
-- [ ] `acura-zdx-2024-a-spec-rwd` — 2024 ZDX A-Spec RWD (358hp RWD)
+- [ ] `acura-zdx-2024-a-spec-rwd` — **left null.** Every figure found is for the dual-motor
+      cars (Type S 4.6s, "under 5s" for dual-motor generally). Nothing published for the
+      single-motor 358hp RWD, including in Acura's own spec release.
 
 ### Batch G — Mercedes (1)
-- [ ] `mercedes-benz-eqe-suv-2025-350-plus` — 2025 EQE SUV 350+ (288hp RWD)
+- [x] `mercedes-benz-eqe-suv-2025-350-plus` — **6.4s** (stated for the 288hp 350+; 350 4MATIC
+      is 6.2s and 500 4MATIC 4.7s, so the figure is trim-specific)
 
 **Expect a partial close.** The gap skews toward mainstream models (Kona, bZ, Uncharted, Leaf)
 where manufacturers frequently don't publish a 0–60 at all. Anything genuinely unpublished
@@ -949,3 +955,26 @@ Limited (201hp) has a 7.0s figure that is probably correct but comes from a 2024
 second is a judgment call I resolved conservatively — same call the 2026-08-20 Mach-E research
 made. If we ever decide cross-model-year figures are acceptable when the powertrain is
 demonstrably unchanged, revisit this one first; it's the strongest candidate.
+
+**Batches D–G — done. Final: 9 of 15 filled.**
+
+| filled | left null |
+| --- | --- |
+| Lyriq Luxury RWD 5.7 · Optiq Luxury/Sport AWD 5.9 · Sierra EV Denali ER 4.5 · Ioniq 9 S RWD 8.4 · Leaf S+/SV+ 7.2 · bZ XLE 8.0 · EQE SUV 350+ 6.4 | Silverado EV WT · Hummer EV Pickup 3X · Kona Electric SE · Kona Electric Limited · Uncharted Premium · ZDX A-Spec RWD |
+
+**The six remaining are the right answer, not unfinished work.** Each was searched and the
+reason recorded above. Three categories:
+
+1. **Genuinely unpublished** — Uncharted Premium (Subaru gave no estimate, no FWD press car),
+   ZDX A-Spec RWD (only dual-motor figures exist), Kona Electric SE. Don't re-search these
+   without a new source appearing.
+2. **A bound, not a figure** — Silverado EV WT ("under 6 seconds").
+3. **Ambiguous configuration** — Hummer 3X, and see the horsepower bug queued above.
+
+Kona Electric Limited is the one genuinely revisitable case: 7.0s exists but from a 2024 test.
+
+**Predicted at the outset that the gap would skew toward mainstream models where manufacturers
+don't publish 0-60 — that held.** The unfilled six are Kona, Uncharted, base-trim ZDX and work
+trucks; every premium/performance trim resolved on the first search. Worth carrying into the
+heat-pump and ground-clearance batches: expect base and work trims to be the expensive ones,
+and budget for a partial close rather than treating leftovers as failure.

@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:ec095b83a89ce5861a6167cd8f25df2e925782eb31d44aed460a1a6057931b89",
+  "hash": "sha256:cd8b0f40b28d051f279c8355b68c14400b9a2b8be54cb62e6db873e506408cbe",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -6712,7 +6712,7 @@
       "id": "mercedes-benz-eqe-suv-2025-350-plus",
       "url": "https://evcompare.org/2025/eqe-suv/350/",
       "catalogId": 78,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "Mercedes-Benz",
       "model": "EQE SUV",
       "trim": "350+",
@@ -6739,7 +6739,7 @@
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48390"
       },
       "performance": {
-        "zeroTo60Sec": null,
+        "zeroTo60Sec": 6.4,
         "horsepowerHp": 288,
         "topSpeedMph": null
       },
@@ -7503,7 +7503,7 @@
       "id": "nissan-leaf-2026-s-plus-fwd",
       "url": "https://evcompare.org/2026/leaf/s-fwd/",
       "catalogId": 87,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "Nissan",
       "model": "Leaf",
       "trim": "S+ FWD",
@@ -7530,7 +7530,7 @@
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49975"
       },
       "performance": {
-        "zeroTo60Sec": null,
+        "zeroTo60Sec": 7.2,
         "horsepowerHp": 214,
         "topSpeedMph": 99
       },
@@ -7589,7 +7589,7 @@
       "id": "nissan-leaf-2026-sv-plus-fwd",
       "url": "https://evcompare.org/2026/leaf/sv-fwd/",
       "catalogId": 88,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "Nissan",
       "model": "Leaf",
       "trim": "SV+ FWD",
@@ -7616,7 +7616,7 @@
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49974"
       },
       "performance": {
-        "zeroTo60Sec": null,
+        "zeroTo60Sec": 7.2,
         "horsepowerHp": 214,
         "topSpeedMph": 99
       },
@@ -9770,7 +9770,7 @@
       "id": "toyota-bz-2026-xle-fwd",
       "url": "https://evcompare.org/2026/bz/xle-fwd/",
       "catalogId": 113,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "Toyota",
       "model": "bZ",
       "trim": "XLE FWD",
@@ -9797,7 +9797,7 @@
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49983"
       },
       "performance": {
-        "zeroTo60Sec": null,
+        "zeroTo60Sec": 8,
         "horsepowerHp": 168,
         "topSpeedMph": null
       },
