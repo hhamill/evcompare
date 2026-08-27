@@ -4,6 +4,11 @@ import { carPath } from "./router.js?v=5";
 
 const CARD_STAT_KEYS = ["epaRange", "msrp", "drivetrain", "maxPassengers"];
 
+// The standard "share" glyph (an upward arrow escaping an open-top tray) — no single emoji
+// reads unambiguously as "share" across platforms, so this is hand-drawn to match the rest of
+// this app's inline-SVG icons (the brand mark, etc.) rather than reaching for an icon library.
+const SHARE_ICON = `<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1v9"/><path d="M4.5 4.5L8 1l3.5 3.5"/><path d="M3 7v6a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V7"/></svg>`;
+
 // Car data is hand-researched from external sources rather than programmatically validated,
 // so it isn't safe to assume it never contains characters that would break out of the
 // innerHTML/attribute context it's interpolated into below. Mirrors scripts/prerender.mjs's
@@ -304,7 +309,10 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
   if (rangeSourceHref) links.push(`<a href="${esc(rangeSourceHref)}" target="_blank" rel="noopener">fueleconomy.gov ↗</a>`);
 
   body.innerHTML = `
-    <div class="modal-title">${bodyIcon(car.bodyStyle)} ${carTitle(car)}</div>
+    <div class="modal-header-row">
+      <div class="modal-title">${bodyIcon(car.bodyStyle)} ${carTitle(car)}</div>
+      <button id="modalShareBtn" class="btn btn-ghost btn-sm modal-share-btn">${SHARE_ICON} Share</button>
+    </div>
     <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
     <div class="modal-price">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
     <p class="modal-summary">${esc(carSummarySentence(car))} Full specs below.</p>
@@ -313,7 +321,6 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
     ${car.notes ? `<div class="modal-section"><h4>Notes</h4><p style="font-size:13px;color:var(--text-dim);">${esc(car.notes)}</p></div>` : ""}
     <div class="modal-actions">
       <button id="modalCompareBtn" class="btn ${inCompare ? "btn-ghost" : "btn-primary"}">${inCompare ? "Remove from compare" : "Add to compare"}</button>
-      <button id="modalShareBtn" class="btn btn-ghost">Share</button>
     </div>
     ${allCars ? renderSimilarSection(car, allCars) : ""}
   `;

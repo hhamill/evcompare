@@ -682,3 +682,16 @@ User noticed `assets/og-image.png` (the Open Graph/Twitter/Discord unfurl image)
 - Appended `?v=${ogImageVersion}` to the `og:image`/`twitter:image` URL in both places it's built: `pageFor()`'s `ogImage` (all 149 car pages) and — new — `buildHomepage()`, which previously copied `index.html`'s two hardcoded image-URL meta tags through completely unmodified; now does a targeted `.replaceAll()` on that literal URL string alongside its existing JSON-LD injection.
 - Confirmed the computed version (`9b1be8e7c4`) matches `sha256sum assets/og-image.png`'s first 10 characters exactly, and that it now appears identically in both `dist/index.html` and every car page's `og:image`/`twitter:image` tags.
 - Not yet re-verified against a live Discord unfurl at the time of this entry — pending another deploy + the user's own live test.
+
+**Confirmed working**: user tested live in Discord after deploy — new og:image showed up correctly.
+
+# TODO: Moved the detail-modal Share button to the header, added an icon (2026-08-27)
+
+User feedback: the Share button was buried at the very bottom of the modal, past the entire spec table/links/notes — asked to move it up next to the model name, and to consider an icon since there's no unambiguous "share" emoji to reach for instead.
+
+- **`js/render.js`**: wrapped the title in a new `.modal-header-row` (flex, `align-items: center`, gap — not `space-between`, so the button sits right after the title text rather than stretching to the far edge, which would otherwise put it in the same corner as the circular `×` close button) and moved `#modalShareBtn` into it. Removed it from `.modal-actions`, which now holds just the Add/Remove-from-compare button.
+- **Icon**: hand-drawn inline SVG (`SHARE_ICON` constant) — the standard "upward arrow escaping an open-top tray" glyph (the iOS/generic share icon), matching this app's existing convention of hand-drawn SVG rather than an icon library or emoji (confirmed there isn't a clean single-emoji match for "share" either, per the user's own read).
+- **`css/styles.css`**: added `.modal-header-row` (with a nested override zeroing `.modal-title`'s own `margin-bottom` when inside it, since `.modal-title` is also reused unwrapped on the static per-car page's `<h1>` and shouldn't change there) and `.modal-share-btn` (`inline-flex` so the icon and text align on one line).
+- Bumped `render.js` v18→v19 (import + markup change) and its importer `app.js` v37→v38, plus `styles.css` v21→v22, with both referenced from `index.html`/`scripts/prerender.mjs`.
+
+**Verified**: rebuilt `dist/`; opened a car's detail modal live and confirmed via screenshot the Share button now sits directly beside the model name (icon + "Share" text), clear of the close button, with the spec table/links/notes below and only "Add to compare" remaining in the bottom action row. Clicked the button directly — fires without error. Checked console/network logs and confirmed zero errors from this change (one stale 404 in the log was a leftover from unrelated earlier-session debugging navigation, not this change — traced via the network log entries, which show every actually-relevant asset for this change, `styles.css?v=22`/`app.js?v=38`/`render.js?v=19`, loading 200 OK).

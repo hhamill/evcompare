@@ -1,6 +1,6 @@
 import { FIELDS } from "./fields.js?v=9";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, countActiveFilters } from "./filters.js?v=9";
-import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=18";
+import { renderCardGrid, renderCompareTable, renderDetailModal } from "./render.js?v=19";
 import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath } from "./router.js?v=5";
 
 const MAX_COMPARE = 6;
