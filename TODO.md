@@ -848,3 +848,52 @@ gap rather than a decision.
 34 records say `0`, 18 say `null`, none say `"N/A"`. If `0` means "confirmed not rated to tow"
 that's correct and useful. Worth confirming the 18 nulls are genuinely unresearched rather than
 the same fact recorded a second way — the three-state convention exists precisely for this.
+
+# TODO: 0–60 research batch — 15 nulls (2026-08-27, in progress)
+
+`performance.zeroTo60Sec` is one of the four card stats as of today, so each null renders a
+dash in a prime slot on 10% of cards. 15 records, batched by research affinity (same
+make/platform usually resolves in one lookup).
+
+Rules, per `data/SCHEMA.md`: only fill from a reliable US-spec source for **that trim** —
+manufacturer spec page or a named review that states the trim. Do **not** borrow a figure from
+a different trim, a different model year, or a EU-spec page. If nothing solid turns up, leave
+`null` and note what was searched, so the next pass doesn't repeat it.
+
+Tick each box and record the value + source as it lands, so this is resumable mid-batch.
+
+### Batch A — Cadillac (3)
+- [ ] `cadillac-lyriq-2025-luxury-rwd` — 2025 Lyriq Luxury RWD (365hp RWD)
+- [ ] `cadillac-optiq-2025-luxury-awd` — 2025 Optiq Luxury AWD (300hp AWD)
+- [ ] `cadillac-optiq-2025-sport-awd` — 2025 Optiq Sport AWD (300hp AWD)
+
+### Batch B — GM trucks (3)
+- [ ] `chevrolet-silverado-ev-2026-wt-standard-range` — 2026 Silverado EV WT Std Range (510hp)
+- [ ] `gmc-hummer-ev-2026-pickup-3x` — 2026 Hummer EV Pickup 3X (1000hp)
+- [ ] `gmc-sierra-ev-2026-denali-extended-range` — 2026 Sierra EV Denali Ext Range (645hp)
+
+### Batch C — Hyundai (3)
+- [ ] `hyundai-ioniq-9-2026-s-rwd` — 2026 Ioniq 9 S RWD (215hp)
+- [ ] `hyundai-kona-electric-2025-se-fwd` — 2025 Kona Electric SE FWD (133hp)
+- [ ] `hyundai-kona-electric-2025-limited-fwd` — 2025 Kona Electric Limited FWD (201hp)
+
+### Batch D — Nissan Leaf (2)
+- [ ] `nissan-leaf-2026-s-plus-fwd` — 2026 Leaf S+ FWD (214hp)
+- [ ] `nissan-leaf-2026-sv-plus-fwd` — 2026 Leaf SV+ FWD (214hp)
+
+### Batch E — Toyota bZ / Subaru Uncharted (2)
+- [ ] `toyota-bz-2026-xle-fwd` — 2026 bZ XLE FWD (168hp)
+- [ ] `subaru-uncharted-2026-premium` — 2026 Uncharted Premium (221hp)
+
+### Batch F — Acura (1)
+- [ ] `acura-zdx-2024-a-spec-rwd` — 2024 ZDX A-Spec RWD (358hp RWD)
+
+### Batch G — Mercedes (1)
+- [ ] `mercedes-benz-eqe-suv-2025-350-plus` — 2025 EQE SUV 350+ (288hp RWD)
+
+**Expect a partial close.** The gap skews toward mainstream models (Kona, bZ, Uncharted, Leaf)
+where manufacturers frequently don't publish a 0–60 at all. Anything genuinely unpublished
+stays `null` with a note — that's the correct outcome, not a failure.
+
+## Results
+_(appended per batch as work proceeds)_
