@@ -1,19 +1,14 @@
 <!--
   Source template for assets/og-image.png (the site-wide Open Graph / Twitter Card / Discord
-  unfurl image) and assets/logo.png (a square, larger-scale render of the same scene, for
+  unfurl image) and assets/logo.png (a square, larger-scale render of the same mark, for
   README/social-profile use). Not part of the build — these are one-time hand-authored assets,
   regenerated manually when the branding changes, not on every deploy.
 
-  The actual browser-tab favicon and topbar brand-mark are a separate, unrelated design (a
-  circle split green/blue with a bolt through the middle) — plain hand-written SVG markup
-  living directly in index.html and scripts/prerender.mjs, not generated from this file. This
-  template's two-car race scene is still the OG-banner/social-profile artwork; the two designs
-  intentionally don't match right now (2026-08-23) — revisit if that divergence stops working.
-
-  Two 8-bit pixel-art EVs face off left-to-right, drawn on a <canvas> from plain pixel-grid
-  arrays (see CAR_RIGHT/CAR_LEFT below) and scaled up with imageSmoothingEnabled=false for
-  crisp blocky edges — no image libraries, no external sprite assets, just JS drawing rects.
-  Colors match the live app's own CSS custom properties (--accent green, --accent-2 blue).
+  Draws the same split-circle-and-bolt mark used for the real favicon/topbar brand-mark (see
+  index.html / scripts/prerender.mjs) at a larger scale, via drawBrandMark() below — same
+  relative geometry (a circle clipped into green/blue halves with a dark bolt over the middle),
+  just scaled up on a <canvas> instead of inline SVG, so this asset can never visually drift
+  from the real mark the way the old two-pixel-car race scene eventually did.
 
   To regenerate both PNGs (no npm dependencies needed, just local Chrome):
 
@@ -29,7 +24,7 @@
 
   1200x630 is the standard OG image size (1.91:1) — Twitter's summary_large_image card and
   Discord's embed both expect it. logo.png is generated square and downsized at use-time
-  for the favicon.
+  for other social/profile contexts.
 -->
 <!doctype html>
 <html>
@@ -37,116 +32,49 @@
 <meta charset="UTF-8" />
 <style>
   html, body { margin: 0; padding: 0; background: #0b0d12; }
-  canvas { display: block; image-rendering: pixelated; }
+  canvas { display: block; }
 </style>
 </head>
 <body>
 <canvas id="c"></canvas>
 <script>
-const COLORS = {
-  ".": null,
-  B: "#4ee08a",   // car A body (--accent)
-  D: "#2c8f5c",   // car A shadow (--accent-dim)
-  L: "#a8f5c9",   // car A highlight
-  b: "#5aa2ff",   // car B body (--accent-2)
-  d: "#3a6fc4",   // car B shadow
-  l: "#b9d6ff",   // car B highlight
-  W: "#eef1f6",   // near window (windshield side)
-  V: "#8fb8cc",   // far window (rear glass, slightly darker/duller)
-  X: "#ffffff",   // window reflection accent
-  K: "#4a5164",   // tire (mid-gray — visible against the dark background)
-  k: "#9aa4b6",   // hubcap highlight
-  H: "#fff3b0",   // headlight
-  R: "#ff6b6b",   // taillight
-};
+// Draws the brand mark centered at (cx, cy) with the given circle radius — same relative
+// geometry as the real mark's 32x32 SVG viewBox (circle r=15 centered at 16,16, clipped into
+// green/blue halves, dark bolt polygon over the middle), just scaled/translated into place.
+// `scale` is radius / 15 so callers can just pick a target on-canvas radius.
+function drawBrandMark(ctx, cx, cy, radius) {
+  const scale = radius / 15;
+  ctx.save();
+  ctx.translate(cx - scale * 16, cy - scale * 16);
+  ctx.scale(scale, scale);
 
-// 30 wide x 15 tall, facing RIGHT (headlight at the far column). Second pass at this sprite —
-// the original 24x12 version read as too pointy/triangular (the roof-to-hood and hood-to-nose
-// transitions were single-step tapers). This one uses a proper stepped "shoulder" (two width
-// tiers between the cabin and the full-width body) for a rounder silhouette, a two-tone window
-// (near/far glass) with a reflection pixel, and a door-line panel break, closer to how a hand-
-// drawn 8-bit car sprite actually breaks up its panels rather than one flat block of body color.
-const CAR_RIGHT = [
-  "..........LLLLLLLL............",
-  ".........BVVVVBWWWB...........",
-  ".........BVVVVBWXWB...........",
-  ".......BBBBBBBBBBBBBB.........",
-  ".....BBBBBBBBBBBBBBBBBBB......",
-  "..RBBBBBBBBBBBBBBBBBBBBBBBBBH.",
-  "..RBBBBBBBBBBBBBBDBBBBBBBBBBH.",
-  "..RBBBBBBBBBBBBBBDBBBBBBBBBBH.",
-  "...BBBBBBBBBBBBBBBBBBBBBBBBB..",
-  "...DDDDDDDDDDDDDDDDDDDDDDDDD..",
-  "...DDDDDDDDDDDDDDDDDDDDDDDDD..",
-  "....KKKKKKK.........KKKKKKK...",
-  "....K.kkk.K.........K.kkk.K...",
-  "....K.kkk.K.........K.kkk.K...",
-  "....KKKKKKK.........KKKKKKK...",
-];
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(16, 16, 15, 0, Math.PI * 2);
+  ctx.clip();
+  ctx.fillStyle = "#4ee08a";
+  ctx.fillRect(0, 0, 16, 32);
+  ctx.fillStyle = "#5aa2ff";
+  ctx.fillRect(16, 0, 16, 32);
+  ctx.restore();
 
-function mirror(row) { return row.split("").reverse().join(""); }
-// Only the body/shadow/highlight chars get recolored to the blue palette (b/d/l) — window,
-// wheel, headlight, and taillight colors are shared between both cars and stay as-is.
-const RECOLOR = { B: "b", D: "d", L: "l" };
-function recolor(ch) { return RECOLOR[ch] || ch; }
+  ctx.beginPath();
+  ctx.moveTo(18.4, 8);
+  ctx.lineTo(10.4, 17.6);
+  ctx.lineTo(15.2, 17.6);
+  ctx.lineTo(13.6, 24);
+  ctx.lineTo(21.6, 12.8);
+  ctx.lineTo(16.8, 12.8);
+  ctx.closePath();
+  ctx.fillStyle = "#06110a";
+  ctx.fill();
 
-// Car B: mirrored (faces LEFT) and recolored to the blue palette.
-const CAR_LEFT = CAR_RIGHT.map(row => mirror(row).split("").map(recolor).join(""));
-
-function drawSprite(ctx, grid, ox, oy, px) {
-  for (let y = 0; y < grid.length; y++) {
-    for (let x = 0; x < grid[y].length; x++) {
-      const c = COLORS[grid[y][x]];
-      if (!c) continue;
-      ctx.fillStyle = c;
-      ctx.fillRect(ox + x * px, oy + y * px, px, px);
-    }
-  }
+  ctx.restore();
 }
 
-const BOLT_SHAPE = [
-  "..LL",
-  ".LL.",
-  "LLLL",
-  "..LL",
-  ".LL.",
-  "LL..",
-];
-
-function drawBolt(ctx, ox, oy, px, color) {
-  for (let y = 0; y < BOLT_SHAPE.length; y++) {
-    for (let x = 0; x < BOLT_SHAPE[y].length; x++) {
-      if (BOLT_SHAPE[y][x] === ".") continue;
-      ctx.fillStyle = color;
-      ctx.fillRect(ox + x * px, oy + y * px, px, px);
-    }
-  }
-}
-
-// Same proven zigzag as drawBolt, drawn three times at decreasing size and increasing
-// brightness (outer orange -> mid yellow -> white core), centered on one point — a layered
-// glow instead of one flat color. (cx, cy) is the shape's visual center, not a top-left corner.
-function drawBoltGlow(ctx, cx, cy, basePx) {
-  const layers = [
-    { mult: 1.4, color: "#ff9900" },
-    { mult: 1.15, color: "#ffe066" },
-    { mult: 1.0, color: "#ffffff" },
-  ];
-  const gw = BOLT_SHAPE[0].length, gh = BOLT_SHAPE.length;
-  for (const { mult, color } of layers) {
-    const px = basePx * mult;
-    drawBolt(ctx, cx - (gw * px) / 2, cy - (gh * px) / 2, px, color);
-  }
-}
-
-// Standalone brand-mark bolt (favicon / topbar badge scale) — the same zigzag already proven
-// to read correctly as the small "vs" divider in the OG image (see `bolt` in drawBolt above),
-// just doubled in resolution (each cell -> 2x2) for more shading detail at this larger size.
-// 8 wide x 12 tall.
 const mode = location.hash.slice(1) || "og";
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
-ctx.imageSmoothingEnabled = false;
 
 if (mode === "og") {
   // 1200x600 (2:1) rather than 1200x630 (1.91:1) — still squarely within the standard OG/
@@ -158,78 +86,37 @@ if (mode === "og") {
   ctx.fillStyle = "#0b0d12";
   ctx.fillRect(0, 0, 1200, 600);
 
-  // Retro horizon glow — a few violet bars narrowing toward a vanishing point, filling the
-  // gap between the title and the cars. Kept well clear of the tagline text below the cars
-  // (no grid lines crossing that zone) so it reads as atmosphere, not clutter.
-  const horizonBars = [
-    [430, 122, 340, 6, "#221839"],
-    [470, 130, 260, 6, "#2c1e4a"],
-    [510, 138, 180, 6, "#38255c"],
-    [550, 146, 100, 6, "#48306f"],
-  ];
-  for (const [x, y, w, h, color] of horizonBars) {
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, w, h);
-  }
-  ctx.fillStyle = "#1c2540";
-  ctx.fillRect(0, 369, 1200, 2);
+  const markRadius = 90;
+  const gap = 28;
+  const wordmarkFont = "700 68px -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif";
+  ctx.font = wordmarkFont;
+  const wordmarkWidth = ctx.measureText("EV Compare").width;
+  const lockupWidth = markRadius * 2 + gap + wordmarkWidth;
+  const lockupStartX = (1200 - lockupWidth) / 2;
+  const markCx = lockupStartX + markRadius;
+  const markCy = 250;
 
-  const px = 11;
-  const carAX = 110, carBX = 760, carY = 190;
-  const carW = CAR_RIGHT[0].length * px, carH = CAR_RIGHT.length * px;
+  drawBrandMark(ctx, markCx, markCy, markRadius);
 
-  ctx.fillStyle = "rgba(0,0,0,0.35)";
-  ctx.beginPath();
-  ctx.ellipse(carAX + carW / 2, carY + carH + 22, 155, 16, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.ellipse(carBX + carW / 2, carY + carH + 22, 155, 16, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  drawSprite(ctx, CAR_RIGHT, carAX, carY, px);
-  drawSprite(ctx, CAR_LEFT, carBX, carY, px);
-  drawBoltGlow(ctx, (carAX + carW + carBX) / 2, carY + carH / 2, 11);
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = "#eef1f6";
+  ctx.font = wordmarkFont;
+  ctx.fillText("EV Compare", lockupStartX + markRadius * 2 + gap, markCy);
 
   ctx.textAlign = "center";
-  ctx.fillStyle = "#eef1f6";
-  ctx.font = "800 64px -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif";
-  ctx.fillText("EV COMPARE", 600, 100);
-
+  ctx.textBaseline = "alphabetic";
   ctx.fillStyle = "#9aa4b6";
   ctx.font = "500 28px -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif";
-  ctx.fillText("Filter and compare electric vehicles side by side", 600, 505);
+  ctx.fillText("View and compare electric vehicles sold in the US", 600, 410);
 } else {
   canvas.width = 512;
   canvas.height = 512;
 
   ctx.fillStyle = "#0b0d12";
   ctx.fillRect(0, 0, 512, 512);
-  const horizonBars = [
-    [156, 132, 200, 4, "#221839"],
-    [176, 138, 160, 4, "#2c1e4a"],
-    [196, 144, 120, 4, "#38255c"],
-    [216, 150, 80, 4, "#48306f"],
-  ];
-  for (const [x, y, w, h, color] of horizonBars) {
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, w, h);
-  }
 
-  // Just car A, centered — this is a square, larger-scale render of the race scene for
-  // README/social-profile use (the favicon/topbar mark is the separate split-circle design,
-  // see the top-of-file comment).
-  const px = 11;
-  const w = CAR_RIGHT[0].length * px;
-  const h = CAR_RIGHT.length * px;
-  const ox = (512 - w) / 2;
-  const oy = (512 - h) / 2 - 6;
-
-  ctx.fillStyle = "rgba(0,0,0,0.35)";
-  ctx.beginPath();
-  ctx.ellipse(256, oy + h + 14, w * 0.42, 16, 0, 0, Math.PI * 2);
-  ctx.fill();
-
-  drawSprite(ctx, CAR_RIGHT, ox, oy, px);
+  drawBrandMark(ctx, 256, 256, 200);
 }
 </script>
 </body>
