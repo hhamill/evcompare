@@ -387,9 +387,16 @@ function buildHomepage() {
 
 // ---------- sitemap / robots ----------
 
-function buildSitemap(urls) {
-  const entries = urls.map(u => `  <url><loc>${esc(u)}</loc></url>`).join("\n");
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`;
+// `lastmod` is each entry's real `lastVerifiedDate` (or, for the homepage, the most recent
+// one across all cars) — not the build timestamp. The build regenerates every page on every
+// deploy regardless of whether anything actually changed, so stamping "today" on all 150
+// URLs every time would be noise, not signal; Google's own guidance is that lastmod should
+// reflect genuine content changes; a value that's always "now" is exactly what erodes a
+// crawler's trust in it. `lastVerifiedDate` is already tracked for precisely this reason (see
+// data/SCHEMA.md) — bumped only when that entry's actual specs are re-researched/corrected.
+function buildSitemap(entries) {
+  const items = entries.map(({ loc, lastmod }) => `  <url><loc>${esc(loc)}</loc><lastmod>${esc(lastmod)}</lastmod></url>`).join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${items}\n</urlset>\n`;
 }
 
 function buildRobots() {
@@ -425,18 +432,19 @@ function main() {
     JSON.stringify({ current: dataHash, count: cars.length, generatedAt }, null, 2) + "\n"
   );
 
-  const urls = [`${SITE_BASE_URL}${BASE_PATH}/`];
+  const mostRecentVerified = cars.reduce((max, c) => c.lastVerifiedDate > max ? c.lastVerifiedDate : max, cars[0].lastVerifiedDate);
+  const sitemapEntries = [{ loc: `${SITE_BASE_URL}${BASE_PATH}/`, lastmod: mostRecentVerified }];
   let count = 0;
   for (const car of cars) {
     const rel = relFilePath(car);
     const outDir = path.join(DIST, rel);
     mkdirSync(outDir, { recursive: true });
     writeFileSync(path.join(outDir, "index.html"), pageFor(car));
-    urls.push(canonicalUrl(car));
+    sitemapEntries.push({ loc: canonicalUrl(car), lastmod: car.lastVerifiedDate });
     count++;
   }
 
-  writeFileSync(path.join(DIST, "sitemap.xml"), buildSitemap(urls));
+  writeFileSync(path.join(DIST, "sitemap.xml"), buildSitemap(sitemapEntries));
   writeFileSync(path.join(DIST, "robots.txt"), buildRobots());
 
   console.log(`Prerendered ${count} car pages + sitemap.xml/robots.txt into dist/`);
