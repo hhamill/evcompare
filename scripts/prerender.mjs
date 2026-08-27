@@ -578,6 +578,7 @@ function datasetLd(meta, sizes) {
     url: `${SITE_BASE_URL}${BASE_PATH}/data/`,
     identifier: meta.hash,
     license: "https://creativecommons.org/publicdomain/zero/1.0/",
+    usageInfo: `${SITE_BASE_URL}${BASE_PATH}/data/`,
     isAccessibleForFree: true,
     creator: { "@type": "Organization", name: SITE_NAME, url: `${SITE_BASE_URL}${BASE_PATH}/` },
     publisher: { "@type": "Organization", name: SITE_NAME, url: `${SITE_BASE_URL}${BASE_PATH}/` },
@@ -646,6 +647,17 @@ ${FAVICON}
     <p class="doc-lede"><strong>It is public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0&nbsp;1.0</a>.</strong>
       Use it for anything — commercial work, research, training, a competing site — with no permission needed and
       no attribution required. A credit to ${esc(SITE_NAME)} is appreciated, never demanded.</p>
+
+    <h2>No warranty</h2>
+    <p><strong>This data is provided as is.</strong> It is compiled by hand from manufacturer
+      specifications, EPA listings and published reviews, and it contains errors and omissions.
+      Figures that were correct when verified may since have changed — manufacturers revise
+      specifications, and EPA ratings are re-certified. Every vehicle carries its own source
+      links and a last-verified date so you can check the trail yourself.</p>
+    <p>It is offered without warranty of any kind, express or implied, including fitness for a
+      particular purpose. Verify any figure against the manufacturer before relying on it,
+      particularly for a purchase decision. No liability is accepted for any use of this data.
+      (CC0 itself disclaims warranties in the same terms; this just says so plainly.)</p>
 
     <h2>Download</h2>
     <table class="doc-table">
@@ -791,6 +803,12 @@ function main() {
       hash: dataHash,
       license,
       attribution,
+      // Travels inside the file on purpose: the disclaimer is worthless if it only lives on a
+      // web page the person holding this JSON never saw.
+      disclaimer: "Provided as is, without warranty of any kind. Compiled by hand from manufacturer "
+        + "specifications, EPA listings and published reviews; it contains errors and omissions, and "
+        + "figures correct when verified may since have changed. Verify against the manufacturer before "
+        + "relying on any value. No liability is accepted for any use of this data.",
       url: SITE_BASE_URL,
       datasetPage: `${SITE_BASE_URL}${BASE_PATH}/data/`,
       documentation: `${SITE_BASE_URL}${BASE_PATH}/data/SCHEMA.md`,

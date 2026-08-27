@@ -102,6 +102,15 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
 }
 ```
 
+## No warranty
+
+This data is provided as is. It is hand-compiled and contains errors and omissions, and figures
+correct when verified may since have changed. It carries no warranty of any kind, express or
+implied, including fitness for a particular purpose, and no liability is accepted for any use of
+it. Verify against the manufacturer before relying on a value — every record carries source links
+and a `lastVerifiedDate` for exactly that. The published wrapper repeats this in its `disclaimer`
+field so it travels with the file.
+
 ## Generated fields
 
 `dist/data/evs.json` is not a copy of this file — `scripts/prerender.mjs` rewrites it with
