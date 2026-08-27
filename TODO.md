@@ -709,3 +709,12 @@ User's screenshot showed the issue clearly: each car's remove (×) button was fl
 - Bumped `render.js` v20→v21, `app.js` v39→v40 (its `render.js` reference), `styles.css` v23→v24.
 
 **Verified**: rebuilt `dist/`; selected 2 cars in the live app and confirmed via screenshot that each × now sits immediately next to its own car's title, with a clean vertical divider separating the two columns all the way down through every spec row. Clicked a × directly — `compareCount` correctly went from 2 to 1. Confirmed via network log that `styles.css?v=24`/`app.js?v=40`/`render.js?v=21` all loaded 200 OK on a fresh navigation, no console errors introduced by this change.
+
+# TODO: Excluded the blurred background from find-in-page while the detail modal is open (2026-08-27)
+
+User reported: searching (Ctrl/Cmd+F) for a spec while the detail modal is open — e.g. "heat pump" — also highlights matches in the blurred card-grid background behind it. Root cause: `.modal-backdrop`'s `backdrop-filter: blur(3px)` is purely a rendering effect; it doesn't touch the DOM's actual interactivity, so the browser's native find-in-page (which works off the accessibility tree, not pixels) still happily matches and highlights text back there.
+
+- **`js/app.js`**: toggles the HTML `inert` attribute on `.topbar` and `.layout` (the two visible siblings of `#detailModal` — everything in the app shell except the modal itself) in `openDetail()`/`closeModal()`, the single choke point both hold (confirmed via grep — nothing else touches `detailModal.hidden`). `inert` is a standards-based, broadly-supported (Chrome/Edge 102+, Firefox 112+, Safari 15.5+) way to pull a subtree out of the tab order, the accessibility tree, *and* native find-in-page all at once — no ARIA hand-rolling, no custom find-interception logic.
+- Bumped `app.js` v40→v41.
+
+**Verified**: rebuilt `dist/`; opened a car's detail modal live and confirmed `document.querySelector('.topbar').inert`/`'.layout'.inert` are both `true` while it's open. Directly tested the actual mechanism find-in-page relies on: called `.focus()` on a background button (`resetFiltersBtn`) while the modal was open — the browser refused, `document.activeElement` stayed `BODY` — then closed the modal and confirmed the same button became focusable again (`inert` back to `false` on both elements). No console errors introduced; confirmed `app.js?v=41` loaded 200 OK.

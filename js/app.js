@@ -60,6 +60,8 @@ const state = {
 };
 
 const el = {
+  topbar: document.querySelector(".topbar"),
+  layoutEl: document.querySelector(".layout"),
   sidebar: document.getElementById("filterGroups"),
   sidebarEl: document.getElementById("sidebar"),
   sidebarBackdrop: document.getElementById("sidebarBackdrop"),
@@ -393,6 +395,12 @@ function openDetail(car, { historyMode = "push" } = {}) {
   // bottom) since renderModal()'s content swap alone doesn't touch modalBody's own scroll
   // offset, only its children.
   el.detailModal.hidden = false;
+  // `inert` pulls the rest of the page out of the tab order, out of assistive-tech reach, and
+  // — the actual bug this fixes — out of the browser's native find-in-page (Ctrl/Cmd+F), which
+  // otherwise happily matches and highlights text in the blurred, inert-looking background,
+  // since a CSS blur is purely visual and doesn't affect the DOM's real interactivity at all.
+  el.topbar.inert = true;
+  el.layoutEl.inert = true;
   el.modalBody.scrollTop = 0;
   document.title = titleFor(car);
   if (historyMode === "push") {
@@ -403,6 +411,8 @@ function openDetail(car, { historyMode = "push" } = {}) {
 
 function closeModal({ updateHistory = true } = {}) {
   el.detailModal.hidden = true;
+  el.topbar.inert = false;
+  el.layoutEl.inert = false;
   state.activeDetailCar = null;
   document.title = HOME_TITLE;
   // Replace, not push: closing shouldn't grow the stack either, so "back" from wherever
