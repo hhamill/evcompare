@@ -15,7 +15,7 @@
 // only affects the *_absolute_* URLs this script embeds (canonical/OG/JSON-LD/sitemap) — see
 // js/router.js's BASE_PATH comment if this ever moves back to a GitHub Pages project page.
 
-import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, existsSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
@@ -53,6 +53,12 @@ const ogImageVersion = createHash("sha256").update(readFileSync(path.join(ROOT, 
 // ---------- helpers ----------
 
 const isReal = v => v != null && v !== "N/A" && v !== "Pending";
+
+function fmtBytes(n) {
+  if (n >= 1024 * 1024) return `${(n / 1024 / 1024).toFixed(1)} MB`;
+  if (n >= 1024) return `${Math.round(n / 1024)} KB`;
+  return `${n} bytes`;
+}
 
 function esc(str) {
   return String(str).replace(/[&<>"']/g, c => ({
@@ -241,7 +247,7 @@ ${o.jsonLd.map(j => `<script type="application/ld+json">${JSON.stringify(j)}</sc
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=36" />
+<link rel="stylesheet" href="/css/styles.css?v=37" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -423,7 +429,9 @@ function footerNavHtml() {
     </nav>
     <nav class="hub-links hub-links-footer" aria-label="Browse by make">
       ${hubNavHtml(HUBSETS.makes, "By make:")}
-    </nav>`;
+    </nav>
+    <p class="hub-links-footer doc-link">The data behind this site is
+      <a href="${BASE_PATH}/data/">free to download and use (CC0)</a>.</p>`;
 }
 
 function hubJsonLd(hub, url, matched) {
@@ -545,6 +553,138 @@ function buildHomepage() {
     .replaceAll("https://evcompare.org/assets/og-image.png", `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`);
 }
 
+// ---------- dataset landing page ----------
+
+// A human page for the CC0 dataset. It exists so the citable entity is a page on this site
+// rather than an anonymous JSON file: schema.org/Dataset puts the landing page in `url` and
+// the file in `distribution`, which is the difference between being cited and being scraped.
+// It also surfaces data/current.json, a cheap change-check that until now nothing linked to.
+//
+// Field documentation is generated from the same FIELDS registry the app renders from, so it
+// cannot drift out of step with what the JSON actually contains.
+function datasetLd(meta, sizes) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: "EV Compare — US electric vehicle specifications",
+    alternateName: "evcompare.org EV dataset",
+    description: `Hand-researched specifications for ${meta.count} electric vehicles sold in the United States: `
+      + `range, battery, charging, performance, seating, cargo and driver-assist data, with source links per vehicle. `
+      + `Public domain (CC0-1.0).`,
+    url: `${SITE_BASE_URL}${BASE_PATH}/data/`,
+    identifier: meta.hash,
+    license: "https://creativecommons.org/publicdomain/zero/1.0/",
+    isAccessibleForFree: true,
+    creator: { "@type": "Organization", name: SITE_NAME, url: `${SITE_BASE_URL}${BASE_PATH}/` },
+    publisher: { "@type": "Organization", name: SITE_NAME, url: `${SITE_BASE_URL}${BASE_PATH}/` },
+    dateModified: meta.lastVerified,
+    keywords: ["electric vehicles", "EV specifications", "EPA range", "NACS", "DC fast charging",
+               "battery capacity", "open data", "CC0"],
+    measurementTechnique: "Manual research against manufacturer specifications, EPA fueleconomy.gov listings and published reviews; each vehicle carries source links and a last-verified date.",
+    variableMeasured: FIELDS.map(f => ({ "@type": "PropertyValue", name: f.label })),
+    distribution: [
+      { "@type": "DataDownload", name: "Full dataset (JSON)", encodingFormat: "application/json",
+        contentUrl: `${SITE_BASE_URL}${BASE_PATH}/data/evs.json`, contentSize: sizes.evs },
+      { "@type": "DataDownload", name: "Current version hash", encodingFormat: "application/json",
+        contentUrl: `${SITE_BASE_URL}${BASE_PATH}/data/current.json`, contentSize: sizes.current },
+      { "@type": "DataDownload", name: "Field documentation", encodingFormat: "text/markdown",
+        contentUrl: `${SITE_BASE_URL}${BASE_PATH}/data/SCHEMA.md`, contentSize: sizes.schema },
+    ],
+  };
+}
+
+function buildDataPage(meta, sizes) {
+  const url = `${SITE_BASE_URL}${BASE_PATH}/data/`;
+  const description = `Hand-researched specifications for ${meta.count} US electric vehicles, free to use for any purpose under CC0.`;
+  const groups = GROUP_ORDER.map(g => {
+    const fs = FIELDS.filter(f => f.group === g);
+    return `      <div class="ds-group"><h3>${esc(g)}</h3><p>${fs.map(f => esc(f.label)).join(" &middot; ")}</p></div>`;
+  }).join("\n");
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EV Dataset — Free CC0 Electric Vehicle Specifications | ${SITE_NAME}</title>
+<meta name="description" content="${esc(description)}" />
+<meta name="robots" content="index,follow" />
+<meta name="theme-color" content="#4ee08a" />
+<link rel="canonical" href="${esc(url)}" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="${esc(SITE_NAME)}" />
+<meta property="og:title" content="EV Compare dataset — ${meta.count} US electric vehicles, CC0" />
+<meta property="og:description" content="${esc(description)}" />
+<meta property="og:url" content="${esc(url)}" />
+<meta property="og:image" content="${esc(OG_IMAGE)}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="EV Compare dataset — ${meta.count} US electric vehicles, CC0" />
+<meta name="twitter:description" content="${esc(description)}" />
+<meta name="twitter:image" content="${esc(OG_IMAGE)}" />
+<script type="application/ld+json">${JSON.stringify(datasetLd(meta, sizes))}</script>
+<link rel="stylesheet" href="/css/styles.css?v=37" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <a class="brand" href="${BASE_PATH}/" aria-label="${esc(SITE_NAME)} — go to homepage">
+      <span class="brand-name">${esc(SITE_NAME)}</span>
+    </a>
+  </header>
+  <main class="doc">
+    <h1>The EV Compare dataset</h1>
+    <p class="doc-lede">Specifications for <strong>${meta.count} electric vehicles</strong> sold in the United States —
+      range, battery, charging, performance, seating, cargo and driver-assist data, hand-researched against
+      manufacturer specs, EPA listings and published reviews. Every vehicle carries its own source links and a
+      last-verified date. Last verified ${esc(meta.lastVerified)}.</p>
+
+    <p class="doc-lede"><strong>It is public domain under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0&nbsp;1.0</a>.</strong>
+      Use it for anything — commercial work, research, training, a competing site — with no permission needed and
+      no attribution required. A credit to ${esc(SITE_NAME)} is appreciated, never demanded.</p>
+
+    <h2>Download</h2>
+    <table class="doc-table">
+      <thead><tr><th>File</th><th>What it is</th><th>Size</th></tr></thead>
+      <tbody>
+        <tr><td><a href="${BASE_PATH}/data/evs.json"><code>evs.json</code></a></td>
+            <td>The whole dataset — ${meta.count} vehicles, ${FIELDS.length} fields each</td><td>${fmtBytes(sizes.evs)}</td></tr>
+        <tr><td><a href="${BASE_PATH}/data/current.json"><code>current.json</code></a></td>
+            <td>Just the current version hash and count</td><td>${fmtBytes(sizes.current)}</td></tr>
+        <tr><td><a href="${BASE_PATH}/data/SCHEMA.md"><code>SCHEMA.md</code></a></td>
+            <td>Field-by-field documentation, including what <code>null</code>, <code>"N/A"</code> and <code>"Pending"</code> each mean</td><td>${fmtBytes(sizes.schema)}</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Checking for updates without re-downloading</h2>
+    <p>Every build stamps <code>evs.json</code> with a SHA-256 of its <code>models</code> array, and writes the same
+      value to <code>current.json</code>. If you already hold a copy, fetch the small file and compare —
+      re-download only when it differs.</p>
+    <pre class="doc-pre"><code>curl -s ${SITE_BASE_URL}${BASE_PATH}/data/current.json
+{ "current": "${esc(meta.hash)}",
+  "count": ${meta.count},
+  "generatedAt": "${esc(meta.generatedAt)}" }</code></pre>
+
+    <h2>What's in each vehicle</h2>
+    <div class="ds-groups">
+${groups}
+    </div>
+
+    <h2>How values are recorded</h2>
+    <p>Numeric fields distinguish three kinds of absence, which matters if you're aggregating:
+      <code>null</code> means unknown — we looked and couldn't confirm it.
+      <code>"N/A"</code> means the concept doesn't apply to that vehicle at all.
+      <code>"Pending"</code> means the figure is real but not yet published, typically an EPA rating that
+      hasn't posted for a car already on sale. Treating all three as zero will give you wrong averages.
+      <a href="${BASE_PATH}/data/SCHEMA.md">SCHEMA.md</a> covers this per field.</p>
+
+    <p class="doc-back"><a href="${BASE_PATH}/">&larr; Browse all ${meta.count} vehicles on ${esc(SITE_NAME)}</a></p>
+  </main>
+</div>
+</body>
+</html>
+`;
+}
+
 // ---------- sitemap / robots ----------
 
 // `lastmod` is each entry's real `lastVerifiedDate` (or, for the homepage, the most recent
@@ -557,6 +697,34 @@ function buildHomepage() {
 function buildSitemap(entries) {
   const items = entries.map(({ loc, lastmod }) => `  <url><loc>${esc(loc)}</loc><lastmod>${esc(lastmod)}</lastmod></url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${items}\n</urlset>\n`;
+}
+
+function buildLlmsTxt(meta) {
+  const hubLines = HUBSETS.practical.map(h => `- [${h.h1}](${SITE_BASE_URL}${hubPath(h)}/): ${h.blurb}`).join("\n");
+  return `# ${SITE_NAME}
+
+> Specifications and side-by-side comparisons for ${meta.count} electric vehicles sold in the United States: range, battery, charging, performance, seating, cargo and driver-assist data. Hand-researched, with per-vehicle source links and last-verified dates. Last verified ${meta.lastVerified}.
+
+The underlying dataset is public domain (CC0-1.0) and free to use without attribution.
+
+## Data
+
+- [Dataset documentation](${SITE_BASE_URL}${BASE_PATH}/data/): what the dataset covers, how values are recorded, and how to check for updates
+- [evs.json](${SITE_BASE_URL}${BASE_PATH}/data/evs.json): the full dataset, ${meta.count} vehicles
+- [SCHEMA.md](${SITE_BASE_URL}${BASE_PATH}/data/SCHEMA.md): field-by-field documentation
+
+## Notable
+
+Numeric fields distinguish three kinds of absence: null (unknown), "N/A" (does not apply to that vehicle), and "Pending" (real but not yet published). Treating all three as zero produces wrong aggregates.
+
+## Guides
+
+${hubLines}
+
+## Full index
+
+- [Sitemap](${SITE_BASE_URL}${BASE_PATH}/sitemap.xml): every vehicle and category page
+`;
 }
 
 function buildRobots() {
@@ -593,6 +761,14 @@ function main() {
   );
 
   const mostRecentVerified = cars.reduce((max, c) => c.lastVerifiedDate > max ? c.lastVerifiedDate : max, cars[0].lastVerifiedDate);
+
+  // Dataset landing page. Written after the data files above so it can report their real
+  // sizes rather than an estimate that drifts.
+  const sizes = {
+    evs: statSync(path.join(DIST, "data", "evs.json")).size,
+    current: statSync(path.join(DIST, "data", "current.json")).size,
+    schema: statSync(path.join(DIST, "data", "SCHEMA.md")).size,
+  };
   const sitemapEntries = [{ loc: `${SITE_BASE_URL}${BASE_PATH}/`, lastmod: mostRecentVerified }];
 
   // Hub landing pages. lastmod is the most recent verification date *among that hub's own
@@ -622,10 +798,20 @@ function main() {
     count++;
   }
 
+  writeFileSync(
+    path.join(DIST, "data", "index.html"),
+    buildDataPage({ count: cars.length, hash: dataHash, generatedAt, lastVerified: mostRecentVerified }, sizes)
+  );
+  sitemapEntries.push({ loc: `${SITE_BASE_URL}${BASE_PATH}/data/`, lastmod: mostRecentVerified });
+
   writeFileSync(path.join(DIST, "sitemap.xml"), buildSitemap(sitemapEntries));
   writeFileSync(path.join(DIST, "robots.txt"), buildRobots());
+  writeFileSync(
+    path.join(DIST, "llms.txt"),
+    buildLlmsTxt({ count: cars.length, lastVerified: mostRecentVerified })
+  );
 
-  console.log(`Prerendered ${count} car pages + ${hubCount} hub pages + sitemap.xml/robots.txt into dist/`);
+  console.log(`Prerendered ${count} car pages + ${hubCount} hub pages + data/ + sitemap.xml/robots.txt into dist/`);
 }
 
 main();
