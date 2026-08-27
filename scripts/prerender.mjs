@@ -40,6 +40,14 @@ function hashModels(models) {
   return "sha256:" + createHash("sha256").update(JSON.stringify(models)).digest("hex");
 }
 
+// Short content hash of the hand-authored OG image, appended as a `?v=` query string to every
+// og:image/twitter:image URL. Platforms like Discord cache a fetched image by its exact URL,
+// independent of how aggressively they revalidate the *page* that references it — so bumping
+// only the page (e.g. a `?v=` on the page URL itself) doesn't reliably bust an already-cached
+// image. Deriving this from the file's own bytes means it changes if and only if the image
+// actually changes, with nothing to remember to bump by hand.
+const ogImageVersion = createHash("sha256").update(readFileSync(path.join(ROOT, "assets", "og-image.png"))).digest("hex").slice(0, 10);
+
 // ---------- helpers ----------
 
 const isReal = v => v != null && v !== "N/A" && v !== "Pending";
@@ -198,7 +206,7 @@ function pageFor(car) {
   const similar = findSimilarCars(car, cars, { limit: 4 });
   const ld = jsonLdFor(car, url, similar);
   const breadcrumbLd = breadcrumbLdFor(car, url);
-  const ogImage = `${SITE_BASE_URL}/assets/og-image.png`;
+  const ogImage = `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`;
 
   return `<!doctype html>
 <html lang="en">
@@ -376,13 +384,18 @@ function homepageJsonLd() {
   return `<script type="application/ld+json">${JSON.stringify(website)}</script>\n<script type="application/ld+json">${JSON.stringify(itemList)}</script>`;
 }
 
-// Injects the homepage's JSON-LD into the source index.html right before </head> rather than
-// copying it byte-for-byte — the only place this build step adds content to a file that isn't
-// wholly generated from scratch, so keep this to a single, easy-to-audit string replace.
+// Injects the homepage's JSON-LD into the source index.html right before </head>, and appends
+// the same og-image cache-busting version query used on every car page (see ogImageVersion
+// above) to index.html's own two hardcoded og:image/twitter:image URLs — rather than copying
+// the source byte-for-byte, these are the only two places this build step adds/rewrites content
+// in a file that isn't wholly generated from scratch, so keep both to single, easy-to-audit
+// string operations.
 function buildHomepage() {
   const src = readFileSync(path.join(ROOT, "index.html"), "utf8");
   if (!src.includes("</head>")) throw new Error("index.html has no </head> to inject JSON-LD before");
-  return src.replace("</head>", `${homepageJsonLd()}\n</head>`);
+  return src
+    .replace("</head>", `${homepageJsonLd()}\n</head>`)
+    .replaceAll("https://evcompare.org/assets/og-image.png", `${SITE_BASE_URL}/assets/og-image.png?v=${ogImageVersion}`);
 }
 
 // ---------- sitemap / robots ----------
