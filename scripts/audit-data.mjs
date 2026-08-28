@@ -23,8 +23,25 @@ const byModel = {};
 for (const m of M) (byModel[`${m.make} ${m.model}`] ??= []).push(m);
 const siblings = Object.entries(byModel).filter(([, l]) => l.length > 1);
 
+// A flag can be investigated and found legitimate — GMC really does publish one 0-60 across
+// three power levels. Without somewhere to record that, every run re-raises it and the same
+// investigation gets paid for again (this one already had been, on 2026-08-27).
+//
+// Each flag therefore carries a stable KEY that embeds the values it was raised over, and
+// scripts/audit-cleared.json maps keys to why they were dismissed. Embedding the values is the
+// safety catch: change the 0-60 or the horsepower and the key changes with it, the exception
+// stops matching, and the flag comes back. An exception can only ever silence the exact
+// situation someone actually looked at.
+const CLEARED_FILE = path.join(ROOT, "scripts", "audit-cleared.json");
+const CLEARED = existsSync(CLEARED_FILE) ? JSON.parse(readFileSync(CLEARED_FILE, "utf8")) : {};
+const pair = (a, b) => [a, b].sort().join("+");   // order-independent, so file order can't flip a key
+
 const flags = [];
-const flag = (check, msg) => flags.push({ check, msg });
+const cleared = [];
+const flag = (check, msg, key) => {
+  if (key && CLEARED[key]) cleared.push({ key, msg, ...CLEARED[key] });
+  else flags.push({ check, msg });
+};
 
 // 1. Different power, identical 0-60. Same power + same 0-60 is fine and common (shared
 //    powertrain across trim levels), so only differing power is flagged.
@@ -34,7 +51,8 @@ for (const [model, l] of siblings)
     const ah = n(a.performance?.horsepowerHp), bh = n(b.performance?.horsepowerHp);
     const az = n(a.performance?.zeroTo60Sec), bz = n(b.performance?.zeroTo60Sec);
     if (ah && bh && az && bz && ah !== bh && az === bz)
-      flag("trim-drift", `${model}: ${a.trim} (${ah}hp) and ${b.trim} (${bh}hp) share ${az}s`);
+      flag("trim-drift", `${model}: ${a.trim} (${ah}hp) and ${b.trim} (${bh}hp) share ${az}s`,
+        `trim-drift/${pair(a.id, b.id)}/${[ah, bh].sort((x, y) => x - y).join("+")}hp@${az}s`);
   }
 
 // 2. More power but slower — implausible within one model unless weight differs a lot.
@@ -44,7 +62,8 @@ for (const [model, l] of siblings)
     const ah = n(a.performance?.horsepowerHp), bh = n(b.performance?.horsepowerHp);
     const az = n(a.performance?.zeroTo60Sec), bz = n(b.performance?.zeroTo60Sec);
     if (ah && bh && az && bz && ah > bh && az > bz)
-      flag("implausible", `${model}: ${a.trim} ${ah}hp/${az}s slower than ${b.trim} ${bh}hp/${bz}s`);
+      flag("implausible", `${model}: ${a.trim} ${ah}hp/${az}s slower than ${b.trim} ${bh}hp/${bz}s`,
+        `implausible/${a.id}+${b.id}/${ah}hp@${az}s-vs-${bh}hp@${bz}s`);
   }
 
 // 3. Different drivetrain but identical range AND battery — RWD and AWD of the same car
@@ -55,7 +74,8 @@ for (const [model, l] of siblings)
     const ar = n(a.range?.epaMiles), br = n(b.range?.epaMiles);
     const ab = n(a.battery?.usableKwh), bb = n(b.battery?.usableKwh);
     if (a.drivetrain !== b.drivetrain && ar && br && ar === br && ab === bb)
-      flag("trim-drift", `${model}: ${a.trim} (${a.drivetrain}) and ${b.trim} (${b.drivetrain}) share ${ar}mi / ${ab}kWh`);
+      flag("trim-drift", `${model}: ${a.trim} (${a.drivetrain}) and ${b.trim} (${b.drivetrain}) share ${ar}mi / ${ab}kWh`,
+        `range-drift/${pair(a.id, b.id)}/${ar}mi@${ab}kWh`);
   }
 
 // 4. Efficiency outside what a road-going EV achieves. Real values run ~1.5 (Hummer) to ~5.4
@@ -64,7 +84,8 @@ for (const m of M) {
   const r = n(m.range?.epaMiles), b = n(m.battery?.usableKwh);
   if (!r || !b) continue;
   const e = r / b;
-  if (e < 1.4 || e > 5.6) flag("efficiency", `${name(m)}: ${e.toFixed(2)} mi/kWh (${r}mi / ${b}kWh)`);
+  if (e < 1.4 || e > 5.6)
+    flag("efficiency", `${name(m)}: ${e.toFixed(2)} mi/kWh (${r}mi / ${b}kWh)`, `efficiency/${m.id}/${r}mi@${b}kWh`);
 }
 
 // 5. Record year vs the year of its own cited EPA entry. This class is invisible to every
@@ -79,9 +100,11 @@ if (existsSync(CACHE)) {
     const e = id && epa[id];
     if (!e) continue;
     if (e.year !== m.modelYear)
-      flag("model-year", `${name(m)}: we say MY${m.modelYear}, its EPA source is "${e.year} ${e.make} ${e.model}"`);
+      flag("model-year", `${name(m)}: we say MY${m.modelYear}, its EPA source is "${e.year} ${e.make} ${e.model}"`,
+        `model-year/${m.id}/MY${m.modelYear}-vs-EPA${e.year}`);
     if (e.range && typeof n(m.range?.epaMiles) === "number" && n(m.range.epaMiles) !== e.range)
-      flag("epa-range", `${name(m)}: we say ${m.range.epaMiles}mi, EPA says ${e.range}mi`);
+      flag("epa-range", `${name(m)}: we say ${m.range.epaMiles}mi, EPA says ${e.range}mi`,
+        `epa-range/${m.id}/${m.range.epaMiles}mi-vs-EPA${e.range}mi`);
   }
 } else {
   console.log("(no scripts/epa-cache.json — run `npm run fetch-epa` to enable the model-year and EPA-range checks)");
@@ -109,6 +132,20 @@ for (const [check, msgs] of Object.entries(byCheck)) {
   console.log(`\n${LABELS[check]} (${msgs.length}):`);
   for (const m of msgs) console.log(`  · ${m}`);
 }
+if (cleared.length) {
+  console.log(`\nPreviously investigated and cleared (${cleared.length}) — shown, not hidden:`);
+  for (const c of cleared) console.log(`  · ${c.msg}\n      ${c.why} (cleared ${c.clearedOn})`);
+}
+
+// A cleared entry that no longer matches anything is itself a defect: either the data moved on
+// and the exception is dead weight, or someone mistyped a key and a live flag is going unsilenced.
+const matched = new Set(cleared.map(c => c.key));
+const stale = Object.keys(CLEARED).filter(k => !matched.has(k));
+if (stale.length) {
+  console.log(`\nStale entries in audit-cleared.json (${stale.length}) — they match nothing; delete or fix:`);
+  for (const k of stale) console.log(`  · ${k}`);
+}
+
 console.log(flags.length
   ? `\n${flags.length} flag(s) — heuristics, not verdicts. Check each against a trim-specific source.`
   : "\nNo flags.");

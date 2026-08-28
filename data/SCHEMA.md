@@ -56,7 +56,9 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
   },
   "range": {
     "epaMiles": 320,
-    "source": "https://www.fueleconomy.gov/..."   // link to EPA/fueleconomy.gov listing used
+    "source": "https://www.fueleconomy.gov/..."   // link to the EPA/fueleconomy.gov listing used, or to
+                                                 // the manufacturer's own page when fueleconomy.gov has
+                                                 // no entry for this exact configuration (see below)
   },
   "performance": {
     "zeroTo60Sec": 4.8,
@@ -166,7 +168,14 @@ values derived from the site's own routing:
 
 ## Rules for filling this out
 - Use only real, verifiable public data (manufacturer spec pages, fueleconomy.gov, EPA, Car and Driver / Edmunds / MotorTrend reviews). Do not invent numbers.
-- Every entry MUST have `range.source` (EPA/fueleconomy.gov link) and at least one link in `links`.
+- Every entry MUST have `range.source` and at least one link in `links`. Prefer a fueleconomy.gov
+  listing. Cite the manufacturer's own published EPA figure instead **only when fueleconomy.gov has no
+  entry for the exact configuration the record describes** — this happens when EPA has certified one
+  wheel/tyre package and not another, or has not yet published a car the maker has already rated.
+  Never cite a fueleconomy.gov entry whose number differs from the one recorded: a link to a page that
+  contradicts the value is worse than no link. Say which configuration is involved in `notes`.
+  (Live examples: the Volvo EX60 P6, where EPA lists only the 22-inch car at 295mi while this record is
+  the standard 20/21-inch car Volvo rates at 307mi; and the Lexus ES 350e/500e before EPA published.)
 - **Numeric ("range"-type) fields have three distinct non-value states — pick the right one, don't default everything to `null`:**
   - `null` — **unknown**: the field applies to this vehicle, we just couldn't confirm a real number from a reliable source. Never guess a number instead — leave it `null`. (e.g. cupholder count, USB port count — routinely hard to source per-trim.)
   - `"N/A"` — **not applicable**: the concept the field measures doesn't exist for this vehicle, so no number could ever fill it in. (e.g. `cargo.rearCubicFeet`/`maxCubicFeet` on a pickup truck — there's no enclosed cargo hold, just a bed, which isn't tracked by this schema; `groundClearanceIn` on a vehicle with adjustable air suspension and no single published figure — clearance genuinely isn't one number for that vehicle.)

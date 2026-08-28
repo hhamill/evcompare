@@ -1445,3 +1445,76 @@ what unlocked the Dodge and the BMWs.
 ## Final tally: 39 of 49 filled
 
 Ground clearance nulls across the dataset went from 49 to 10.
+
+## Audit flag cleanup (2026-08-28)
+
+Three correctness items, all closed. `npm run audit` now reports **no flags**.
+
+### 1. Volvo EX60 P6 — 307mi vs EPA's 295mi. Real citation error.
+
+The record was right and its citation was wrong. `links.epaWindowSticker` pointed at
+fueleconomy.gov id **50697**, which is specifically the **"EX60 P6 electric (22 Inch Wheels)"**
+entry at 295mi — a different configuration from the one this record describes
+(`wheelSizesIn: [20, 21]`, 307mi).
+
+Checked whether EPA simply had a second entry we'd missed: it does not. The 2027 Volvo menu
+lists exactly one P6, the 22-inch one, and querying its options returns a single id. EPA has not
+published the standard-wheel P6 that Volvo already rates at 307mi. (Contrast the EX90, where
+both a base and a "(21 Inch Wheels)" entry exist.)
+
+Fixed by repointing `range.source` and `links.epaWindowSticker` at Volvo's own US spec page and
+recording the situation in `notes`. `data/SCHEMA.md` gained a rule for this case, since it will
+recur: prefer fueleconomy.gov, fall back to the manufacturer's published EPA figure when EPA has
+no entry for the exact configuration, and **never cite a fueleconomy.gov entry whose number
+differs from the one recorded** — a link to a page that contradicts the value is worse than no
+link at all.
+
+### 2. GMC Sierra EV — Elevation and Denali share 4.5s. False positive, and not the first time.
+
+GMC publishes 4.5s across 605hp, 645hp and 760hp Sierra EV configurations; the heavier Extended
+Range pack offsets the extra power, and Edmunds separately measured the Denali Extended Range at
+4.4s. Re-confirmed today against GMC's own trim pages.
+
+This had **already been investigated and cleared on 2026-08-27** (see `de88ce7`), and the audit
+re-raised it anyway, so the same work got paid for twice. That is the actual defect, and it is
+fixed rather than re-diagnosed — see below.
+
+### 3. Lexus ES — we say MY2027, Edmunds says 2026. Both are right.
+
+Lexus's own press release of 2026-08-10 designates the battery-electric ES models **MY2027**;
+EPA certified them under **MY2026**, which is what Edmunds mirrors. `modelYear` stays 2027,
+following the manufacturer's designation — that is what appears on the buyer's order sheet.
+
+The valuable part was the cross-check. These records cited only a Lexus press-release URL, so
+attaching the real EPA entries (ids 50450 and 50452, the standard 19-inch configurations)
+verified every range figure we hold against EPA directly: 350e 307mi and 500e 276mi both match
+exactly, and the 21-inch figures in `notes` (292 and 272) match EPA's separate 21-inch entries.
+The records also picked up `epaSizeClass: "Midsize Car"`, taking the missing-size-class count
+from 25 to 23.
+
+### The mechanism: `scripts/audit-cleared.json`
+
+A flag that has been investigated and found legitimate needs somewhere to be recorded, or every
+run re-raises it. Each flag now carries a stable key, and that file maps keys to why they were
+dismissed and when.
+
+**The keys embed the values the flag was raised over** — `.../605+645hp@4.5s`, `.../MY2027-vs-EPA2026`.
+That is the safety catch: change the horsepower or the 0-60 and the key changes with it, the
+exception stops matching, and the flag comes back. An exception can only ever silence the exact
+situation a person actually looked at. Verified by temporarily moving the Denali to 650hp — the
+flag reappeared and the now-unmatched entry was reported as stale.
+
+Two deliberate properties:
+- Cleared items are **printed, not hidden** — with the reason and the date — so the audit output
+  still shows everything that was ever suspicious.
+- An entry matching nothing is reported as **stale**, because that means either the data moved on
+  and the exception is dead weight, or a key was mistyped and a live flag is going unsilenced.
+
+### Found while here, not fixed
+
+`data/SCHEMA.md` documents `epaSizeClass` as GENERATED and says to run `npm run fetch-epa`, but
+`fetch-epa` only writes `scripts/epa-cache.json` — nothing writes the field back into
+`data/evs.json`. The 25 (now 23) records missing it are the visible symptom; the two Lexus
+records were filled by hand with `set-spec`. Making `fetch-epa` write back would fix the field
+permanently and surface any drift between stored and cached values, but it would touch every
+record that cites an EPA id, so it belongs in its own change rather than a flag cleanup.

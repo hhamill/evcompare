@@ -951,6 +951,22 @@
     "range": 222,
     "fetchedOn": "2026-08-28"
   },
+  "50450": {
+    "year": 2026,
+    "make": "Lexus",
+    "model": "ES 350e (19 inch Wheels)",
+    "vclass": "Midsize Cars",
+    "range": 307,
+    "fetchedOn": "2026-08-28"
+  },
+  "50452": {
+    "year": 2026,
+    "make": "Lexus",
+    "model": "ES 500e AWD (19 inch Wheels)",
+    "vclass": "Midsize Cars",
+    "range": 276,
+    "fetchedOn": "2026-08-28"
+  },
   "50460": {
     "year": 2026,
     "make": "Tesla",

@@ -1,0 +1,14 @@
+{
+  "trim-drift/gmc-sierra-ev-2026-denali-extended-range+gmc-sierra-ev-2026-elevation-standard-range/605+645hp@4.5s": {
+    "why": "Not drift — GMC itself publishes 4.5s across 605hp, 645hp and 760hp Sierra EV configurations. The heavier Extended Range pack offsets the extra power. Independently re-confirmed against GMC's own trim pages; Edmunds separately measured the Denali Extended Range at 4.4s.",
+    "clearedOn": "2026-08-28"
+  },
+  "model-year/lexus-es-2027-350e-fwd/MY2027-vs-EPA2026": {
+    "why": "Real divergence between the manufacturer and EPA, not a drifted record. Lexus's own press release (2026-08-10) designates the battery-electric ES models MY2027; EPA certified them under MY2026, and Edmunds catalogues them as 2026. modelYear follows Lexus's designation, which is what a buyer sees. The range check passes against the same EPA entry (307mi), so the car is matched correctly.",
+    "clearedOn": "2026-08-28"
+  },
+  "model-year/lexus-es-2027-500e-awd/MY2027-vs-EPA2026": {
+    "why": "Same divergence as the 350e: Lexus designates MY2027, EPA certified MY2026. The range check passes against the same EPA entry (276mi), confirming the record is matched to the right vehicle.",
+    "clearedOn": "2026-08-28"
+  }
+}

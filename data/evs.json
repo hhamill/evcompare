@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:244dfe082a6c6d8197aa414d7d31b9c85c0e2f00603c6ce8448ec284b9c7ee18",
+  "hash": "sha256:970946ebac830de57df6927c1f60ae812d6cb12f8da1331beaaea6202820c842",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -5810,13 +5810,13 @@
       "id": "lexus-es-2027-350e-fwd",
       "url": "https://evcompare.org/2027/es/350e-fwd/",
       "catalogId": 67,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Lexus",
       "model": "ES",
       "trim": "350e FWD",
       "modelYear": 2027,
       "bodyStyle": "Sedan",
-      "epaSizeClass": null,
+      "epaSizeClass": "Midsize Car",
       "onSaleDate": "2026-09",
       "msrp": 47610,
       "doors": 4,
@@ -5890,21 +5890,21 @@
       "links": {
         "manufacturerSpec": "https://pressroom.lexus.com/vehicle/2027-lexus-es-electric/",
         "review": "https://pressroom.lexus.com/2027-lexus-es-battery-electric-models-return-with-up-to-307-miles-of-epa-estimated-total-range/",
-        "epaWindowSticker": "https://pressroom.lexus.com/2027-lexus-es-battery-electric-models-return-with-up-to-307-miles-of-epa-estimated-total-range/"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50450"
       },
-      "notes": "First-ever battery-electric ES, arriving at dealers September 2026 as part of the redesigned eighth-generation ES lineup (alongside a carryover-style 350h hybrid). Base 'Premium' grade shown; a 'Luxury' grade is also offered. 307-mile range is on standard 19-inch wheels (292 mi with optional 21-inch wheels). MSRP of $47,610 is before the $1,395 delivery fee."
+      "notes": "First-ever battery-electric ES, arriving at dealers September 2026 as part of the redesigned eighth-generation ES lineup (alongside a carryover-style 350h hybrid). Base \"Premium\" grade shown; a \"Luxury\" grade is also offered. 307-mile range is on standard 19-inch wheels (292 mi with optional 21-inch wheels). MSRP of $47,610 is before the $1,395 delivery fee. Lexus designates these BEV models MY2027 (press release of 2026-08-10) but EPA certified them under MY2026, as does Edmunds; modelYear follows Lexus. The EPA entry cited is the standard 19-inch configuration."
     },
     {
       "id": "lexus-es-2027-500e-awd",
       "url": "https://evcompare.org/2027/es/500e-awd/",
       "catalogId": 68,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Lexus",
       "model": "ES",
       "trim": "500e AWD",
       "modelYear": 2027,
       "bodyStyle": "Sedan",
-      "epaSizeClass": null,
+      "epaSizeClass": "Midsize Car",
       "onSaleDate": "2026-09",
       "msrp": 50610,
       "doors": 4,
@@ -5978,9 +5978,9 @@
       "links": {
         "manufacturerSpec": "https://pressroom.lexus.com/vehicle/2027-lexus-es-electric/",
         "review": "https://pressroom.lexus.com/2027-lexus-es-battery-electric-models-return-with-up-to-307-miles-of-epa-estimated-total-range/",
-        "epaWindowSticker": "https://pressroom.lexus.com/2027-lexus-es-battery-electric-models-return-with-up-to-307-miles-of-epa-estimated-total-range/"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50452"
       },
-      "notes": "Dual-motor DIRECT4 AWD version of the first-ever battery-electric ES, arriving at dealers September 2026. Base 'Premium' grade shown; a 'Luxury' grade is also offered. 276-mile range is on standard 19-inch wheels (272 mi with optional 21-inch wheels). MSRP of $50,610 is before the $1,395 delivery fee."
+      "notes": "Dual-motor DIRECT4 AWD version of the first-ever battery-electric ES, arriving at dealers September 2026. Base \"Premium\" grade shown; a \"Luxury\" grade is also offered. 276-mile range is on standard 19-inch wheels (272 mi with optional 21-inch wheels). MSRP of $50,610 is before the $1,395 delivery fee. Lexus designates these BEV models MY2027 (press release of 2026-08-10) but EPA certified them under MY2026, as does Edmunds; modelYear follows Lexus. The EPA entry cited is the standard 19-inch configuration."
     },
     {
       "id": "lexus-rz-2026-350e-fwd",
@@ -11012,7 +11012,7 @@
       "id": "volvo-ex60-2027-p6-plus",
       "url": "https://evcompare.org/2027/ex60/p6-plus-single-motor-rwd/",
       "catalogId": 126,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Volvo",
       "model": "EX60",
       "trim": "P6 Plus (Single Motor RWD)",
@@ -11037,7 +11037,7 @@
       },
       "range": {
         "epaMiles": 307,
-        "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50697"
+        "source": "https://www.volvocars.com/us/cars/ex60-electric/specifications/"
       },
       "performance": {
         "zeroTo60Sec": 5.7,
@@ -11092,9 +11092,9 @@
       "links": {
         "manufacturerSpec": "https://www.volvocars.com/us/cars/ex60-electric/specifications/",
         "review": "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50697"
+        "epaWindowSticker": "https://www.volvocars.com/us/cars/ex60-electric/specifications/"
       },
-      "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus; leather (Nappa) and ventilated seats are Ultra-trim/option items. Heated rear seats and built-in rear booster cushions are Ultra-trim features, not standard on Plus. Battery warranty is 10 years to 80% capacity (no mileage cap published)."
+      "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus; leather (Nappa) and ventilated seats are Ultra-trim/option items. Heated rear seats and built-in rear booster cushions are Ultra-trim features, not standard on Plus. Battery warranty is 10 years to 80% capacity (no mileage cap published). Range sourced to Volvo rather than fueleconomy.gov: EPA has published only one EX60 P6 entry, the 22-inch-wheel configuration at 295mi (id 50697), and this record is the standard 20/21-inch car that Volvo rates at 307mi."
     },
     {
       "id": "volvo-ex60-2027-p10-awd-plus",
