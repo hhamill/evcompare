@@ -1153,9 +1153,53 @@ working as designed.
 
 ## Coverage question this opens
 
-- [ ] With those four relabelled, the dataset now has **no MY2026 Hummer or F-150 Lightning**.
-      For the Hummer that's a real gap-in-waiting: a MY2026 exists as a product (830hp standard,
-      1,160hp with the 24-module battery) but EPA hasn't certified it, so it can be added once
-      it appears. For the Lightning it probably isn't a gap at all — Ford has **ended
-      all-electric Lightning production**, and the successor is an EREV, which this dataset
-      excludes by scope.
+- [ ] **MY2026 Hummer: researched 2026-08-28, not added — see the pre-researched facts below.**
+- [x] MY2026 F-150 Lightning is **not** a gap: Ford has ended all-electric Lightning production
+      and the successor is an EREV, which this dataset excludes by scope.
+
+
+# TODO: 2026 GMC Hummer EV — researched, deliberately not added yet (2026-08-28)
+
+Checked whether it qualifies for a `"Pending"` EPA range per `SCHEMA.md` (which requires the
+car to be *otherwise on sale now*). **It does qualify** — both Pickup and SUV are orderable
+through dealers with published pricing, and EPA has certified no 2026 Hummer at all, which is
+exactly the Porsche Cayenne Electric precedent.
+
+**Not added anyway, on completeness grounds.** I could source **11 of 44 fields**; the existing
+2025 record has **35 of 44**. A record a quarter filled would render as dashes across its card,
+the compare table and its own detail page — worse than the 2025 record that already represents
+the Hummer.
+
+The tempting shortcut is to copy the ~33 body-and-features fields from the 2025 record, since a
+Hummer's door count and cargo volume don't change with a battery module count. **Deliberately
+not doing that.** It is the same reasoning that produced the Optiq's mixed record (2025 power,
+2026 range) and the VF8's inherited 0-60 — both found by audit this week. Carrying fields over
+wholesale onto a fresh record, then stamping today's `lastVerifiedDate` on them, would assert a
+verification that didn't happen.
+
+## Verified 2026 facts, so a future pass doesn't re-research them
+
+| | Pickup | SUV |
+| --- | --- | --- |
+| 2X (20-module, 2 motors) | $99,895 | $99,895 |
+| 3X (20-module, 3 motors, **830hp**) | $107,995 | $107,995 |
+| 3X + 24-module (**1,160hp**, 212 kWh usable) | $117,990 | not offered |
+| Carbon Fiber Edition | — | $124,900 |
+
+- **DC fast charging:** 800V architecture, up to 300 kW. AC: 19.2 kW onboard charger.
+- **GM-estimated range** (not EPA, so `range.epaMiles` must be `"Pending"`, not these):
+  Pickup 3X 20-module w/ Extreme Off-Road Package 297mi; 3X 24-module 345mi; SUV up to 315mi.
+- **0-60:** 3.3s (Pickup 3X test vehicle), 3.5s (SUV 3X test vehicle), 2.8s (Carbon Fiber
+  Edition w/ 24-module, Watts to Freedom). ⚠️ None of these state which battery configuration
+  the 3X figures used — the same ambiguity that left the 2025 record's 0-60 null. Don't record
+  one without pinning the config.
+- Prices rose during MY2026 (GM Authority, Jan 2026) — re-check pricing when adding.
+
+## To actually add it
+
+- [ ] Research the ~33 remaining fields against 2026 sources: battery kWh for the 20-module
+      pack, cargo volumes, seating, doors, tow rating, wheel sizes, and the comfort/tech/driver-
+      assist booleans. `gmc.com` and `edmunds.com` both return 403 to our fetcher, so this needs
+      a different route than the other batches used.
+- [ ] Then add Pickup 3X and SUV 3X for MY2026, with `range.epaMiles: "Pending"`, keeping the
+      MY2025 records — both years genuinely exist and the 2025 ones are correctly sourced.
