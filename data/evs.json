@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:f365449a0aaff2db408120c053783e75d9c6f06b42871a4e80a6992a6b47741c",
+  "hash": "sha256:e15e0d6eedad76131327c513f773e1a50ad72a35757144036ff34103c74307e4",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -189,7 +189,7 @@
       "id": "audi-q4-e-tron-2025-premium-45",
       "url": "https://evcompare.org/2025/q4-e-tron/premium-45/",
       "catalogId": 3,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "Q4 e-tron",
       "trim": "Premium 45",
@@ -267,7 +267,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 2200,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 7.1,
       "links": {
         "manufacturerSpec": "https://www.audiusa.com/us/web/en/models/q4/q4-e-tron/2025/overview.html",
         "review": "https://www.cars.com/research/audi-q4_e_tron-2025/",
@@ -279,7 +279,7 @@
       "id": "audi-q4-e-tron-2025-premium-plus-55-quattro",
       "url": "https://evcompare.org/2025/q4-e-tron/premium-plus-55-quattro/",
       "catalogId": 4,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "Q4 e-tron",
       "trim": "Premium Plus 55 quattro",
@@ -357,7 +357,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 2650,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 7.1,
       "links": {
         "manufacturerSpec": "https://www.audiusa.com/us/web/en/models/q4/q4-e-tron/2025/overview.html",
         "review": "https://www.cars.com/research/audi-q4_e_tron-2025/",
@@ -369,7 +369,7 @@
       "id": "audi-q6-e-tron-2025-premium-quattro",
       "url": "https://evcompare.org/2025/q6-e-tron/premium-quattro/",
       "catalogId": 5,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "Q6 e-tron",
       "trim": "Premium quattro",
@@ -447,7 +447,7 @@
         "frunkCubicFeet": 2.3
       },
       "towCapacityLbs": 4000,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 7.2,
       "links": {
         "manufacturerSpec": "https://www.audiusa.com/en/models/q6-e-tron/q6-e-tron/2025/overview/",
         "review": "https://cars.usnews.com/cars-trucks/audi/q6-e-tron",
@@ -459,7 +459,7 @@
       "id": "audi-q8-e-tron-2025-premium-quattro",
       "url": "https://evcompare.org/2025/q8-e-tron/premium-quattro/",
       "catalogId": 6,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "Q8 e-tron",
       "trim": "Premium quattro",
@@ -536,7 +536,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 4000,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 6.9,
       "links": {
         "manufacturerSpec": "https://media.audiusa.com/models/q8-e-tron",
         "review": "https://www.cars.com/research/audi-q8_e_tron-2025/",
@@ -548,7 +548,7 @@
       "id": "audi-sq6-e-tron-2025-premium-quattro",
       "url": "https://evcompare.org/2025/sq6-e-tron/premium-quattro/",
       "catalogId": 7,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "SQ6 e-tron",
       "trim": "Premium quattro",
@@ -625,7 +625,7 @@
         "frunkCubicFeet": 2.3
       },
       "towCapacityLbs": 4400,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 6.5,
       "links": {
         "manufacturerSpec": "https://media.audiusa.com/models/sq6-e-tron",
         "review": "https://www.cars.com/research/audi-sq6_e_tron-2025/",
@@ -637,7 +637,7 @@
       "id": "audi-s-e-tron-gt-2025-premium-plus-quattro",
       "url": "https://evcompare.org/2025/e-tron-gt/s-e-tron-gt-premium-plus-quattro/",
       "catalogId": 8,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "e-tron GT",
       "trim": "S e-tron GT Premium Plus quattro",
@@ -714,7 +714,7 @@
         "frunkCubicFeet": 1.8
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://media.audiusa.com/models/e-tron-gt-rs-e-tron-gt",
         "review": "https://cars.usnews.com/cars-trucks/audi/e-tron-gt",
@@ -726,7 +726,7 @@
       "id": "audi-rs-e-tron-gt-2025",
       "url": "https://evcompare.org/2025/e-tron-gt/rs-e-tron-gt-performance/",
       "catalogId": 9,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "e-tron GT",
       "trim": "RS e-tron GT performance",
@@ -802,7 +802,7 @@
         "frunkCubicFeet": 1.8
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://media.audiusa.com/models/e-tron-gt-rs-e-tron-gt",
         "review": "https://www.cars.com/research/audi-rs_e_tron_gt-2025/",
@@ -11628,7 +11628,7 @@
       "id": "audi-a6-e-tron-2027-premium",
       "url": "https://evcompare.org/2027/a6-e-tron/premium/",
       "catalogId": 133,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "A6 e-tron",
       "trim": "Premium",
@@ -11706,7 +11706,7 @@
         "frunkCubicFeet": 1
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.6,
       "links": {
         "manufacturerSpec": "https://www.audiusa.com/en/models/a6-e-tron/a6-sportback-e-tron/2027/overview/",
         "review": "https://www.edmunds.com/audi/a6-sportback-e-tron/2027/features-specs/",
@@ -11718,7 +11718,7 @@
       "id": "audi-a6-e-tron-2027-premium-plus-quattro",
       "url": "https://evcompare.org/2027/a6-e-tron/premium-plus-quattro/",
       "catalogId": 134,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Audi",
       "model": "A6 e-tron",
       "trim": "Premium Plus quattro",
@@ -11796,7 +11796,7 @@
         "frunkCubicFeet": 1
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.6,
       "links": {
         "manufacturerSpec": "https://www.audiusa.com/en/models/a6-e-tron/a6-sportback-e-tron/2027/overview/",
         "review": "https://www.edmunds.com/audi/a6-sportback-e-tron/2027/features-specs/",

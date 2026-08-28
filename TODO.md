@@ -1232,13 +1232,13 @@ Watch for the trap that recurred three times in the 0-60 batch: **figures quoted
 different variant of the same model.** Ground clearance is especially prone to it because
 adaptive/air suspension quotes a range, and off-road packages raise it.
 
-### Batch A — Audi (9 records, 6 models)
-- [ ] Q4 e-tron — Premium 45, Premium Plus 55 quattro
-- [ ] Q6 e-tron — Premium quattro
-- [ ] Q8 e-tron — Premium quattro
-- [ ] SQ6 e-tron — Premium quattro
-- [ ] e-tron GT — S Premium Plus quattro, RS performance
-- [ ] A6 e-tron — Premium, Premium Plus quattro
+### Batch A — Audi (9 records, 6 models) — DONE, 9/9
+- [x] Q4 e-tron — Premium 45, Premium Plus 55 quattro — **7.1 in** (180 mm, standard suspension)
+- [x] Q6 e-tron — Premium quattro — **7.2 in** (184 mm, standard suspension)
+- [x] Q8 e-tron — Premium quattro — **6.9 in** (176 mm, air suspension default height)
+- [x] SQ6 e-tron — Premium quattro — **6.5 in** (164 mm, sport suspension)
+- [x] e-tron GT — S Premium Plus quattro, RS performance — **4.9 in** (125 mm, air suspension base height)
+- [x] A6 e-tron — Premium, Premium Plus quattro — **5.6 in** (143 mm, standard suspension)
 
 ### Batch B — BMW (8 records, 5 models)
 - [ ] i4 — eDrive40, M60 xDrive
@@ -1282,4 +1282,46 @@ Air-suspension cars should end up `"N/A"`, not `null` — that distinction alrea
 data for 8 records.
 
 ## Results
-_(appended per batch)_
+
+### Batch A — Audi (2026-08-28): 9 of 9 filled
+
+Every Audi record closed. The batch went better than the "expect a partial close" warning
+predicted, but not via the sources that warning assumed.
+
+**Sources.** Edmunds, KBB and US News all 403 the fetcher, and Audi's own US press-site PDFs
+(`media.audiusa.com/assets/...TechnicalSpecifications.pdf`) extract to nothing but the logo —
+they are image-rendered, not text. What worked instead were two independent EV spec databases,
+[electrichasgoneaudi.net](https://electrichasgoneaudi.net/models/q6-e-tron/specifications/) and
+[EVKX.net](https://evkx.net/models/audi/q6_e-tron/q6_e-tron/), which publish ground clearance
+per *suspension type* rather than per trim — exactly the axis that actually moves this number.
+Every figure below is corroborated across both, plus a third source where noted. The one
+official source that did work was
+[audi.com's Q8 e-tron chassis page](https://www.audi.com/en/the-audi-q8-e-tron-until-2025-15069/a-high-level-of-driving-fun-and-comfort-chassis-and-steering-15074),
+which states the 176 mm default directly.
+
+**Ground clearance varies by suspension, not by trim.** That is the useful finding for the
+remaining batches. For every Audi the figure is fixed by which of standard / sport / adaptive
+air is fitted, so the research question per record is "which suspension does this US trim ship
+with?", not "what is this trim's ground clearance?". Checked per record rather than assumed:
+
+- Q4 e-tron Premium 45 and Premium Plus 55 quattro both ship standard suspension (180 mm); the
+  165 mm sport setup only arrives with the S line package, which neither record represents.
+- A6 e-tron Premium and Premium Plus quattro both ship standard suspension (143 mm). Adaptive
+  air is optional on Premium Plus and only becomes standard at Prestige (and on the S6), so
+  neither of these records gets the 105–145 mm air figure.
+- SQ6 e-tron gets sport suspension as standard equipment — hence 6.5 in, *lower* than the Q6
+  it is derived from. That inversion is real, not a transcription slip.
+
+**Air-suspension cars got numbers, not `"N/A"`.** The eight existing `"N/A"` ground clearance
+records are all wide-range off-road adjustable (Rivian, Hummer, Lucid Gravity, Silverado EV
+RST) with no meaningful single height. None of the three air-sprung Audis here are that case:
+the Q8 e-tron has an Audi-published 176 mm default (raised +35 mm in off-road mode, +15 mm
+beyond that), and the e-tron GT's 125 mm is consistently reported as its base height across
+sources with 165 mm as the raised limit. This matches how the dataset already treats air-sprung
+cars that publish a nominal — Lucid Air at 4.9 in, Porsche Taycan at 5.0 in, Macan at 7.3 in.
+
+**Not repeated from the 0-60 batch:** no figure here was taken from a different body style of
+the same nameplate. The spec databases list Sportback and Avant variants alongside the ones we
+carry, and the A6 in particular publishes an Avant-wagon figure — an earlier pass had already
+left this record null for exactly that reason. All values above are the Sportback/SUV figures
+matching the records we hold.
