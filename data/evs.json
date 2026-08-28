@@ -1736,7 +1736,7 @@
       "performance": {
         "zeroTo60Sec": 5.7,
         "horsepowerHp": 365,
-        "topSpeedMph": null
+        "topSpeedMph": 118
       },
       "charging": {
         "portType": "CCS1",
@@ -1821,7 +1821,7 @@
       "performance": {
         "zeroTo60Sec": 5.1,
         "horsepowerHp": 515,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -1912,7 +1912,7 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
@@ -2000,7 +2000,7 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 275 }
       },
       "techFeatures": {
@@ -2756,7 +2756,7 @@
       "id": "chevrolet-silverado-ev-2026-wt-standard-range",
       "url": "https://evcompare.org/2026/silverado-ev/wt-standard-range/",
       "catalogId": 32,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Chevrolet",
       "model": "Silverado EV",
       "trim": "WT (Standard Range)",
@@ -2793,7 +2793,7 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -2844,7 +2844,7 @@
       "id": "chevrolet-silverado-ev-2026-rst-max-range",
       "url": "https://evcompare.org/2026/silverado-ev/rst-max-range/",
       "catalogId": 33,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Chevrolet",
       "model": "Silverado EV",
       "trim": "RST (Max Range)",
@@ -2881,7 +2881,7 @@
         "maxDcKw": 350,
         "level2Kw": 19.2,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,

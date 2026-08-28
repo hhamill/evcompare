@@ -1688,19 +1688,33 @@ EQE SUV 500, EQS SUV 580 and CLA records already in the dataset — the file sto
 evspecifications' Mercedes catalogue is thin and EU-only: no EQE SUV, EQS SUV, G-Class or EQB
 250+. Those four came from manufacturer and US press sources instead.
 
-### Batch B — Cadillac, Chevrolet (12 records)
-- [ ] 2026 Cadillac Escalade IQ — Luxury AWD · _top speed_
-- [ ] 2026 Cadillac Escalade IQ — Premium Sport AWD · _top speed_
-- [ ] 2025 Cadillac Lyriq — Luxury RWD · _top speed_
-- [ ] 2025 Cadillac Lyriq — Sport AWD · _top speed_
-- [ ] 2025 Cadillac Optiq — Luxury AWD · _heat pump_
-- [ ] 2025 Cadillac Optiq — Sport AWD · _heat pump_
-- [ ] 2026 Chevrolet Blazer EV — LT FWD · _top speed_
-- [ ] 2026 Chevrolet Blazer EV — LT AWD · _top speed_
-- [ ] 2026 Chevrolet Equinox EV — LT FWD · _top speed_
-- [ ] 2026 Chevrolet Equinox EV — RS AWD · _top speed_
-- [ ] 2026 Chevrolet Silverado EV — WT (Standard Range) · _heat pump_
-- [ ] 2026 Chevrolet Silverado EV — RST (Max Range) · _heat pump_
+### Batch B — Cadillac, Chevrolet (12 records) — 6/12
+- [ ] 2026 Cadillac Escalade IQ — Luxury AWD · _top speed_ — **not published**
+- [ ] 2026 Cadillac Escalade IQ — Premium Sport AWD · _top speed_ — **not published**
+- [x] 2025 Cadillac Lyriq — Luxury RWD · **118 mph**
+- [x] 2025 Cadillac Lyriq — Sport AWD · **130 mph**
+- [x] 2025 Cadillac Optiq — Luxury AWD · **heat pump true**
+- [x] 2025 Cadillac Optiq — Sport AWD · **heat pump true**
+- [ ] 2026 Chevrolet Blazer EV — LT FWD · _top speed_ — **not published**
+- [ ] 2026 Chevrolet Blazer EV — LT AWD · _top speed_ — **not published**
+- [ ] 2026 Chevrolet Equinox EV — LT FWD · _top speed_ — **not published**
+- [ ] 2026 Chevrolet Equinox EV — RS AWD · _top speed_ — **not published**
+- [x] 2026 Chevrolet Silverado EV — WT (Standard Range) · **heat pump true**
+- [x] 2026 Chevrolet Silverado EV — RST (Max Range) · **heat pump true**
+
+The Lyriq splits by drivetrain — **118 mph RWD against 130 mph AWD** — which is why the two
+records were looked up separately rather than one figure copied across. Confirmed against a US
+source as well as evspecifications.
+
+All four heat pumps are `true` for the same reason: **GM's Ultium Energy Recovery system, a
+patented heat pump, is standard across the platform**, which covers the Optiq and both Silverado
+EVs. That is a platform fact rather than a per-trim one, so it is safe to apply across GM Ultium
+records — but it was confirmed per model, and it should not be extended to the Hummer without
+checking, since the Hummer was the first Ultium vehicle and may predate the system.
+
+**GM does not publish top speed.** Neither evspecifications, Edmunds, KBB nor Chevrolet's own
+pages carry it for the Blazer EV, Equinox EV or Escalade IQ. The figures that circulate come from
+simulation sites, not the manufacturer, so those six stay null.
 
 ### Batch C — Audi, GMC (9 records)
 - [ ] 2025 Audi Q8 e-tron — Premium quattro · _heat pump_
