@@ -1212,3 +1212,74 @@ verification that didn't happen.
       a different route than the other batches used.
 - [ ] Then add Pickup 3X and SUV 3X for MY2026, with `range.epaMiles: "Pending"`, keeping the
       MY2025 records — both years genuinely exist and the 2025 ones are correctly sourced.
+
+# TODO: Ground clearance research batch — 49 nulls (2026-08-28, in progress)
+
+Picked over the heat-pump gap (56 null) because it's far more concentrated — Audi 9, BMW 8,
+Mercedes 8 is half the batch in three makes — and because it's a published number rather than a
+boolean that spec sheets routinely omit.
+
+**49 nulls across 31 distinct models.** Ground clearance rarely varies by trim within a model,
+so one lookup usually closes several records — but confirm that per model rather than assuming
+it (an air-suspension or off-road variant can differ, and 8 records are already correctly
+`"N/A"` for exactly that reason).
+
+Same sourcing rules as the 0-60 batch: a reliable US-spec figure for that model year, no
+borrowing across model years or from EU-spec pages (which quote mm and sometimes a different
+suspension setting). Leave `null` and note what was searched if nothing solid turns up.
+
+Watch for the trap that recurred three times in the 0-60 batch: **figures quoted for a
+different variant of the same model.** Ground clearance is especially prone to it because
+adaptive/air suspension quotes a range, and off-road packages raise it.
+
+### Batch A — Audi (9 records, 6 models)
+- [ ] Q4 e-tron — Premium 45, Premium Plus 55 quattro
+- [ ] Q6 e-tron — Premium quattro
+- [ ] Q8 e-tron — Premium quattro
+- [ ] SQ6 e-tron — Premium quattro
+- [ ] e-tron GT — S Premium Plus quattro, RS performance
+- [ ] A6 e-tron — Premium, Premium Plus quattro
+
+### Batch B — BMW (8 records, 5 models)
+- [ ] i4 — eDrive40, M60 xDrive
+- [ ] i5 — eDrive40, M60 xDrive
+- [ ] i7 — xDrive60
+- [ ] iX — xDrive60, M70 xDrive
+- [ ] iX3 — 50 xDrive
+
+### Batch C — Mercedes-Benz + Maybach (9 records, 5 models)
+- [ ] EQB — 250+, 350 4MATIC
+- [ ] EQE Sedan — 350+, 500 4MATIC
+- [ ] EQS Sedan — 450+, 580 4MATIC
+- [ ] CLA — 250+ w/EQ, 350 4MATIC w/EQ
+- [ ] Maybach EQS SUV — 680 4MATIC
+
+### Batch D — Hyundai + Genesis (8 records, 5 models)
+- [ ] Ioniq 9 — S RWD, Calligraphy AWD
+- [ ] Kona Electric — SE FWD, Limited FWD
+- [ ] Ioniq 5 N — N
+- [ ] Electrified G80 — Advanced AWD
+- [ ] GV60 — Standard RWD, Performance AWD
+
+### Batch E — Ford + GM (6 records, 4 models)
+- [ ] F-150 Lightning — Flash, Platinum
+- [ ] Mustang Mach-E — Premium AWD Extended Range
+- [ ] Chevrolet Bolt — LT, RS
+- [ ] GMC Sierra EV — Denali (Extended Range)
+
+### Batch F — remaining (9 records, 6 models)
+- [ ] Tesla Cybertruck — Cyberbeast
+- [ ] Tesla Model S — AWD, Plaid AWD
+- [ ] Dodge Charger Daytona — Scat Pack AWD, R/T AWD
+- [ ] Lexus ES — 350e FWD, 500e AWD
+- [ ] MINI Countryman Electric — SE ALL4
+- [ ] Porsche Taycan — Turbo S
+
+**Expect a partial close, and expect it to skew differently from the 0-60 batch.** That one
+failed on mainstream trims; this one is concentrated in German luxury, where US spec sheets
+often omit ground clearance entirely and the figures that circulate are EU-spec in millimetres.
+Air-suspension cars should end up `"N/A"`, not `null` — that distinction already exists in the
+data for 8 records.
+
+## Results
+_(appended per batch)_
