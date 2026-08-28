@@ -1716,16 +1716,30 @@ checking, since the Hummer was the first Ultium vehicle and may predate the syst
 pages carry it for the Blazer EV, Equinox EV or Escalade IQ. The figures that circulate come from
 simulation sites, not the manufacturer, so those six stay null.
 
-### Batch C — Audi, GMC (9 records)
-- [ ] 2025 Audi Q8 e-tron — Premium quattro · _heat pump_
-- [ ] 2025 Audi e-tron GT — S e-tron GT Premium Plus quattro · _heat pump_
-- [ ] 2025 Audi e-tron GT — RS e-tron GT performance · _heat pump_
-- [ ] 2027 Audi A6 e-tron — Premium · _top speed_
-- [ ] 2027 Audi A6 e-tron — Premium Plus quattro · _top speed_
-- [ ] 2025 GMC Hummer EV Pickup — 3X · _heat pump_
-- [ ] 2026 GMC Sierra EV — Elevation (Standard Range) · _heat pump_
-- [ ] 2026 GMC Sierra EV — Denali (Extended Range) · _heat pump_
-- [ ] 2025 GMC Hummer EV SUV — 3X · _heat pump + top speed_
+### Batch C — Audi, GMC (9 records) — 8/9
+- [x] 2025 Audi Q8 e-tron — Premium quattro · **heat pump true**
+- [x] 2025 Audi e-tron GT — S e-tron GT Premium Plus quattro · **heat pump true**
+- [x] 2025 Audi e-tron GT — RS e-tron GT performance · **heat pump true**
+- [x] 2027 Audi A6 e-tron — Premium · **130 mph**
+- [x] 2027 Audi A6 e-tron — Premium Plus quattro · **130 mph**
+- [x] 2025 GMC Hummer EV Pickup — 3X · **heat pump true**
+- [x] 2026 GMC Sierra EV — Elevation (Standard Range) · **heat pump true**
+- [x] 2026 GMC Sierra EV — Denali (Extended Range) · **heat pump true**
+- [~] 2025 GMC Hummer EV SUV — 3X · **heat pump true**, top speed **not published**
+
+evspecifications was no help for Audi either — its catalogue stops at the Q4 e-tron and the old
+e-tron, with no Q8 e-tron, e-tron GT or A6 e-tron. All five Audi values came from Audi instead:
+the technology portal states the e-tron GT's heat pump is standard equipment, and Audi USA lists
+the Q8 e-tron's climate control as including one.
+
+The A6's two top speeds were looked up separately rather than shared, since the records are
+different drivetrains — both land on the same 130 mph electronic cap, but that is now a checked
+fact rather than an assumption.
+
+**The Hummer question resolved on a platform fact.** GM's Ultium Energy Recovery system — a
+patented heat pump — launched *with* the Hummer EV, so the earlier caution about it predating the
+system was unfounded. All four GMC heat pumps are `true`. GM still publishes no top speed, so the
+Hummer SUV's stays null.
 
 ### Batch D — Genesis, Hyundai, Kia (10 records)
 - [ ] 2025 Genesis Electrified G80 — Advanced AWD · _heat pump_

@@ -496,7 +496,7 @@
         "maxDcKw": null,
         "level2Kw": null,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
@@ -674,7 +674,7 @@
         "maxDcKw": 320,
         "level2Kw": null,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
@@ -763,7 +763,7 @@
         "maxDcKw": 320,
         "level2Kw": null,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
@@ -3676,7 +3676,7 @@
         "maxDcKw": 350,
         "level2Kw": 19.2,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3727,7 +3727,7 @@
       "id": "gmc-sierra-ev-2026-elevation-standard-range",
       "url": "https://evcompare.org/2026/sierra-ev/elevation-standard-range/",
       "catalogId": 43,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "GMC",
       "model": "Sierra EV",
       "trim": "Elevation (Standard Range)",
@@ -3764,7 +3764,7 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3851,7 +3851,7 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -11490,7 +11490,7 @@
         "maxDcKw": 300,
         "level2Kw": 19.2,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -11658,7 +11658,7 @@
       "performance": {
         "zeroTo60Sec": 5.2,
         "horsepowerHp": 375,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -11748,7 +11748,7 @@
       "performance": {
         "zeroTo60Sec": 4.3,
         "horsepowerHp": 466,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
