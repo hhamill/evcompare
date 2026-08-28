@@ -1518,3 +1518,41 @@ Two deliberate properties:
 records were filled by hand with `set-spec`. Making `fetch-epa` write back would fix the field
 permanently and surface any drift between stored and cached values, but it would touch every
 record that cites an EPA id, so it belongs in its own change rather than a flag cleanup.
+
+## epaSizeClass write-back (2026-08-28)
+
+`data/SCHEMA.md` described `epaSizeClass` as GENERATED and told you to run `npm run fetch-epa`,
+but that script only ever wrote `scripts/epa-cache.json` — nothing put the value into
+`data/evs.json`. The field was hand-filled once during the EPA reconciliation pass and had no way
+to stay current. Now `fetch-epa` does the write-back, so the documentation is true and the field
+regenerates from the cache on every run.
+
+**The first run confirmed all 125 records that cite an EPA id were already correct** — 0 filled,
+0 changed. That is the useful result: the field was right, and it is now *checked* rather than
+assumed.
+
+Behaviour worth knowing:
+
+- **EPA is the source of truth.** A stored value that disagrees is overwritten, and every change
+  is printed under a heading that says why you should care — a size class moving means either an
+  EPA reclassification or a record pointed at the wrong vehicle.
+- **A record with no cached EPA entry is never cleared.** It is reported as "not derivable"
+  instead. Clearing would have wiped the Volvo EX60 P6, which legitimately cites Volvo rather
+  than fueleconomy.gov (EPA has no entry for its wheel package) while still having a known size
+  class. Reporting keeps a value the generator cannot vouch for visible rather than quietly
+  trusted. That record's `notes` now records where its class came from (EPA id 50697 — size class
+  is a property of the vehicle, not the wheel package).
+- `--dry-run` previews without writing. `lastVerifiedDate` bumps only on records that actually
+  change, so a no-op run doesn't churn 125 sitemap dates.
+- Line surgery rather than parse-and-stringify, for the same reason as `sync-urls.mjs` and
+  `set-spec.mjs`: `data/evs.json` is hand-formatted (indentation isn't even uniform between
+  sibling keys) and reserialising would reflow 400KB into an unreadable diff.
+
+Verified by injecting both failure modes — one record set to `null`, another to a deliberately
+wrong `"Minivan"` — and confirming the run filled the first, corrected the second, listed them
+under separate headings, and left the file byte-identical to the pre-test snapshot.
+
+**Still 23 records with `epaSizeClass: null`**, and the generator can't help: they cite no EPA id
+at all (Rivian, Cadillac, VW ID.4, Honda Prologue, Porsche Cayenne Electric, Tesla Cybertruck and
+Model Y L, and others). Backfilling those ids is its own task — it would also extend the audit's
+model-year and EPA-range checks to cover them, which is the bigger prize.

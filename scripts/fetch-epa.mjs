@@ -15,6 +15,15 @@
 // Cached to scripts/ rather than data/ because data/ is published to the site; this is
 // build-time reference material, not part of the dataset. Committing it keeps the audit
 // runnable offline and records what EPA said, and when.
+//
+// The cache is then written back into data/evs.json as each record's `epaSizeClass`, which is
+// what makes that field genuinely GENERATED rather than a one-off hand-fill that silently rots.
+// EPA is the source of truth for it, so a stored value that disagrees is overwritten — but every
+// such change is printed, because a size class moving is either an EPA reclassification or a
+// record pointed at the wrong vehicle, and both deserve a look.
+//
+// Flags: --refresh re-fetches every id instead of trusting the cache.
+//        --dry-run reports what the write-back would do without touching data/evs.json.
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import https from "node:https";
 import path from "node:path";
@@ -22,7 +31,10 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const CACHE = path.join(ROOT, "scripts", "epa-cache.json");
+const EVS = path.join(ROOT, "data", "evs.json");
 const REFRESH = process.argv.includes("--refresh");
+const DRY_RUN = process.argv.includes("--dry-run");
+const TODAY = new Date().toISOString().slice(0, 10);
 const DELAY_MS = 200;   // be a polite guest on a government server
 
 const get = url => new Promise((resolve, reject) => {
@@ -108,4 +120,61 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   writeFileSync(CACHE, JSON.stringify(cache, null, 2) + "\n");
   console.log(`\nfetched ${ok}, cached ${Object.keys(cache).length} total -> scripts/epa-cache.json`);
   if (failed.length) { console.log(`\n${failed.length} failed:`); failed.forEach(f => console.log("  " + f)); }
+
+  // ---- write epaSizeClass back into data/evs.json -------------------------------------------
+  //
+  // Line surgery rather than parse-and-stringify: data/evs.json is hand-formatted (indentation is
+  // not even uniform between sibling keys) and reserialising would reflow 400KB into an unreadable
+  // diff. Same reasoning, and same technique, as scripts/sync-urls.mjs and scripts/set-spec.mjs.
+  const raw = readFileSync(EVS, "utf8");
+  const lines = raw.split("\n");
+
+  // Record boundaries: an id line starts a record and runs until the next one.
+  const starts = [];
+  lines.forEach((l, i) => {
+    const m = l.match(/^      "id": "([^"]+)",$/);
+    if (m) starts.push({ id: m[1], from: i });
+  });
+  starts.forEach((r, k) => (r.to = k + 1 < starts.length ? starts[k + 1].from - 1 : lines.length - 1));
+
+  const byRecord = new Map(targets.map(t => [t.recordId, t.epaId]));
+  const set = [], changed = [], unbacked = [];
+  let unchanged = 0;
+
+  for (const r of starts) {
+    const entry = cache[byRecord.get(r.id)];
+    const idx = (() => {
+      for (let i = r.from; i <= r.to; i++) if (/^\s*"epaSizeClass":/.test(lines[i])) return i;
+      return -1;
+    })();
+    if (idx === -1) continue;                         // record predates the field; leave it alone
+    const current = JSON.parse(`{${lines[idx].trim().replace(/,$/, "")}}`).epaSizeClass;
+
+    // No cached EPA entry means nothing to derive from. Never clear a value on that basis — the
+    // EX60 P6 legitimately cites Volvo rather than EPA (fueleconomy.gov has no entry for its wheel
+    // package) while still having a known size class. Report those instead, so a value the
+    // generator cannot vouch for is visible rather than quietly trusted.
+    if (!entry) { if (current != null) unbacked.push(`${r.id} (${current})`); continue; }
+
+    const want = shortSizeClass(entry.vclass);        // throws on an unmapped class, deliberately
+    if (current === want) { unchanged++; continue; }
+    (current == null ? set : changed).push(`${r.id}: ${JSON.stringify(current)} -> ${JSON.stringify(want)}`);
+
+    const m = lines[idx].match(/^(\s*)"epaSizeClass": .*?(,?)$/);
+    lines[idx] = `${m[1]}"epaSizeClass": ${JSON.stringify(want)}${m[2]}`;
+    for (let i = r.from; i <= r.to; i++) {            // filling a generated field is a verification event
+      const d = lines[i].match(/^(\s*)"lastVerifiedDate": ".*?"(,?)$/);
+      if (d) { lines[i] = `${d[1]}"lastVerifiedDate": ${JSON.stringify(TODAY)}${d[2]}`; break; }
+    }
+  }
+
+  const report = (label, list) => { if (list.length) { console.log(`\n${label} (${list.length}):`); list.forEach(x => console.log("  · " + x)); } };
+  console.log(`\nepaSizeClass: ${unchanged} already correct, ${set.length} filled, ${changed.length} changed, ${unbacked.length} not derivable`);
+  report("filled", set);
+  report("CHANGED — EPA reclassified, or the record cites the wrong vehicle. Check these", changed);
+  report("no cached EPA entry, so left as-is and unverifiable from EPA", unbacked);
+
+  if (set.length + changed.length === 0) console.log("\ndata/evs.json unchanged.");
+  else if (DRY_RUN) console.log("\n--dry-run: data/evs.json NOT written.");
+  else { writeFileSync(EVS, lines.join("\n")); console.log(`\nwrote ${set.length + changed.length} record(s) -> data/evs.json (run: npm run sync-urls && npm run prerender)`); }
 }

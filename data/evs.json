@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:970946ebac830de57df6927c1f60ae812d6cb12f8da1331beaaea6202820c842",
+  "hash": "sha256:847e9f7b9f99e8b10196f6c6869daa14614f48b9d314ac7c2deeaea0c133f7ef",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -11094,7 +11094,7 @@
         "review": "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review",
         "epaWindowSticker": "https://www.volvocars.com/us/cars/ex60-electric/specifications/"
       },
-      "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus; leather (Nappa) and ventilated seats are Ultra-trim/option items. Heated rear seats and built-in rear booster cushions are Ultra-trim features, not standard on Plus. Battery warranty is 10 years to 80% capacity (no mileage cap published). Range sourced to Volvo rather than fueleconomy.gov: EPA has published only one EX60 P6 entry, the 22-inch-wheel configuration at 295mi (id 50697), and this record is the standard 20/21-inch car that Volvo rates at 307mi."
+      "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus; leather (Nappa) and ventilated seats are Ultra-trim/option items. Heated rear seats and built-in rear booster cushions are Ultra-trim features, not standard on Plus. Battery warranty is 10 years to 80% capacity (no mileage cap published). Range sourced to Volvo rather than fueleconomy.gov: EPA has published only one EX60 P6 entry, the 22-inch-wheel configuration at 295mi (id 50697), and this record is the standard 20/21-inch car that Volvo rates at 307mi. epaSizeClass is EPA's class for that same id 50697 — size class is a property of the vehicle, not of the wheel package — so it holds here, but npm run fetch-epa cannot regenerate it and reports this record as not derivable."
     },
     {
       "id": "volvo-ex60-2027-p10-awd-plus",
