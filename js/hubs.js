@@ -140,6 +140,44 @@ const PRACTICAL_HUBS = [
     },
   },
   {
+    slug: "small-electric-suvs",
+    noun: "small electric SUVs",
+    h1: "Small electric SUVs",
+    title: "Small Electric SUVs — Every Model Compared",
+    blurb: "Compact electric SUVs and crossovers, sized by the EPA rather than by marketing.",
+    match: c => c.epaSizeClass === "Small SUV",
+    highlight: "epaRange", order: "desc",
+    determines: [],
+    intro: (cars, total) => {
+      const r = extreme(cars, "epaRange", "desc"), p = extreme(cars, "msrp", "asc");
+      return `${cars.length} of the ${total} EVs we track fall in the EPA's Small Sport Utility Vehicle class.`
+        + ` That's the agency's own sizing, not ours — the same figure on every window sticker.`
+        + (r ? ` The longest-range is the ${name(r.car)} at ${r.text}.` : "")
+        + (p ? ` The most affordable starts at ${p.text}.` : "");
+    },
+  },
+  {
+    // EPA gives SUVs exactly two classes, Small and Standard, so "Standard" means midsize and
+    // up rather than full-size specifically. Titled "Larger" to avoid overclaiming: the class
+    // holds an Audi Q4 e-tron alongside an Escalade IQ.
+    slug: "large-electric-suvs",
+    noun: "larger electric SUVs",
+    h1: "Larger electric SUVs",
+    title: "Large & Midsize Electric SUVs — Every Model Compared",
+    blurb: "The electric SUVs the EPA classes above its Small category — midsize through full-size.",
+    match: c => c.epaSizeClass === "Standard SUV",
+    highlight: "epaRange", order: "desc",
+    determines: [],
+    intro: (cars, total) => {
+      const r = extreme(cars, "epaRange", "desc"), s3 = cars.filter(c => c.isThreeRow).length;
+      return `${cars.length} of the ${total} EVs we track sit in the EPA's Standard Sport Utility Vehicle`
+        + ` class — everything it doesn't call Small, so midsize through full-size rather than`
+        + ` full-size alone.`
+        + (s3 ? ` ${s3} of them seat three rows.` : "")
+        + (r ? ` The longest-range is the ${name(r.car)} at ${r.text}.` : "");
+    },
+  },
+  {
     // Deliberately scoped to the physical connector, not "Supercharger access": whether a
     // given car can use every Supercharger stall also depends on per-brand network
     // agreements, which this dataset doesn't track and shouldn't imply.
