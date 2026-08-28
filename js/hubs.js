@@ -198,7 +198,7 @@ const BODY_MIN = 5;   // Minivan (2) and Van (1) fall out; their cars are covere
 
 const slugify = str => String(str).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 const plural = { SUV: "SUVs", Sedan: "sedans", Truck: "trucks", Hatchback: "hatchbacks",
-                 Crossover: "crossovers", Minivan: "minivans", Van: "vans" };
+                 Coupe: "coupes", Minivan: "minivans", Van: "vans" };
 
 function groupBy(cars, key) {
   const out = new Map();

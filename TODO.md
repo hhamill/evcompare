@@ -771,11 +771,16 @@ Note it resolves the exact case in dispute: EX30 and Mach-E land in the *same* c
       stripped since that isn't size. Distribution: 43 Small SUV, 35 Standard SUV, 11 Large
       Cars, 9 Midsize, 8 Compact, 7 Standard Pickup, 4+2 Station Wagons, 3 Special Purpose,
       2 Subcompact, 2 Minivan.
-- [ ] Merge `Crossover` → `SUV` in `bodyStyle` (6 records). Keep `bodyStyle` as the *shape*
-      taxonomy — it drives the silhouettes, which are shape-based not size-based — and let
-      `epaSizeClass` carry size as a separate facet. Filtering then supports "SUV" + "Small",
-      which is what people actually shop for.
-- [ ] Drop the `Crossover` body-style hub and add size-class filtering/hubs once the field exists.
+- [x] **Done 2026-08-28 — and it wasn't a blind merge.** EPA classes split the six: EV6 ×2 and
+      EC40 ×2 are *Small Sport Utility Vehicle* → **SUV**, but both Leafs are *Small Station
+      Wagon*, which is what our existing Hatchback records map to → **Hatchback**. Counts went
+      SUV 95→99, Hatchback 9→11, Crossover 6→0.
+- [x] Crossover hub dropped (it fell out automatically — `buildHubs` requires ≥5 records).
+      `/electric-crossovers/` is retired; sitemap 186→185.
+- [ ] **Still to do: size-class filtering and hubs from `epaSizeClass`.** The field is populated
+      and the merge is done, so this is unblocked. It's what makes the SUV bucket usable —
+      99 of 149 records are "SUV", spanning an EX30 to an Escalade IQ, and `epaSizeClass`
+      already splits that 39 Small / 35 Standard.
 
 **Caveat to accept going in:** EPA gives only two SUV tiers (Small / Standard), not
 small/mid/large. That's coarser than ideal but it is authoritative, citable, needs no judgment
