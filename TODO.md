@@ -1247,19 +1247,19 @@ adaptive/air suspension quotes a range, and off-road packages raise it.
 - [x] iX — xDrive60, M70 xDrive — **8.8 in** both
 - [x] iX3 — 50 xDrive **6.9 in**
 
-### Batch C — Mercedes-Benz + Maybach (9 records, 5 models) — 3/9, rest blocked
-- [ ] EQB — 250+, 350 4MATIC — **no reliable figure**, see below
-- [ ] EQE Sedan — 350+, 500 4MATIC — **no reliable figure**, see below
+### Batch C — Mercedes-Benz + Maybach (9 records, 5 models) — 3/9, rest unpublished
+- [ ] EQB — 250+, 350 4MATIC — **not published in US data**, confirmed
+- [ ] EQE Sedan — 350+, 500 4MATIC — **not published in US data**, confirmed
 - [x] EQS Sedan — 450+, 580 4MATIC — **4.8 in** both
-- [ ] CLA — 250+ w/EQ, 350 4MATIC w/EQ — **no reliable figure**, see below
+- [ ] CLA — 250+ w/EQ, 350 4MATIC w/EQ — **not published in US data**, confirmed
 - [x] Maybach EQS SUV — 680 4MATIC — **7.3 in**
 
-### Batch D — Hyundai + Genesis (8 records, 5 models) — 1/8, interrupted
-- [ ] Ioniq 9 — S RWD, Calligraphy AWD — SEL AWD reads 6.9 in; **our two trims not yet checked**
-- [ ] Kona Electric — SE FWD, Limited FWD — SEL reads 5.9 in; **our two trims not yet checked**
+### Batch D — Hyundai + Genesis (8 records, 5 models) — 6/8
+- [x] Ioniq 9 — S RWD, Calligraphy AWD — **6.9 in** both (S, SE, SEL and Calligraphy all read 6.9)
+- [x] Kona Electric — SE FWD, Limited FWD — **5.9 in** both (all four trims read 5.9)
 - [x] Ioniq 5 N — N — **5.6 in** (single trim, read directly)
-- [ ] Electrified G80 — Advanced AWD — wrong Edmunds slug, not yet found
-- [ ] GV60 — Standard RWD, Performance AWD — Edmunds has no ground clearance row for the GV60
+- [x] Electrified G80 — Advanced AWD — **5.5 in** (2024 MY page, the last Edmunds carries; same car)
+- [ ] GV60 — Standard RWD, Performance AWD — **not published in US data**, confirmed
 
 **Resume here.** Edmunds began returning 403 partway through this batch, so it was stopped
 rather than pushed. The two "reads N in" figures above are for *adjacent trims we do not
@@ -1267,19 +1267,19 @@ carry* and must not be copied across — that is precisely the drift this audit 
 Re-check `st-402040674`/`st-402040677` (Kona SE/Limited) and the Ioniq 9 S and Performance
 Calligraphy style ids, confirming the trim from each page's `<title>` before writing.
 
-### Batch E — Ford + GM (6 records, 4 models)
-- [ ] F-150 Lightning — Flash, Platinum
-- [ ] Mustang Mach-E — Premium AWD Extended Range
-- [ ] Chevrolet Bolt — LT, RS
-- [ ] GMC Sierra EV — Denali (Extended Range)
+### Batch E — Ford + GM (6 records, 4 models) — DONE, 6/6
+- [x] F-150 Lightning — Flash, Platinum — **8.4 in** both
+- [x] Mustang Mach-E — Premium AWD Extended Range — **5.7 in**
+- [x] Chevrolet Bolt — LT, RS — **5.6 in** both
+- [x] GMC Sierra EV — Denali (Extended Range) — **8.2 in** (vs the Elevation's 8.1)
 
-### Batch F — remaining (9 records, 6 models)
-- [ ] Tesla Cybertruck — Cyberbeast
-- [ ] Tesla Model S — AWD, Plaid AWD
-- [ ] Dodge Charger Daytona — Scat Pack AWD, R/T AWD
-- [ ] Lexus ES — 350e FWD, 500e AWD
-- [ ] MINI Countryman Electric — SE ALL4
-- [ ] Porsche Taycan — Turbo S
+### Batch F — remaining (9 records, 6 models) — 7/9
+- [x] Tesla Cybertruck — Cyberbeast — **8.0 in**
+- [x] Tesla Model S — AWD, Plaid AWD — **4.6 in** both
+- [x] Dodge Charger Daytona — R/T **5.5 in**, Scat Pack **5.6 in** (Dodge's own spec sheet)
+- [ ] Lexus ES — 350e FWD, 500e AWD — **not published yet**, brand-new model
+- [x] MINI Countryman Electric — SE ALL4 — **7.4 in**
+- [x] Porsche Taycan — Turbo S — **4.9 in** (vs the base car's 5.0)
 
 **Expect a partial close, and expect it to skew differently from the 0-60 batch.** That one
 failed on mainstream trims; this one is concentrated in German luxury, where US spec sheets
@@ -1381,22 +1381,67 @@ CLA — it has one for the EQS, which is why those two closed), KBB, US News, an
 USA's own press site, whose EQ releases give length/width/height but no ground clearance. The
 closest MBUSA gets is prose: AIRMATIC "can be raised by up to 1 inch," with no baseline stated.
 
-### Batch D — Hyundai + Genesis (2026-08-28): 1 of 8, stopped early
+### Batches D, E and F (2026-08-28): 26 of 32 filled
 
-Ioniq 5 N filled at **5.6 in** — a single-trim record, read straight off its own page.
+Edmunds recovered after a cool-off and the rest of the crawl ran at a deliberately slower
+pace — a wait between every navigation, and a settle delay before reading. Both turned out to
+matter (see below). Values are listed against each batch's checklist above.
 
-Edmunds started returning 403 on the fourth model in this batch, so the crawl was stopped
-rather than hammered. Nothing was written from the partial reads: the Ioniq 9 figure in hand is
-the SEL AWD and the Kona figure is the SEL, and this dataset carries neither of those trims.
-The Genesis GV60 has no ground clearance row on Edmunds at all, and the Electrified G80's
-Edmunds slug is not `electrified-g80` — that needs looking up from the make index.
+**Read each trim's own page, never the model default.** The trim-level differences here are
+real: the Sierra EV Denali is 8.2 in against the Elevation's 8.1; the Cybertruck Dual Motor is
+10.0 in against 8.0 for the Base, Premium and Cyberbeast; the Taycan Turbo S is 4.9 in against
+the base car's 5.0. Where a figure *is* uniform, that was established by reading the trims
+rather than assuming — all four Kona Electric trims read 5.9, and the Ioniq 9 reads 6.9 across
+S, SE, SEL and Performance Calligraphy, RWD and AWD alike.
 
-**Method note for batches E and F.** Edmunds is the best source found so far (US convention,
-matches the dataset's existing figures) but it must be read through a real browser and it rate
-limits. Read the value out of the page HTML rather than the rendered text, since the
-dimensions section renders collapsed:
+**A "no such row" result is only trustworthy after the page settles.** The Sierra EV Denali read
+as having no ground clearance row on the first attempt and 8.2 in on the second — the first read
+landed before that section rendered. Every "not published" verdict below was therefore
+re-confirmed with a settle delay, checking that the Exterior Dimensions block itself was present
+(Length, Width, Height, Wheelbase all populated) and simply lacked the clearance row.
+
+**Edmunds mechanics worth keeping.** Style ids do not follow trim listing order — `st-402097385`
+is the i4 M60, not the eDrive40 — but the page's trim `<select>` carries the id-to-trim mapping
+directly, which beats probing ids one at a time. Read the value out of the HTML rather than the
+rendered text, since the dimensions section renders collapsed:
 
     /Ground clearance<\/th><td[^>]*>([^<]+)/
 
-Always print `document.title` alongside the value — style ids do not reliably follow trim
-listing order.
+Always print `document.title` alongside the value to confirm which trim answered. Edmunds rate
+limits to a 403 after roughly fifteen to twenty requests in quick succession; it clears on its
+own, and pacing avoids it entirely. Slugs that cost a 404 before being found: `mercedes-benz/eqb`
+(not `eqb-class`), `mercedes-benz/cla`, `chevrolet/bolt` (not `bolt-ev`), `dodge/charger` (not
+`charger-daytona`), `mini/countryman` (the electric SE ALL4 is a trim inside it, not its own
+model), `genesis/electrified-g80/2024` (no current-year page).
+
+**Dodge came from Dodge.** Edmunds, KBB, JD Power and cars.com all lack a ground clearance row
+for the Charger Daytona — cars.com renders it as a literal "N/A". The official Stellantis spec
+sheet has it, and its PDF is real text, so it was decompressed and read directly: a two-column
+table headed `R/T` and `SCAT PACK` with `Ground Clearance 5.5 (141.3) 5.6 (142.8)`. That is the
+2024 preliminary sheet; the 2025 sheet carries the same pair and the car is unchanged.
+
+**A conflict that resolved cleanly.** The MINI Countryman SE ALL4 had three figures in
+circulation: 7.4 in, 6.7 in (170 mm) and 5.8 in. JD Power and Edmunds independently give 7.4 in
+for exactly this trim; the 170 mm is the European car with Adaptive M suspension, and the 5.8
+traces to nothing. Two US sources on the right trim beat two aggregator figures on the wrong one.
+
+### Still open: 10 records, and the reason is the same for all of them
+
+- **Genesis GV60** (Standard RWD, Performance AWD) — no row on Edmunds, and cars.com renders
+  "Min Ground Clearance" as "N/A". The 160 mm figure that circulates is EU/AU spec.
+- **Lexus ES 350e / 500e** — no row on Edmunds for either electric trim. Brand-new model; the
+  figure does not appear to be published yet. (Note while here: Edmunds carries these as **2026**
+  and this dataset records them as **2027** — worth a look in its own right.)
+- **Mercedes-Benz EQB, EQE Sedan, CLA with EQ Technology** (2 records each) — Mercedes does not
+  publish a US figure, Edmunds has no row for any of the three, KBB and US News have nothing, and
+  MBUSA's own press releases give length/width/height but no ground clearance. The aggregator
+  numbers disagree with each other (EQB 154 vs 140 mm; EQE 134 mm vs 5.5 in), and the CLA's
+  circulating ~160 mm is the **Indian-market car, which has taller springs**.
+
+These are genuine publication gaps rather than research failures, so they stay `null`. Worth
+one more pass if a manufacturer spec sheet in extractable-text form turns up — that is exactly
+what unlocked the Dodge and the BMWs.
+
+## Final tally: 39 of 49 filled
+
+Ground clearance nulls across the dataset went from 49 to 10.

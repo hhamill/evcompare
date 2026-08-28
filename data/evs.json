@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:75b200d0da7cd980193a06a2563e5b6e8d8d1d9fc930ed0c66a6a94063b4427a",
+  "hash": "sha256:244dfe082a6c6d8197aa414d7d31b9c85c0e2f00603c6ce8448ec284b9c7ee18",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -2931,7 +2931,7 @@
       "id": "dodge-charger-daytona-2025-scat-pack-awd",
       "url": "https://evcompare.org/2025/charger-daytona/scat-pack-awd/",
       "catalogId": 34,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Dodge",
       "model": "Charger Daytona",
       "trim": "Scat Pack AWD",
@@ -3007,7 +3007,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.6,
       "links": {
         "manufacturerSpec": "https://www.dodge.com/charger.html",
         "review": "https://cars.usnews.com/cars-trucks/dodge/charger-daytona",
@@ -3019,7 +3019,7 @@
       "id": "dodge-charger-daytona-2025-rt-awd",
       "url": "https://evcompare.org/2025/charger-daytona/r-t-awd/",
       "catalogId": 35,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Dodge",
       "model": "Charger Daytona",
       "trim": "R/T AWD",
@@ -3095,7 +3095,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.5,
       "links": {
         "manufacturerSpec": "https://www.dodge.com/charger.html",
         "review": "https://cars.usnews.com/cars-trucks/dodge/charger-daytona",
@@ -3899,7 +3899,7 @@
       "id": "genesis-electrified-g80-2025-advanced-awd",
       "url": "https://evcompare.org/2025/electrified-g80/advanced-awd/",
       "catalogId": 45,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Genesis",
       "model": "Electrified G80",
       "trim": "Advanced AWD",
@@ -3975,7 +3975,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.5,
       "links": {
         "manufacturerSpec": "https://www.genesis.com/us/en/electrified-g80/",
         "review": "https://www.cars.com/research/genesis-electrified_g80-2025/specs/",
@@ -6430,7 +6430,7 @@
       "id": "mini-countryman-electric-2025-se-all4",
       "url": "https://evcompare.org/2025/countryman-electric/se-all4/",
       "catalogId": 74,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "MINI",
       "model": "Countryman Electric",
       "trim": "SE ALL4",
@@ -6507,7 +6507,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 2645,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 7.4,
       "links": {
         "manufacturerSpec": "https://www.miniusa.com/model/electric-vehicles/countryman.html",
         "review": "https://www.cars.com/articles/2025-mini-countryman-se-all4-quick-spin-now-fully-electric-507768/",
@@ -8563,7 +8563,7 @@
       "id": "porsche-taycan-2025-turbo-s-awd",
       "url": "https://evcompare.org/2025/taycan/turbo-s/",
       "catalogId": 98,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Porsche",
       "model": "Taycan",
       "trim": "Turbo S",
@@ -8639,7 +8639,7 @@
         "frunkCubicFeet": 3
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://www.porsche.com/usa/models/taycan/taycan-range/",
         "review": "https://cars.usnews.com/cars-trucks/porsche/taycan/interior",
