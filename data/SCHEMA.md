@@ -31,7 +31,7 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
   "epaSizeClass": "Small SUV",  // GENERATED — EPA's own size class for this exact vehicle, from fueleconomy.gov's REST API (`/ws/rest/vehicle/{id}`, field `VClass`), keyed off the id already in `links.epaWindowSticker`. Run `npm run fetch-epa`. Values are EPA's own classes, **shortened losslessly** — a mechanical
   renaming, reversible to EPA's exact string, not a normalisation onto a size scale of our own
   (the point of using EPA is that it is sourced rather than judged). The full set is:
-  `Small SUV`, `Standard SUV`, `Subcompact Car`, `Compact Car`, `Midsize Car`, `Large Car`,
+  `Small SUV`, `Standard SUV`, `Minicompact Car`, `Subcompact Car`, `Compact Car`, `Midsize Car`, `Large Car`,
   `Small Wagon`, `Midsize Wagon`, `Standard Pickup`, `Special Purpose`, `Minivan` — matching
   the short idiom every other enum here uses (`bodyStyle`, `drivetrain`, `charging.portType`).
   The mapping lives in `SIZE_CLASS` in `scripts/fetch-epa.mjs` and **throws on an unmapped

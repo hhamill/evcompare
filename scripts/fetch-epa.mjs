@@ -58,6 +58,7 @@ const get = url => new Promise((resolve, reject) => {
 export const SIZE_CLASS = {
   "Small Sport Utility Vehicle": "Small SUV",
   "Standard Sport Utility Vehicle": "Standard SUV",
+  "Minicompact Cars": "Minicompact Car",
   "Subcompact Cars": "Subcompact Car",
   "Compact Cars": "Compact Car",
   "Midsize Cars": "Midsize Car",

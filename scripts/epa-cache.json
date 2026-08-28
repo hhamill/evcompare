@@ -295,6 +295,30 @@
     "range": 300,
     "fetchedOn": "2026-08-28"
   },
+  "48691": {
+    "year": 2025,
+    "make": "Cadillac",
+    "model": "LYRIQ",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 326,
+    "fetchedOn": "2026-08-28"
+  },
+  "48692": {
+    "year": 2025,
+    "make": "Cadillac",
+    "model": "LYRIQ AWD (11 kW Charger)",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 319,
+    "fetchedOn": "2026-08-28"
+  },
+  "48703": {
+    "year": 2025,
+    "make": "Fiat",
+    "model": "500e",
+    "vclass": "Minicompact Cars",
+    "range": 149,
+    "fetchedOn": "2026-08-28"
+  },
   "48708": {
     "year": 2025,
     "make": "Ford",
@@ -357,6 +381,14 @@
     "model": "Solterra Limited/Touring AWD",
     "vclass": "Small Sport Utility Vehicle 4WD",
     "range": 222,
+    "fetchedOn": "2026-08-28"
+  },
+  "48774": {
+    "year": 2025,
+    "make": "Volkswagen",
+    "model": "ID.4 AWD Pro S",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 263,
     "fetchedOn": "2026-08-28"
   },
   "48775": {
@@ -431,6 +463,22 @@
     "range": 287,
     "fetchedOn": "2026-08-28"
   },
+  "49090": {
+    "year": 2025,
+    "make": "Honda",
+    "model": "Prologue AWD Elite",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 283,
+    "fetchedOn": "2026-08-28"
+  },
+  "49091": {
+    "year": 2025,
+    "make": "Honda",
+    "model": "Prologue FWD",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 308,
+    "fetchedOn": "2026-08-28"
+  },
   "49093": {
     "year": 2025,
     "make": "Jeep",
@@ -453,6 +501,14 @@
     "model": "EQB 350 4matic",
     "vclass": "Small Sport Utility Vehicle 4WD",
     "range": 207,
+    "fetchedOn": "2026-08-28"
+  },
+  "49155": {
+    "year": 2025,
+    "make": "Volkswagen",
+    "model": "ID.4",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 206,
     "fetchedOn": "2026-08-28"
   },
   "49613": {
@@ -565,6 +621,22 @@
     "model": "EV9 Long Range AWD",
     "vclass": "Standard Sport Utility Vehicle 4WD",
     "range": 283,
+    "fetchedOn": "2026-08-28"
+  },
+  "49687": {
+    "year": 2026,
+    "make": "Mercedes-Benz",
+    "model": "G 580 with EQ Technology",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 239,
+    "fetchedOn": "2026-08-28"
+  },
+  "49690": {
+    "year": 2026,
+    "make": "Mercedes-Benz",
+    "model": "EQS 680 4matic Maybach (SUV)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 300,
     "fetchedOn": "2026-08-28"
   },
   "49741": {

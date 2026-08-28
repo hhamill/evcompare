@@ -1556,3 +1556,83 @@ under separate headings, and left the file byte-identical to the pre-test snapsh
 at all (Rivian, Cadillac, VW ID.4, Honda Prologue, Porsche Cayenne Electric, Tesla Cybertruck and
 Model Y L, and others). Backfilling those ids is its own task — it would also extend the audit's
 model-year and EPA-range checks to cover them, which is the bigger prize.
+
+## EPA id backfill (2026-08-28) — 9 of 24 assigned, coverage 125 -> 134 of 149
+
+An EPA id is the most load-bearing link in a record: `npm run fetch-epa` keys `epaSizeClass` off
+it, and the audit's model-year and EPA-range checks compare against it. A record without one is
+unchecked by both. 24 records were in that state.
+
+**First, a check on scope: EPA has no heat pump data.** Pulled a full vehicle record to be sure —
+the fields are MPGe, kWh/100mi, charge times, drive, motor, size class, range and CO2, with
+nothing thermal at all. Edmunds has no heat pump row either. That field needs manufacturer pages
+or an EV-specific database; evspecifications carries it (verified: "Thermal Management:
+Liquid-based coolant circulation / Updated heat pump" on the BMW iX) **and carries top speed**,
+so a heat-pump crawl there fills two gaps per page — heat pump (56 null) and top speed (38 null).
+
+**Assigned, all nine confirmed by exact range and drivetrain match**, and all nine pass both audit
+checks afterwards, which is the real confirmation they point at the right vehicle:
+
+    cadillac-lyriq-2025-luxury-rwd      48691  LYRIQ                     RWD 326mi  Small SUV
+    cadillac-lyriq-2025-sport-awd       48692  LYRIQ AWD (11 kW)         AWD 319mi  Small SUV
+    fiat-500e-2025-red                  48703  500e                      FWD 149mi  Minicompact Car
+    honda-prologue-2025-ex-fwd          49091  Prologue FWD              FWD 308mi  Standard SUV
+    honda-prologue-2025-elite-awd       49090  Prologue AWD Elite        AWD 283mi  Standard SUV
+    volkswagen-id4-2025-standard-rwd    49155  ID.4                      RWD 206mi  Small SUV
+    volkswagen-id4-2025-pro-s-awd       48774  ID.4 AWD Pro S            AWD 263mi  Small SUV
+    mercedes-benz-g-class-2026-g580     49687  G 580 with EQ Technology  4WD 239mi  Standard SUV
+    mercedes-maybach-eqs-suv-2026-680   49690  EQS 680 4matic Maybach    AWD 300mi  Standard SUV
+
+The write-back built earlier today filled all nine `epaSizeClass` values automatically on the next
+`npm run fetch-epa`, which is exactly what it was for. `epaSizeClass` nulls: 23 -> 14.
+
+The Fiat 500e came back as **"Minicompact Cars"**, a class the dataset had never seen, and
+`shortSizeClass` threw rather than writing `null` — the fail-loudly design working as designed.
+Added to `SIZE_CLASS` and to the enum list in `data/SCHEMA.md`.
+
+### New tool: `npm run find-epa-id [id-substring]`
+
+`scripts/find-epa-id.mjs` proposes candidates for every record lacking an id. It deliberately
+**proposes and does not assign** — EPA splits entries by wheel size, charger speed and sub-trim,
+so one model can carry twenty ids whose ranges differ by 80 miles, and picking wrong is exactly
+the trim drift this dataset keeps hitting. It prints each candidate with drive, range and class,
+marks the ones whose range matches the record exactly, and leaves the call to a person.
+
+Two things it has to do that were learned the hard way here:
+
+- **Search modelYear-1 through modelYear+1.** EPA's certification year and the maker's model year
+  genuinely disagree — Cadillac ships the Optiq as MY2025 and EPA lists it only under 2026.
+- **Match on any word of the model name, not just the whole string.** EPA calls the Mercedes
+  G-Class "G 580 with EQ Technology", which shares no substring with what we call it, and files
+  the Maybach EQS SUV under make "Mercedes-Benz" rather than "Mercedes-Maybach" (aliased).
+
+### The remaining 15, with the reason each is still unassigned
+
+Most are not research failures — **EPA simply has no entry**:
+
+- **Cadillac Escalade IQ** (2) — absent from EPA's Cadillac list in both 2025 and 2026, which
+  carries only the gas Escalade 2WD/4WD/V.
+- **Chevrolet Silverado EV RST (Max Range)** — EPA's 2026 Silverado EV entries are all WT or
+  unlabelled Ext/Std Range; there is no RST, and nothing rated 460mi.
+- **Tesla Cybertruck Cyberbeast** — EPA lists Cybertruck AWD and Dual Motor AWD at 325mi and Long
+  Range at 335mi. No Cyberbeast entry, and nothing at our 320mi.
+- **Tesla Model Y L** — not in EPA's 2026 Tesla list (Long Range AWD/RWD, Performance, Standard).
+- **Ford E-Transit** — no Transit entry of any kind in EPA's Ford list.
+- **Porsche Cayenne Electric** (2) — absent from EPA entirely, which is consistent: both records
+  already carry `range.epaMiles: "Pending"`.
+- **Rivian R1S Quad-Motor Max Pack** — EPA published no Quad entries for MY2025 at all.
+- **Volvo EX60 P6** — deliberate; cites Volvo because EPA published only the 22-inch car.
+
+Four need a **decision rather than a lookup**, and should not be assigned mechanically:
+
+- **Cadillac Optiq** (2) — we hold MY2025 at 302mi; EPA lists the Optiq only under MY2026, AWD at
+  303mi. Same manufacturer-vs-EPA year divergence as the Lexus ES, plus a 1-mile range gap that
+  needs explaining before linking.
+- **Rivian R1S Dual-Motor Large Pack** and **R1T Adventure Dual-Motor Large Pack** — both record
+  329mi with wheels [20, 22], but EPA splits by wheel: 300mi on 20in and 329mi on 22in. Our figure
+  is the 22-inch one while the record claims both sizes. The same wheel-specificity problem the
+  EX60 P6 had, and it wants the same treatment.
+- **Rivian R2 Premium AWD** — worth a proper look. EPA's only 2027 R2 entries are **Performance**
+  AWD (307mi on 20in AT, 330mi on 21in). Our record is *Premium* AWD carrying 330mi, which EPA
+  attributes to the Performance on 21-inch wheels. That is either a missing EPA entry or trim
+  drift in our data, and it should be resolved before an id is attached.

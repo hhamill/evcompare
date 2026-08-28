@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:847e9f7b9f99e8b10196f6c6869daa14614f48b9d314ac7c2deeaea0c133f7ef",
+  "hash": "sha256:232561f6127ff0eea001d90e909bce499597d2ec34a22847db5707f5a3fcffa6",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -1706,13 +1706,13 @@
       "id": "cadillac-lyriq-2025-luxury-rwd",
       "url": "https://evcompare.org/2025/lyriq/luxury-rwd/",
       "catalogId": 20,
-      "lastVerifiedDate": "2026-08-27",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Cadillac",
       "model": "Lyriq",
       "trim": "Luxury RWD",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Small SUV",
       "onSaleDate": null,
       "msrp": 58590,
       "doors": 5,
@@ -1783,7 +1783,7 @@
       "links": {
         "manufacturerSpec": "https://www.cadillac.com/electric/lyriq",
         "review": "https://www.caranddriver.com/cadillac/lyriq",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Cadillac&baseModel=LYRIQ&srchtyp=ymm&pageno=1"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48691"
       },
       "notes": "102 kWh is Cadillac's published total pack rating; usable capacity is somewhat lower. RWD Lyriq isn't tow-rated; AWD adds a 3,500 lb tow rating. No frunk. Super Cruise (hands-free highway driver-assist, not full self-driving) is offered, $25/month after the trial period."
     },
@@ -1791,13 +1791,13 @@
       "id": "cadillac-lyriq-2025-sport-awd",
       "url": "https://evcompare.org/2025/lyriq/sport-awd/",
       "catalogId": 21,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Cadillac",
       "model": "Lyriq",
       "trim": "Sport AWD",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Small SUV",
       "onSaleDate": null,
       "msrp": 62590,
       "doors": 5,
@@ -1867,7 +1867,7 @@
       "links": {
         "manufacturerSpec": "https://www.cadillac.com/electric/lyriq",
         "review": "https://www.caranddriver.com/cadillac/lyriq",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Cadillac&baseModel=LYRIQ&srchtyp=ymm&pageno=1"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48692"
       },
       "notes": "Dual-motor AWD, 515 hp / 450 lb-ft, with 22-inch 'After Midnight' finish wheels standard on Sport. MSRP is approximate (~$62,590) — sources vary $62k-$65k. Super Cruise (hands-free highway driver-assist, not full self-driving) is offered, $25/month after the trial period."
     },
@@ -3107,13 +3107,13 @@
       "id": "fiat-500e-2025-red",
       "url": "https://evcompare.org/2025/500e/500e-red/",
       "catalogId": 36,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Fiat",
       "model": "500e",
       "trim": "(500e)RED",
       "modelYear": 2025,
       "bodyStyle": "Hatchback",
-      "epaSizeClass": null,
+      "epaSizeClass": "Minicompact Car",
       "onSaleDate": null,
       "msrp": 30500,
       "doors": 2,
@@ -3187,7 +3187,7 @@
       "links": {
         "manufacturerSpec": "https://www.fiatusa.com/models/500e-red",
         "review": "https://www.edmunds.com/fiat/500e/",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/bymodel/2025_FIAT_500e.shtml"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48703"
       },
       "notes": "Base (500e)RED trim; four higher-priced special-edition trims (Inspired By Music, Inspired By Beauty, Inspired By Los Angeles, Giorgio Armani Edition) are also offered. Small 2-door/4-passenger city car with 7.5 cu ft of cargo space. US sales have been very low (roughly 1,141 units in 2025), and the model's future in the US market is uncertain. Lane Keeping Assist and Adaptive Cruise Control are optional, not standard, on this trim."
     },
@@ -4251,13 +4251,13 @@
       "id": "honda-prologue-2025-ex-fwd",
       "url": "https://evcompare.org/2025/prologue/ex-fwd/",
       "catalogId": 49,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Honda",
       "model": "Prologue",
       "trim": "EX FWD",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
       "msrp": 47400,
       "doors": 5,
@@ -4327,7 +4327,7 @@
       "links": {
         "manufacturerSpec": "https://automobiles.honda.com/prologue",
         "review": "https://www.caranddriver.com/honda/prologue",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Honda&baseModel=Prologue&srchtyp=ymm&pageno=1&rowLimit=50"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49091"
       },
       "notes": "Built on GM's Ultium platform, sharing underpinnings with the Chevy Blazer EV and Cadillac Lyriq. No frunk — there's a small ~0.8 cu ft underfloor storage bin behind the rear cargo floor instead. All Prologue trims — EX, Touring, and Elite, FWD or AWD — share the same 1,500 lb max tow rating."
     },
@@ -4335,13 +4335,13 @@
       "id": "honda-prologue-2025-elite-awd",
       "url": "https://evcompare.org/2025/prologue/elite-awd/",
       "catalogId": 50,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Honda",
       "model": "Prologue",
       "trim": "Elite AWD",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
       "msrp": 57900,
       "doors": 5,
@@ -4411,7 +4411,7 @@
       "links": {
         "manufacturerSpec": "https://automobiles.honda.com/prologue",
         "review": "https://www.caranddriver.com/honda/prologue",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Honda&baseModel=Prologue&srchtyp=ymm&pageno=1&rowLimit=50"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49090"
       },
       "notes": "Top trim; adds a 360-degree camera, head-up display, ventilated front seats, and a heated steering wheel over EX. No frunk — a small underfloor bin only."
     },
@@ -10488,13 +10488,13 @@
       "id": "volkswagen-id4-2025-standard-rwd",
       "url": "https://evcompare.org/2025/id-4/standard-rwd/",
       "catalogId": 120,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Volkswagen",
       "model": "ID.4",
       "trim": "Standard RWD",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Small SUV",
       "onSaleDate": null,
       "msrp": 39995,
       "doors": 5,
@@ -10564,7 +10564,7 @@
       "links": {
         "manufacturerSpec": "https://www.vw.com/en/models/id-4.html",
         "review": "https://www.caranddriver.com/volkswagen/id4",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Volkswagen&baseModel=ID.4&srchtyp=ymm&pageno=1"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49155"
       },
       "notes": "62 kWh is the gross/nominal pack size published for the Standard trim. Wireless charging, ventilated seats, heated steering wheel, and heat pump are Pro/Pro S-tier features, not standard here. VW discontinued this 62 kWh Standard trim for MY2026 — 2025 is the last model year it's offered."
     },
@@ -10572,13 +10572,13 @@
       "id": "volkswagen-id4-2025-pro-s-awd",
       "url": "https://evcompare.org/2025/id-4/pro-s-awd/",
       "catalogId": 121,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Volkswagen",
       "model": "ID.4",
       "trim": "Pro S AWD",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Small SUV",
       "onSaleDate": null,
       "msrp": 54095,
       "doors": 5,
@@ -10650,7 +10650,7 @@
       "links": {
         "manufacturerSpec": "https://www.vw.com/en/models/id-4.html",
         "review": "https://www.caranddriver.com/volkswagen/id4",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&year1=2025&year2=2025&make=Volkswagen&baseModel=ID.4&srchtyp=ymm&pageno=1"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48774"
       },
       "notes": "82 kWh is the gross/nominal pack size published for Pro/Pro S trims. MY2025 got a mid-cycle AWD power bump to 335 hp (up from 295 hp in 2023-24). Includes 12-way power/massaging front seats and a panoramic glass roof."
     },
@@ -11808,13 +11808,13 @@
       "id": "mercedes-benz-g-class-2026-g580-eq-technology",
       "url": "https://evcompare.org/2026/g-class/g-580-w-eq-technology/",
       "catalogId": 135,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Benz",
       "model": "G-Class",
       "trim": "G 580 w/EQ Technology",
       "modelYear": 2026,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
       "msrp": 163200,
       "doors": 5,
@@ -11888,7 +11888,7 @@
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/g-class/suv/g580w4e",
         "review": "https://www.edmunds.com/car-news/2025-mercedes-benz-g-580-ev-track-range-tested.html",
-        "epaWindowSticker": "https://www.edmunds.com/car-news/2025-mercedes-benz-g-580-ev-track-range-tested.html"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49687"
       },
       "notes": "Electric G-Wagen: four individually-controlled motors (one per wheel), retains the ladder-frame chassis, three locking differentials, and real off-road hardware (G-Turn tank-turn maneuver on loose surfaces, G-Steering reduced turning radius). Not available with a tow hitch in the US. No usable frunk — the space under the hood isn't configured as cargo, consistent with the gas G-Class. Single US configuration (no separate lower trim)."
     },
@@ -12250,7 +12250,7 @@
       "trim": "680 4MATIC",
       "modelYear": 2026,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
       "msrp": 180000,
       "doors": 5,
@@ -12324,7 +12324,7 @@
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/eqs/suv/eqs680z4",
         "review": "https://www.edmunds.com/mercedes-benz/maybach-eqs-suv/",
-        "epaWindowSticker": "https://driveclean.ca.gov/taxonomy/term/42616"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49690"
       },
       "notes": "Ultra-luxury sub-brand tier of the EQS SUV (regular EQS SUV entries are badged Mercedes-Benz; this is Mercedes-Maybach, roughly 2-3x the regular EQS SUV's price). No frunk."
     },
