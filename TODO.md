@@ -1098,3 +1098,64 @@ Niro EV Wind/Wave, Optiq Luxury/Sport, bZ Woodland/Woodland Premium, Bolt LT/RS.
 where trims share a powertrain and EPA certifies one configuration — but it does mean those
 pairs' ranges can never disagree, so a genuine per-trim difference would be invisible. Worth a
 glance, not obviously wrong.
+
+
+# TODO: Six model-year mismatches reconciled (2026-08-28)
+
+Policy applied to all six, chosen once rather than case by case: **make the record's label agree
+with its own data and its own source.** What settled each was EPA's menu API — which model years
+it has actually certified per model:
+
+| model | EPA 2025 | EPA 2026 |
+| --- | --- | --- |
+| F-150 Lightning | 5 entries | **none** (Mach-E has both, so this isn't a coverage gap) |
+| Hummer EV | 8 entries | **none** |
+| Optiq | **none** | 6 entries |
+
+**Hummer EV Pickup 3X / SUV 3X, F-150 Lightning Flash / Platinum → relabelled MY2026 → MY2025.**
+Every figure on those four already matched the 2025 car and its 2025 EPA entry; only the year
+was wrong. `id` was regenerated too, since it embeds the year (`catalogId` is the stable public
+identifier for share links, so nothing external breaks).
+
+**Cadillac Optiq Luxury / Sport AWD — year was right, range was wrong.** These are genuinely
+MY2025 cars: 300hp AWD at $52,895 / $53,495 matches the 2025 spec, whereas the 2026 is 315hp
+RWD base at $52,395 with 440hp AWD costing $3,500 more. The error was the range — **302mi is
+the 2025 figure, 303mi is the 2026's**, and the record had taken 303 along with a 2026 EPA link.
+Range corrected to 302, and `links.epaWindowSticker` **removed** rather than left pointing at
+the wrong model year: EPA has no 2025 Optiq entry to repoint it at. `range.source` now cites
+Edmunds' 2025 range page instead.
+
+**Bonus catch: Tesla Model 3 Performance AWD, 346mi → 314mi.** Its own cited EPA sticker says
+314; 346 is the Long Range figure. That's trim drift again, found by the EPA-range check rather
+than the sibling-comparison one — worth noting that the two checks catch the same class from
+different angles.
+
+## Four public URLs changed
+
+    /2026/f-150-lightning/flash/     -> /2025/f-150-lightning/flash/
+    /2026/f-150-lightning/platinum/  -> /2025/f-150-lightning/platinum/
+    /2026/hummer-ev-pickup/3x/       -> /2025/hummer-ev-pickup/3x/
+    /2026/hummer-ev-suv/3x/          -> /2025/hummer-ev-suv/3x/
+
+The old paths have no redirect; they fall through `404.html` to the homepage. Accepted as the
+cost of correctness — these pages are days old with minimal index presence, and `npm run
+sync-urls` updated the committed `models[].url` values automatically, which is the tooling
+working as designed.
+
+## Left flagged deliberately
+
+- [ ] **Volvo EX60 P6 Plus — we say 307mi, EPA says 295mi. Not a wrong value; a specificity
+      mismatch.** EPA's only P6 entry is *"22 Inch Wheels"*, and our record lists
+      `wheelSizesIn: [20, 21]`. Smaller wheels genuinely give more range, so 307 is plausible
+      for our configuration — but the cited source describes a different one. Resolving it means
+      deciding what the record represents (which wheel spec), so it wants a decision rather than
+      a guess. The sibling P10 matches EPA exactly, which supports the wheel explanation.
+
+## Coverage question this opens
+
+- [ ] With those four relabelled, the dataset now has **no MY2026 Hummer or F-150 Lightning**.
+      For the Hummer that's a real gap-in-waiting: a MY2026 exists as a product (830hp standard,
+      1,160hp with the 24-module battery) but EPA hasn't certified it, so it can be added once
+      it appears. For the Lightning it probably isn't a gap at all — Ford has **ended
+      all-electric Lightning production**, and the successor is an EREV, which this dataset
+      excludes by scope.

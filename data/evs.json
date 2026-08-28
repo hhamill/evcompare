@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:92d952ddd295ba0a645b09cb6e786b0558c0bcadbb18a02f27b92f82b64b4826",
+  "hash": "sha256:875b892194be36349334183be3bc9da4c66463892313932e8b0f18eb0999fd12",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -1875,7 +1875,7 @@
       "id": "cadillac-optiq-2025-luxury-awd",
       "url": "https://evcompare.org/2025/optiq/luxury-awd/",
       "catalogId": 22,
-      "lastVerifiedDate": "2026-08-27",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Cadillac",
       "model": "Optiq",
       "trim": "Luxury AWD",
@@ -1899,8 +1899,8 @@
         "warrantyMiles": 100000
       },
       "range": {
-        "epaMiles": 303,
-        "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49951"
+        "epaMiles": 302,
+        "source": "https://www.edmunds.com/cadillac/optiq/2025/mpg/"
       },
       "performance": {
         "zeroTo60Sec": 5.9,
@@ -1955,8 +1955,7 @@
       "groundClearanceIn": 7.78,
       "links": {
         "manufacturerSpec": "https://www.cadillac.com/electric/optiq",
-        "review": "https://insideevs.com/reviews/754331/2025-cadillac-optiq-ev-review/",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49951"
+        "review": "https://insideevs.com/reviews/754331/2025-cadillac-optiq-ev-review/"
       },
       "notes": "Optiq is AWD-only in the US — every trim gets standard dual-motor AWD (front motor primary, rear engages as needed). No Apple CarPlay/Android Auto — Cadillac EVs use Google built-in instead. Super Cruise (hands-free highway driver-assist, not full self-driving) comes with a complimentary 3-year trial, then $25/month (or $15/month bundled with OnStar Connected Services)."
     },
@@ -1964,7 +1963,7 @@
       "id": "cadillac-optiq-2025-sport-awd",
       "url": "https://evcompare.org/2025/optiq/sport-awd/",
       "catalogId": 23,
-      "lastVerifiedDate": "2026-08-27",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Cadillac",
       "model": "Optiq",
       "trim": "Sport AWD",
@@ -1988,8 +1987,8 @@
         "warrantyMiles": 100000
       },
       "range": {
-        "epaMiles": 303,
-        "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49951"
+        "epaMiles": 302,
+        "source": "https://www.edmunds.com/cadillac/optiq/2025/mpg/"
       },
       "performance": {
         "zeroTo60Sec": 5.9,
@@ -2044,8 +2043,7 @@
       "groundClearanceIn": 7.78,
       "links": {
         "manufacturerSpec": "https://www.cadillac.com/electric/optiq",
-        "review": "https://insideevs.com/reviews/754331/2025-cadillac-optiq-ev-review/",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49951"
+        "review": "https://insideevs.com/reviews/754331/2025-cadillac-optiq-ev-review/"
       },
       "notes": "Mechanically identical to Luxury AWD; Sport differs mainly in styling (gloss-black exterior accents and dark badging vs. Luxury's Galvano Chrome trim). No Apple CarPlay/Android Auto — Google built-in only. Super Cruise (hands-free highway driver-assist, not full self-driving) is offered, $25/month after the trial period."
     },
@@ -3194,14 +3192,14 @@
       "notes": "Base (500e)RED trim; four higher-priced special-edition trims (Inspired By Music, Inspired By Beauty, Inspired By Los Angeles, Giorgio Armani Edition) are also offered. Small 2-door/4-passenger city car with 7.5 cu ft of cargo space. US sales have been very low (roughly 1,141 units in 2025), and the model's future in the US market is uncertain. Lane Keeping Assist and Adaptive Cruise Control are optional, not standard, on this trim."
     },
     {
-      "id": "ford-f-150-lightning-2026-flash",
-      "url": "https://evcompare.org/2026/f-150-lightning/flash/",
+      "id": "ford-f-150-lightning-2025-flash",
+      "url": "https://evcompare.org/2025/f-150-lightning/flash/",
       "catalogId": 37,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Ford",
       "model": "F-150 Lightning",
       "trim": "Flash",
-      "modelYear": 2026,
+      "modelYear": 2025,
       "bodyStyle": "Truck",
       "epaSizeClass": "Standard Pickup Trucks",
       "onSaleDate": null,
@@ -3283,14 +3281,14 @@
       "notes": "Pickup truck with no enclosed rear cargo hold — storage is the 14.1 cu ft 'Mega Power Frunk' plus the 5.5 ft bed. For 2026, Ford dropped the Standard Range battery, so all Lightning trims now use the 123 kWh Extended Range pack as standard: 580 hp / 775 lb-ft, ~3.8s 0-60. BlueCruise (hands-free highway driver-assist, not full self-driving) is available. Level 2 AC charging can be optioned up to 19.2 kW with the dual onboard charger."
     },
     {
-      "id": "ford-f-150-lightning-2026-platinum",
-      "url": "https://evcompare.org/2026/f-150-lightning/platinum/",
+      "id": "ford-f-150-lightning-2025-platinum",
+      "url": "https://evcompare.org/2025/f-150-lightning/platinum/",
       "catalogId": 38,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Ford",
       "model": "F-150 Lightning",
       "trim": "Platinum",
-      "modelYear": 2026,
+      "modelYear": 2025,
       "bodyStyle": "Truck",
       "epaSizeClass": "Standard Pickup Trucks",
       "onSaleDate": null,
@@ -3638,14 +3636,14 @@
       "notes": "GT is standard AWD with the Extended Range 98.8 kWh pack (88 kWh usable): 480 hp / 600 lb-ft. Edmunds' own test track measured 3.7s 0-60; Ford's claim with the optional GT Performance Upgrade (+100 lb-ft to 700 lb-ft) is 3.3s. Native CCS1 charge port; NACS Supercharger access requires Ford's separate ~$200 adapter. Ventilated seats are notably not offered on GT — only on Premium, despite GT being the top trim. Top speed is 124 mph."
     },
     {
-      "id": "gmc-hummer-ev-2026-pickup-3x",
-      "url": "https://evcompare.org/2026/hummer-ev-pickup/3x/",
+      "id": "gmc-hummer-ev-2025-pickup-3x",
+      "url": "https://evcompare.org/2025/hummer-ev-pickup/3x/",
       "catalogId": 42,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "GMC",
       "model": "Hummer EV Pickup",
       "trim": "3X",
-      "modelYear": 2026,
+      "modelYear": 2025,
       "bodyStyle": "Truck",
       "epaSizeClass": "Standard Pickup Trucks",
       "onSaleDate": null,
@@ -9531,7 +9529,7 @@
       "id": "tesla-model-3-2026-performance-awd",
       "url": "https://evcompare.org/2026/model-3/performance-awd/",
       "catalogId": 109,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Tesla",
       "model": "Model 3",
       "trim": "Performance AWD",
@@ -9555,7 +9553,7 @@
         "warrantyMiles": 120000
       },
       "range": {
-        "epaMiles": 346,
+        "epaMiles": 314,
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50250"
       },
       "performance": {
@@ -11452,14 +11450,14 @@
       "notes": "First Ford EV commercial van in this dataset. Represents the base Low Roof, standard-wheelbase Cargo Van RWD configuration; Medium/High Roof and Extended-length body options exist with up to 487.3 cu ft cargo, but Low Roof is the highest-volume fleet configuration. Seats only the driver and front passenger (no rear seats in a cargo van). BlueCruise isn't offered on E-Transit. Native CCS1 charge port, with an optional NACS adapter for Supercharger access. Historically RWD-only."
     },
     {
-      "id": "gmc-hummer-ev-suv-2026-3x",
-      "url": "https://evcompare.org/2026/hummer-ev-suv/3x/",
+      "id": "gmc-hummer-ev-suv-2025-3x",
+      "url": "https://evcompare.org/2025/hummer-ev-suv/3x/",
       "catalogId": 131,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "GMC",
       "model": "Hummer EV SUV",
       "trim": "3X",
-      "modelYear": 2026,
+      "modelYear": 2025,
       "bodyStyle": "SUV",
       "epaSizeClass": "Standard Sport Utility Vehicle",
       "onSaleDate": null,
