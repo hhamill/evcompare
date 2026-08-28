@@ -5,6 +5,7 @@
   "scripts": {
     "prerender": "node scripts/prerender.mjs",
     "sync-urls": "node scripts/sync-urls.mjs",
-    "audit": "node scripts/audit-data.mjs"
+    "audit": "node scripts/audit-data.mjs",
+    "fetch-epa": "node scripts/fetch-epa.mjs"
   }
 }

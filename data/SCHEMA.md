@@ -28,6 +28,7 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
   "model": "Model Y",
   "trim": "Long Range AWD",
   "modelYear": 2025,
+  "epaSizeClass": "Small Sport Utility Vehicle",  // GENERATED — EPA's own size class for this exact vehicle, from fueleconomy.gov's REST API (`/ws/rest/vehicle/{id}`, field `VClass`), keyed off the id already in `links.epaWindowSticker`. Run `npm run fetch-epa`. The drivetrain suffix EPA appends ("... 4WD") is stripped, since that is not size and `drivetrain` already records it. `null` for the 23 records with no EPA id. Deliberately NOT hand-assigned: `bodyStyle` alone cannot express size (95 of 149 records are "SUV", spanning a Volvo EX30 to an Escalade IQ), and the SUV/Crossover split it used to imply is not defensible — see the 2026-08-27 audit.
   "bodyStyle": "SUV",                // "Sedan" | "SUV" | "Crossover" | "Hatchback" | "Truck" | "Minivan"
   "onSaleDate": null,                // ISO date/month ("2026-09-25" or "2026-09") if a manufacturer has published one, else null. For not-yet-shipping models this is what tells a shopper "preorder now, delivery later" vs. "buy today."
   "msrp": 47990,                     // USD, base price for this trim, number or null

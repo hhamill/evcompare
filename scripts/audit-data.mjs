@@ -10,7 +10,7 @@
 // Every check is a HEURISTIC. A flag means "look at this", never "this is wrong" — sibling
 // trims legitimately share figures when they share a powertrain, and manufacturers do quote one
 // 0-60 across a range. Read the reasoning before changing anything.
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -67,7 +67,27 @@ for (const m of M) {
   if (e < 1.4 || e > 5.6) flag("efficiency", `${name(m)}: ${e.toFixed(2)} mi/kWh (${r}mi / ${b}kWh)`);
 }
 
-// 5. Duplicate identity.
+// 5. Record year vs the year of its own cited EPA entry. This class is invisible to every
+//    other check here — a year-drifted record is internally consistent, and only disagrees
+//    with an external reference. Reads the cache written by `npm run fetch-epa` so the audit
+//    still runs offline in seconds; skipped entirely if the cache is absent.
+const CACHE = path.join(ROOT, "scripts", "epa-cache.json");
+if (existsSync(CACHE)) {
+  const epa = JSON.parse(readFileSync(CACHE, "utf8"));
+  for (const m of M) {
+    const id = (m.links?.epaWindowSticker || "").match(/[?&]id=(\d+)/)?.[1];
+    const e = id && epa[id];
+    if (!e) continue;
+    if (e.year !== m.modelYear)
+      flag("model-year", `${name(m)}: we say MY${m.modelYear}, its EPA source is "${e.year} ${e.make} ${e.model}"`);
+    if (e.range && typeof n(m.range?.epaMiles) === "number" && n(m.range.epaMiles) !== e.range)
+      flag("epa-range", `${name(m)}: we say ${m.range.epaMiles}mi, EPA says ${e.range}mi`);
+  }
+} else {
+  console.log("(no scripts/epa-cache.json — run `npm run fetch-epa` to enable the model-year and EPA-range checks)");
+}
+
+// 6. Duplicate identity.
 const seen = new Map();
 for (const m of M) {
   const k = `${m.modelYear}|${m.make}|${m.model}|${m.trim}`;
@@ -78,6 +98,8 @@ for (const m of M) {
 const byCheck = {};
 for (const f of flags) (byCheck[f.check] ??= []).push(f.msg);
 const LABELS = {
+  "model-year": "Record's model year disagrees with its own cited EPA source",
+  "epa-range": "Recorded EPA range disagrees with the EPA source",
   "trim-drift": "Possible trim drift — a figure shared where it probably shouldn't be",
   implausible: "Physically implausible within a model",
   efficiency: "Efficiency outside the plausible band — range or battery suspect",

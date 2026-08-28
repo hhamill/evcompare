@@ -1,0 +1,978 @@
+{
+  "47809": {
+    "year": 2024,
+    "make": "Acura",
+    "model": "ZDX RWD",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 313,
+    "fetchedOn": "2026-08-28"
+  },
+  "48296": {
+    "year": 2025,
+    "make": "Audi",
+    "model": "Q4 45 e-tron",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 288,
+    "fetchedOn": "2026-08-28"
+  },
+  "48297": {
+    "year": 2025,
+    "make": "Audi",
+    "model": "Q6 e-tron quattro (19 inch wheels)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 307,
+    "fetchedOn": "2026-08-28"
+  },
+  "48299": {
+    "year": 2025,
+    "make": "Audi",
+    "model": "Q8 e-tron quattro (20 inch wheels)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 272,
+    "fetchedOn": "2026-08-28"
+  },
+  "48303": {
+    "year": 2025,
+    "make": "Audi",
+    "model": "SQ6 e-tron",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 275,
+    "fetchedOn": "2026-08-28"
+  },
+  "48344": {
+    "year": 2025,
+    "make": "GMC",
+    "model": "Hummer EV Pickup 3X",
+    "vclass": "Standard Pickup Trucks 4WD",
+    "range": 312,
+    "fetchedOn": "2026-08-28"
+  },
+  "48348": {
+    "year": 2025,
+    "make": "GMC",
+    "model": "Hummer EV SUV 3X",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 312,
+    "fetchedOn": "2026-08-28"
+  },
+  "48351": {
+    "year": 2025,
+    "make": "Genesis",
+    "model": "Electrified G80",
+    "vclass": "Midsize Cars",
+    "range": 282,
+    "fetchedOn": "2026-08-28"
+  },
+  "48352": {
+    "year": 2025,
+    "make": "Genesis",
+    "model": "GV60 RWD",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 294,
+    "fetchedOn": "2026-08-28"
+  },
+  "48353": {
+    "year": 2025,
+    "make": "Genesis",
+    "model": "Electrified GV70",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 236,
+    "fetchedOn": "2026-08-28"
+  },
+  "48355": {
+    "year": 2025,
+    "make": "Genesis",
+    "model": "GV60 AWD Performance",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 235,
+    "fetchedOn": "2026-08-28"
+  },
+  "48357": {
+    "year": 2025,
+    "make": "Hyundai",
+    "model": "Kona Electric (17 inch Wheels)",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 261,
+    "fetchedOn": "2026-08-28"
+  },
+  "48359": {
+    "year": 2025,
+    "make": "Hyundai",
+    "model": "Kona Electric Standard Range",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 200,
+    "fetchedOn": "2026-08-28"
+  },
+  "48364": {
+    "year": 2025,
+    "make": "Hyundai",
+    "model": "Ioniq 6 Standard Range",
+    "vclass": "Midsize Cars",
+    "range": 240,
+    "fetchedOn": "2026-08-28"
+  },
+  "48365": {
+    "year": 2025,
+    "make": "Hyundai",
+    "model": "Ioniq 6 AWD (20 inch Wheels)",
+    "vclass": "Midsize Cars",
+    "range": 270,
+    "fetchedOn": "2026-08-28"
+  },
+  "48370": {
+    "year": 2025,
+    "make": "Kia",
+    "model": "Niro Electric",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 253,
+    "fetchedOn": "2026-08-28"
+  },
+  "48371": {
+    "year": 2025,
+    "make": "Lucid",
+    "model": "Air G Touring XR AWD with 19 inch wheels",
+    "vclass": "Large Cars",
+    "range": 512,
+    "fetchedOn": "2026-08-28"
+  },
+  "48374": {
+    "year": 2025,
+    "make": "Lucid",
+    "model": "Air Pure RWD with 19 inch wheels",
+    "vclass": "Large Cars",
+    "range": 420,
+    "fetchedOn": "2026-08-28"
+  },
+  "48384": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQE 350 Plus",
+    "vclass": "Midsize Cars",
+    "range": 308,
+    "fetchedOn": "2026-08-28"
+  },
+  "48385": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQE 500 4matic",
+    "vclass": "Midsize Cars",
+    "range": 266,
+    "fetchedOn": "2026-08-28"
+  },
+  "48388": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQS 450 Plus",
+    "vclass": "Large Cars",
+    "range": 390,
+    "fetchedOn": "2026-08-28"
+  },
+  "48389": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQS 580 4matic",
+    "vclass": "Large Cars",
+    "range": 371,
+    "fetchedOn": "2026-08-28"
+  },
+  "48390": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQE 350 Plus (SUV)",
+    "vclass": "Midsize Station Wagons",
+    "range": 302,
+    "fetchedOn": "2026-08-28"
+  },
+  "48391": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQE 500 4matic (SUV)",
+    "vclass": "Midsize Station Wagons",
+    "range": 264,
+    "fetchedOn": "2026-08-28"
+  },
+  "48392": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQS 450 Plus (SUV)",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 323,
+    "fetchedOn": "2026-08-28"
+  },
+  "48396": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQS 580 4matic (SUV)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 317,
+    "fetchedOn": "2026-08-28"
+  },
+  "48398": {
+    "year": 2025,
+    "make": "MINI",
+    "model": "Countryman SE ALL4 (18 inch Wheels)",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 212,
+    "fetchedOn": "2026-08-28"
+  },
+  "48404": {
+    "year": 2025,
+    "make": "Polestar",
+    "model": "2 Dual Motor Performance Pack",
+    "vclass": "Midsize Cars",
+    "range": 254,
+    "fetchedOn": "2026-08-28"
+  },
+  "48405": {
+    "year": 2025,
+    "make": "Polestar",
+    "model": "2 Single Motor (19 Inch Wheels)",
+    "vclass": "Midsize Cars",
+    "range": 314,
+    "fetchedOn": "2026-08-28"
+  },
+  "48409": {
+    "year": 2025,
+    "make": "Polestar",
+    "model": "3 Long Range Dual Motor (21 Inch Wheels)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 315,
+    "fetchedOn": "2026-08-28"
+  },
+  "48411": {
+    "year": 2025,
+    "make": "Polestar",
+    "model": "3 Long Range Dual Motor Performance Pack",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 279,
+    "fetchedOn": "2026-08-28"
+  },
+  "48415": {
+    "year": 2025,
+    "make": "Porsche",
+    "model": "Taycan Performance Battery",
+    "vclass": "Compact Cars",
+    "range": 274,
+    "fetchedOn": "2026-08-28"
+  },
+  "48444": {
+    "year": 2025,
+    "make": "Volkswagen",
+    "model": "ID. Buzz",
+    "vclass": "Minivan - 2WD",
+    "range": 234,
+    "fetchedOn": "2026-08-28"
+  },
+  "48445": {
+    "year": 2025,
+    "make": "Volkswagen",
+    "model": "ID. Buzz 4motion",
+    "vclass": "Minivan - 4WD",
+    "range": 231,
+    "fetchedOn": "2026-08-28"
+  },
+  "48450": {
+    "year": 2025,
+    "make": "Volvo",
+    "model": "EX30 Single Motor extended range (19/20 Inch Wheels)",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 261,
+    "fetchedOn": "2026-08-28"
+  },
+  "48681": {
+    "year": 2025,
+    "make": "Audi",
+    "model": "Q4 55 e-tron quattro",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 258,
+    "fetchedOn": "2026-08-28"
+  },
+  "48688": {
+    "year": 2025,
+    "make": "Audi",
+    "model": "S e-tron GT (20 inch wheels)",
+    "vclass": "Subcompact Cars",
+    "range": 300,
+    "fetchedOn": "2026-08-28"
+  },
+  "48708": {
+    "year": 2025,
+    "make": "Ford",
+    "model": "F-150 Lightning Platinum 4WD",
+    "vclass": "Standard Pickup Trucks 4WD",
+    "range": 300,
+    "fetchedOn": "2026-08-28"
+  },
+  "48721": {
+    "year": 2025,
+    "make": "Nissan",
+    "model": "ARIYA FWD 63kWh",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 216,
+    "fetchedOn": "2026-08-28"
+  },
+  "48722": {
+    "year": 2025,
+    "make": "Nissan",
+    "model": "ARIYA PLATINUM+ e-4ORCE 87kWh 19in. Wheels",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 267,
+    "fetchedOn": "2026-08-28"
+  },
+  "48727": {
+    "year": 2025,
+    "make": "Porsche",
+    "model": "Macan 4 Electric",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 308,
+    "fetchedOn": "2026-08-28"
+  },
+  "48729": {
+    "year": 2025,
+    "make": "Porsche",
+    "model": "Macan Turbo Electric",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 288,
+    "fetchedOn": "2026-08-28"
+  },
+  "48739": {
+    "year": 2025,
+    "make": "Porsche",
+    "model": "Taycan Turbo S",
+    "vclass": "Compact Cars",
+    "range": 266,
+    "fetchedOn": "2026-08-28"
+  },
+  "48762": {
+    "year": 2025,
+    "make": "Subaru",
+    "model": "Solterra AWD",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 227,
+    "fetchedOn": "2026-08-28"
+  },
+  "48763": {
+    "year": 2025,
+    "make": "Subaru",
+    "model": "Solterra Limited/Touring AWD",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 222,
+    "fetchedOn": "2026-08-28"
+  },
+  "48775": {
+    "year": 2025,
+    "make": "Volvo",
+    "model": "EX30 Twin Performance (19 Inch Wheels)",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 253,
+    "fetchedOn": "2026-08-28"
+  },
+  "48781": {
+    "year": 2024,
+    "make": "Acura",
+    "model": "ZDX AWD Type S",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 278,
+    "fetchedOn": "2026-08-28"
+  },
+  "48993": {
+    "year": 2025,
+    "make": "Audi",
+    "model": "RS e-tron GT Performance",
+    "vclass": "Subcompact Cars",
+    "range": 278,
+    "fetchedOn": "2026-08-28"
+  },
+  "48994": {
+    "year": 2025,
+    "make": "Dodge",
+    "model": "Charger Daytona R/T AWD 255/45R20",
+    "vclass": "Large Cars",
+    "range": 308,
+    "fetchedOn": "2026-08-28"
+  },
+  "49075": {
+    "year": 2025,
+    "make": "Dodge",
+    "model": "Charger Daytona Scat Pack AWD 305/35ZR20",
+    "vclass": "Large Cars",
+    "range": 279,
+    "fetchedOn": "2026-08-28"
+  },
+  "49077": {
+    "year": 2025,
+    "make": "Ford",
+    "model": "F-150 Lightning 4WD ER2",
+    "vclass": "Standard Pickup Trucks 4WD",
+    "range": 300,
+    "fetchedOn": "2026-08-28"
+  },
+  "49086": {
+    "year": 2025,
+    "make": "Vinfast",
+    "model": "VF 8 Eco",
+    "vclass": "Special Purpose Vehicle 4WD",
+    "range": 256,
+    "fetchedOn": "2026-08-28"
+  },
+  "49087": {
+    "year": 2025,
+    "make": "Vinfast",
+    "model": "VF 8 Plus",
+    "vclass": "Special Purpose Vehicle 4WD",
+    "range": 235,
+    "fetchedOn": "2026-08-28"
+  },
+  "49088": {
+    "year": 2025,
+    "make": "Vinfast",
+    "model": "VF 9 Plus",
+    "vclass": "Special Purpose Vehicle 4WD",
+    "range": 287,
+    "fetchedOn": "2026-08-28"
+  },
+  "49093": {
+    "year": 2025,
+    "make": "Jeep",
+    "model": "Wagoneer S AWD (Falken tire)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 294,
+    "fetchedOn": "2026-08-28"
+  },
+  "49116": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQB 250 Plus",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 251,
+    "fetchedOn": "2026-08-28"
+  },
+  "49118": {
+    "year": 2025,
+    "make": "Mercedes-Benz",
+    "model": "EQB 350 4matic",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 207,
+    "fetchedOn": "2026-08-28"
+  },
+  "49613": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "i5 eDrive40 Sedan (19 inch Wheels)",
+    "vclass": "Compact Cars",
+    "range": 310,
+    "fetchedOn": "2026-08-28"
+  },
+  "49623": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "iX xDrive60 (20 inch Wheels)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 364,
+    "fetchedOn": "2026-08-28"
+  },
+  "49627": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "iX M70 (21 inch Wheels)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 303,
+    "fetchedOn": "2026-08-28"
+  },
+  "49636": {
+    "year": 2026,
+    "make": "Cadillac",
+    "model": "VISTIQ (11 kW Charger)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 305,
+    "fetchedOn": "2026-08-28"
+  },
+  "49637": {
+    "year": 2026,
+    "make": "Cadillac",
+    "model": "VISTIQ (19 kW Charger)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 300,
+    "fetchedOn": "2026-08-28"
+  },
+  "49642": {
+    "year": 2026,
+    "make": "Chevrolet",
+    "model": "Silverado EV Std Range WT (11kW Charger)",
+    "vclass": "Standard Pickup Trucks 4WD",
+    "range": 286,
+    "fetchedOn": "2026-08-28"
+  },
+  "49644": {
+    "year": 2026,
+    "make": "Chevrolet",
+    "model": "Blazer EV FWD",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 312,
+    "fetchedOn": "2026-08-28"
+  },
+  "49646": {
+    "year": 2026,
+    "make": "Chevrolet",
+    "model": "Blazer EV AWD",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 283,
+    "fetchedOn": "2026-08-28"
+  },
+  "49658": {
+    "year": 2026,
+    "make": "GMC",
+    "model": "SIERRA EV Ext Range (11kW Charger)",
+    "vclass": "Standard Pickup Trucks 4WD",
+    "range": 410,
+    "fetchedOn": "2026-08-28"
+  },
+  "49660": {
+    "year": 2026,
+    "make": "GMC",
+    "model": "SIERRA EV Std Range (11kW Charger)",
+    "vclass": "Standard Pickup Trucks 4WD",
+    "range": 283,
+    "fetchedOn": "2026-08-28"
+  },
+  "49661": {
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Ioniq 9 RWD",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 335,
+    "fetchedOn": "2026-08-28"
+  },
+  "49663": {
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Ioniq 9 AWD Performance",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 311,
+    "fetchedOn": "2026-08-28"
+  },
+  "49665": {
+    "year": 2026,
+    "make": "Kia",
+    "model": "EV9 Standard Range RWD",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 230,
+    "fetchedOn": "2026-08-28"
+  },
+  "49667": {
+    "year": 2026,
+    "make": "Kia",
+    "model": "EV9 Long Range AWD",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 283,
+    "fetchedOn": "2026-08-28"
+  },
+  "49741": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Model S",
+    "vclass": "Large Cars",
+    "range": 410,
+    "fetchedOn": "2026-08-28"
+  },
+  "49742": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Model S Plaid",
+    "vclass": "Large Cars",
+    "range": 368,
+    "fetchedOn": "2026-08-28"
+  },
+  "49744": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Model Y Long Range AWD",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 327,
+    "fetchedOn": "2026-08-28"
+  },
+  "49745": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Model X",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 352,
+    "fetchedOn": "2026-08-28"
+  },
+  "49746": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Model X Plaid",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 335,
+    "fetchedOn": "2026-08-28"
+  },
+  "49748": {
+    "year": 2026,
+    "make": "Volvo",
+    "model": "EC40",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 298,
+    "fetchedOn": "2026-08-28"
+  },
+  "49750": {
+    "year": 2026,
+    "make": "Volvo",
+    "model": "EC40 Twin",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 268,
+    "fetchedOn": "2026-08-28"
+  },
+  "49945": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "i7 xDrive60 Sedan (19 inch Wheels)",
+    "vclass": "Large Cars",
+    "range": 311,
+    "fetchedOn": "2026-08-28"
+  },
+  "49951": {
+    "year": 2026,
+    "make": "Cadillac",
+    "model": "OPTIQ AWD (11 kW Charger)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 303,
+    "fetchedOn": "2026-08-28"
+  },
+  "49953": {
+    "year": 2026,
+    "make": "Chevrolet",
+    "model": "Equinox EV FWD",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 319,
+    "fetchedOn": "2026-08-28"
+  },
+  "49955": {
+    "year": 2026,
+    "make": "Chevrolet",
+    "model": "Equinox EV AWD (11 kW Charger)",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 307,
+    "fetchedOn": "2026-08-28"
+  },
+  "49961": {
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Ioniq 5 Standard range",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 245,
+    "fetchedOn": "2026-08-28"
+  },
+  "49963": {
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Ioniq 5 AWD (20inch Wheels)",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 269,
+    "fetchedOn": "2026-08-28"
+  },
+  "49965": {
+    "year": 2026,
+    "make": "Hyundai",
+    "model": "Ioniq 5 N",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 221,
+    "fetchedOn": "2026-08-28"
+  },
+  "49974": {
+    "year": 2026,
+    "make": "Nissan",
+    "model": "LEAF 75kWh (18 inch alloy Wheels)",
+    "vclass": "Small Station Wagons",
+    "range": 288,
+    "fetchedOn": "2026-08-28"
+  },
+  "49975": {
+    "year": 2026,
+    "make": "Nissan",
+    "model": "LEAF 75kWh (18 inch steel Wheels)",
+    "vclass": "Small Station Wagons",
+    "range": 303,
+    "fetchedOn": "2026-08-28"
+  },
+  "49983": {
+    "year": 2026,
+    "make": "Toyota",
+    "model": "bZ (energy capacity 200 Ah)",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 236,
+    "fetchedOn": "2026-08-28"
+  },
+  "49986": {
+    "year": 2026,
+    "make": "Toyota",
+    "model": "bZ AWD LIMITED",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 278,
+    "fetchedOn": "2026-08-28"
+  },
+  "50029": {
+    "year": 2026,
+    "make": "Lucid",
+    "model": "Gravity GT w/20F21R wheels (3R)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 437,
+    "fetchedOn": "2026-08-28"
+  },
+  "50031": {
+    "year": 2026,
+    "make": "Mercedes-Benz",
+    "model": "CLA250 Plus with EQ Tech (R22)",
+    "vclass": "Compact Cars",
+    "range": 374,
+    "fetchedOn": "2026-08-28"
+  },
+  "50032": {
+    "year": 2026,
+    "make": "Mercedes-Benz",
+    "model": "CLA350 4matic with EQ Tech",
+    "vclass": "Compact Cars",
+    "range": 312,
+    "fetchedOn": "2026-08-28"
+  },
+  "50033": {
+    "year": 2026,
+    "make": "Polestar",
+    "model": "4 Long Range Single Motor",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 310,
+    "fetchedOn": "2026-08-28"
+  },
+  "50034": {
+    "year": 2026,
+    "make": "Polestar",
+    "model": "4 Long Range Dual Motor",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 280,
+    "fetchedOn": "2026-08-28"
+  },
+  "50040": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Model Y Standard RWD (18in Wheels)",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 321,
+    "fetchedOn": "2026-08-28"
+  },
+  "50188": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "i4 eDrive40 Gran Coupe (18 inch wheels)",
+    "vclass": "Compact Cars",
+    "range": 333,
+    "fetchedOn": "2026-08-28"
+  },
+  "50190": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "i4 M60 xDrive Gran Coupe (19 inch Wheels)",
+    "vclass": "Compact Cars",
+    "range": 278,
+    "fetchedOn": "2026-08-28"
+  },
+  "50194": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "i5 M60 xDrive Sedan (19 inch Wheels)",
+    "vclass": "Compact Cars",
+    "range": 277,
+    "fetchedOn": "2026-08-28"
+  },
+  "50201": {
+    "year": 2026,
+    "make": "Ford",
+    "model": "Mustang Mach-E AWD Extended",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 300,
+    "fetchedOn": "2026-08-28"
+  },
+  "50202": {
+    "year": 2026,
+    "make": "Ford",
+    "model": "Mustang Mach-E GT",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 280,
+    "fetchedOn": "2026-08-28"
+  },
+  "50204": {
+    "year": 2026,
+    "make": "Ford",
+    "model": "Mustang Mach-E RWD",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 260,
+    "fetchedOn": "2026-08-28"
+  },
+  "50213": {
+    "year": 2026,
+    "make": "Kia",
+    "model": "EV6 Long Range AWD (20 inch Wheels)",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 270,
+    "fetchedOn": "2026-08-28"
+  },
+  "50215": {
+    "year": 2026,
+    "make": "Kia",
+    "model": "EV6 Standard Range RWD",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 237,
+    "fetchedOn": "2026-08-28"
+  },
+  "50220": {
+    "year": 2026,
+    "make": "Lexus",
+    "model": "RZ 550e AWD",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 229,
+    "fetchedOn": "2026-08-28"
+  },
+  "50221": {
+    "year": 2026,
+    "make": "Lucid",
+    "model": "Gravity Touring w/20F21R wheels",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 337,
+    "fetchedOn": "2026-08-28"
+  },
+  "50250": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Model 3 Performance AWD",
+    "vclass": "Midsize Cars",
+    "range": 314,
+    "fetchedOn": "2026-08-28"
+  },
+  "50251": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Model 3 Standard RWD",
+    "vclass": "Midsize Cars",
+    "range": 321,
+    "fetchedOn": "2026-08-28"
+  },
+  "50257": {
+    "year": 2026,
+    "make": "Volvo",
+    "model": "EX90 Twin Motor (21 Inch Wheels)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 305,
+    "fetchedOn": "2026-08-28"
+  },
+  "50258": {
+    "year": 2026,
+    "make": "Volvo",
+    "model": "EX90 Twin Motor Performance",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 298,
+    "fetchedOn": "2026-08-28"
+  },
+  "50291": {
+    "year": 2026,
+    "make": "Lexus",
+    "model": "RZ 350e FWD (18 inch wheels)",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 301,
+    "fetchedOn": "2026-08-28"
+  },
+  "50301": {
+    "year": 2026,
+    "make": "Subaru",
+    "model": "Uncharted",
+    "vclass": "Small Sport Utility Vehicle 2WD",
+    "range": 308,
+    "fetchedOn": "2026-08-28"
+  },
+  "50302": {
+    "year": 2026,
+    "make": "Subaru",
+    "model": "Uncharted 20 inch AWD",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 273,
+    "fetchedOn": "2026-08-28"
+  },
+  "50305": {
+    "year": 2026,
+    "make": "Toyota",
+    "model": "bZ Woodland AWD 235/60R18",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 281,
+    "fetchedOn": "2026-08-28"
+  },
+  "50366": {
+    "year": 2027,
+    "make": "Audi",
+    "model": "A6 e-tron",
+    "vclass": "Large Cars",
+    "range": 348,
+    "fetchedOn": "2026-08-28"
+  },
+  "50367": {
+    "year": 2027,
+    "make": "Audi",
+    "model": "A6 e-tron quattro",
+    "vclass": "Large Cars",
+    "range": 327,
+    "fetchedOn": "2026-08-28"
+  },
+  "50372": {
+    "year": 2027,
+    "make": "Chevrolet",
+    "model": "BOLT",
+    "vclass": "Small Station Wagons",
+    "range": 262,
+    "fetchedOn": "2026-08-28"
+  },
+  "50385": {
+    "year": 2027,
+    "make": "BMW",
+    "model": "iX3 50 xDrive (20 inch Summer Tires)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 434,
+    "fetchedOn": "2026-08-28"
+  },
+  "50391": {
+    "year": 2027,
+    "make": "Rivian",
+    "model": "R2 Performance AWD (21in)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 330,
+    "fetchedOn": "2026-08-28"
+  },
+  "50449": {
+    "year": 2026,
+    "make": "Jeep",
+    "model": "Recon MOAB 4WD",
+    "vclass": "Small Sport Utility Vehicle 4WD",
+    "range": 222,
+    "fetchedOn": "2026-08-28"
+  },
+  "50460": {
+    "year": 2026,
+    "make": "Tesla",
+    "model": "Cybertruck Dual Motor AWD",
+    "vclass": "Standard Pickup Trucks 4WD",
+    "range": 325,
+    "fetchedOn": "2026-08-28"
+  },
+  "50696": {
+    "year": 2027,
+    "make": "Volvo",
+    "model": "EX60 P10 AWD electric",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 330,
+    "fetchedOn": "2026-08-28"
+  },
+  "50697": {
+    "year": 2027,
+    "make": "Volvo",
+    "model": "EX60 P6 electric (22 Inch Wheels)",
+    "vclass": "Standard Sport Utility Vehicle 2WD",
+    "range": 295,
+    "fetchedOn": "2026-08-28"
+  }
+}

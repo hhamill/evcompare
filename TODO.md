@@ -766,9 +766,11 @@ Verified by hand against three records:
 
 Note it resolves the exact case in dispute: EX30 and Mach-E land in the *same* class.
 
-- [ ] Add `epaSizeClass` as a new field, populated from the API. **126/149 records already
-      store a specific `id=` in `links.epaWindowSticker`** — those are scriptable. The other 23
-      need a manual lookup or an id backfill first.
+- [x] **Done 2026-08-28.** `epaSizeClass` added to all 149 records, 126 populated from
+      `npm run fetch-epa` (new), 23 null for want of an EPA id. EPA's drivetrain suffix is
+      stripped since that isn't size. Distribution: 43 Small SUV, 35 Standard SUV, 11 Large
+      Cars, 9 Midsize, 8 Compact, 7 Standard Pickup, 4+2 Station Wagons, 3 Special Purpose,
+      2 Subcompact, 2 Minivan.
 - [ ] Merge `Crossover` → `SUV` in `bodyStyle` (6 records). Keep `bodyStyle` as the *shape*
       taxonomy — it drives the silhouettes, which are shape-based not size-based — and let
       `epaSizeClass` carry size as a separate facet. Filtering then supports "SUV" + "Small",
@@ -1042,14 +1044,57 @@ This matters more than one truck. If those two were year-bumped without re-verif
 others may have been. 132 of 149 records cite a specific `fueleconomy.gov` vehicle id, so it
 is checkable — just not from inside the file.
 
-- [ ] **Fold a model-year check into the `epaSizeClass` API pass.** That task already needs to
-      hit `fueleconomy.gov/ws/rest/vehicle/{id}` for all 132 records; the same XML carries
-      `year` alongside `VClass`. One pass, two audits — size classes filled *and* every
-      record's model year reconciled against its own source. Do them together rather than
-      paying for the API traffic twice.
-- [ ] Once that data exists, add the check to `scripts/audit-data.mjs` (it would need the
-      fetched years cached to a file, since the audit is meant to run offline in seconds).
+- [x] **Done 2026-08-28 — and it found six.** See the results section below.
+- [x] **Done.** `npm run audit` now reads `scripts/epa-cache.json` and checks both model year
+      and EPA range against source, skipping those two checks cleanly if the cache is absent.
 
 This is the same principle as the trim-drift checks: each mistake found by hand becomes a
 check. The difference is that this class needs an external reference, so it belongs in the
 research pipeline rather than the offline audit.
+
+
+# TODO: EPA reconciliation pass — results (2026-08-28)
+
+`npm run fetch-epa` pulled all 126 EPA entries our records cite (122 unique — four ids are
+cited twice). Cached to `scripts/epa-cache.json`, which `npm run audit` now reads.
+
+## What it settled
+
+**`epaSizeClass` is populated, and EPA independently confirms Crossover isn't a category.**
+Every one of our six "Crossover" records maps to *Small Sport Utility Vehicle* or *Small
+Station Wagon* — i.e. EPA files them as small SUVs, exactly as the 2026-08-27 audit argued from
+the numbers. The merge is now backed by an external authority rather than our own reasoning.
+The remaining SUV/Crossover work is unblocked.
+
+## Six records whose model year disagrees with their own source
+
+- [ ] **Cadillac Optiq ×2** — we say MY2025, source is the *2026* Optiq entry (id 49951). This
+      one is genuinely mixed, not just mislabelled: the record carries **2025 horsepower
+      (300hp)** and the **2026 EPA range (303mi)**. The 2026 car is 440hp. So either the EPA
+      link is wrong for a 2025 record, or the record is a 2026 car with stale power and price.
+      *Note on yesterday's 0-60 work:* the 5.9s added on 2026-08-27 is correct **for the record
+      as labelled** (MY2025 / 300hp) and was explicitly checked against the year at the time. If
+      these get reclassified to MY2026, 0-60, horsepower, and price all change together — the
+      0-60 isn't a separate error.
+- [ ] **Ford F-150 Lightning Flash and Platinum** — we say MY2026, sources are 2025 entries.
+- [ ] **GMC Hummer EV Pickup 3X and SUV 3X** — we say MY2026, sources are 2025 entries. Already
+      root-caused on 2026-08-27; now confirmed as part of a pattern rather than a one-off.
+
+**Still needs your decision, unchanged from yesterday:** relabelling to the source year changes
+`carPath()` output and therefore public URLs, and the site has no redirects. Re-researching to
+the labelled year keeps URLs but is real work. Six records is small enough to do either way
+consistently — worth picking one policy and applying it to all six.
+
+## Two range disagreements
+
+- [ ] **Tesla Model 3 Performance AWD** — we say 346mi, its EPA entry says 314mi. A 32-mile gap
+      is too large to be a rounding or trim-variant difference; one of the two is wrong.
+- [ ] **Volvo EX60 P6 Plus** — we say 307mi, EPA says 295mi. This is a MY2027 car, so ours may
+      predate certification; check whether 307 was a manufacturer estimate.
+
+## Four EPA entries cited by two records each
+
+Niro EV Wind/Wave, Optiq Luxury/Sport, bZ Woodland/Woodland Premium, Bolt LT/RS. Legitimate
+where trims share a powertrain and EPA certifies one configuration — but it does mean those
+pairs' ranges can never disagree, so a genuine per-trim difference would be invisible. Worth a
+glance, not obviously wrong.
