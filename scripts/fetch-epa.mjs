@@ -35,42 +35,77 @@ const get = url => new Promise((resolve, reject) => {
   }).on("error", reject);
 });
 
+// EPA's own labels are verbose ("Standard Sport Utility Vehicle"), inconsistently pluralised
+// ("Large Cars" but "Minivan"), and out of step with every other enum in this dataset, which
+// reads "SUV" / "RWD" / "CCS1". Shortened on the way in.
+//
+// The mapping is deliberately LOSSLESS and mechanical — a pure renaming, reversible to EPA's
+// exact string — rather than a normalisation onto some tidier size scale of our own. The whole
+// reason for using EPA here is that it is sourced rather than judged; inventing tiers would
+// give that back. The raw value stays in scripts/epa-cache.json regardless.
+export const SIZE_CLASS = {
+  "Small Sport Utility Vehicle": "Small SUV",
+  "Standard Sport Utility Vehicle": "Standard SUV",
+  "Subcompact Cars": "Subcompact Car",
+  "Compact Cars": "Compact Car",
+  "Midsize Cars": "Midsize Car",
+  "Large Cars": "Large Car",
+  "Small Station Wagons": "Small Wagon",
+  "Midsize Station Wagons": "Midsize Wagon",
+  "Standard Pickup Trucks": "Standard Pickup",
+  "Special Purpose Vehicle": "Special Purpose",
+  "Minivan": "Minivan",
+};
+
+// EPA appends the drivetrain ("... 4WD"); that is not size and `drivetrain` already records it.
+export function shortSizeClass(vclass) {
+  if (!vclass) return null;
+  const stripped = vclass.replace(/\s*[-–]?\s*(2WD|4WD|AWD)$/, "").trim();
+  const short = SIZE_CLASS[stripped];
+  if (!short) throw new Error(`unmapped EPA VClass: "${stripped}" — add it to SIZE_CLASS`);
+  return short;
+}
+
 const tag = (xml, name) => {
   const m = xml.match(new RegExp(`<${name}>([^<]*)</${name}>`));
   return m ? m[1] : null;
 };
 
-const models = JSON.parse(readFileSync(path.join(ROOT, "data", "evs.json"), "utf8")).models;
-const cache = !REFRESH && existsSync(CACHE) ? JSON.parse(readFileSync(CACHE, "utf8")) : {};
+// Only run the fetch when invoked directly — scripts/ imports shortSizeClass from here,
+// and a bare import shouldn't hit a government API as a side effect.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const models = JSON.parse(readFileSync(path.join(ROOT, "data", "evs.json"), "utf8")).models;
+  const cache = !REFRESH && existsSync(CACHE) ? JSON.parse(readFileSync(CACHE, "utf8")) : {};
 
-const targets = [];
-for (const m of models) {
-  const id = (m.links?.epaWindowSticker || "").match(/[?&]id=(\d+)/)?.[1];
-  if (id) targets.push({ recordId: m.id, epaId: id });
-}
-const todo = targets.filter(t => !cache[t.epaId]);
-console.log(`${targets.length} records cite an EPA id · ${Object.keys(cache).length} cached · ${todo.length} to fetch`);
-
-let ok = 0, failed = [];
-for (const [i, t] of todo.entries()) {
-  try {
-    const xml = await get(`https://www.fueleconomy.gov/ws/rest/vehicle/${t.epaId}`);
-    cache[t.epaId] = {
-      year: Number(tag(xml, "year")),
-      make: tag(xml, "make"),
-      model: tag(xml, "model"),
-      vclass: tag(xml, "VClass"),
-      range: Number(tag(xml, "range")) || null,
-      fetchedOn: new Date().toISOString().slice(0, 10),
-    };
-    ok++;
-  } catch (e) {
-    failed.push(`${t.epaId} (${t.recordId}): ${e.message}`);
+  const targets = [];
+  for (const m of models) {
+    const id = (m.links?.epaWindowSticker || "").match(/[?&]id=(\d+)/)?.[1];
+    if (id) targets.push({ recordId: m.id, epaId: id });
   }
-  if ((i + 1) % 25 === 0) process.stdout.write(`  ...${i + 1}/${todo.length}\n`);
-  await new Promise(r => setTimeout(r, DELAY_MS));
-}
+  const todo = targets.filter(t => !cache[t.epaId]);
+  console.log(`${targets.length} records cite an EPA id · ${Object.keys(cache).length} cached · ${todo.length} to fetch`);
 
-writeFileSync(CACHE, JSON.stringify(cache, null, 2) + "\n");
-console.log(`\nfetched ${ok}, cached ${Object.keys(cache).length} total -> scripts/epa-cache.json`);
-if (failed.length) { console.log(`\n${failed.length} failed:`); failed.forEach(f => console.log("  " + f)); }
+  let ok = 0, failed = [];
+  for (const [i, t] of todo.entries()) {
+    try {
+      const xml = await get(`https://www.fueleconomy.gov/ws/rest/vehicle/${t.epaId}`);
+      cache[t.epaId] = {
+        year: Number(tag(xml, "year")),
+        make: tag(xml, "make"),
+        model: tag(xml, "model"),
+        vclass: tag(xml, "VClass"),
+        range: Number(tag(xml, "range")) || null,
+        fetchedOn: new Date().toISOString().slice(0, 10),
+      };
+      ok++;
+    } catch (e) {
+      failed.push(`${t.epaId} (${t.recordId}): ${e.message}`);
+    }
+    if ((i + 1) % 25 === 0) process.stdout.write(`  ...${i + 1}/${todo.length}\n`);
+    await new Promise(r => setTimeout(r, DELAY_MS));
+  }
+
+  writeFileSync(CACHE, JSON.stringify(cache, null, 2) + "\n");
+  console.log(`\nfetched ${ok}, cached ${Object.keys(cache).length} total -> scripts/epa-cache.json`);
+  if (failed.length) { console.log(`\n${failed.length} failed:`); failed.forEach(f => console.log("  " + f)); }
+}
