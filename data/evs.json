@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:e15e0d6eedad76131327c513f773e1a50ad72a35757144036ff34103c74307e4",
+  "hash": "sha256:89a06cbc23fa0cc95e64d96fcfad997a7568b43889ed0355e78246614099b991",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -814,7 +814,7 @@
       "id": "bmw-i4-2026-edrive40",
       "url": "https://evcompare.org/2026/i4/edrive40/",
       "catalogId": 10,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "BMW",
       "model": "i4",
       "trim": "eDrive40",
@@ -891,7 +891,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 3527,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/bmw-i-series/i4/bmw-i4-gran-coupe.html",
         "review": "https://www.edmunds.com/bmw/i4/2026/",
@@ -903,7 +903,7 @@
       "id": "bmw-i4-2026-m60-xdrive",
       "url": "https://evcompare.org/2026/i4/m60-xdrive/",
       "catalogId": 11,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "BMW",
       "model": "i4",
       "trim": "M60 xDrive",
@@ -980,7 +980,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 3527,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/m-series/bmw-i4-m60/bmw-i4-m60-gran-coupe.html",
         "review": "https://www.edmunds.com/bmw/i4/2026/m60/",
@@ -992,7 +992,7 @@
       "id": "bmw-i5-2026-edrive40",
       "url": "https://evcompare.org/2026/i5/edrive40/",
       "catalogId": 12,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "BMW",
       "model": "i5",
       "trim": "eDrive40",
@@ -1069,7 +1069,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 3307,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.7,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/bmw-i-series/i5/bmw-i5-overview.html",
         "review": "https://www.edmunds.com/bmw/i5/2026/",
@@ -1081,7 +1081,7 @@
       "id": "bmw-i5-2026-m60-xdrive",
       "url": "https://evcompare.org/2026/i5/m60-xdrive/",
       "catalogId": 13,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "BMW",
       "model": "i5",
       "trim": "M60 xDrive",
@@ -1158,7 +1158,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 4409,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.4,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/m-series/bmw-i5-m60/bmw-i5-m60xdrive-overview.html",
         "review": "https://www.edmunds.com/bmw/i5/2026/m60/",
@@ -1170,7 +1170,7 @@
       "id": "bmw-i7-2026-xdrive60",
       "url": "https://evcompare.org/2026/i7/xdrive60/",
       "catalogId": 14,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "BMW",
       "model": "i7",
       "trim": "xDrive60",
@@ -1248,7 +1248,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.4,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/7-series/sedan/bmw-i7-sedan.html",
         "review": "https://www.edmunds.com/bmw/i7/",
@@ -1260,7 +1260,7 @@
       "id": "bmw-ix-2026-xdrive60",
       "url": "https://evcompare.org/2026/ix/xdrive60/",
       "catalogId": 15,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "BMW",
       "model": "iX",
       "trim": "xDrive60",
@@ -1339,7 +1339,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 3500,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 8.8,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/bmw-i-series/ix/bmw-ix.html",
         "review": "https://www.edmunds.com/bmw/ix/2026/",
@@ -1351,7 +1351,7 @@
       "id": "bmw-ix-2026-m70-xdrive",
       "url": "https://evcompare.org/2026/ix/m70-xdrive/",
       "catalogId": 16,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "BMW",
       "model": "iX",
       "trim": "M70 xDrive",
@@ -1429,7 +1429,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 3500,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 8.8,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/m-series/ix-m70/bmw-ix-m70.html",
         "review": "https://www.edmunds.com/bmw/ix/2026/m70/",
@@ -1441,7 +1441,7 @@
       "id": "bmw-ix3-2027-50-xdrive",
       "url": "https://evcompare.org/2027/ix3/50-xdrive/",
       "catalogId": 17,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "BMW",
       "model": "iX3",
       "trim": "50 xDrive",
@@ -1518,7 +1518,7 @@
         "frunkCubicFeet": 2
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 6.9,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/x-series/ix3/bmw-ix3.html",
         "review": "https://carbuzz.com/2027-bmw-ix3-first-drive-review/",
@@ -7232,7 +7232,7 @@
       "id": "mercedes-benz-eqs-sedan-2025-450-plus",
       "url": "https://evcompare.org/2025/eqs-sedan/450/",
       "catalogId": 83,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Benz",
       "model": "EQS Sedan",
       "trim": "450+",
@@ -7309,7 +7309,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.8,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/class/eqs/sedan",
         "review": "https://www.cars.com/research/mercedes_benz-eqs_450-2025/",
@@ -7321,7 +7321,7 @@
       "id": "mercedes-benz-eqs-sedan-2025-580-4matic",
       "url": "https://evcompare.org/2025/eqs-sedan/580-4matic/",
       "catalogId": 84,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Benz",
       "model": "EQS Sedan",
       "trim": "580 4MATIC",
@@ -7398,7 +7398,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.8,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/class/eqs/sedan",
         "review": "https://www.cars.com/research/mercedes_benz-eqs_580-2025/",
@@ -11541,7 +11541,7 @@
       "id": "hyundai-ioniq-5-n-2026",
       "url": "https://evcompare.org/2026/ioniq-5-n/n/",
       "catalogId": 132,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Hyundai",
       "model": "Ioniq 5 N",
       "trim": "N",
@@ -11616,7 +11616,7 @@
         "frunkCubicFeet": 0.85
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.6,
       "links": {
         "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-5-n",
         "review": "https://www.autoblog.com/cars/hyundai/ioniq-5-n/2026",
@@ -12244,7 +12244,7 @@
       "id": "mercedes-maybach-eqs-suv-2026-680-4matic",
       "url": "https://evcompare.org/2026/eqs-suv/680-4matic/",
       "catalogId": 140,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Maybach",
       "model": "EQS SUV",
       "trim": "680 4MATIC",
@@ -12320,7 +12320,7 @@
         "frunkCubicFeet": 0
       },
       "towCapacityLbs": 3500,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 7.3,
       "links": {
         "manufacturerSpec": "https://www.mbusa.com/en/vehicles/model/eqs/suv/eqs680z4",
         "review": "https://www.edmunds.com/mercedes-benz/maybach-eqs-suv/",

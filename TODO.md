@@ -1240,26 +1240,32 @@ adaptive/air suspension quotes a range, and off-road packages raise it.
 - [x] e-tron GT — S Premium Plus quattro, RS performance — **4.9 in** (125 mm, air suspension base height)
 - [x] A6 e-tron — Premium, Premium Plus quattro — **5.6 in** (143 mm, standard suspension)
 
-### Batch B — BMW (8 records, 5 models)
-- [ ] i4 — eDrive40, M60 xDrive
-- [ ] i5 — eDrive40, M60 xDrive
-- [ ] i7 — xDrive60
-- [ ] iX — xDrive60, M70 xDrive
-- [ ] iX3 — 50 xDrive
+### Batch B — BMW (8 records, 5 models) — DONE, 8/8
+- [x] i4 — eDrive40, M60 xDrive — **4.9 in** both
+- [x] i5 — eDrive40 **5.7 in**, M60 xDrive **5.4 in**
+- [x] i7 — xDrive60 **5.4 in**
+- [x] iX — xDrive60, M70 xDrive — **8.8 in** both
+- [x] iX3 — 50 xDrive **6.9 in**
 
-### Batch C — Mercedes-Benz + Maybach (9 records, 5 models)
-- [ ] EQB — 250+, 350 4MATIC
-- [ ] EQE Sedan — 350+, 500 4MATIC
-- [ ] EQS Sedan — 450+, 580 4MATIC
-- [ ] CLA — 250+ w/EQ, 350 4MATIC w/EQ
-- [ ] Maybach EQS SUV — 680 4MATIC
+### Batch C — Mercedes-Benz + Maybach (9 records, 5 models) — 3/9, rest blocked
+- [ ] EQB — 250+, 350 4MATIC — **no reliable figure**, see below
+- [ ] EQE Sedan — 350+, 500 4MATIC — **no reliable figure**, see below
+- [x] EQS Sedan — 450+, 580 4MATIC — **4.8 in** both
+- [ ] CLA — 250+ w/EQ, 350 4MATIC w/EQ — **no reliable figure**, see below
+- [x] Maybach EQS SUV — 680 4MATIC — **7.3 in**
 
-### Batch D — Hyundai + Genesis (8 records, 5 models)
-- [ ] Ioniq 9 — S RWD, Calligraphy AWD
-- [ ] Kona Electric — SE FWD, Limited FWD
-- [ ] Ioniq 5 N — N
-- [ ] Electrified G80 — Advanced AWD
-- [ ] GV60 — Standard RWD, Performance AWD
+### Batch D — Hyundai + Genesis (8 records, 5 models) — 1/8, interrupted
+- [ ] Ioniq 9 — S RWD, Calligraphy AWD — SEL AWD reads 6.9 in; **our two trims not yet checked**
+- [ ] Kona Electric — SE FWD, Limited FWD — SEL reads 5.9 in; **our two trims not yet checked**
+- [x] Ioniq 5 N — N — **5.6 in** (single trim, read directly)
+- [ ] Electrified G80 — Advanced AWD — wrong Edmunds slug, not yet found
+- [ ] GV60 — Standard RWD, Performance AWD — Edmunds has no ground clearance row for the GV60
+
+**Resume here.** Edmunds began returning 403 partway through this batch, so it was stopped
+rather than pushed. The two "reads N in" figures above are for *adjacent trims we do not
+carry* and must not be copied across — that is precisely the drift this audit exists to catch.
+Re-check `st-402040674`/`st-402040677` (Kona SE/Limited) and the Ioniq 9 S and Performance
+Calligraphy style ids, confirming the trim from each page's `<title>` before writing.
 
 ### Batch E — Ford + GM (6 records, 4 models)
 - [ ] F-150 Lightning — Flash, Platinum
@@ -1325,3 +1331,72 @@ the same nameplate. The spec databases list Sportback and Avant variants alongsi
 carry, and the A6 in particular publishes an Avant-wagon figure — an earlier pass had already
 left this record null for exactly that reason. All values above are the Sportback/SUV figures
 matching the records we hold.
+
+### Batch B — BMW (2026-08-28): 8 of 8 filled
+
+Every BMW record closed, and unlike Batch A this one has a manufacturer cross-check.
+
+**How it was sourced.** BMW's own press spec sheets *are* real text PDFs (Audi's are
+image-rendered), so
+[BMW USA's 2024 5 Series technical specifications](https://www.press.bmwgroup.com/usa/article/attachment/T0418778EN_US/624323)
+could be decompressed and read directly: `Ground clearance inches 6.1 5.7 5.4` across the
+530i / i5 eDrive40 / i5 M60 xDrive columns. The rest came from Edmunds, read in a browser
+(their pages 403 a plain fetcher), cross-checked against evspecifications.com.
+
+**A near-miss worth recording.** A search summary reported the i5 eDrive40 at 6.1 in. The raw
+table shows 6.1 is the *gas* 530i column — the eDrive40 is 5.7. Reading the four-column
+dimensions block directly is what caught it. Every figure below was confirmed from a page whose
+own `<title>` names the trim, after an Edmunds style id turned out not to follow listing order
+(`st-402097385` is the i4 M60, not the eDrive40).
+
+**Two independent US sources agree on all eight**, and where BMW USA publishes a number it
+matches: i5 eDrive40 5.7 and M60 5.4 appear identically in BMW's press sheet and on Edmunds;
+i7 xDrive60 5.4, iX3 6.9 and i4 4.9 match evspecifications.com.
+
+**The iX is the one to double-check if it ever looks wrong.** Edmunds and evspecifications'
+*US* entry both say 8.8 in for the xDrive60 and the M70. EVKX and evspecifications' *EU* entry
+say 8.0 in (202 mm) — that is the coil-spring figure, and US iX models ship adaptive two-axle
+air suspension as standard. 8.8 in is the US-market number and is what the rest of this
+dataset's convention wants.
+
+### Batch C — Mercedes-Benz (2026-08-28): 3 of 9 filled
+
+**Filled:** EQS Sedan 450+ and 580 4MATIC at **4.8 in** — the whole EQS Sedan line reads 4.8
+(450+, 450 4MATIC and 580 4MATIC all match; the AMG EQS is a different 5.3). Maybach EQS SUV
+680 4MATIC at **7.3 in**, which agrees with the EQS SUV 450+/580 records already in the
+dataset. This closes the "genuinely couldn't confirm a reliable US-specific figure" note left
+against the EQS Sedan entries earlier in this file.
+
+**Left null on purpose: EQB (2), EQE Sedan (2), CLA with EQ Technology (2).** Mercedes does not
+publish ground clearance for these in the US, and the figures that circulate do not agree:
+
+- EQB — 154 mm from one aggregator, 140 mm (5.5 in) from another.
+- EQE Sedan — 134 mm from one, 5.5 in (140 mm) from another.
+- CLA with EQ Technology — the ~160 mm figure in circulation is explicitly the **Indian-market
+  car, which has taller springs**. Copying it into a US record would be the drift trap in its
+  purest form.
+
+Checked and came up empty: Edmunds (no ground clearance row at all for the EQB, EQE Sedan or
+CLA — it has one for the EQS, which is why those two closed), KBB, US News, and Mercedes-Benz
+USA's own press site, whose EQ releases give length/width/height but no ground clearance. The
+closest MBUSA gets is prose: AIRMATIC "can be raised by up to 1 inch," with no baseline stated.
+
+### Batch D — Hyundai + Genesis (2026-08-28): 1 of 8, stopped early
+
+Ioniq 5 N filled at **5.6 in** — a single-trim record, read straight off its own page.
+
+Edmunds started returning 403 on the fourth model in this batch, so the crawl was stopped
+rather than hammered. Nothing was written from the partial reads: the Ioniq 9 figure in hand is
+the SEL AWD and the Kona figure is the SEL, and this dataset carries neither of those trims.
+The Genesis GV60 has no ground clearance row on Edmunds at all, and the Electrified G80's
+Edmunds slug is not `electrified-g80` — that needs looking up from the make index.
+
+**Method note for batches E and F.** Edmunds is the best source found so far (US convention,
+matches the dataset's existing figures) but it must be read through a real browser and it rate
+limits. Read the value out of the page HTML rather than the rendered text, since the
+dimensions section renders collapsed:
+
+    /Ground clearance<\/th><td[^>]*>([^<]+)/
+
+Always print `document.title` alongside the value — style ids do not reliably follow trim
+listing order.
