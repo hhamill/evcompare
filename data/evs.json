@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:89a06cbc23fa0cc95e64d96fcfad997a7568b43889ed0355e78246614099b991",
+  "hash": "sha256:75b200d0da7cd980193a06a2563e5b6e8d8d1d9fc930ed0c66a6a94063b4427a",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -2405,7 +2405,7 @@
       "id": "chevrolet-bolt-2027-lt",
       "url": "https://evcompare.org/2027/bolt/lt/",
       "catalogId": 28,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Chevrolet",
       "model": "Bolt",
       "trim": "LT",
@@ -2480,7 +2480,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.6,
       "links": {
         "manufacturerSpec": "https://www.chevrolet.com/electric/bolt-ev",
         "review": "https://electrek.co/2026/03/09/2027-chevy-bolt-review-whys-this-great-budget-ev-only-here-for-a-limited-time/",
@@ -2492,7 +2492,7 @@
       "id": "chevrolet-bolt-2027-rs",
       "url": "https://evcompare.org/2027/bolt/rs/",
       "catalogId": 29,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Chevrolet",
       "model": "Bolt",
       "trim": "RS",
@@ -2567,7 +2567,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.6,
       "links": {
         "manufacturerSpec": "https://www.chevrolet.com/electric/bolt-ev",
         "review": "https://electrek.co/2026/03/09/2027-chevy-bolt-review-whys-this-great-budget-ev-only-here-for-a-limited-time/",
@@ -3272,7 +3272,7 @@
         "frunkCubicFeet": 14.1
       },
       "towCapacityLbs": 7700,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 8.4,
       "links": {
         "manufacturerSpec": "https://www.ford.com/trucks/f150/f150-lightning/2026/models/",
         "review": "https://www.caranddriver.com/ford/f-150-lightning",
@@ -3360,7 +3360,7 @@
         "frunkCubicFeet": 14.1
       },
       "towCapacityLbs": 8600,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 8.4,
       "links": {
         "manufacturerSpec": "https://www.ford.com/trucks/f150/f150-lightning/2026/models/",
         "review": "https://www.caranddriver.com/ford/f-150-lightning",
@@ -3462,7 +3462,7 @@
       "id": "ford-mustang-mach-e-2026-premium-awd",
       "url": "https://evcompare.org/2026/mustang-mach-e/premium-awd-extended-range/",
       "catalogId": 40,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Ford",
       "model": "Mustang Mach-E",
       "trim": "Premium AWD Extended Range",
@@ -3538,7 +3538,7 @@
         "frunkCubicFeet": 4.8
       },
       "towCapacityLbs": 0,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.7,
       "links": {
         "manufacturerSpec": "https://www.ford.com/suvs/mach-e/models/premium/",
         "review": "https://www.edmunds.com/ford/mustang-mach-e/2026/trims/",
@@ -3814,7 +3814,7 @@
       "id": "gmc-sierra-ev-2026-denali-extended-range",
       "url": "https://evcompare.org/2026/sierra-ev/denali-extended-range/",
       "catalogId": 44,
-      "lastVerifiedDate": "2026-08-27",
+      "lastVerifiedDate": "2026-08-28",
       "make": "GMC",
       "model": "Sierra EV",
       "trim": "Denali (Extended Range)",
@@ -3887,7 +3887,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 12500,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 8.2,
       "links": {
         "manufacturerSpec": "https://www.gmc.com/electric/sierra-ev",
         "review": "https://www.cars.com/research/gmc-sierra_ev-2026/",
@@ -4767,7 +4767,7 @@
       "id": "hyundai-ioniq-9-2026-s-rwd",
       "url": "https://evcompare.org/2026/ioniq-9/s-rwd/",
       "catalogId": 55,
-      "lastVerifiedDate": "2026-08-27",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Hyundai",
       "model": "Ioniq 9",
       "trim": "S RWD",
@@ -4840,7 +4840,7 @@
         "frunkCubicFeet": 2
       },
       "towCapacityLbs": 3500,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 6.9,
       "links": {
         "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-9",
         "review": "https://www.cars.com/research/hyundai-ioniq_9-2026/",
@@ -4852,7 +4852,7 @@
       "id": "hyundai-ioniq-9-2026-calligraphy-awd",
       "url": "https://evcompare.org/2026/ioniq-9/calligraphy-awd/",
       "catalogId": 56,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Hyundai",
       "model": "Ioniq 9",
       "trim": "Calligraphy AWD",
@@ -4925,7 +4925,7 @@
         "frunkCubicFeet": 3
       },
       "towCapacityLbs": 5000,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 6.9,
       "links": {
         "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/ioniq-9/calligraphy",
         "review": "https://www.edmunds.com/car-news/2026-hyundai-ioniq-9-calligraphy-tested.html",
@@ -4937,7 +4937,7 @@
       "id": "hyundai-kona-electric-2025-se-fwd",
       "url": "https://evcompare.org/2025/kona-electric/se-fwd/",
       "catalogId": 57,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Hyundai",
       "model": "Kona Electric",
       "trim": "SE FWD",
@@ -5013,7 +5013,7 @@
         "frunkCubicFeet": 1
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.9,
       "links": {
         "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/kona-electric/se",
         "review": "https://www.edmunds.com/hyundai/kona-electric/2025/features-specs/",
@@ -5025,7 +5025,7 @@
       "id": "hyundai-kona-electric-2025-limited-fwd",
       "url": "https://evcompare.org/2025/kona-electric/limited-fwd/",
       "catalogId": 58,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Hyundai",
       "model": "Kona Electric",
       "trim": "Limited FWD",
@@ -5101,7 +5101,7 @@
         "frunkCubicFeet": 1
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 5.9,
       "links": {
         "manufacturerSpec": "https://www.hyundaiusa.com/us/en/vehicles/kona-electric/limited",
         "review": "https://www.edmunds.com/hyundai/kona-electric/2025/features-specs/",
@@ -9354,7 +9354,7 @@
       "id": "tesla-cybertruck-2026-cyberbeast",
       "url": "https://evcompare.org/2026/cybertruck/cyberbeast/",
       "catalogId": 107,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Tesla",
       "model": "Cybertruck",
       "trim": "Cyberbeast",
@@ -9429,7 +9429,7 @@
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 11000,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 8,
       "links": {
         "manufacturerSpec": "https://www.tesla.com/cybertruck",
         "review": "https://www.caranddriver.com/tesla/cybertruck",
@@ -12768,7 +12768,7 @@
       "id": "tesla-model-s-2026-awd",
       "url": "https://evcompare.org/2026/model-s/awd/",
       "catalogId": 146,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Tesla",
       "model": "Model S",
       "trim": "AWD",
@@ -12844,7 +12844,7 @@
         "frunkCubicFeet": 3.1
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.6,
       "links": {
         "manufacturerSpec": "https://www.tesla.com/models",
         "review": "https://www.edmunds.com/tesla/model-s/",
@@ -12856,7 +12856,7 @@
       "id": "tesla-model-s-2026-plaid-awd",
       "url": "https://evcompare.org/2026/model-s/plaid-awd/",
       "catalogId": 147,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Tesla",
       "model": "Model S",
       "trim": "Plaid AWD",
@@ -12932,7 +12932,7 @@
         "frunkCubicFeet": 3.1
       },
       "towCapacityLbs": null,
-      "groundClearanceIn": null,
+      "groundClearanceIn": 4.6,
       "links": {
         "manufacturerSpec": "https://www.tesla.com/models",
         "review": "https://www.edmunds.com/tesla/model-s/",
