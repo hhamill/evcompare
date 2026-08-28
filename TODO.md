@@ -1665,8 +1665,8 @@ Top speed has no such problem: it is a clean, single, well-populated row.
     Top speed:  /Top speed:\s*([0-9.]+)\s*mph/          on the summary line
     Heat pump:  "Thermal Management" section, look for /heat pump/i
 
-Model pages are opaque hashes (), so each brand's index page
-(, all 48 linked from ) has to be read first to map model names to
+Model pages are opaque hashes (`/en/model/d47a45e`), so each brand's index page
+(`/en/brand/{hash}`, all 48 linked from `/en/brands`) has to be read first to map model names to
 URLs. Read them through the browser rather than one fetch per page — several navigations batch
 into a single round trip.
 
