@@ -1636,3 +1636,135 @@ Four need a **decision rather than a lookup**, and should not be assigned mechan
   AWD (307mi on 20in AT, 330mi on 21in). Our record is *Premium* AWD carrying 330mi, which EPA
   attributes to the Performance on 21-inch wheels. That is either a missing EPA entry or trim
   drift in our data, and it should be resolved before an id is attached.
+
+## Heat pump + top speed backfill — queued 2026-08-28
+
+83 records need one or both: **heat pump** is null on 56, **top speed** on 38, overlapping on 11.
+Paired because [evspecifications.com](https://www.evspecifications.com/en/brands) carries both on
+one page, so most records cost a single visit.
+
+### The rule that matters: on this source, presence is trustworthy and absence is not
+
+Its "Thermal Management" row says "Liquid-based coolant circulation / Heat pump" on the 2026 BMW
+i4 and the 2026 iX, but only "Liquid-based coolant circulation" on the 2024 i5 — and the i5 does
+have a heat pump. The field is populated inconsistently, and older entries look thinner.
+
+So: **a positive mention writes ; silence writes nothing.** Never record  because the
+page didn't say "heat pump" — that would manufacture ~50 wrong booleans, which is far worse than
+leaving them null. A  needs a source that explicitly says the trim lacks one.
+
+That distinction matters more here than for most fields, because **heat pump is genuinely
+trim-dependent**. The ten  values already in the dataset are all base trims — Q4 e-tron,
+Ioniq 5 SE Standard Range, EV6 Light, Solterra, bZ, ID.4 Standard, Uncharted — while the same
+nameplate's upper trims are . Getting the trim wrong flips the value.
+
+Top speed has no such problem: it is a clean, single, well-populated row.
+
+### Extraction
+
+    Top speed:  /Top speed:\s*([0-9.]+)\s*mph/          on the summary line
+    Heat pump:  "Thermal Management" section, look for /heat pump/i
+
+Model pages are opaque hashes (), so each brand's index page
+(, all 48 linked from ) has to be read first to map model names to
+URLs. Read them through the browser rather than one fetch per page — several navigations batch
+into a single round trip.
+
+### Batch A — Mercedes-Benz (8 records)
+- [ ] 2025 Mercedes-Benz EQB — 250+ · _top speed_
+- [ ] 2025 Mercedes-Benz EQE SUV — 350+ · _top speed_
+- [ ] 2025 Mercedes-Benz EQE Sedan — 350+ · _top speed_
+- [ ] 2025 Mercedes-Benz EQE Sedan — 500 4MATIC · _top speed_
+- [ ] 2025 Mercedes-Benz EQS SUV — 450+ · _top speed_
+- [ ] 2025 Mercedes-Benz EQS Sedan — 450+ · _top speed_
+- [ ] 2025 Mercedes-Benz EQS Sedan — 580 4MATIC · _top speed_
+- [ ] 2026 Mercedes-Benz G-Class — G 580 w/EQ Technology · _heat pump_
+
+### Batch B — Cadillac, Chevrolet (12 records)
+- [ ] 2026 Cadillac Escalade IQ — Luxury AWD · _top speed_
+- [ ] 2026 Cadillac Escalade IQ — Premium Sport AWD · _top speed_
+- [ ] 2025 Cadillac Lyriq — Luxury RWD · _top speed_
+- [ ] 2025 Cadillac Lyriq — Sport AWD · _top speed_
+- [ ] 2025 Cadillac Optiq — Luxury AWD · _heat pump_
+- [ ] 2025 Cadillac Optiq — Sport AWD · _heat pump_
+- [ ] 2026 Chevrolet Blazer EV — LT FWD · _top speed_
+- [ ] 2026 Chevrolet Blazer EV — LT AWD · _top speed_
+- [ ] 2026 Chevrolet Equinox EV — LT FWD · _top speed_
+- [ ] 2026 Chevrolet Equinox EV — RS AWD · _top speed_
+- [ ] 2026 Chevrolet Silverado EV — WT (Standard Range) · _heat pump_
+- [ ] 2026 Chevrolet Silverado EV — RST (Max Range) · _heat pump_
+
+### Batch C — Audi, GMC (9 records)
+- [ ] 2025 Audi Q8 e-tron — Premium quattro · _heat pump_
+- [ ] 2025 Audi e-tron GT — S e-tron GT Premium Plus quattro · _heat pump_
+- [ ] 2025 Audi e-tron GT — RS e-tron GT performance · _heat pump_
+- [ ] 2027 Audi A6 e-tron — Premium · _top speed_
+- [ ] 2027 Audi A6 e-tron — Premium Plus quattro · _top speed_
+- [ ] 2025 GMC Hummer EV Pickup — 3X · _heat pump_
+- [ ] 2026 GMC Sierra EV — Elevation (Standard Range) · _heat pump_
+- [ ] 2026 GMC Sierra EV — Denali (Extended Range) · _heat pump_
+- [ ] 2025 GMC Hummer EV SUV — 3X · _heat pump + top speed_
+
+### Batch D — Genesis, Hyundai, Kia (10 records)
+- [ ] 2025 Genesis Electrified G80 — Advanced AWD · _heat pump_
+- [ ] 2025 Genesis Electrified GV70 — Advanced AWD · _heat pump_
+- [ ] 2025 Genesis GV60 — Standard RWD · _heat pump_
+- [ ] 2025 Genesis GV60 — Performance AWD · _heat pump_
+- [ ] 2026 Hyundai Ioniq 9 — S RWD · _heat pump + top speed_
+- [ ] 2026 Hyundai Ioniq 9 — Calligraphy AWD · _heat pump_
+- [ ] 2025 Hyundai Kona Electric — SE FWD · _heat pump_
+- [ ] 2025 Hyundai Kona Electric — Limited FWD · _heat pump_
+- [ ] 2025 Kia Niro EV — Wind FWD · _heat pump_
+- [ ] 2025 Kia Niro EV — Wave FWD · _heat pump_
+
+### Batch E — Lexus, Toyota, Subaru (11 records)
+- [ ] 2027 Lexus ES — 350e FWD · _heat pump + top speed_
+- [ ] 2027 Lexus ES — 500e AWD · _heat pump + top speed_
+- [ ] 2026 Lexus RZ — 350e FWD · _heat pump + top speed_
+- [ ] 2026 Lexus RZ — 550e F SPORT AWD · _heat pump + top speed_
+- [ ] 2026 Toyota bZ — XLE FWD · _top speed_
+- [ ] 2026 Toyota bZ — Limited AWD · _top speed_
+- [ ] 2026 Toyota bZ Woodland — Woodland · _heat pump + top speed_
+- [ ] 2026 Toyota bZ Woodland — Woodland Premium · _heat pump + top speed_
+- [ ] 2025 Subaru Solterra — Premium AWD · _top speed_
+- [ ] 2025 Subaru Solterra — Touring AWD · _top speed_
+- [ ] 2026 Subaru Uncharted — Premium · _top speed_
+
+### Batch F — Nissan, Ford, Honda, Dodge (11 records)
+- [ ] 2025 Nissan Ariya — Engage FWD · _heat pump + top speed_
+- [ ] 2025 Nissan Ariya — Platinum+ e-4ORCE AWD · _heat pump + top speed_
+- [ ] 2026 Nissan Leaf — S+ FWD · _heat pump_
+- [ ] 2026 Nissan Leaf — SV+ FWD · _heat pump_
+- [ ] 2025 Ford F-150 Lightning — Flash · _heat pump_
+- [ ] 2025 Ford F-150 Lightning — Platinum · _heat pump_
+- [ ] 2026 Ford E-Transit — Cargo Van Low Roof RWD · _heat pump_
+- [ ] 2025 Honda Prologue — EX FWD · _heat pump_
+- [ ] 2025 Honda Prologue — Elite AWD · _heat pump_
+- [ ] 2025 Dodge Charger Daytona — Scat Pack AWD · _heat pump_
+- [ ] 2025 Dodge Charger Daytona — R/T AWD · _heat pump_
+
+### Batch G — Rivian, Tesla, Porsche, Volvo, Volkswagen, BMW, Fiat, MINI, Lucid (15 records)
+- [ ] 2025 Rivian R1T — Adventure Dual-Motor AWD (Large Pack) · _top speed_
+- [ ] 2027 Rivian R2 — Premium AWD · _heat pump + top speed_
+- [ ] 2027 Rivian R2 — Performance AWD · _heat pump_
+- [ ] 2026 Tesla Model S — AWD · _top speed_
+- [ ] 2026 Tesla Model S — Plaid AWD · _top speed_
+- [ ] 2026 Porsche Cayenne Electric — Base · _heat pump_
+- [ ] 2026 Porsche Cayenne Electric — Turbo · _heat pump_
+- [ ] 2025 Volvo EX30 — Single Motor Extended Range · _heat pump_
+- [ ] 2025 Volvo EX30 — Twin Motor Performance · _heat pump_
+- [ ] 2025 Volkswagen ID. Buzz — Pro S · _heat pump_
+- [ ] 2025 Volkswagen ID. Buzz — Pro S Plus 4MOTION · _heat pump_
+- [ ] 2027 BMW iX3 — 50 xDrive · _top speed_
+- [ ] 2025 Fiat 500e — (500e)RED · _heat pump_
+- [ ] 2025 MINI Countryman Electric — SE ALL4 · _heat pump_
+- [ ] 2026 Lucid Gravity — Touring AWD · _top speed_
+
+### Batch H — Acura, Jeep, VinFast (7 records) — **not listed on evspecifications**, needs manufacturer sources
+- [ ] 2024 Acura ZDX — A-Spec RWD · _heat pump_
+- [ ] 2024 Acura ZDX — Type S AWD · _heat pump_
+- [ ] 2026 Jeep Recon — Moab 4WD · _heat pump_
+- [ ] 2025 Jeep Wagoneer S — Launch Edition AWD · _heat pump_
+- [ ] 2025 VinFast VF8 — Eco AWD · _heat pump_
+- [ ] 2025 VinFast VF8 — Plus AWD · _heat pump_
+- [ ] 2025 VinFast VF9 — Plus AWD · _heat pump_
