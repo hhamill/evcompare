@@ -843,17 +843,26 @@ function main() {
     return { id, url, ...rest };
   });
 
+
+  // Hash the models as published, not as sourced: the value in current.json is what a
+  // consumer checks against the file they downloaded, so it has to describe that file.
+  const dataHash = hashModels(publishedModels);
+
   // The committed wrapper can drift the same way the urls can — most likely by rewording the
   // disclaimer in dataset-meta.mjs and forgetting to re-sync. Published output is regenerated
   // either way; this only flags the repo copy.
   const srcWrapper = JSON.parse(readFileSync(path.join(ROOT, "data", "evs.json"), "utf8"));
   delete srcWrapper.models;
-  const expectedWrapper = datasetWrapper({ hash: srcWrapper.hash, count: cars.length });
+  const expectedWrapper = datasetWrapper({ hash: dataHash, count: cars.length });
   const wrapperStale = JSON.stringify(srcWrapper) !== JSON.stringify(expectedWrapper);
+  const hashStale = srcWrapper.hash !== dataHash;
 
   const missingUrls = cars.filter(c => !c.url).length;
   if (wrapperStale) {
-    console.warn(`  ! data/evs.json's wrapper is out of date (licence/terms/disclaimer metadata).`);
+    console.warn(hashStale
+      ? `  ! data/evs.json's committed hash is stale (${srcWrapper.hash.slice(0, 15)}… should be ${dataHash.slice(0, 15)}…).`
+        + `\n    Anyone verifying the GitHub copy against it would get a false mismatch.`
+      : `  ! data/evs.json's wrapper is out of date (licence/terms/disclaimer metadata).`);
     console.warn(`    Run: npm run sync-urls`);
   }
   if (staleUrls.length || missingUrls) {
@@ -862,10 +871,6 @@ function main() {
     console.warn(`    repo is what people get from GitHub. Run: npm run sync-urls`);
     for (const u of staleUrls.slice(0, 3)) console.warn(`      ${u.id}: ${u.committed} -> ${u.url}`);
   }
-
-  // Hash the models as published, not as sourced: the value in current.json is what a
-  // consumer checks against the file they downloaded, so it has to describe that file.
-  const dataHash = hashModels(publishedModels);
   writeFileSync(
     path.join(DIST, "data", "evs.json"),
     JSON.stringify({ ...datasetWrapper({ hash: dataHash, count: cars.length, generatedAt }), models: publishedModels }, null, 2) + "\n"
