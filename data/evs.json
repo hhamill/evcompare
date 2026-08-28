@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:232561f6127ff0eea001d90e909bce499597d2ec34a22847db5707f5a3fcffa6",
+  "hash": "sha256:1c4b814f9a56971bd6db77243830afc68f8472918900c4b9c47be07705050646",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -13,7 +13,7 @@
       "id": "acura-zdx-2024-a-spec-rwd",
       "url": "https://evcompare.org/2024/zdx/a-spec-rwd/",
       "catalogId": 1,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Acura",
       "model": "ZDX",
       "trim": "A-Spec RWD",
@@ -50,7 +50,7 @@
         "maxDcKw": 190,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 225 }
       },
       "techFeatures": {
@@ -101,7 +101,7 @@
       "id": "acura-zdx-2024-type-s-awd",
       "url": "https://evcompare.org/2024/zdx/type-s-awd/",
       "catalogId": 2,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Acura",
       "model": "ZDX",
       "trim": "Type S AWD",
@@ -138,7 +138,7 @@
         "maxDcKw": 190,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 225 }
       },
       "techFeatures": {
@@ -3232,7 +3232,7 @@
         "maxDcKw": 150,
         "level2Kw": 11.3,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3321,7 +3321,7 @@
         "maxDcKw": 150,
         "level2Kw": 11.3,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3936,7 +3936,7 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": true,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
@@ -3987,7 +3987,7 @@
       "id": "genesis-electrified-gv70-2025-advanced-awd",
       "url": "https://evcompare.org/2025/electrified-gv70/advanced-awd/",
       "catalogId": 46,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Genesis",
       "model": "Electrified GV70",
       "trim": "Advanced AWD",
@@ -4024,7 +4024,7 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": true,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
@@ -4075,7 +4075,7 @@
       "id": "genesis-gv60-2025-standard-rwd",
       "url": "https://evcompare.org/2025/gv60/standard-rwd/",
       "catalogId": 47,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Genesis",
       "model": "GV60",
       "trim": "Standard RWD",
@@ -4112,7 +4112,7 @@
         "maxDcKw": 350,
         "level2Kw": 10.9,
         "vehicleToLoad": true,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
@@ -4163,7 +4163,7 @@
       "id": "genesis-gv60-2025-performance-awd",
       "url": "https://evcompare.org/2025/gv60/performance-awd/",
       "catalogId": 48,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Genesis",
       "model": "GV60",
       "trim": "Performance AWD",
@@ -4200,7 +4200,7 @@
         "maxDcKw": 350,
         "level2Kw": 10.9,
         "vehicleToLoad": true,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 0 }
       },
       "techFeatures": {
@@ -4288,7 +4288,7 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 225 }
       },
       "techFeatures": {
@@ -4372,7 +4372,7 @@
         "maxDcKw": 150,
         "level2Kw": 11.5,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 225 }
       },
       "techFeatures": {
@@ -4804,7 +4804,7 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -4889,7 +4889,7 @@
         "maxDcKw": 350,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -5636,7 +5636,7 @@
       "id": "kia-niro-ev-2025-wind-fwd",
       "url": "https://evcompare.org/2025/niro-ev/wind-fwd/",
       "catalogId": 65,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Kia",
       "model": "Niro EV",
       "trim": "Wind FWD",
@@ -5673,7 +5673,7 @@
         "maxDcKw": 85,
         "level2Kw": 11,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": false
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -5723,7 +5723,7 @@
       "id": "kia-niro-ev-2025-wave-fwd",
       "url": "https://evcompare.org/2025/niro-ev/wave-fwd/",
       "catalogId": 66,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Kia",
       "model": "Niro EV",
       "trim": "Wave FWD",
@@ -5760,7 +5760,7 @@
         "maxDcKw": 85,
         "level2Kw": 11,
         "vehicleToLoad": true,
-        "heatPump": null
+        "heatPump": false
       },
       "techFeatures": {
         "appleCarPlay": true,

@@ -1741,17 +1741,31 @@ patented heat pump — launched *with* the Hummer EV, so the earlier caution abo
 system was unfounded. All four GMC heat pumps are `true`. GM still publishes no top speed, so the
 Hummer SUV's stays null.
 
-### Batch D — Genesis, Hyundai, Kia (10 records)
-- [ ] 2025 Genesis Electrified G80 — Advanced AWD · _heat pump_
-- [ ] 2025 Genesis Electrified GV70 — Advanced AWD · _heat pump_
-- [ ] 2025 Genesis GV60 — Standard RWD · _heat pump_
-- [ ] 2025 Genesis GV60 — Performance AWD · _heat pump_
-- [ ] 2026 Hyundai Ioniq 9 — S RWD · _heat pump + top speed_
-- [ ] 2026 Hyundai Ioniq 9 — Calligraphy AWD · _heat pump_
-- [ ] 2025 Hyundai Kona Electric — SE FWD · _heat pump_
-- [ ] 2025 Hyundai Kona Electric — Limited FWD · _heat pump_
-- [ ] 2025 Kia Niro EV — Wind FWD · _heat pump_
-- [ ] 2025 Kia Niro EV — Wave FWD · _heat pump_
+### Batch D — Genesis, Hyundai, Kia (10 records) — 8/10
+- [x] 2025 Genesis Electrified G80 — Advanced AWD · **heat pump true**
+- [x] 2025 Genesis Electrified GV70 — Advanced AWD · **heat pump true**
+- [x] 2025 Genesis GV60 — Standard RWD · **heat pump true**
+- [x] 2025 Genesis GV60 — Performance AWD · **heat pump true**
+- [x] 2026 Hyundai Ioniq 9 — Calligraphy AWD · **heat pump true**
+- [~] 2026 Hyundai Ioniq 9 — S RWD · **heat pump true**, top speed not published
+- [ ] 2025 Hyundai Kona Electric — SE FWD · _heat pump_ — **left null on purpose, see below**
+- [ ] 2025 Hyundai Kona Electric — Limited FWD · _heat pump_ — **left null on purpose**
+- [x] 2025 Kia Niro EV — Wind FWD · **heat pump false**
+- [x] 2025 Kia Niro EV — Wave FWD · **heat pump false**
+
+Genesis fits a heat pump across the line — the 2025 GV60 features-and-specs sheet lists it on the
+base Standard trim, so it holds for the trims above it. The Ioniq 9's own Hyundai USA S-trim page
+lists an HVAC heat pump, and standard on the base trim carries upward.
+
+The **Niro EV is the batch's `false`**, and a sourced one: Kia's own trim comparison shows the
+heat pump arriving only via an option package on Wind and via the Preserve package on Wave, so
+neither trim has one as standard.
+
+**The Kona Electric is deliberately still null.** The "standard on all Kona Electric" claim traces
+to a UK review, and Hyundai's own US trim comparison does not list the feature at all — its
+rendered page and full HTML contain no "heat pump" string. Writing `true` from a UK source would
+be the same mistake as writing `false` from silence. Hyundai is precisely the make where this
+matters: the Ioniq 5 SE Standard Range in this dataset is `false` while the Limited is `true`.
 
 ### Batch E — Lexus, Toyota, Subaru (11 records)
 - [ ] 2027 Lexus ES — 350e FWD · _heat pump + top speed_
@@ -1766,18 +1780,22 @@ Hummer SUV's stays null.
 - [ ] 2025 Subaru Solterra — Touring AWD · _top speed_
 - [ ] 2026 Subaru Uncharted — Premium · _top speed_
 
-### Batch F — Nissan, Ford, Honda, Dodge (11 records)
+### Batch F — Nissan, Ford, Honda, Dodge (11 records) — 4/11
+- [x] 2025 Ford F-150 Lightning — Flash · **heat pump true**
+- [x] 2025 Ford F-150 Lightning — Platinum · **heat pump true**
+- [x] 2025 Honda Prologue — EX FWD · **heat pump true**
+- [x] 2025 Honda Prologue — Elite AWD · **heat pump true**
+- [ ] 2026 Ford E-Transit — Cargo Van Low Roof RWD · _heat pump_
 - [ ] 2025 Nissan Ariya — Engage FWD · _heat pump + top speed_
 - [ ] 2025 Nissan Ariya — Platinum+ e-4ORCE AWD · _heat pump + top speed_
 - [ ] 2026 Nissan Leaf — S+ FWD · _heat pump_
 - [ ] 2026 Nissan Leaf — SV+ FWD · _heat pump_
-- [ ] 2025 Ford F-150 Lightning — Flash · _heat pump_
-- [ ] 2025 Ford F-150 Lightning — Platinum · _heat pump_
-- [ ] 2026 Ford E-Transit — Cargo Van Low Roof RWD · _heat pump_
-- [ ] 2025 Honda Prologue — EX FWD · _heat pump_
-- [ ] 2025 Honda Prologue — Elite AWD · _heat pump_
 - [ ] 2025 Dodge Charger Daytona — Scat Pack AWD · _heat pump_
 - [ ] 2025 Dodge Charger Daytona — R/T AWD · _heat pump_
+
+Ford's own support page states the Vapor Injection Heat Pump is standard on every 2024-and-newer
+F-150 Lightning trim. The Prologue is GM Ultium underneath, so it inherits the same Ultium Energy
+Recovery heat pump as the Silverado and Sierra — a platform fact, corroborated independently.
 
 ### Batch G — Rivian, Tesla, Porsche, Volvo, Volkswagen, BMW, Fiat, MINI, Lucid (15 records)
 - [ ] 2025 Rivian R1T — Adventure Dual-Motor AWD (Large Pack) · _top speed_
@@ -1796,11 +1814,32 @@ Hummer SUV's stays null.
 - [ ] 2025 MINI Countryman Electric — SE ALL4 · _heat pump_
 - [ ] 2026 Lucid Gravity — Touring AWD · _top speed_
 
-### Batch H — Acura, Jeep, VinFast (7 records) — **not listed on evspecifications**, needs manufacturer sources
-- [ ] 2024 Acura ZDX — A-Spec RWD · _heat pump_
-- [ ] 2024 Acura ZDX — Type S AWD · _heat pump_
+### Batch H — Acura, Jeep, VinFast (7 records) — 2/7 — **not listed on evspecifications**
+- [x] 2024 Acura ZDX — A-Spec RWD · **heat pump true**
+- [x] 2024 Acura ZDX — Type S AWD · **heat pump true**
 - [ ] 2026 Jeep Recon — Moab 4WD · _heat pump_
 - [ ] 2025 Jeep Wagoneer S — Launch Edition AWD · _heat pump_
 - [ ] 2025 VinFast VF8 — Eco AWD · _heat pump_
 - [ ] 2025 VinFast VF8 — Plus AWD · _heat pump_
 - [ ] 2025 VinFast VF9 — Plus AWD · _heat pump_
+
+The ZDX is GM Ultium under Acura badging, so it takes the same platform heat pump as the Prologue.
+
+## Progress: 35 of 83 filled. heat pump 56 -> 30 null, top speed 38 -> 27 null.
+
+Batches A-D are done or near-done; **E and G are untouched, F and H are partial.**
+
+What the batches so far established, worth carrying into the rest:
+
+- **evspecifications is far thinner than its BMW pages suggested.** It has no EQE SUV, EQS SUV,
+  G-Class, EQB 250+, Q8 e-tron, e-tron GT or A6 e-tron, and its GM pages carry neither a top speed
+  nor a heat pump mention. Most values so far came from manufacturers instead. Check the brand
+  index first rather than assuming coverage.
+- **Platform facts close whole makes at once.** GM's Ultium Energy Recovery heat pump is standard
+  across the platform and it launched *with* the Hummer EV, which settled ten records — Optiq,
+  both Silverados, both Sierras, both Hummers, both Prologues and both ZDXs — from one sourced
+  fact rather than ten lookups.
+- **GM and Rivian do not publish top speed**, and neither do Hyundai or Subaru so far. The figures
+  circulating for those come from simulation sites, not manufacturers.
+- **Top speed can split by drivetrain within a model.** The Lyriq is 118 mph RWD against 130 mph
+  AWD. Look each record up rather than sharing a figure across trims.
