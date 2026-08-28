@@ -939,8 +939,24 @@ Only the Sierra closed. The other two are correct outcomes, not failures:
 - **Hummer EV Pickup 3X** — every figure found belongs to a different configuration: 3.3s for a
   measured 3X test vehicle, 2.8s for the Carbon Fiber Edition with the 24-module battery.
 
-- [ ] **Separate bug: our Hummer 3X record says `horsepowerHp: 1000`, which matches neither
-      2026 configuration** — the 3X is 830hp standard, or 1160hp with the optional 24-module
+- [ ] **Root cause found 2026-08-27, and it isn't the horsepower — it's the model year.**
+      Both Hummer records are labelled **MY2026** but cite **MY2025** EPA stickers
+      (`id=48344` pickup, `id=48348` SUV, both of which return "2025 GMC Hummer EV ... 3X").
+      Every figure on those records — 1,000hp, 205kWh, 312mi — is correct *for the 2025 car*
+      and correctly sourced. Nothing is internally wrong; the year label doesn't match the data.
+
+      Two ways to resolve, and it's a judgment call worth making deliberately:
+      **(a) Relabel to MY2025.** Cheap, and makes each record honest about what it describes.
+      But `carPath()` builds URLs from `modelYear`, so `/2026/hummer-ev-pickup/3x/` becomes
+      `/2025/...` — an indexed URL disappears, falling through 404.html to the homepage. The
+      site has no redirect mechanism.
+      **(b) Re-research as MY2026.** Matches the apparent intent (the dataset deliberately
+      covers current model years, and a real MY2026 Hummer exists at 830hp / 1,160hp with the
+      24-module battery). More work, keeps the URL.
+      Left untouched pending that call — this changes public URLs, so it shouldn't be decided
+      as a side effect of a research batch.
+
+      *Superseded note:* the earlier reading was — the 3X is 830hp standard, or 1160hp with the optional 24-module
       battery. 1000hp looks like a stale figure from an earlier model year (the original
       Edition 1 was quoted at 1,000hp). Worth re-verifying the whole Hummer record, not just
       this field, and it's probably why the 0-60 couldn't be matched to a configuration.
@@ -1002,13 +1018,38 @@ Every check is a heuristic. A flag means "look at this", never "this is wrong".
 **Run it after every research batch.** Current state — 2 flags, both pre-existing, neither
 introduced by today's work:
 
-- [ ] **GMC Sierra EV: Elevation (605hp) and Denali Extended Range (645hp) both 4.5s.**
-      Probably a false positive: GMC was confirmed today to quote 4.5s for *both* the 645hp
-      Extended Range and the 760hp Max Range, so they genuinely publish one figure across power
-      levels. Confirm the Elevation figure has its own source rather than being inherited.
-- [ ] **VinFast VF8: Eco AWD (349hp) and Plus AWD (402hp) both 5.5s.** More suspicious — 53hp
-      apart with an identical figure, and the VF8 entries were bulk-researched (see the
-      2026-08-20 batch, which found several VF8 fields empty). Verify against a per-trim source.
+- [x] **GMC Sierra EV Elevation/Denali sharing 4.5s — cleared, false positive.** GMC publishes
+      4.5s across all three power levels (605hp Elevation, 645hp Denali ER, 760hp Denali Max).
+      Elevation's 283mi also matches its own source. Nothing to fix.
+- [x] **VinFast VF8 Eco/Plus sharing 5.5s — TRUE POSITIVE, fixed.** The Eco had inherited the
+      Plus's figure. VinFast's own spec sheet quotes "~6 seconds" for the Eco against "Mid 5
+      seconds" for the Plus, and Edmunds renders those as 5.9 / 5.5. Eco corrected to **5.9s**.
+      The audit earned its keep on its first run.
 
 Worth extending when a new drift pattern shows up: the point is that each hand-caught mistake
 becomes a check, so the same class can't recur silently.
+
+
+# TODO: Model-year drift — a second audit class (2026-08-27)
+
+The Hummer investigation turned up a failure mode the current audit can't see: **a record's
+`modelYear` disagreeing with the model year of its own cited EPA source.** Both Hummer records
+are MY2026 carrying MY2025 data and MY2025 sticker links. That's invisible to every in-file
+check, because nothing about the record is internally inconsistent — the mismatch only shows
+against the external source.
+
+This matters more than one truck. If those two were year-bumped without re-verification,
+others may have been. 132 of 149 records cite a specific `fueleconomy.gov` vehicle id, so it
+is checkable — just not from inside the file.
+
+- [ ] **Fold a model-year check into the `epaSizeClass` API pass.** That task already needs to
+      hit `fueleconomy.gov/ws/rest/vehicle/{id}` for all 132 records; the same XML carries
+      `year` alongside `VClass`. One pass, two audits — size classes filled *and* every
+      record's model year reconciled against its own source. Do them together rather than
+      paying for the API traffic twice.
+- [ ] Once that data exists, add the check to `scripts/audit-data.mjs` (it would need the
+      fetched years cached to a file, since the audit is meant to run offline in seconds).
+
+This is the same principle as the trim-drift checks: each mistake found by hand becomes a
+check. The difference is that this class needs an external reference, so it belongs in the
+research pipeline rather than the offline audit.

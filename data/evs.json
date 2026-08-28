@@ -9942,7 +9942,7 @@
       "id": "vinfast-vf8-2025-eco-awd",
       "url": "https://evcompare.org/2025/vf8/eco-awd/",
       "catalogId": 115,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-27",
       "make": "VinFast",
       "model": "VF8",
       "trim": "Eco AWD",
@@ -9969,7 +9969,7 @@
         "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49086"
       },
       "performance": {
-        "zeroTo60Sec": 5.5,
+        "zeroTo60Sec": 5.9,
         "horsepowerHp": 349,
         "topSpeedMph": 124
       },
