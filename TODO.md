@@ -777,10 +777,14 @@ Note it resolves the exact case in dispute: EX30 and Mach-E land in the *same* c
       SUV 95→99, Hatchback 9→11, Crossover 6→0.
 - [x] Crossover hub dropped (it fell out automatically — `buildHubs` requires ≥5 records).
       `/electric-crossovers/` is retired; sitemap 186→185.
-- [ ] **Still to do: size-class filtering and hubs from `epaSizeClass`.** The field is populated
-      and the merge is done, so this is unblocked. It's what makes the SUV bucket usable —
-      99 of 149 records are "SUV", spanning an EX30 to an Escalade IQ, and `epaSizeClass`
-      already splits that 39 Small / 35 Standard.
+- [x] **Size-class filtering done 2026-08-28.** `epaSizeClass` registered in `FIELDS`, which
+      surfaces it in the sidebar filter, the compare table, the detail modal and the
+      prerendered spec tables in one change. Verified: filtering to "Small SUV" gives 43 of 149.
+- [ ] **Size-class hubs still to do.** Now trivial — `/small-electric-suvs/` is
+      `c => c.bodyStyle === "SUV" && c.epaSizeClass === "Small SUV"`, or just the class alone.
+      Candidates by size: Small SUV 43, Standard SUV 33, Large Car 11, Midsize Car 9. Note 25
+      records have no `epaSizeClass` (no EPA id), so any size hub silently excludes them —
+      worth an id-backfill pass first, or accepting the gap knowingly.
 
 **Caveat to accept going in:** EPA gives only two SUV tiers (Small / Standard), not
 small/mid/large. That's coarser than ideal but it is authoritative, citable, needs no judgment

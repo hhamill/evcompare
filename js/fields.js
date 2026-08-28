@@ -68,6 +68,11 @@ export const FIELDS = [
   // ---- Overview ----
   { key: "make", label: "Make", group: "Overview", type: "enum", get: c => c.make },
   { key: "bodyStyle", label: "Body Style", group: "Overview", type: "enum", get: c => c.bodyStyle },
+  // EPA's own size class, sourced rather than judged — see data/SCHEMA.md. Sits beside
+  // bodyStyle because the two answer different questions: bodyStyle is the shape (and drives
+  // the silhouettes), this is the size. Together they express "small SUV", which bodyStyle
+  // alone cannot — 99 of 149 records are "SUV", spanning a Volvo EX30 to an Escalade IQ.
+  { key: "epaSizeClass", label: "EPA Size Class", group: "Overview", type: "enum", get: c => c.epaSizeClass },
   { key: "modelYear", label: "Model Year", group: "Overview", type: "enum", get: c => c.modelYear },
   { key: "msrp", label: "Price (MSRP)", group: "Overview", type: "range", compareBetter: "lower", get: c => c.msrp,
     format: v => fmtNum(v, n => `$${Math.round(n).toLocaleString()}`) },

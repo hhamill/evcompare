@@ -1,4 +1,4 @@
-import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "./fields.js?v=13";
+import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "./fields.js?v=14";
 import { findSimilarCars } from "./similar.js?v=6";
 import { carPath, hubPath } from "./router.js?v=6";
 import { hubsForCar } from "./hubs.js?v=4";
