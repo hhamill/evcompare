@@ -1670,15 +1670,23 @@ Model pages are opaque hashes (`/en/model/d47a45e`), so each brand's index page
 URLs. Read them through the browser rather than one fetch per page — several navigations batch
 into a single round trip.
 
-### Batch A — Mercedes-Benz (8 records)
-- [ ] 2025 Mercedes-Benz EQB — 250+ · _top speed_
-- [ ] 2025 Mercedes-Benz EQE SUV — 350+ · _top speed_
-- [ ] 2025 Mercedes-Benz EQE Sedan — 350+ · _top speed_
-- [ ] 2025 Mercedes-Benz EQE Sedan — 500 4MATIC · _top speed_
-- [ ] 2025 Mercedes-Benz EQS SUV — 450+ · _top speed_
-- [ ] 2025 Mercedes-Benz EQS Sedan — 450+ · _top speed_
-- [ ] 2025 Mercedes-Benz EQS Sedan — 580 4MATIC · _top speed_
-- [ ] 2026 Mercedes-Benz G-Class — G 580 w/EQ Technology · _heat pump_
+### Batch A — Mercedes-Benz (8 records) — DONE, 8/8
+- [x] 2025 Mercedes-Benz EQB — 250+ · **99 mph** (matches its EQB 350 sibling; MBUSA/Edmunds)
+- [x] 2025 Mercedes-Benz EQE SUV — 350+ · **130 mph**
+- [x] 2025 Mercedes-Benz EQE Sedan — 350+ · **130 mph**
+- [x] 2025 Mercedes-Benz EQE Sedan — 500 4MATIC · **130 mph**
+- [x] 2025 Mercedes-Benz EQS SUV — 450+ · **130 mph**
+- [x] 2025 Mercedes-Benz EQS Sedan — 450+ · **130 mph**
+- [x] 2025 Mercedes-Benz EQS Sedan — 580 4MATIC · **130 mph**
+- [x] 2026 Mercedes-Benz G-Class — G 580 w/EQ Technology · **heat pump true** (MBUSA: standard,
+      scavenges waste heat from motors and battery)
+
+Every non-AMG EQE and EQS is electronically limited to the same 210 km/h, which the four sedan
+pages on evspecifications render as 130.5 mph. Recorded as **130** to match the US figure and the
+EQE SUV 500, EQS SUV 580 and CLA records already in the dataset — the file stores integers.
+
+evspecifications' Mercedes catalogue is thin and EU-only: no EQE SUV, EQS SUV, G-Class or EQB
+250+. Those four came from manufacturer and US press sources instead.
 
 ### Batch B — Cadillac, Chevrolet (12 records)
 - [ ] 2026 Cadillac Escalade IQ — Luxury AWD · _top speed_

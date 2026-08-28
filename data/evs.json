@@ -6519,7 +6519,7 @@
       "id": "mercedes-benz-eqb-2025-250-plus",
       "url": "https://evcompare.org/2025/eqb/250/",
       "catalogId": 75,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Benz",
       "model": "EQB",
       "trim": "250+",
@@ -6549,7 +6549,7 @@
       "performance": {
         "zeroTo60Sec": 8.5,
         "horsepowerHp": 188,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "CCS1",
@@ -6787,7 +6787,7 @@
       "id": "mercedes-benz-eqe-suv-2025-350-plus",
       "url": "https://evcompare.org/2025/eqe-suv/350/",
       "catalogId": 78,
-      "lastVerifiedDate": "2026-08-27",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Benz",
       "model": "EQE SUV",
       "trim": "350+",
@@ -6817,7 +6817,7 @@
       "performance": {
         "zeroTo60Sec": 6.4,
         "horsepowerHp": 288,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -6876,7 +6876,7 @@
       "id": "mercedes-benz-eqe-sedan-2025-350-plus",
       "url": "https://evcompare.org/2025/eqe-sedan/350/",
       "catalogId": 79,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Benz",
       "model": "EQE Sedan",
       "trim": "350+",
@@ -6906,7 +6906,7 @@
       "performance": {
         "zeroTo60Sec": 5.8,
         "horsepowerHp": 288,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -6965,7 +6965,7 @@
       "id": "mercedes-benz-eqe-sedan-2025-500-4matic",
       "url": "https://evcompare.org/2025/eqe-sedan/500-4matic/",
       "catalogId": 80,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Benz",
       "model": "EQE Sedan",
       "trim": "500 4MATIC",
@@ -6995,7 +6995,7 @@
       "performance": {
         "zeroTo60Sec": 4.5,
         "horsepowerHp": 402,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -7143,7 +7143,7 @@
       "id": "mercedes-benz-eqs-suv-2025-450-plus",
       "url": "https://evcompare.org/2025/eqs-suv/450/",
       "catalogId": 82,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Mercedes-Benz",
       "model": "EQS SUV",
       "trim": "450+",
@@ -7173,7 +7173,7 @@
       "performance": {
         "zeroTo60Sec": 6.5,
         "horsepowerHp": 355,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -7262,7 +7262,7 @@
       "performance": {
         "zeroTo60Sec": 6.5,
         "horsepowerHp": 355,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -7351,7 +7351,7 @@
       "performance": {
         "zeroTo60Sec": 4.1,
         "horsepowerHp": 536,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "CCS1",
@@ -11845,7 +11845,7 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 185 }
       },
       "techFeatures": {
