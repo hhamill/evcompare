@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:759ef30640c8d5f5588300fa6d50a1ca2f47d15f0924f01b9febb1abf27b0351",
+  "hash": "sha256:874a6b904fe748865cc87214c7a0221062d58d5cd8a8c8ffe6073cd06e517fd5",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -12798,7 +12798,7 @@
       "performance": {
         "zeroTo60Sec": 3.1,
         "horsepowerHp": 670,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "NACS",
@@ -12886,7 +12886,7 @@
       "performance": {
         "zeroTo60Sec": 2,
         "horsepowerHp": 1020,
-        "topSpeedMph": null
+        "topSpeedMph": 163
       },
       "charging": {
         "portType": "NACS",
@@ -12938,7 +12938,7 @@
         "review": "https://www.edmunds.com/tesla/model-s/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49742"
       },
-      "notes": "2026 is Tesla's final model year for the current Model S generation. Both trims are now AWD-only — the older single-motor/RWD base configuration has been dropped. No factory tow rating (aftermarket hitches exist, rated around 2,000 lb weight-carrying, but that's not an official Tesla spec). No Apple CarPlay/Android Auto support."
+      "notes": "2026 is Tesla's final model year for the current Model S generation. Both trims are now AWD-only — the older single-motor/RWD base configuration has been dropped. No factory tow rating (aftermarket hitches exist, rated around 2,000 lb weight-carrying, but that's not an official Tesla spec). No Apple CarPlay/Android Auto support. Top speed is the as-delivered 163 mph: Tesla headlines 200 mph for the Plaid but its own footnote states that figure requires a paid hardware upgrade, and the car does 163 mph until that upgrade is bought."
     },
     {
       "id": "tesla-model-y-2026-l",
