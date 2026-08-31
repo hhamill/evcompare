@@ -798,13 +798,19 @@ some passenger/luggage-volume gaps for free.
 
 Counts are `null` (genuinely unresearched) out of 149.
 
-- [ ] **`performance.zeroTo60Sec` — 15 null.** Highest priority: it is one of the four stats on
-      every card since the 2026-08-27 card change, so those cards show "—" in a prime slot.
-      Manufacturer specs or a review will have it.
-- [ ] **`charging.heatPump` — 56 null.** Genuinely decision-relevant (cold-weather range) and
-      on manufacturer spec sheets.
-- [ ] **`groundClearanceIn` — 49 null** (+8 correctly `"N/A"` for air suspension). On spec sheets.
-      Known-hard cases already itemized in the 2026-08-20 batch above; don't re-chase those.
+Updated 2026-08-28. Every count below is what remains **after** the ground clearance, heat pump
+and top speed batches; each remaining record has a `notes` line explaining why it is blank, so
+these are the hard residue rather than unstarted work.
+
+- [ ] **`performance.zeroTo60Sec` — 6 null** (was 15).
+- [ ] **`performance.topSpeedMph` — 17 null** (was 38). Roughly half are GM, which publishes no
+      top speed at all; the rest are new models the spec databases have not picked up.
+- [ ] **`charging.heatPump` — 11 null** (was 56). What is left is mostly cases where sources
+      actively contradict each other, not cases nobody has looked at — Kona Electric (US review
+      says no, UK/Canada say yes), VF9, Lexus RZ/ES, Ariya.
+- [ ] **`groundClearanceIn` — 10 null** (was 49), +8 correctly `"N/A"` for air suspension.
+- [ ] **`epaSizeClass` — 14 null.** Blocked on the 15 records with no EPA id; `npm run
+      find-epa-id` proposes candidates, and most of those 15 are simply absent from EPA.
 
 Follow-on, harder:
 
@@ -855,11 +861,11 @@ gap rather than a decision.
   64 kWh LFP pack, 60.5 usable. Don't "fix" these.
 - **No duplicate records** (same make+model+trim+year).
 
-## 6. Minor: `towCapacityLbs` uses `0` and `null` with no `"N/A"`
+## 6. RESOLVED — `towCapacityLbs` uses `0`, never `"N/A"`, and that is correct
 
-34 records say `0`, 18 say `null`, none say `"N/A"`. If `0` means "confirmed not rated to tow"
-that's correct and useful. Worth confirming the 18 nulls are genuinely unresearched rather than
-the same fact recorded a second way — the three-state convention exists precisely for this.
+Settled 2026-08-28. `0` is a real rating, not a gap: the Mustang Mach-E is literally rated to tow
+0 lb. `data/SCHEMA.md` now documents that `0` covers both a published zero and "no US rating
+published at all", with `notes` saying which. See the tow-rating batch at the end of this file.
 
 # TODO: 0–60 research batch — 15 nulls (2026-08-27, in progress)
 
@@ -1844,7 +1850,7 @@ architecture, consistent with the Taycan and Macan records already `true` here.
 
 The ZDX is GM Ultium under Acura badging, so it takes the same platform heat pump as the Prologue.
 
-## Progress: 41 of 83 filled. heat pump 56 -> 25 null, top speed 38 -> 26 null.
+## Progress: 55 of 83 filled. heat pump 56 -> 11 null, top speed 38 -> 17 null.
 
 Batches A-D done or near-done, G part-done; **E is untouched, F, G and H are partial.**
 
@@ -1945,7 +1951,7 @@ different case — no single number was ever quoted.
 The test is now written into `data/SCHEMA.md`: **was a number ever quoted, not whether the number
 is large.** Keeping the zero also keeps the field numeric for the filter slider.
 
-## Tow-rating batch (2026-08-28) — 6 corrected, 4 cleared, 10 open
+## Tow-rating batch (2026-08-28) — DONE: 11 corrected, 9 false positives, 0 open
 
 Working the 20 metric-looking tow ratings in batches of under five.
 
