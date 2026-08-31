@@ -1944,3 +1944,56 @@ different case — no single number was ever quoted.
 
 The test is now written into `data/SCHEMA.md`: **was a number ever quoted, not whether the number
 is large.** Keeping the zero also keeps the field numeric for the filter slider.
+
+## Tow-rating batch (2026-08-28) — 6 corrected, 4 cleared, 10 open
+
+Working the 20 metric-looking tow ratings in batches of under five.
+
+### Corrected from US sources (6)
+
+    Model Y L        3527 -> 3500   Tesla rates 3,500lb across every 2026 trim
+    Model 3 x2       2205 -> 2200   Tesla USA publishes 2,200lb; 2,205 was 1,000kg
+    EX30 Twin Motor  3527 -> 2000   Volvo USA gives 2,000lb for both EX30 drivelines
+    EC40 x2          3307/3968 -> 2000   Volvo rates the C40 Recharge/EC40 at 2,000lb model-wide
+
+Both in-model contradictions resolved in the direction the sweep predicted: the Model Y L and the
+EX30 Twin Motor were each carrying a European figure while their own siblings carried the US one.
+Confirming the heuristic from the other side, 3,500lb is 1,588kg and 2,000lb is 907kg — neither
+round in metric, which is what a natively-US figure looks like.
+
+### False positives — the heuristic's real limitation (4)
+
+**Porsche publishes the metric-derived number as its US spec.** porsche.com/usa quotes **7,716 lbs**
+for the Cayenne Electric and **4,409 lbs** for the Macan Electric. Both are exactly round in
+kilograms, and both are correct. Cleared in `scripts/audit-cleared.json` with that reasoning.
+
+So the rule is not "round in kg means wrong". It is **"round in kg means check"** — and the check is
+whether the *US manufacturer* publishes that number, not whether the number looks metric. Worth
+remembering before assuming the remaining ten are errors.
+
+(Noted while there: Porsche raised the Macan 4, 4S and Turbo to 5,500 lbs for MY2026. Our records
+are MY2025 and correct at 4,409, but that value must not be carried forward if they move to 2026.)
+
+### Open (10) — and a decision needed first
+
+- **BMW i4 x2 (3,527lb), i5 eDrive40 (3,307lb), i5 M60 (4,409lb)**
+- **Kia Niro EV x2 (1,653lb)**
+- **MINI Countryman SE ALL4 (2,645lb)**
+- **VinFast VF8 x2, VF9 (3,968lb)**
+
+The BMWs are the clear case and they raise the question that governs the rest. BMW's 1,600 kg and
+2,000 kg figures are explicitly non-North-American: **BMW USA does not offer a factory tow package
+on the i4 or i5**, and the standing guidance is that if the owner's manual and window sticker list
+no towing capacity, the car is not approved for towing. So we have positive evidence the number is
+wrong for the US, but no US number to replace it with.
+
+Three options, and they apply to up to ten records:
+
+1. **`0`** — "rated to tow nothing", consistent with the 34 records already using it, including the
+   Porsche Taycan and Mercedes EQE Sedan, which are European cars in exactly this position.
+2. **`null`** — "we could not confirm a real number", which is literally true and avoids publishing
+   a figure we now believe is wrong for this market.
+3. **Leave as-is** and let the audit flag stand.
+
+`0` asserts something no US source states. `null` loses information but publishes nothing false.
+Not deciding this unilaterally, since it changes what the live site shows for up to ten records.

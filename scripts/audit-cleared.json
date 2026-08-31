@@ -1,6 +1,6 @@
 {
   "trim-drift/gmc-sierra-ev-2026-denali-extended-range+gmc-sierra-ev-2026-elevation-standard-range/605+645hp@4.5s": {
-    "why": "Not drift — GMC itself publishes 4.5s across 605hp, 645hp and 760hp Sierra EV configurations. The heavier Extended Range pack offsets the extra power. Independently re-confirmed against GMC's own trim pages; Edmunds separately measured the Denali Extended Range at 4.4s.",
+    "why": "Not drift \u2014 GMC itself publishes 4.5s across 605hp, 645hp and 760hp Sierra EV configurations. The heavier Extended Range pack offsets the extra power. Independently re-confirmed against GMC's own trim pages; Edmunds separately measured the Denali Extended Range at 4.4s.",
     "clearedOn": "2026-08-28"
   },
   "model-year/lexus-es-2027-350e-fwd/MY2027-vs-EPA2026": {
@@ -9,6 +9,22 @@
   },
   "model-year/lexus-es-2027-500e-awd/MY2027-vs-EPA2026": {
     "why": "Same divergence as the 350e: Lexus designates MY2027, EPA certified MY2026. The range check passes against the same EPA entry (276mi), confirming the record is matched to the right vehicle.",
+    "clearedOn": "2026-08-28"
+  },
+  "unit-tell/porsche-cayenne-electric-2026-base/tow7716": {
+    "why": "Not a converted European figure \u2014 Porsche's own US site publishes exactly this number. porsche.com/usa quotes 7,716 lbs for the Cayenne Electric with the optional tow hitch. The heuristic is right that it is round in metric (3,500 kg); it is wrong that this makes it non-US. Some makers publish the metric-derived figure as their US spec.",
+    "clearedOn": "2026-08-28"
+  },
+  "unit-tell/porsche-cayenne-electric-2026-turbo/tow7716": {
+    "why": "Not a converted European figure \u2014 Porsche's own US site publishes exactly this number. porsche.com/usa quotes 7,716 lbs for the Cayenne Electric with the optional tow hitch. The heuristic is right that it is round in metric (3,500 kg); it is wrong that this makes it non-US. Some makers publish the metric-derived figure as their US spec.",
+    "clearedOn": "2026-08-28"
+  },
+  "unit-tell/porsche-macan-electric-2025-4-awd/tow4409": {
+    "why": "Not a converted European figure \u2014 Porsche USA publishes 4,409 lbs for the Macan Electric, matching the combustion Macan's rating. Correct for MY2025; note Porsche raised the Macan 4, 4S and Turbo to 5,500 lbs for MY2026, so this value must not be carried forward if these records move to 2026.",
+    "clearedOn": "2026-08-28"
+  },
+  "unit-tell/porsche-macan-electric-2025-turbo-awd/tow4409": {
+    "why": "Not a converted European figure \u2014 Porsche USA publishes 4,409 lbs for the Macan Electric, matching the combustion Macan's rating. Correct for MY2025; note Porsche raised the Macan 4, 4S and Turbo to 5,500 lbs for MY2026, so this value must not be carried forward if these records move to 2026.",
     "clearedOn": "2026-08-28"
   }
 }
