@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:d74c796813508fcde9e9b51ecaf273493b9d818f882fc18a36543e695311bab4",
+  "hash": "sha256:49f74e6eb66a3d7d7883457c0e703983a7f1517a2d295f2b6b43b5cfad42d3e4",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -890,14 +890,14 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": 3527,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/bmw-i-series/i4/bmw-i4-gran-coupe.html",
         "review": "https://www.edmunds.com/bmw/i4/2026/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50188"
       },
-      "notes": "Base RWD trim of BMW's 4 Series Gran Coupe-based liftback sedan. For 2026, BMW added silicon-carbide inverters, raising EPA range over the prior model year. Forward collision warning and lane departure warning are standard; full adaptive cruise and lane centering require the optional Driving Assistant Professional package. Charge port is CCS1 (adapter needed for Tesla Superchargers); no factory tow rating is published for the US."
+      "notes": "Base RWD trim of BMW's 4 Series Gran Coupe-based liftback sedan. For 2026, BMW added silicon-carbide inverters, raising EPA range over the prior model year. Forward collision warning and lane departure warning are standard; full adaptive cruise and lane centering require the optional Driving Assistant Professional package. Charge port is CCS1 (adapter needed for Tesla Superchargers). BMW offers no factory tow package on this model in North America and publishes no US tow rating, so it is recorded as 0 lb — not rated to tow here. The 1,600 kg / 2,000 kg figures that circulate are European ratings for markets where the factory hitch is sold."
     },
     {
       "id": "bmw-i4-2026-m60-xdrive",
@@ -979,14 +979,14 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": 3527,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 4.9,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/m-series/bmw-i4-m60/bmw-i4-m60-gran-coupe.html",
         "review": "https://www.edmunds.com/bmw/i4/2026/m60/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50190"
       },
-      "notes": "For 2026, BMW replaced the prior i4 M50 with the more powerful M60 xDrive as the top i4 trim: 593 hp, dual-motor AWD, 130 mph top speed (140 mph with the optional High Performance Tire Package on 20-inch wheels). Driving Assistant Professional (adaptive cruise, lane centering) is an optional package, not standard."
+      "notes": "For 2026, BMW replaced the prior i4 M50 with the more powerful M60 xDrive as the top i4 trim: 593 hp, dual-motor AWD, 130 mph top speed (140 mph with the optional High Performance Tire Package on 20-inch wheels). Driving Assistant Professional (adaptive cruise, lane centering) is an optional package, not standard. BMW offers no factory tow package on this model in North America and publishes no US tow rating, so it is recorded as 0 lb — not rated to tow here. The 1,600 kg / 2,000 kg figures that circulate are European ratings for markets where the factory hitch is sold."
     },
     {
       "id": "bmw-i5-2026-edrive40",
@@ -1068,14 +1068,14 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": 3307,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 5.7,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/bmw-i-series/i5/bmw-i5-overview.html",
         "review": "https://www.edmunds.com/bmw/i5/2026/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49613"
       },
-      "notes": "As of March 2026 production, BMW switched the entire i5 lineup to a native NACS charge port with bundled J1772 and CCS1 adapters; earlier-built 2026 cars shipped with CCS1 and got a software update enabling Supercharger access. Blind spot detection, lane keeping assistant, forward collision mitigation, and speed limit assistant are standard; full adaptive cruise and lane centering require the optional Driving Assistant Professional package."
+      "notes": "As of March 2026 production, BMW switched the entire i5 lineup to a native NACS charge port with bundled J1772 and CCS1 adapters; earlier-built 2026 cars shipped with CCS1 and got a software update enabling Supercharger access. Blind spot detection, lane keeping assistant, forward collision mitigation, and speed limit assistant are standard; full adaptive cruise and lane centering require the optional Driving Assistant Professional package. BMW offers no factory tow package on this model in North America and publishes no US tow rating, so it is recorded as 0 lb — not rated to tow here. The 1,600 kg / 2,000 kg figures that circulate are European ratings for markets where the factory hitch is sold."
     },
     {
       "id": "bmw-i5-2026-m60-xdrive",
@@ -1157,14 +1157,14 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 0
       },
-      "towCapacityLbs": 4409,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 5.4,
       "links": {
         "manufacturerSpec": "https://www.bmwusa.com/vehicles/m-series/bmw-i5-m60/bmw-i5-m60xdrive-overview.html",
         "review": "https://www.edmunds.com/bmw/i5/2026/m60/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50194"
       },
-      "notes": "The i5 M60 xDrive was the first BMW sold in the US with a native NACS charge port (added for 2026); it ships with adapters for legacy CCS1/J1772 equipment."
+      "notes": "The i5 M60 xDrive was the first BMW sold in the US with a native NACS charge port (added for 2026); it ships with adapters for legacy CCS1/J1772 equipment. BMW offers no factory tow package on this model in North America and publishes no US tow rating, so it is recorded as 0 lb — not rated to tow here. The 1,600 kg / 2,000 kg figures that circulate are European ratings for markets where the factory hitch is sold."
     },
     {
       "id": "bmw-i7-2026-xdrive60",

@@ -193,6 +193,15 @@ values derived from the site's own routing:
     suspension and no single figure exists to publish at all. The test is whether a number was
     ever quoted, not whether the number is large. Keeping the zero also keeps the field numeric
     for the filter slider.
+
+    `0` covers two situations, and `notes` should say which: the maker **published** a zero
+    rating (the Mustang Mach-E is rated at 0 lb), or the maker **publishes no US tow rating at
+    all** and sells no factory tow package here (the BMW i4 and i5 — the 1,600 kg / 2,000 kg
+    figures that circulate for them are European). The second is an inference, and a deliberate
+    one: no published rating means no towing, so recording it as 0 is very likely right and is
+    more useful to someone filtering for a car that *can* tow than an empty cell would be. Do not
+    use `null` for this — `null` should mean "go and look this up", and here there is nothing to
+    find. Never carry a European rating into the field just because a number exists somewhere.
   - Boolean fields stay plain `true`/`false`/`null` (no N/A/Pending) — a feature is either confirmed present, confirmed absent, or unconfirmed.
 - Prefer current model year (2025 or 2026) US-market specs; 2027 models are fine to include if the manufacturer has published real (not estimated) specs and pricing.
 - Keep `id` unique and kebab-case: `{make}-{model}-{year}-{trim}`.
