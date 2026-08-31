@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:1e327f92100f534b12c7de1551f9d012bf70d7c02305fdcdf130cbcfc4c246d1",
+  "hash": "sha256:16b665ed08a189da5b1e5df1756ef01d239915548d37a3b16a5be78f81a76878",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -7410,7 +7410,7 @@
       "id": "nissan-ariya-2025-engage-fwd",
       "url": "https://evcompare.org/2025/ariya/engage-fwd/",
       "catalogId": 85,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Nissan",
       "model": "Ariya",
       "trim": "Engage FWD",
@@ -7440,7 +7440,7 @@
       "performance": {
         "zeroTo60Sec": 7.1,
         "horsepowerHp": 214,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "CCS1",
@@ -7492,13 +7492,13 @@
         "review": "https://www.edmunds.com/nissan/ariya/2025/st-402061762/features-specs/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48721"
       },
-      "notes": "2025 was the final model year the Ariya was built for the US — Nissan paused production ahead of MY2026 to reallocate resources to the redesigned Leaf, though the pause isn't (yet) a permanent cancellation; the vehicle remains sold from existing dealer inventory. FWD isn't tow-rated. ProPILOT Assist is standard; ProPILOT Assist 2.0 with hands-off highway driving is reserved for higher trims — not full self-driving."
+      "notes": "2025 was the final model year the Ariya was built for the US — Nissan paused production ahead of MY2026 to reallocate resources to the redesigned Leaf, though the pause isn't (yet) a permanent cancellation; the vehicle remains sold from existing dealer inventory. FWD isn't tow-rated. ProPILOT Assist is standard; ProPILOT Assist 2.0 with hands-off highway driving is reserved for higher trims — not full self-driving. Public sources for this trim are limited on heat pump: sources agree the Ariya fits one on some trims but not all, and none of Nissan's US material, its press kit or the spec databases say which — so the field is left blank rather than guessed from trim level."
     },
     {
       "id": "nissan-ariya-2025-platinum-plus-e-4orce-awd",
       "url": "https://evcompare.org/2025/ariya/platinum-e-4orce-awd/",
       "catalogId": 86,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Nissan",
       "model": "Ariya",
       "trim": "Platinum+ e-4ORCE AWD",
@@ -7528,7 +7528,7 @@
       "performance": {
         "zeroTo60Sec": 4.8,
         "horsepowerHp": 389,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "CCS1",
@@ -7581,7 +7581,7 @@
         "review": "https://www.edmunds.com/nissan/ariya/2025/st-402061761/features-specs/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48722"
       },
-      "notes": "Range-topping AWD trim with Nappa leather and a hands-free power liftgate; 19-inch wheels shown (267 mi EPA range), 20-inch wheel option drops range to 257 mi. 2025 was the final model year the Ariya was built for the US — Nissan paused production for MY2026 to focus on the redesigned Leaf. ProPILOT Assist 2.0 (hands-on-wheel highway assist) is standard on this trim but isn't a self-driving product."
+      "notes": "Range-topping AWD trim with Nappa leather and a hands-free power liftgate; 19-inch wheels shown (267 mi EPA range), 20-inch wheel option drops range to 257 mi. 2025 was the final model year the Ariya was built for the US — Nissan paused production for MY2026 to focus on the redesigned Leaf. ProPILOT Assist 2.0 (hands-on-wheel highway assist) is standard on this trim but isn't a self-driving product. Public sources for this trim are limited on heat pump: sources agree the Ariya fits one on some trims but not all, and none of Nissan's US material, its press kit or the spec databases say which — so the field is left blank rather than guessed from trim level."
     },
     {
       "id": "nissan-leaf-2026-s-plus-fwd",
@@ -7624,7 +7624,7 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": false
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -7711,7 +7711,7 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -9880,7 +9880,7 @@
       "id": "toyota-bz-2026-xle-fwd",
       "url": "https://evcompare.org/2026/bz/xle-fwd/",
       "catalogId": 113,
-      "lastVerifiedDate": "2026-08-27",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Toyota",
       "model": "bZ",
       "trim": "XLE FWD",
@@ -9961,13 +9961,13 @@
         "review": "https://www.edmunds.com/toyota/bz/2026/features-specs/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49983"
       },
-      "notes": "Uses the smaller 57.7 kWh base battery (the bigger 74.7 kWh pack is reserved for XLE Plus/Limited trims). Renamed from bZ4X to 'bZ' for MY2026 as part of a facelift with a new front/rear fascia. Switched from CCS1 to a native NACS port; DC fast-charge ceiling is standardized at 150 kW across trims (was split 150/100 kW FWD/AWD on the old bZ4X), and Level 2 AC charging increased to 11 kW (was 6.6 kW). Toyota's current trim ladder is XLE / XLE Plus / Limited, each FWD or AWD."
+      "notes": "Uses the smaller 57.7 kWh base battery (the bigger 74.7 kWh pack is reserved for XLE Plus/Limited trims). Renamed from bZ4X to 'bZ' for MY2026 as part of a facelift with a new front/rear fascia. Switched from CCS1 to a native NACS port; DC fast-charge ceiling is standardized at 150 kW across trims (was split 150/100 kW FWD/AWD on the old bZ4X), and Level 2 AC charging increased to 11 kW (was 6.6 kW). Toyota's current trim ladder is XLE / XLE Plus / Limited, each FWD or AWD. Public sources for this trim are limited: Toyota does not publish a top speed for the bZ, and the spec databases still carry only the pre-facelift bZ4X, whose figures do not transfer to this more powerful car — so top speed is left blank rather than estimated."
     },
     {
       "id": "toyota-bz-2026-limited-awd",
       "url": "https://evcompare.org/2026/bz/limited-awd/",
       "catalogId": 114,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Toyota",
       "model": "bZ",
       "trim": "Limited AWD",
@@ -10048,7 +10048,7 @@
         "review": "https://www.edmunds.com/toyota/bz/2026/features-specs/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49986"
       },
-      "notes": "AWD dual-motor, 338 hp combined — a meaningful power jump from the old bZ4X Limited AWD's 214 hp. DC fast-charge is unified at 150 kW (the old bZ4X AWD was capped at 100 kW). Renamed from bZ4X to 'bZ' for MY2026 as part of a facelift with a new front/rear fascia; switched from CCS1 to native NACS, and Level 2 AC charging increased to 11 kW (was 6.6 kW)."
+      "notes": "AWD dual-motor, 338 hp combined — a meaningful power jump from the old bZ4X Limited AWD's 214 hp. DC fast-charge is unified at 150 kW (the old bZ4X AWD was capped at 100 kW). Renamed from bZ4X to 'bZ' for MY2026 as part of a facelift with a new front/rear fascia; switched from CCS1 to native NACS, and Level 2 AC charging increased to 11 kW (was 6.6 kW). Public sources for this trim are limited: Toyota does not publish a top speed for the bZ, and the spec databases still carry only the pre-facelift bZ4X, whose figures do not transfer to this more powerful car — so top speed is left blank rather than estimated."
     },
     {
       "id": "vinfast-vf8-2025-eco-awd",
