@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:72aebb3001e4ee12f768fa569b146ed572add5078bc5045c2722209f8c7a9d1b",
+  "hash": "sha256:632791631fa70cbb48936bd6bedb78aa342495b8a6e3923d39e5f5348fd6324c",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -9792,7 +9792,7 @@
       "id": "tesla-model-y-2026-premium-awd",
       "url": "https://evcompare.org/2026/model-y/premium-awd/",
       "catalogId": 112,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Tesla",
       "model": "Model Y",
       "trim": "Premium AWD",
@@ -9822,7 +9822,7 @@
       "performance": {
         "zeroTo60Sec": 4.6,
         "horsepowerHp": 346,
-        "topSpeedMph": 133
+        "topSpeedMph": 125
       },
       "charging": {
         "portType": "NACS",

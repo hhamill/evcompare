@@ -30,5 +30,21 @@
   "unit-tell/mini-countryman-electric-2025-se-all4/tow2645": {
     "why": "Not a converted European figure \u2014 MINI USA publishes exactly this. Its own specs page states 'a towing capacity of up to 2,645 pounds with the available factory-installed trailer hitch', and the same number appears in the page's FAQ structured data and a spec row. The factory hitch is offered in the US. Same pattern as the Porsche entries: round in kg (1,200) and still the manufacturer's own US spec.",
     "clearedOn": "2026-08-28"
+  },
+  "unit-tell/vinfast-vf8-2025-eco-awd/tow3968": {
+    "why": "Not a converted European figure smuggled in \u2014 3,968 lb is VinFast's published US spec, carried consistently by KBB across model years and trims, Carweek and Edmunds. VinFast is a Vietnamese maker and its US material is metric-derived throughout, so round-in-kg is the house style rather than a sourcing error. Same pattern as the Porsche and MINI entries.",
+    "clearedOn": "2026-08-28"
+  },
+  "unit-tell/vinfast-vf8-2025-plus-awd/tow3968": {
+    "why": "Not a converted European figure smuggled in \u2014 3,968 lb is VinFast's published US spec, carried consistently by KBB across model years and trims, Carweek and Edmunds. VinFast is a Vietnamese maker and its US material is metric-derived throughout, so round-in-kg is the house style rather than a sourcing error. Same pattern as the Porsche and MINI entries.",
+    "clearedOn": "2026-08-28"
+  },
+  "unit-tell/vinfast-vf9-2025-plus-awd/tow3968": {
+    "why": "Not a converted European figure smuggled in \u2014 3,968 lb is VinFast's published US spec, carried consistently by KBB across model years and trims, Carweek and Edmunds. VinFast is a Vietnamese maker and its US material is metric-derived throughout, so round-in-kg is the house style rather than a sourcing error. Same pattern as the Porsche and MINI entries.",
+    "clearedOn": "2026-08-28"
+  },
+  "topspeed-inverted/dodge-charger-daytona-2025-rt-awd+dodge-charger-daytona-2025-scat-pack-awd/496hp@137-vs-670hp@134": {
+    "why": "Real and published, not drift. Dodge's own Charger Daytona specification sheet lists the two trims side by side: R/T 137mph, Scat Pack 134mph, alongside 0-60 of 4.7s and 3.3s and EPA range of 317mi and 260mi. The more powerful car is limited slightly lower \u2014 a tyre-rating ceiling, not a transposed figure. Same document already used for these records' ground clearance.",
+    "clearedOn": "2026-08-28"
   }
 }

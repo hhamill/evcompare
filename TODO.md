@@ -1974,26 +1974,44 @@ remembering before assuming the remaining ten are errors.
 (Noted while there: Porsche raised the Macan 4, 4S and Turbo to 5,500 lbs for MY2026. Our records
 are MY2025 and correct at 4,409, but that value must not be carried forward if they move to 2026.)
 
-### Open (10) — and a decision needed first
+### Closed — all 20 resolved
 
-- **BMW i4 x2 (3,527lb), i5 eDrive40 (3,307lb), i5 M60 (4,409lb)**
-- **Kia Niro EV x2 (1,653lb)**
-- **MINI Countryman SE ALL4 (2,645lb)**
-- **VinFast VF8 x2, VF9 (3,968lb)**
+**Corrected (11):** the 6 above, plus BMW i4 x2 / i5 x2 and Kia Niro EV x2 to `0`, and the Tesla
+Model Y Premium AWD's top speed.
 
-The BMWs are the clear case and they raise the question that governs the rest. BMW's 1,600 kg and
-2,000 kg figures are explicitly non-North-American: **BMW USA does not offer a factory tow package
-on the i4 or i5**, and the standing guidance is that if the owner's manual and window sticker list
-no towing capacity, the car is not approved for towing. So we have positive evidence the number is
-wrong for the US, but no US number to replace it with.
+BMW offers no factory tow package on the i4 or i5 in North America and publishes no US rating;
+Kia publishes none for the Niro EV and its US owner documentation does not approve towing. Per the
+decision recorded in `data/SCHEMA.md`, those become `0` — no published rating means no towing,
+which is very likely right and more useful to someone filtering for a car that *can* tow than an
+empty cell. Each record's notes say the zero is an inference and names the European figure it
+replaced.
 
-Three options, and they apply to up to ten records:
+The i4 eDrive40 had already been contradicting itself: its notes said "no factory tow rating is
+published for the US" while the record carried 3,527 lb. Someone had found this before; only the
+number had not caught up.
 
-1. **`0`** — "rated to tow nothing", consistent with the 34 records already using it, including the
-   Porsche Taycan and Mercedes EQE Sedan, which are European cars in exactly this position.
-2. **`null`** — "we could not confirm a real number", which is literally true and avoids publishing
-   a figure we now believe is wrong for this market.
-3. **Leave as-is** and let the audit flag stand.
+**Cleared as false positives (9):** Porsche Cayenne Electric x2 (7,716 lb) and Macan x2 (4,409),
+MINI Countryman SE (2,645), VinFast VF8 x2 and VF9 (3,968), and the Dodge Charger Daytona top-speed
+inversion.
 
-`0` asserts something no US source states. `null` loses information but publishes nothing false.
-Not deciding this unilaterally, since it changes what the live site shows for up to ten records.
+### What the batch taught, which is the part worth keeping
+
+**Nine of twenty were false positives.** Porsche, MINI and VinFast all publish the metric-derived
+number as their own US spec — MINI USA's page says "up to 2,645 pounds with the available
+factory-installed trailer hitch" in its own words and its FAQ structured data. So the check does
+not mean "this number is wrong". It means **"verify this number against the US manufacturer"**, and
+roughly half the time the manufacturer is the source of the metric-looking figure.
+
+**The in-model contradictions were the reliable signal**, not the metric shape on its own. Every
+case where one nameplate carried two conventions turned out to be a genuine error: the Model Y L
+against its siblings' 3,500 lb, the EX30 Twin Motor against the Single Motor's 2,000 lb, and the
+Model Y Premium AWD's 133 mph against 125 mph on both its siblings.
+
+**One diagnosis flipped on inspection.** The Model Y top-speed flag read as "the L is too slow";
+the L was right at 125 mph and the *Premium AWD's* 133 mph was the error — a figure matching no
+Model Y variant. Worth remembering that a flag names a pair, not a culprit.
+
+**The Dodge inversion was real.** Dodge's own spec sheet lists R/T 137 mph against Scat Pack
+134 mph, alongside 0-60 of 4.7s and 3.3s. The more powerful car is limited slightly lower.
+
+`npm run audit` is back to **No flags**.
