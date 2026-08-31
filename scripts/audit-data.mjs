@@ -110,7 +110,60 @@ if (existsSync(CACHE)) {
   console.log("(no scripts/epa-cache.json — run `npm run fetch-epa` to enable the model-year and EPA-range checks)");
 }
 
-// 6. Duplicate identity.
+// 6. Lower power but higher top speed within one model. The mirror of check 2, and it catches a
+//    different failure: a figure taken from the wrong trim of the same nameplate.
+for (const [model, l] of siblings)
+  for (const a of l) for (const b of l) {
+    if (a === b) continue;
+    const ah = n(a.performance?.horsepowerHp), bh = n(b.performance?.horsepowerHp);
+    const at = n(a.performance?.topSpeedMph), bt = n(b.performance?.topSpeedMph);
+    if (ah && bh && at && bt && ah < bh && at > bt)
+      flag("implausible", `${model}: ${a.trim} ${ah}hp does ${at}mph, beating ${b.trim} ${bh}hp at ${bt}mph`,
+        `topspeed-inverted/${a.id}+${b.id}/${ah}hp@${at}-vs-${bh}hp@${bt}`);
+  }
+
+// 7. Figures that are round in METRIC but not in the unit we store. This dataset is US-market, and
+//    US sources quote round pounds — 3,500 lb, 2,200 lb. A value like 3,527 lb is 1,600 kg
+//    converted, which means the number came off a European spec sheet. That matters beyond
+//    tidiness: the European car is often rated to tow when the US one is not rated at all.
+//    Caught the Tesla Model Y L at 3,527 lb while its two siblings carry Tesla's US 3,500.
+const kgRound = lb => {
+  const kg = lb / 2.20462;
+  return Math.abs(kg - Math.round(kg / 50) * 50) < 1.2;
+};
+for (const m of M) {
+  const t = n(m.towCapacityLbs);
+  if (t === null || t <= 0) continue;
+  if (kgRound(t) && t % 50 !== 0)
+    flag("unit-tell", `${name(m)}: tow ${t}lb is ${Math.round(t / 2.20462)}kg exactly — a converted European figure?`,
+      `unit-tell/${m.id}/tow${t}`);
+}
+// Same nameplate carrying both conventions is a stronger signal than either value alone.
+for (const [model, l] of siblings) {
+  const vals = l.map(x => n(x.towCapacityLbs)).filter(v => v !== null && v > 0);
+  if (vals.length < 2) continue;
+  const metric = vals.filter(v => kgRound(v) && v % 50 !== 0);
+  if (metric.length && metric.length < vals.length)
+    flag("unit-tell", `${model}: mixed tow units across trims — ${l.filter(x => n(x.towCapacityLbs) > 0).map(x => `${x.trim} ${x.towCapacityLbs}lb`).join(", ")}`,
+      `unit-tell-mixed/${model.replace(/\s+/g, "-")}/${vals.slice().sort((a, b) => a - b).join("+")}`);
+}
+
+// 8. Top speed that isn't a whole number. Every other figure in this field is, so a fractional one
+//    is an unrounded unit conversion that escaped the house convention rather than a real spec.
+for (const m of M) {
+  const t = n(m.performance?.topSpeedMph);
+  if (t !== null && !Number.isInteger(t))
+    flag("unit-tell", `${name(m)}: top speed ${t}mph is not a whole number`, `unit-tell-frac/${m.id}/${t}`);
+}
+
+// 9. Structural impossibility: seats-folded cargo smaller than seats-up cargo.
+for (const m of M) {
+  const r = n(m.cargo?.rearCubicFeet), x = n(m.cargo?.maxCubicFeet);
+  if (r !== null && x !== null && r > x)
+    flag("impossible", `${name(m)}: rear cargo ${r} exceeds max ${x}`, `cargo-order/${m.id}/${r}-${x}`);
+}
+
+// 10. Duplicate identity.
 const seen = new Map();
 for (const m of M) {
   const k = `${m.modelYear}|${m.make}|${m.model}|${m.trim}`;
@@ -127,6 +180,8 @@ const LABELS = {
   implausible: "Physically implausible within a model",
   efficiency: "Efficiency outside the plausible band — range or battery suspect",
   duplicate: "Duplicate record identity",
+  "unit-tell": "Number looks converted from metric rather than taken from a US source",
+  impossible: "Structurally impossible value",
 };
 for (const [check, msgs] of Object.entries(byCheck)) {
   console.log(`\n${LABELS[check]} (${msgs.length}):`);

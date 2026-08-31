@@ -1862,3 +1862,81 @@ What the batches so far established, worth carrying into the rest:
   circulating for those come from simulation sites, not manufacturers.
 - **Top speed can split by drivetrain within a model.** The Lyriq is 118 mph RWD against 130 mph
   AWD. Look each record up rather than sharing a figure across trims.
+
+## Full-file sanity sweep (2026-08-28) — 26 things to double-check
+
+Ran a broad scan for the failure modes that don't show up as missing data: inverted orderings
+within a model, structurally impossible values, unit-conversion tells, cross-model copy-paste, and
+internal contradictions. Most of what it surfaced was benign and is explained below so nobody
+re-investigates it. Four classes are real and are now **live flags in `npm run audit`** — that
+command no longer reports "No flags", deliberately, because these are genuinely unresolved.
+
+### 1. Tow capacity looks European on 20 records — the biggest finding
+
+This dataset is US-market, and US sources quote round pounds: 3,500 / 2,200 / 8,500 / 12,500. But
+twenty records carry values that are round in **kilograms** and not in pounds — 3,527 lb is exactly
+1,600 kg, 2,205 lb is 1,000 kg, 7,716 lb is 3,500 kg. Those numbers came off European spec sheets.
+
+Two cases prove it rather than merely suggest it, because the same nameplate carries both
+conventions:
+
+- **Tesla Model Y** — Standard RWD 3,500 lb, Premium AWD 3,500 lb, **L 3,527 lb**. Tesla's US
+  figure is 3,500. The L is the odd one out within its own model.
+- **Volvo EX30** — Single Motor Extended Range 2,000 lb, **Twin Motor Performance 3,527 lb**. Two
+  conventions in one model, and a Twin Motor rated to tow 76% more than the Single Motor is
+  independently odd.
+
+**Why this matters more than tidiness:** the European car is frequently rated to tow when the US
+car is not rated at all. A converted figure can therefore be not just imprecise but wrong in kind —
+advertising a tow rating the US buyer does not have. Each of the twenty needs checking against a US
+rating, and some may belong at `0` (this dataset's existing encoding for "not rated to tow",
+used on 34 records) rather than a number.
+
+Affected: BMW i4 x2, i5 x2 · Kia Niro EV x2 · MINI Countryman SE · Porsche Macan x2, Cayenne
+Electric x2 · Tesla Model 3 x2, Model Y L · VinFast VF8 x2, VF9 · Volvo EC40 x2, EX30 Twin Motor.
+
+Note the Tesla Model 3 nuance: Tesla USA does now publish a **2,200 lb** rating, so our 2,205 is
+the right car with the wrong provenance — nearly right, but sourced from the metric figure.
+
+### 2. Two top speeds where the lower-powered trim is faster
+
+- **Dodge Charger Daytona** — R/T 496 hp does 137 mph, beating the Scat Pack's 670 hp at 134 mph.
+- **Tesla Model Y** — Premium AWD 346 hp does 133 mph, beating the L's 444 hp at 125 mph.
+
+Both are *possible* — a heavier three-row body or a tyre rating can lower the limiter on the more
+powerful car — but both are the classic shape of a figure taken from the wrong trim.
+
+### 3. Kia Niro EV top speed is 103.8 mph
+
+Every other top speed in the file is a whole number. 103.8 is 167 km/h unrounded — a conversion
+that escaped the house convention. Both Niro trims carry it. Round it, or replace it with Kia's
+US figure.
+
+### 4. Lucid Gravity Touring tows 5,999 lb
+
+Its Grand Touring sibling is 6,000. A one-pound difference is not a real specification.
+
+### Checked and benign — recorded so it isn't re-investigated
+
+- **26 sibling pairs share a top speed despite different power.** This is the expected pattern, not
+  drift: manufacturers cap a whole line at one electronic limit. Volvo is 112 mph across EX30/EC40/
+  EX60/EX90, Mercedes 130 across EQE/EQS/CLA, Hyundai 115 across Ioniq 5/6, VW 99. Deliberately
+  **not** made an audit check — it would fire 26 times and mean nothing.
+- **Rivian R1S and R1T share 329 mi / 109.4 kWh / 533 hp / 4.5 s.** Looks like cross-model
+  copy-paste; it isn't. EPA's own listings give both the 22-inch Dual Large at 329 mi.
+- **Tesla Model Y L: 79 kWh / 325 mi against Premium AWD's 78.4 kWh / 327 mi.** Bigger battery,
+  less range — but the L is the longer, heavier three-row body, so this is real.
+- **Mustang Mach-E GT at 5.2 in** ground clearance for an SUV — the GT is lowered.
+- **Efficiency outliers** all explicable: Hummer 1.52 mi/kWh (heavy), E-Transit 1.77 (van), Lucid
+  Air Pure 5.00 (efficient), Tesla Standard 5.35 (LFP, already confirmed against two EPA stickers).
+- **Kia EV9 Light RWD 235 kW vs Wind AWD 210 kW** — the cheaper trim charging faster looks wrong,
+  but the Light uses the smaller 76.1 kWh pack with a different charge curve. Worth a glance if
+  anyone is in that record anyway; not flagged.
+- **Ford E-Transit max cargo 277.7 cu ft** — high, but it is a cargo van.
+
+### Open question, not a defect
+
+`towCapacityLbs` uses `0` for "not rated to tow" on 34 records and never uses `"N/A"`, while
+`groundClearanceIn` uses `"N/A"` for the analogous case. Both are defensible — 0 lb is a real
+quantity and keeps the filter slider numeric — but the difference is undocumented in
+`data/SCHEMA.md`. Worth either documenting the distinction or reconciling it.
