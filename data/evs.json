@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:02ba6ddd684813dd3d685bf9346d8d403778f2cfa136f2262421b6d693729066",
+  "hash": "sha256:efe5227655ddcb6e25151683c524360bd5dd972dd4510d2c32d6b148ce0cea7e",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -4797,7 +4797,7 @@
       "performance": {
         "zeroTo60Sec": 8.4,
         "horsepowerHp": 215,
-        "topSpeedMph": null
+        "topSpeedMph": 118
       },
       "charging": {
         "portType": "NACS",
@@ -9091,7 +9091,7 @@
       "id": "subaru-solterra-2025-premium-awd",
       "url": "https://evcompare.org/2025/solterra/premium-awd/",
       "catalogId": 104,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Subaru",
       "model": "Solterra",
       "trim": "Premium AWD",
@@ -9121,7 +9121,7 @@
       "performance": {
         "zeroTo60Sec": 6.7,
         "horsepowerHp": 215,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "CCS1",
@@ -9179,7 +9179,7 @@
       "id": "subaru-solterra-2025-touring-awd",
       "url": "https://evcompare.org/2025/solterra/touring-awd/",
       "catalogId": 105,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Subaru",
       "model": "Solterra",
       "trim": "Touring AWD",
@@ -9209,7 +9209,7 @@
       "performance": {
         "zeroTo60Sec": 6.7,
         "horsepowerHp": 215,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "CCS1",
@@ -12332,7 +12332,7 @@
       "id": "subaru-uncharted-2026-premium",
       "url": "https://evcompare.org/2026/uncharted/premium/",
       "catalogId": 141,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Subaru",
       "model": "Uncharted",
       "trim": "Premium",
@@ -12413,7 +12413,7 @@
         "review": "https://www.edmunds.com/subaru/uncharted/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50301"
       },
-      "notes": "Third Subaru EV model alongside Solterra and Trailseeker (subcompact, below both in size/price) — Subaru's first FWD-based EV, on a different platform than the Toyota-shared Solterra. Base Premium trim is single-motor FWD only; AWD (dual-motor, 338 hp combined) is exclusive to Sport/GT trims. Not rated to tow on any trim. No frunk. Heat pump is standard on Sport/GT but not on this base Premium trim."
+      "notes": "Third Subaru EV model alongside Solterra and Trailseeker (subcompact, below both in size/price) — Subaru's first FWD-based EV, on a different platform than the Toyota-shared Solterra. Base Premium trim is single-motor FWD only; AWD (dual-motor, 338 hp combined) is exclusive to Sport/GT trims. Not rated to tow on any trim. No frunk. Heat pump is standard on Sport/GT but not on this base Premium trim. Public sources for this model are limited on top speed: Subaru does not publish one and the spec databases do not yet carry the Uncharted at all, so it is left blank rather than estimated."
     },
     {
       "id": "subaru-uncharted-2026-gt",
