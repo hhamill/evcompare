@@ -179,6 +179,11 @@ values derived from the site's own routing:
   the standard 20/21-inch car Volvo rates at 307mi; and the Lexus ES 350e/500e before EPA published.)
 - **Numeric ("range"-type) fields have three distinct non-value states — pick the right one, don't default everything to `null`:**
   - `null` — **unknown**: the field applies to this vehicle, we just couldn't confirm a real number from a reliable source. Never guess a number instead — leave it `null`. (e.g. cupholder count, USB port count — routinely hard to source per-trim.)
+    When a field is left `null` because the search was genuinely exhausted rather than not yet
+    attempted, say so in `notes` — that text is shown to site visitors, so it turns a blank cell
+    into an answer. Name what was checked and keep it short, e.g. *"Public sources for this trim
+    are limited: neither Lexus nor the usual US spec databases publish a top speed or state
+    whether a heat pump is fitted, so both are left blank rather than estimated."*
   - `"N/A"` — **not applicable**: the concept the field measures doesn't exist for this vehicle, so no number could ever fill it in. (e.g. `cargo.rearCubicFeet`/`maxCubicFeet` on a pickup truck — there's no enclosed cargo hold, just a bed, which isn't tracked by this schema; `groundClearanceIn` on a vehicle with adjustable air suspension and no single published figure — clearance genuinely isn't one number for that vehicle.)
   - `"Pending"` — **known but not yet published**: we're confident the real number exists or will exist and just hasn't been released yet, for a vehicle that's otherwise on sale now. (e.g. EPA range certification that hasn't posted to fueleconomy.gov yet for a vehicle already shipping.) Don't use this for "might not even launch in the US" uncertainty — that's still `null`.
   - Boolean fields stay plain `true`/`false`/`null` (no N/A/Pending) — a feature is either confirmed present, confirmed absent, or unconfirmed.

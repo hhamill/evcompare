@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:1d8f11c3bff31c91a72f744d0338de929c2eb78b57c089c0cbf2080c2aa7f2fa",
+  "hash": "sha256:1e327f92100f534b12c7de1551f9d012bf70d7c02305fdcdf130cbcfc4c246d1",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -5840,7 +5840,7 @@
       "performance": {
         "zeroTo60Sec": 7.4,
         "horsepowerHp": 221,
-        "topSpeedMph": null
+        "topSpeedMph": 99
       },
       "charging": {
         "portType": "NACS",
@@ -5892,7 +5892,7 @@
         "review": "https://pressroom.lexus.com/2027-lexus-es-battery-electric-models-return-with-up-to-307-miles-of-epa-estimated-total-range/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50450"
       },
-      "notes": "First-ever battery-electric ES, arriving at dealers September 2026 as part of the redesigned eighth-generation ES lineup (alongside a carryover-style 350h hybrid). Base \"Premium\" grade shown; a \"Luxury\" grade is also offered. 307-mile range is on standard 19-inch wheels (292 mi with optional 21-inch wheels). MSRP of $47,610 is before the $1,395 delivery fee. Lexus designates these BEV models MY2027 (press release of 2026-08-10) but EPA certified them under MY2026, as does Edmunds; modelYear follows Lexus. The EPA entry cited is the standard 19-inch configuration."
+      "notes": "First-ever battery-electric ES, arriving at dealers September 2026 as part of the redesigned eighth-generation ES lineup (alongside a carryover-style 350h hybrid). Base \"Premium\" grade shown; a \"Luxury\" grade is also offered. 307-mile range is on standard 19-inch wheels (292 mi with optional 21-inch wheels). MSRP of $47,610 is before the $1,395 delivery fee. Lexus designates these BEV models MY2027 (press release of 2026-08-10) but EPA certified them under MY2026, as does Edmunds; modelYear follows Lexus. The EPA entry cited is the standard 19-inch configuration. Lexus does not publish whether a heat pump is fitted, and no independent source states it either, so that field is left blank rather than estimated."
     },
     {
       "id": "lexus-es-2027-500e-awd",
@@ -5928,7 +5928,7 @@
       "performance": {
         "zeroTo60Sec": 5.1,
         "horsepowerHp": 338,
-        "topSpeedMph": null
+        "topSpeedMph": 112
       },
       "charging": {
         "portType": "NACS",
@@ -5980,13 +5980,13 @@
         "review": "https://pressroom.lexus.com/2027-lexus-es-battery-electric-models-return-with-up-to-307-miles-of-epa-estimated-total-range/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50452"
       },
-      "notes": "Dual-motor DIRECT4 AWD version of the first-ever battery-electric ES, arriving at dealers September 2026. Base \"Premium\" grade shown; a \"Luxury\" grade is also offered. 276-mile range is on standard 19-inch wheels (272 mi with optional 21-inch wheels). MSRP of $50,610 is before the $1,395 delivery fee. Lexus designates these BEV models MY2027 (press release of 2026-08-10) but EPA certified them under MY2026, as does Edmunds; modelYear follows Lexus. The EPA entry cited is the standard 19-inch configuration."
+      "notes": "Dual-motor DIRECT4 AWD version of the first-ever battery-electric ES, arriving at dealers September 2026. Base \"Premium\" grade shown; a \"Luxury\" grade is also offered. 276-mile range is on standard 19-inch wheels (272 mi with optional 21-inch wheels). MSRP of $50,610 is before the $1,395 delivery fee. Lexus designates these BEV models MY2027 (press release of 2026-08-10) but EPA certified them under MY2026, as does Edmunds; modelYear follows Lexus. The EPA entry cited is the standard 19-inch configuration. Lexus does not publish whether a heat pump is fitted, and no independent source states it either, so that field is left blank rather than estimated."
     },
     {
       "id": "lexus-rz-2026-350e-fwd",
       "url": "https://evcompare.org/2026/rz/350e-fwd/",
       "catalogId": 69,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Lexus",
       "model": "RZ",
       "trim": "350e FWD",
@@ -6068,13 +6068,13 @@
         "review": "https://pressroom.lexus.com/2026-lexus-rz-adds-more-power-and-performance-2/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50291"
       },
-      "notes": "Entry FWD trim of the redesigned-for-2026 RZ lineup (added alongside carryover 450e AWD and new 550e F SPORT AWD). Lexus Safety System+ 3.0 is standard: pre-collision system with pedestrian detection, adaptive cruise, and lane tracing assist. No frunk. 10-80% DC fast charge takes about 30 minutes. Battery warranty is 10 years / 150,000 miles (capacity retention above 70%). Interior is synthetic leather (not genuine) with a heated steering wheel standard; ventilated front seats and heated rear seats are available."
+      "notes": "Entry FWD trim of the redesigned-for-2026 RZ lineup (added alongside carryover 450e AWD and new 550e F SPORT AWD). Lexus Safety System+ 3.0 is standard: pre-collision system with pedestrian detection, adaptive cruise, and lane tracing assist. No frunk. 10-80% DC fast charge takes about 30 minutes. Battery warranty is 10 years / 150,000 miles (capacity retention above 70%). Interior is synthetic leather (not genuine) with a heated steering wheel standard; ventilated front seats and heated rear seats are available. Public sources for this trim are limited: neither Lexus nor the usual US spec databases publish a top speed or state whether a heat pump is fitted, so both are left blank rather than estimated."
     },
     {
       "id": "lexus-rz-2026-550e-f-sport-awd",
       "url": "https://evcompare.org/2026/rz/550e-f-sport-awd/",
       "catalogId": 70,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Lexus",
       "model": "RZ",
       "trim": "550e F SPORT AWD",
@@ -6155,7 +6155,7 @@
         "review": "https://pressroom.lexus.com/2026-lexus-rz-adds-more-power-and-performance-2/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50220"
       },
-      "notes": "New top-performance dual-motor F SPORT trim for 2026, replacing the prior 450e as RZ's flagship (402 total system hp). Adds Mark Levinson 13-speaker audio, a head-up display, and Panoramic View Monitor over 350e/450e. No frunk. 10-80% DC fast charge takes about 30 minutes. Battery warranty is 10 years / 150,000 miles."
+      "notes": "New top-performance dual-motor F SPORT trim for 2026, replacing the prior 450e as RZ's flagship (402 total system hp). Adds Mark Levinson 13-speaker audio, a head-up display, and Panoramic View Monitor over 350e/450e. No frunk. 10-80% DC fast charge takes about 30 minutes. Battery warranty is 10 years / 150,000 miles. Public sources for this trim are limited: neither Lexus nor the usual US spec databases publish a top speed or state whether a heat pump is fitted, so both are left blank rather than estimated."
     },
     {
       "id": "lucid-air-2025-pure-rwd",
