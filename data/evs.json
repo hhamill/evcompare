@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:874a6b904fe748865cc87214c7a0221062d58d5cd8a8c8ffe6073cd06e517fd5",
+  "hash": "sha256:93fcd6b196a94276c6bcbca1ace23599336cb43fbee26ff3984a988474202e8a",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -3144,7 +3144,7 @@
         "maxDcKw": null,
         "level2Kw": null,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": false,
         "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
@@ -3189,7 +3189,7 @@
         "review": "https://www.edmunds.com/fiat/500e/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48703"
       },
-      "notes": "Base (500e)RED trim; four higher-priced special-edition trims (Inspired By Music, Inspired By Beauty, Inspired By Los Angeles, Giorgio Armani Edition) are also offered. Small 2-door/4-passenger city car with 7.5 cu ft of cargo space. US sales have been very low (roughly 1,141 units in 2025), and the model's future in the US market is uncertain. Lane Keeping Assist and Adaptive Cruise Control are optional, not standard, on this trim."
+      "notes": "Base (500e)RED trim; four higher-priced special-edition trims (Inspired By Music, Inspired By Beauty, Inspired By Los Angeles, Giorgio Armani Edition) are also offered. Small 2-door/4-passenger city car with 7.5 cu ft of cargo space. US sales have been very low (roughly 1,141 units in 2025), and the model's future in the US market is uncertain. Lane Keeping Assist and Adaptive Cruise Control are optional, not standard, on this trim. No heat pump: Stellantis describes the 500e as heating the cabin with a high-voltage air PTC element, with a separate coolant heater for the battery — which is less efficient in the cold than a heat pump."
     },
     {
       "id": "ford-f-150-lightning-2025-flash",
@@ -12506,7 +12506,7 @@
       "id": "lucid-gravity-2026-touring-awd",
       "url": "https://evcompare.org/2026/gravity/touring-awd/",
       "catalogId": 143,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Lucid",
       "model": "Gravity",
       "trim": "Touring AWD",
@@ -12588,7 +12588,7 @@
         "review": "https://www.edmunds.com/car-news/2026-lucid-gravity-touring-debut-first-look.html",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50221"
       },
-      "notes": "Cheaper entry point below the Grand Touring — same Gravity body/platform but a smaller 89 kWh pack (vs. Grand Touring's 123 kWh) and single-tier motor output. Base configuration is the 5-seat/2-row layout (111.9 cu ft folded); a 7-seat/3-row option also exists (106.2 cu ft folded). Ground clearance is adjustable via air suspension, so no single figure is published."
+      "notes": "Cheaper entry point below the Grand Touring — same Gravity body/platform but a smaller 89 kWh pack (vs. Grand Touring's 123 kWh) and single-tier motor output. Base configuration is the 5-seat/2-row layout (111.9 cu ft folded); a 7-seat/3-row option also exists (106.2 cu ft folded). Ground clearance is adjustable via air suspension, so no single figure is published. Public sources for this trim are limited on top speed: Lucid publishes one for the Grand Touring but not the Touring, and the two have different power outputs, so the Grand Touring's figure is not carried across."
     },
     {
       "id": "toyota-bz-woodland-2026-woodland",
