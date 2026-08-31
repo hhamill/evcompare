@@ -818,10 +818,17 @@ Follow-on, harder:
       `/non-tesla-evs-with-nacs-port/` hub, which is the most citable page on the site. Harder
       because manufacturers announce adapter programmes piecemeal and pricing changes.
 
-**Consider deleting rather than filling:** `techFeatures.cupholders` (139 null — 93% empty),
-`driverAssist.handsFreeDriving.subscriptionUsdPerMonth` (128), `techFeatures.usbPorts.total`
-(92). Tedious to source, nobody picks an EV on cupholder count, and a field that is 93% null
-is arguably worse than no field — it renders as a column of dashes in the compare table.
+**Decided 2026-08-28 — two deleted, one kept.** `techFeatures.cupholders` (139/149 null) and
+`techFeatures.usbPorts` (typeC/typeA/total, ~92 null) are **removed** from the schema, the data and
+the field registry. Nobody picks an EV on cupholder count, and a field that is 93% null is worse
+than no field — it renders as a column of dashes in the compare table.
+
+`driverAssist.handsFreeDriving.subscriptionUsdPerMonth` (128 null) is **kept**, despite being the
+emptiest of the three, because its emptiness is meaningful rather than incidental: it is only ever
+populated when hands-free driving is available at all, so the null tracks a real fact about the
+car. Where it does have a value it answers a question a shopper actually asks — the system exists,
+but is it $25/mo or $99/mo? Sparse-because-conditional is not the same as sparse-because-tedious,
+and only the second is worth deleting.
 
 ## 3. Missing models and trims
 

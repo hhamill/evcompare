@@ -77,9 +77,7 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
   "techFeatures": {
     "appleCarPlay": false,
     "androidAuto": false,
-    "wirelessPhoneCharging": true,
-    "cupholders": 5,
-    "usbPorts": { "typeC": 4, "typeA": 0, "total": 4 }
+    "wirelessPhoneCharging": true
   },
   "driverAssist": {
     "handsFreeDriving": {
@@ -178,7 +176,7 @@ values derived from the site's own routing:
   (Live examples: the Volvo EX60 P6, where EPA lists only the 22-inch car at 295mi while this record is
   the standard 20/21-inch car Volvo rates at 307mi; and the Lexus ES 350e/500e before EPA published.)
 - **Numeric ("range"-type) fields have three distinct non-value states — pick the right one, don't default everything to `null`:**
-  - `null` — **unknown**: the field applies to this vehicle, we just couldn't confirm a real number from a reliable source. Never guess a number instead — leave it `null`. (e.g. cupholder count, USB port count — routinely hard to source per-trim.)
+  - `null` — **unknown**: the field applies to this vehicle, we just couldn't confirm a real number from a reliable source. Never guess a number instead — leave it `null`. (e.g. a top speed no manufacturer publishes — see the notes convention just below.)
     When a field is left `null` because the search was genuinely exhausted rather than not yet
     attempted, say so in `notes` — that text is shown to site visitors, so it turns a blank cell
     into an answer. Name what was checked and keep it short, e.g. *"Public sources for this trim

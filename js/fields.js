@@ -59,7 +59,7 @@ function fmtNum(value, formatter) {
 // `compareBetter: "higher" | "lower"` marks a numeric field as having a genuinely
 // uncontroversial "better" direction, so the compare table can highlight the winning
 // value(s) — used only where there's broad consensus (price, range, charging speed,
-// 0-60, horsepower, USB ports, hands-free driving cost). Left unset for fields that are more
+// 0-60, horsepower, hands-free driving cost). Left unset for fields that are more
 // about tradeoffs than a clear win (doors, wheel size, cargo volume, ground clearance,
 // tow capacity, passenger count) — those stay neutral rather than implying a value
 // judgment that doesn't hold for every shopper.
@@ -128,10 +128,6 @@ export const FIELDS = [
   { key: "appleCarPlay", label: "Apple CarPlay", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.appleCarPlay },
   { key: "androidAuto", label: "Android Auto", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.androidAuto },
   { key: "wirelessPhoneCharging", label: "Wireless Phone Charging", group: "Tech & Safety", type: "boolean", get: c => c.techFeatures?.wirelessPhoneCharging },
-  { key: "cupholders", label: "Cupholders", group: "Tech & Safety", type: "range", step: 1, get: c => c.techFeatures?.cupholders,
-    format: v => fmtNum(v, n => `${roundTo(n, 0)}`) },
-  { key: "usbPortsTotal", label: "USB Ports (total)", group: "Tech & Safety", type: "range", step: 1, compareBetter: "higher", get: c => c.techFeatures?.usbPorts?.total,
-    format: v => fmtNum(v, n => `${roundTo(n, 0)}`) },
   { key: "handsFreeDriving", label: "Hands-Free Driving", group: "Tech & Safety", type: "boolean", get: c => c.driverAssist?.handsFreeDriving?.available },
   { key: "handsFreeDrivingCost", label: "Hands-Free Driving Subscription", group: "Tech & Safety", type: "range", step: 1, compareBetter: "lower", get: c => c.driverAssist?.handsFreeDriving?.subscriptionUsdPerMonth,
     format: v => fmtNum(v, n => (roundTo(n, 0) === 0 ? "Included" : `$${roundTo(n, 0)}/mo`)) },
