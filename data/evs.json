@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:49f74e6eb66a3d7d7883457c0e703983a7f1517a2d295f2b6b43b5cfad42d3e4",
+  "hash": "sha256:72aebb3001e4ee12f768fa569b146ed572add5078bc5045c2722209f8c7a9d1b",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -5666,7 +5666,7 @@
       "performance": {
         "zeroTo60Sec": 7.1,
         "horsepowerHp": 201,
-        "topSpeedMph": 103.8
+        "topSpeedMph": 104
       },
       "charging": {
         "portType": "NACS",
@@ -5710,14 +5710,14 @@
         "maxCubicFeet": 63.67,
         "frunkCubicFeet": 0.71
       },
-      "towCapacityLbs": 1653,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 5.9,
       "links": {
         "manufacturerSpec": "https://www.kia.com/us/en/niro-ev",
         "review": "https://www.edmunds.com/kia/niro-ev/2025/st-402055749/features-specs/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48370"
       },
-      "notes": "2025 Niro EV ships with a native NACS charge port. Niro EV is FWD-only; no AWD variant is offered."
+      "notes": "2025 Niro EV ships with a native NACS charge port. Niro EV is FWD-only; no AWD variant is offered. Kia publishes no US tow rating for the Niro EV and its US owner documentation does not approve towing, so it is recorded as 0 lb — not rated to tow here. The 750 kg figure that appears on some spec sites is a European/Australian rating not extended to US cars."
     },
     {
       "id": "kia-niro-ev-2025-wave-fwd",
@@ -5753,7 +5753,7 @@
       "performance": {
         "zeroTo60Sec": 7.1,
         "horsepowerHp": 201,
-        "topSpeedMph": 103.8
+        "topSpeedMph": 104
       },
       "charging": {
         "portType": "NACS",
@@ -5797,14 +5797,14 @@
         "maxCubicFeet": 63.67,
         "frunkCubicFeet": 0.71
       },
-      "towCapacityLbs": 1653,
+      "towCapacityLbs": 0,
       "groundClearanceIn": 5.9,
       "links": {
         "manufacturerSpec": "https://www.kia.com/us/en/niro-ev",
         "review": "https://www.edmunds.com/kia/niro-ev/2025/st-402055750/features-specs/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48370"
       },
-      "notes": "Wave adds Highway Driving Assist II (automatic lane changes), power-folding mirrors, sunroof, head-up display, and Harman/Kardon audio over the Wind. Niro EV is FWD-only; no AWD variant is offered."
+      "notes": "Wave adds Highway Driving Assist II (automatic lane changes), power-folding mirrors, sunroof, head-up display, and Harman/Kardon audio over the Wind. Niro EV is FWD-only; no AWD variant is offered. Kia publishes no US tow rating for the Niro EV and its US owner documentation does not approve towing, so it is recorded as 0 lb — not rated to tow here. The 750 kg figure that appears on some spec sites is a European/Australian rating not extended to US cars."
     },
     {
       "id": "lexus-es-2027-350e-fwd",

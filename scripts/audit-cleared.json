@@ -26,5 +26,9 @@
   "unit-tell/porsche-macan-electric-2025-turbo-awd/tow4409": {
     "why": "Not a converted European figure \u2014 Porsche USA publishes 4,409 lbs for the Macan Electric, matching the combustion Macan's rating. Correct for MY2025; note Porsche raised the Macan 4, 4S and Turbo to 5,500 lbs for MY2026, so this value must not be carried forward if these records move to 2026.",
     "clearedOn": "2026-08-28"
+  },
+  "unit-tell/mini-countryman-electric-2025-se-all4/tow2645": {
+    "why": "Not a converted European figure \u2014 MINI USA publishes exactly this. Its own specs page states 'a towing capacity of up to 2,645 pounds with the available factory-installed trailer hitch', and the same number appears in the page's FAQ structured data and a spec row. The factory hitch is offered in the US. Same pattern as the Porsche entries: round in kg (1,200) and still the manufacturer's own US spec.",
+    "clearedOn": "2026-08-28"
   }
 }
