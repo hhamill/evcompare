@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:16b665ed08a189da5b1e5df1756ef01d239915548d37a3b16a5be78f81a76878",
+  "hash": "sha256:02ba6ddd684813dd3d685bf9346d8d403778f2cfa136f2262421b6d693729066",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -2968,7 +2968,7 @@
         "maxDcKw": 183,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
@@ -3056,7 +3056,7 @@
         "maxDcKw": 183,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
@@ -10834,7 +10834,7 @@
       "id": "volvo-ex30-2025-single-motor-extended-range",
       "url": "https://evcompare.org/2025/ex30/single-motor-extended-range/",
       "catalogId": 124,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Volvo",
       "model": "EX30",
       "trim": "Single Motor Extended Range",
@@ -10871,7 +10871,7 @@
         "maxDcKw": 153,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
@@ -10923,7 +10923,7 @@
       "id": "volvo-ex30-2025-twin-motor-performance",
       "url": "https://evcompare.org/2025/ex30/twin-motor-performance/",
       "catalogId": 125,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Volvo",
       "model": "EX30",
       "trim": "Twin Motor Performance",
@@ -10960,7 +10960,7 @@
         "maxDcKw": 153,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
