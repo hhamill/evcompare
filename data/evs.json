@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:efe5227655ddcb6e25151683c524360bd5dd972dd4510d2c32d6b148ce0cea7e",
+  "hash": "sha256:d2e8a00e1c3bac7b50a78b62d3b78f62242ee8e2d7abd41dce5fd7bf26e81c08",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -8827,7 +8827,7 @@
       "id": "rivian-r1t-2025-adventure-dual-motor-awd-large-pack",
       "url": "https://evcompare.org/2025/r1t/adventure-dual-motor-awd-large-pack/",
       "catalogId": 101,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Rivian",
       "model": "R1T",
       "trim": "Adventure Dual-Motor AWD (Large Pack)",
@@ -8909,13 +8909,13 @@
         "review": "https://www.caranddriver.com/rivian/r1t",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1T&srchtyp=ymm&pageno=1&rowLimit=50"
       },
-      "notes": "Pickup truck with no conventional enclosed rear cargo/trunk area. Storage comes from an 11 cu ft powered frunk, an 11.7 cu ft 'Gear Tunnel' running through the cabin (65 in L x 18.1 in W x 20.3 in H, doors on both ends), and a 54.2 in long truck bed (51.1 in wide, extendable to 83.6 in with the tailgate down and seats folded). Adjustable air suspension means no single ground-clearance figure is published. Vegan/synthetic interior materials only; no Apple CarPlay/Android Auto support."
+      "notes": "Pickup truck with no conventional enclosed rear cargo/trunk area. Storage comes from an 11 cu ft powered frunk, an 11.7 cu ft 'Gear Tunnel' running through the cabin (65 in L x 18.1 in W x 20.3 in H, doors on both ends), and a 54.2 in long truck bed (51.1 in wide, extendable to 83.6 in with the tailgate down and seats folded). Adjustable air suspension means no single ground-clearance figure is published. Vegan/synthetic interior materials only; no Apple CarPlay/Android Auto support. Public sources for this trim are limited on top speed: Rivian does not publish one, and the spec databases carry only the first-generation R1T — 2025 is a second-generation truck with a different powertrain, so those figures do not transfer."
     },
     {
       "id": "rivian-r2-2027-premium-awd",
       "url": "https://evcompare.org/2027/r2/premium-awd/",
       "catalogId": 102,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Rivian",
       "model": "R2",
       "trim": "Premium AWD",
@@ -8952,7 +8952,7 @@
         "maxDcKw": 210,
         "level2Kw": null,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": false,
@@ -8997,13 +8997,13 @@
         "review": "https://electrek.co/2026/03/12/rivian-reveals-full-r2-lineup-pricing-rwd-model/",
         "epaWindowSticker": null
       },
-      "notes": "Rivian originally targeted late 2026 for Premium deliveries; company statements now point to early 2027 with no confirmed month. The 330-mile range is Rivian's own quoted figure for Premium, which shares Performance's battery pack. No Apple CarPlay/Android Auto on any Rivian model."
+      "notes": "Rivian originally targeted late 2026 for Premium deliveries; company statements now point to early 2027 with no confirmed month. The 330-mile range is Rivian's own quoted figure for Premium, which shares Performance's battery pack. No Apple CarPlay/Android Auto on any Rivian model. Public sources for this trim are limited on top speed: a figure circulates for the R2 Performance but none is published for the Premium, and the spec databases do not yet carry the R2 at all."
     },
     {
       "id": "rivian-r2-2027-performance-awd",
       "url": "https://evcompare.org/2027/r2/performance-awd/",
       "catalogId": 103,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Rivian",
       "model": "R2",
       "trim": "Performance AWD",
@@ -9040,7 +9040,7 @@
         "maxDcKw": 210,
         "level2Kw": null,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": false,
