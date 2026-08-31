@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:1a598c5b0d4fe1570a9dcbd682cf67c9339d2f25993b3724b6600825e92fa55a",
+  "hash": "sha256:759ef30640c8d5f5588300fa6d50a1ca2f47d15f0924f01b9febb1abf27b0351",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -5019,7 +5019,7 @@
         "review": "https://www.edmunds.com/hyundai/kona-electric/2025/features-specs/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48359"
       },
-      "notes": "Kona Electric is FWD-only in the US; no AWD variant is offered. SE uses the smaller 48.6 kWh standard-range battery/133-hp motor; Limited and N Line use the 64.8 kWh long-range pack/201-hp motor."
+      "notes": "Kona Electric is FWD-only in the US; no AWD variant is offered. SE uses the smaller 48.6 kWh standard-range battery/133-hp motor; Limited and N Line use the 64.8 kWh long-range pack/201-hp motor. Public sources for this trim are limited on heat pump, and they disagree along regional lines: UK and Canadian material says a heat pump is standard on all Kona Electrics, while a US first-drive review states the North American car does without one. Hyundai's US trim pages do not mention the feature at all, so the field is left blank rather than taking an overseas spec for the US car."
     },
     {
       "id": "hyundai-kona-electric-2025-limited-fwd",
@@ -5107,7 +5107,7 @@
         "review": "https://www.edmunds.com/hyundai/kona-electric/2025/features-specs/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48357"
       },
-      "notes": "Kona Electric is FWD-only in the US; no AWD variant is offered. Limited uses the 64.8 kWh long-range pack (261 mi on standard 17-in wheels; 230 mi with optional 19-in wheels)."
+      "notes": "Kona Electric is FWD-only in the US; no AWD variant is offered. Limited uses the 64.8 kWh long-range pack (261 mi on standard 17-in wheels; 230 mi with optional 19-in wheels). Public sources for this trim are limited on heat pump, and they disagree along regional lines: UK and Canadian material says a heat pump is standard on all Kona Electrics, while a US first-drive review states the North American car does without one. Hyundai's US trim pages do not mention the feature at all, so the field is left blank rather than taking an overseas spec for the US car."
     },
     {
       "id": "jeep-recon-2026-moab-4wd",
