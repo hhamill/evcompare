@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:93fcd6b196a94276c6bcbca1ace23599336cb43fbee26ff3984a988474202e8a",
+  "hash": "sha256:d74c796813508fcde9e9b51ecaf273493b9d818f882fc18a36543e695311bab4",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -9441,7 +9441,7 @@
       "id": "tesla-model-3-2026-standard-rwd",
       "url": "https://evcompare.org/2026/model-3/standard-rwd/",
       "catalogId": 108,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Tesla",
       "model": "Model 3",
       "trim": "Standard RWD",
@@ -9516,7 +9516,7 @@
         "maxCubicFeet": 43,
         "frunkCubicFeet": 3.1
       },
-      "towCapacityLbs": 2205,
+      "towCapacityLbs": 2200,
       "groundClearanceIn": 5.4,
       "links": {
         "manufacturerSpec": "https://www.tesla.com/model3/design",
@@ -9603,7 +9603,7 @@
         "maxCubicFeet": 43,
         "frunkCubicFeet": 3.1
       },
-      "towCapacityLbs": 2205,
+      "towCapacityLbs": 2200,
       "groundClearanceIn": 5.4,
       "links": {
         "manufacturerSpec": "https://www.tesla.com/model3-performance",
@@ -10733,7 +10733,7 @@
         "maxCubicFeet": 42.6,
         "frunkCubicFeet": 0.7
       },
-      "towCapacityLbs": 3307,
+      "towCapacityLbs": 2000,
       "groundClearanceIn": 7,
       "links": {
         "manufacturerSpec": "https://www.volvocars.com/us/cars/ec40-electric/",
@@ -10821,7 +10821,7 @@
         "maxCubicFeet": 42.6,
         "frunkCubicFeet": 0.7
       },
-      "towCapacityLbs": 3968,
+      "towCapacityLbs": 2000,
       "groundClearanceIn": 7,
       "links": {
         "manufacturerSpec": "https://www.volvocars.com/us/cars/ec40-electric/",
@@ -10999,7 +10999,7 @@
         "maxCubicFeet": 31.9,
         "frunkCubicFeet": null
       },
-      "towCapacityLbs": 3527,
+      "towCapacityLbs": 2000,
       "groundClearanceIn": 7,
       "links": {
         "manufacturerSpec": "https://www.volvocars.com/us/cars/ex30-electric/",
@@ -12944,7 +12944,7 @@
       "id": "tesla-model-y-2026-l",
       "url": "https://evcompare.org/2026/model-y/l/",
       "catalogId": 148,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Tesla",
       "model": "Model Y",
       "trim": "L",
@@ -13019,7 +13019,7 @@
         "maxCubicFeet": null,
         "frunkCubicFeet": 4
       },
-      "towCapacityLbs": 3527,
+      "towCapacityLbs": 3500,
       "groundClearanceIn": 6.6,
       "links": {
         "manufacturerSpec": "https://www.tesla.com/modely",
