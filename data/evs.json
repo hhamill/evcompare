@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:9ffb0e01caf6d4d8a2cf22bcb00782b41dac519371171e2a2b03e2b4c885c08e",
+  "hash": "sha256:1a598c5b0d4fe1570a9dcbd682cf67c9339d2f25993b3724b6600825e92fa55a",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -10054,7 +10054,7 @@
       "id": "vinfast-vf8-2025-eco-awd",
       "url": "https://evcompare.org/2025/vf8/eco-awd/",
       "catalogId": 115,
-      "lastVerifiedDate": "2026-08-27",
+      "lastVerifiedDate": "2026-08-28",
       "make": "VinFast",
       "model": "VF8",
       "trim": "Eco AWD",
@@ -10091,7 +10091,7 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": false, "costUsd": null }
       },
       "techFeatures": {
@@ -10142,7 +10142,7 @@
       "id": "vinfast-vf8-2025-plus-awd",
       "url": "https://evcompare.org/2025/vf8/plus-awd/",
       "catalogId": 116,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "VinFast",
       "model": "VF8",
       "trim": "Plus AWD",
@@ -10179,7 +10179,7 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": false, "costUsd": null }
       },
       "techFeatures": {
@@ -10230,7 +10230,7 @@
       "id": "vinfast-vf9-2025-plus-awd",
       "url": "https://evcompare.org/2025/vf9/plus-awd/",
       "catalogId": 117,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "VinFast",
       "model": "VF9",
       "trim": "Plus AWD",
@@ -10306,7 +10306,7 @@
         "review": "https://www.kbb.com/vinfast/vf-9/2025/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=49088"
       },
-      "notes": "3-row, 7-passenger flagship SUV. The Eco trim (349 hp, EPA-rated 330 mi) starts around $62,900. Seats are vegan (synthetic) leather, not genuine."
+      "notes": "3-row, 7-passenger flagship SUV. The Eco trim (349 hp, EPA-rated 330 mi) starts around $62,900. Seats are vegan (synthetic) leather, not genuine. Public sources for this model are limited on heat pump, and they disagree: one overseas spec table lists the VF 9 as not having one while VinFast's general marketing describes heat-pump climate control across the range. The VF 8 is confirmed standard on both trims, but that is not evidence for this model, so the field is left blank."
     },
     {
       "id": "volkswagen-id-buzz-2025-pro-s-rwd",
@@ -12594,7 +12594,7 @@
       "id": "toyota-bz-woodland-2026-woodland",
       "url": "https://evcompare.org/2026/bz-woodland/woodland/",
       "catalogId": 144,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Toyota",
       "model": "bZ Woodland",
       "trim": "Woodland",
@@ -12631,7 +12631,7 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -12675,13 +12675,13 @@
         "review": "https://insideevs.com/reviews/787449/toyota-bz-woodland-ev-review-2026/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50305"
       },
-      "notes": "Off-road-styled variant of the compact bZ (formerly bZ4X, renamed 'bZ' for MY2026), listed as its own model since Toyota markets Woodland as a distinct trim family. Standard AWD dual-motor, no FWD/single-motor option. Two EPA-certified range configurations exist depending on tire choice (235/60R18 = 281 mi used here, 235/65R18 = 260 mi). Woodland Premium adds heated and ventilated seats over this base Woodland grade."
+      "notes": "Off-road-styled variant of the compact bZ (formerly bZ4X, renamed 'bZ' for MY2026), listed as its own model since Toyota markets Woodland as a distinct trim family. Standard AWD dual-motor, no FWD/single-motor option. Two EPA-certified range configurations exist depending on tire choice (235/60R18 = 281 mi used here, 235/65R18 = 260 mi). Woodland Premium adds heated and ventilated seats over this base Woodland grade. Public sources for this model are limited on top speed: Toyota does not publish one, and the spec databases carry only the pre-facelift bZ4X, which is a different vehicle — so it is left blank rather than estimated."
     },
     {
       "id": "toyota-bz-woodland-2026-woodland-premium",
       "url": "https://evcompare.org/2026/bz-woodland/woodland-premium/",
       "catalogId": 145,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Toyota",
       "model": "bZ Woodland",
       "trim": "Woodland Premium",
@@ -12718,7 +12718,7 @@
         "maxDcKw": 150,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -12762,7 +12762,7 @@
         "review": "https://insideevs.com/reviews/787449/toyota-bz-woodland-ev-review-2026/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50305"
       },
-      "notes": "Off-road-styled variant of the compact bZ (formerly bZ4X, renamed 'bZ' for MY2026), listed as its own model since Toyota markets Woodland as a distinct trim family. Standard AWD dual-motor, no FWD/single-motor option. Two EPA-certified range configurations exist depending on tire choice (235/60R18 = 281 mi used here, 235/65R18 = 260 mi). Adds heated and ventilated seats over the base Woodland grade."
+      "notes": "Off-road-styled variant of the compact bZ (formerly bZ4X, renamed 'bZ' for MY2026), listed as its own model since Toyota markets Woodland as a distinct trim family. Standard AWD dual-motor, no FWD/single-motor option. Two EPA-certified range configurations exist depending on tire choice (235/60R18 = 281 mi used here, 235/65R18 = 260 mi). Adds heated and ventilated seats over the base Woodland grade. Public sources for this model are limited on top speed: Toyota does not publish one, and the spec databases carry only the pre-facelift bZ4X, which is a different vehicle — so it is left blank rather than estimated."
     },
     {
       "id": "tesla-model-s-2026-awd",
