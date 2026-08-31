@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:1c4b814f9a56971bd6db77243830afc68f8472918900c4b9c47be07705050646",
+  "hash": "sha256:1d8f11c3bff31c91a72f744d0338de929c2eb78b57c089c0cbf2080c2aa7f2fa",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -1471,7 +1471,7 @@
       "performance": {
         "zeroTo60Sec": 4.7,
         "horsepowerHp": 463,
-        "topSpeedMph": null
+        "topSpeedMph": 130
       },
       "charging": {
         "portType": "NACS",
@@ -6467,7 +6467,7 @@
         "maxDcKw": 130,
         "level2Kw": 7.4,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 175 }
       },
       "techFeatures": {
@@ -10312,7 +10312,7 @@
       "id": "volkswagen-id-buzz-2025-pro-s-rwd",
       "url": "https://evcompare.org/2025/id-buzz/pro-s/",
       "catalogId": 118,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Volkswagen",
       "model": "ID. Buzz",
       "trim": "Pro S",
@@ -10349,7 +10349,7 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
@@ -10400,7 +10400,7 @@
       "id": "volkswagen-id-buzz-2025-pro-s-plus-4motion-awd",
       "url": "https://evcompare.org/2025/id-buzz/pro-s-plus-4motion/",
       "catalogId": 119,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Volkswagen",
       "model": "ID. Buzz",
       "trim": "Pro S Plus 4MOTION",
@@ -10437,7 +10437,7 @@
         "maxDcKw": 200,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 200 }
       },
       "techFeatures": {
@@ -12070,7 +12070,7 @@
       "id": "porsche-cayenne-electric-2026-base",
       "url": "https://evcompare.org/2026/cayenne-electric/base/",
       "catalogId": 138,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Porsche",
       "model": "Cayenne Electric",
       "trim": "Base",
@@ -12107,7 +12107,7 @@
         "maxDcKw": 400,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -12157,7 +12157,7 @@
       "id": "porsche-cayenne-electric-2026-turbo",
       "url": "https://evcompare.org/2026/cayenne-electric/turbo/",
       "catalogId": 139,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Porsche",
       "model": "Cayenne Electric",
       "trim": "Turbo",
@@ -12194,7 +12194,7 @@
         "maxDcKw": 400,
         "level2Kw": 11,
         "vehicleToLoad": null,
-        "heatPump": null
+        "heatPump": true
       },
       "techFeatures": {
         "appleCarPlay": true,

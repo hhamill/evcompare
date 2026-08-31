@@ -1797,22 +1797,41 @@ Ford's own support page states the Vapor Injection Heat Pump is standard on ever
 F-150 Lightning trim. The Prologue is GM Ultium underneath, so it inherits the same Ultium Energy
 Recovery heat pump as the Silverado and Sierra — a platform fact, corroborated independently.
 
-### Batch G — Rivian, Tesla, Porsche, Volvo, Volkswagen, BMW, Fiat, MINI, Lucid (15 records)
+### Batch G — Rivian, Tesla, Porsche, Volvo, Volkswagen, BMW, Fiat, MINI, Lucid (15) — 6/15
+- [x] 2025 Volkswagen ID. Buzz — Pro S · **heat pump true**
+- [x] 2025 Volkswagen ID. Buzz — Pro S Plus 4MOTION · **heat pump true**
+- [x] 2026 Porsche Cayenne Electric — Base · **heat pump true**
+- [x] 2026 Porsche Cayenne Electric — Turbo · **heat pump true**
+- [x] 2025 MINI Countryman Electric — SE ALL4 · **heat pump true**
+- [x] 2027 BMW iX3 — 50 xDrive · **130 mph**
+- [ ] 2025 Volvo EX30 — Single Motor Extended Range · _heat pump_ — wording is "available on", not
+      "standard"; Volvo's own support article 403s the fetcher
+- [ ] 2025 Volvo EX30 — Twin Motor Performance · _heat pump_ — same
+- [ ] 2025 Fiat 500e — (500e)RED · _heat pump_ — **sources contradict each other**, see below
+- [ ] 2026 Tesla Model S — AWD · _top speed_ — **sources contradict each other**
+- [ ] 2026 Tesla Model S — Plaid AWD · _top speed_ — **sources contradict each other**
+- [ ] 2026 Lucid Gravity — Touring AWD · _top speed_ — Lucid's own Touring spec sheet would settle
+      it but the attachment returns only navigation; do **not** copy the Grand Touring's 155 mph
 - [ ] 2025 Rivian R1T — Adventure Dual-Motor AWD (Large Pack) · _top speed_
 - [ ] 2027 Rivian R2 — Premium AWD · _heat pump + top speed_
 - [ ] 2027 Rivian R2 — Performance AWD · _heat pump_
-- [ ] 2026 Tesla Model S — AWD · _top speed_
-- [ ] 2026 Tesla Model S — Plaid AWD · _top speed_
-- [ ] 2026 Porsche Cayenne Electric — Base · _heat pump_
-- [ ] 2026 Porsche Cayenne Electric — Turbo · _heat pump_
-- [ ] 2025 Volvo EX30 — Single Motor Extended Range · _heat pump_
-- [ ] 2025 Volvo EX30 — Twin Motor Performance · _heat pump_
-- [ ] 2025 Volkswagen ID. Buzz — Pro S · _heat pump_
-- [ ] 2025 Volkswagen ID. Buzz — Pro S Plus 4MOTION · _heat pump_
-- [ ] 2027 BMW iX3 — 50 xDrive · _top speed_
-- [ ] 2025 Fiat 500e — (500e)RED · _heat pump_
-- [ ] 2025 MINI Countryman Electric — SE ALL4 · _heat pump_
-- [ ] 2026 Lucid Gravity — Touring AWD · _top speed_
+
+VW states plainly that a heat pump is standard on all US ID. Buzz models. Porsche's own
+high-voltage press kit for the Cayenne Electric describes an integrated heat pump as part of the
+architecture, consistent with the Taycan and Macan records already `true` here.
+
+**Three left null because sources actively disagree, not because none were found:**
+
+- **Fiat 500e** — one source attributes to Stellantis that the 500e heats the cabin with an HV air
+  PTC element rather than a heat pump; another says it has one. An explicit negative would be
+  recordable, but not while a positive claim sits beside it.
+- **Tesla Model S** — the 2026 Plaid's limit is variously reported as 149 mph, 163 mph on 21-inch
+  wheels, and 200 mph with a paid upgrade, and one summary gave 130 mph for the non-Plaid AWD
+  while asserting 200 for the Plaid in the same breath. Tesla's own page is the only thing that
+  will settle this.
+- **Volvo EX30** — every source says the heat pump is "available on" the Single Motor Extended
+  Range and Twin Motor Performance, which is exactly the standard-or-optional ambiguity that makes
+  the difference between `true` and `false`.
 
 ### Batch H — Acura, Jeep, VinFast (7 records) — 2/7 — **not listed on evspecifications**
 - [x] 2024 Acura ZDX — A-Spec RWD · **heat pump true**
@@ -1825,9 +1844,9 @@ Recovery heat pump as the Silverado and Sierra — a platform fact, corroborated
 
 The ZDX is GM Ultium under Acura badging, so it takes the same platform heat pump as the Prologue.
 
-## Progress: 35 of 83 filled. heat pump 56 -> 30 null, top speed 38 -> 27 null.
+## Progress: 41 of 83 filled. heat pump 56 -> 25 null, top speed 38 -> 26 null.
 
-Batches A-D are done or near-done; **E and G are untouched, F and H are partial.**
+Batches A-D done or near-done, G part-done; **E is untouched, F, G and H are partial.**
 
 What the batches so far established, worth carrying into the rest:
 
