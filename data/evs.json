@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:d2e8a00e1c3bac7b50a78b62d3b78f62242ee8e2d7abd41dce5fd7bf26e81c08",
+  "hash": "sha256:9ffb0e01caf6d4d8a2cf22bcb00782b41dac519371171e2a2b03e2b4c885c08e",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -5113,7 +5113,7 @@
       "id": "jeep-recon-2026-moab-4wd",
       "url": "https://evcompare.org/2026/recon/moab-4wd/",
       "catalogId": 59,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Jeep",
       "model": "Recon",
       "trim": "Moab 4WD",
@@ -5193,13 +5193,13 @@
         "review": "https://www.consumerreports.org/cars/hybrids-evs/2026-jeep-recon-electric-suv-review-a1341965777/",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50449"
       },
-      "notes": "The Recon EV went on sale in the US/Canada in mid-2026. Currently only offered as the launch-exclusive Moab trim: 33-inch all-terrain tires, removable doors, Trail Rated badge, e-locker axle. EPA range of 222 mi came in below Jeep's earlier 230-mile target."
+      "notes": "The Recon EV went on sale in the US/Canada in mid-2026. Currently only offered as the launch-exclusive Moab trim: 33-inch all-terrain tires, removable doors, Trail Rated badge, e-locker axle. EPA range of 222 mi came in below Jeep's earlier 230-mile target. Public sources for this model are limited on heat pump: Jeep's own specification sheet is not publicly reachable and no source states either way, so the field is left blank — the Wagoneer S on the same STLA Large platform does have one, but that is not evidence for this model."
     },
     {
       "id": "jeep-wagoneer-s-2025-launch-edition-awd",
       "url": "https://evcompare.org/2025/wagoneer-s/launch-edition-awd/",
       "catalogId": 60,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-08-28",
       "make": "Jeep",
       "model": "Wagoneer S",
       "trim": "Launch Edition AWD",
@@ -5236,7 +5236,7 @@
         "maxDcKw": 203,
         "level2Kw": 11,
         "vehicleToLoad": false,
-        "heatPump": null,
+        "heatPump": true,
         "nacsAdapter": { "available": true, "costUsd": 230 }
       },
       "techFeatures": {
