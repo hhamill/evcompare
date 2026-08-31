@@ -103,7 +103,7 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
     "maxCubicFeet": 72.1,             // rear seats folded
     "frunkCubicFeet": 4.1
   },
-  "towCapacityLbs": 3500,
+  "towCapacityLbs": 3500,             // 0 = rated to tow nothing (a real rating); null = unknown. Never "N/A" — see the three-state rules below
   "groundClearanceIn": 6.6,
   "links": {
     "manufacturerSpec": "https://www.tesla.com/modely/design",
@@ -186,6 +186,13 @@ values derived from the site's own routing:
     whether a heat pump is fitted, so both are left blank rather than estimated."*
   - `"N/A"` — **not applicable**: the concept the field measures doesn't exist for this vehicle, so no number could ever fill it in. (e.g. `cargo.rearCubicFeet`/`maxCubicFeet` on a pickup truck — there's no enclosed cargo hold, just a bed, which isn't tracked by this schema; `groundClearanceIn` on a vehicle with adjustable air suspension and no single published figure — clearance genuinely isn't one number for that vehicle.)
   - `"Pending"` — **known but not yet published**: we're confident the real number exists or will exist and just hasn't been released yet, for a vehicle that's otherwise on sale now. (e.g. EPA range certification that hasn't posted to fueleconomy.gov yet for a vehicle already shipping.) Don't use this for "might not even launch in the US" uncertainty — that's still `null`.
+  - **A real zero is a value, not a gap.** `towCapacityLbs: 0` means the manufacturer rates this
+    vehicle to tow nothing — the Mustang Mach-E is genuinely rated at 0 lb — which is published
+    data, so it belongs as a number and not as `"N/A"` or `null`. 34 records use it. Contrast
+    `groundClearanceIn`, which does use `"N/A"`: there the vehicle has an adjustable air
+    suspension and no single figure exists to publish at all. The test is whether a number was
+    ever quoted, not whether the number is large. Keeping the zero also keeps the field numeric
+    for the filter slider.
   - Boolean fields stay plain `true`/`false`/`null` (no N/A/Pending) — a feature is either confirmed present, confirmed absent, or unconfirmed.
 - Prefer current model year (2025 or 2026) US-market specs; 2027 models are fine to include if the manufacturer has published real (not estimated) specs and pricing.
 - Keep `id` unique and kebab-case: `{make}-{model}-{year}-{trim}`.

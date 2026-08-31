@@ -1934,9 +1934,13 @@ Its Grand Touring sibling is 6,000. A one-pound difference is not a real specifi
   anyone is in that record anyway; not flagged.
 - **Ford E-Transit max cargo 277.7 cu ft** — high, but it is a cargo van.
 
-### Open question, not a defect
+### Settled: `towCapacityLbs: 0` is correct, and now documented
 
-`towCapacityLbs` uses `0` for "not rated to tow" on 34 records and never uses `"N/A"`, while
-`groundClearanceIn` uses `"N/A"` for the analogous case. Both are defensible — 0 lb is a real
-quantity and keeps the filter slider numeric — but the difference is undocumented in
-`data/SCHEMA.md`. Worth either documenting the distinction or reconciling it.
+Raised as an inconsistency — `towCapacityLbs` uses `0` on 34 records and never `"N/A"`, while
+`groundClearanceIn` uses `"N/A"` for what looked like the analogous case. It isn't analogous, and
+`0` is right: the Mustang Mach-E is **literally rated to tow 0 lb**. That is a published
+manufacturer figure, so it is data. Ground clearance on an air-suspension car is the genuinely
+different case — no single number was ever quoted.
+
+The test is now written into `data/SCHEMA.md`: **was a number ever quoted, not whether the number
+is large.** Keeping the zero also keeps the field numeric for the filter slider.
