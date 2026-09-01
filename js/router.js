@@ -61,49 +61,66 @@ export function homePath() {
   return BASE_PATH ? `${BASE_PATH}/` : "/";
 }
 
-// Shareable comparison links: /compare/{catalogId}-{catalogId}-... — deliberately path
-// segments, not a query string, so this rides the exact same 404.html deep-link mechanism
-// already proven for car pages above, rather than exercising the query-string-preserving
-// branch of that redirect trick, which nothing else in this app has ever used or tested.
-// No static file backs this route (can't prerender every combination of 149+ cars), so a
-// hard reload/crawler hit falls back to the homepage — same accepted tradeoff as /compare
-// itself; catalogId exists purely to keep this URL short, not for anything else.
-const COMPARE_PREFIX = `${BASE_PATH}/compare/`;
-// "/compare/similar/<ids>" records that the comparison was built by "Compare all" from a car's
-// similar-vehicles list, rather than picked by hand. It only distinguishes the entry point for
-// analytics; the ids after it are what actually rebuild the view, and both forms restore
-// identically.
-const SIMILAR_SEGMENT = "similar/";
+// Comparison links come in two shapes:
+//
+//   /compare/12-87-34            a hand-picked comparison
+//   /compare/12/similar/87-34    built by "Compare all" from car 12's Similar Vehicles list
+//
+// The second names its origin car in its own path segment rather than relying on a
+// first-id-is-special convention, so the view can anchor to it — pin it as the leftmost
+// column and send "Back to" there — after a reload or a handoff to another device.
+//
+// Order is meaningful and preserved exactly as given: these ids drive the column order, so a
+// link can hand someone the same left-to-right arrangement the sender was looking at. (They
+// used to come out in dataset order regardless, which is why the origin car was only
+// accidentally first — and only while catalogIds happened to ascend with file position.)
+//
+// Deliberately path segments, not a query string, so this rides the exact same 404.html
+// deep-link mechanism already proven for car pages above, rather than exercising the
+// query-string-preserving branch of that redirect trick, which nothing else in this app has
+// ever used or tested. No static file backs these routes (can't prerender every combination
+// of 149+ cars), so a crawler hit falls back to the homepage. catalogId exists purely to keep
+// these URLs short, not for anything else.
+const COMPARE_ROOT = `${BASE_PATH}/compare`;
+const SIMILAR_ROUTE = /^(\d+)\/similar\/(.+)$/;
 
-export function compareSharePath(catalogIds, { fromSimilar = false } = {}) {
-  const entry = `${BASE_PATH}/compare${fromSimilar ? "/similar" : ""}`;
-  // Removing the last car empties the selection while the view stays open. Return the bare
-  // entry path rather than a dangling "/compare/" — it round-trips to null either way, but
-  // there's no reason to put a trailing slash in the address bar.
-  return catalogIds.length ? `${entry}/${catalogIds.join("-")}` : entry;
+// `originId` must also appear in `catalogIds` — it's part of the comparison, not separate
+// from it — and is emitted from its own segment rather than repeated in the id list.
+export function compareSharePath(catalogIds, { originId = null } = {}) {
+  if (originId != null) {
+    const rest = catalogIds.filter(id => id !== originId);
+    return rest.length ? `${COMPARE_ROOT}/${originId}/similar/${rest.join("-")}` : `${COMPARE_ROOT}/${originId}`;
+  }
+  return catalogIds.length ? `${COMPARE_ROOT}/${catalogIds.join("-")}` : COMPARE_ROOT;
 }
 
-// Returns an array of positive integers, or null if pathname isn't a comparison link carrying
-// ids. Accepts both "/compare/<ids>" and "/compare/similar/<ids>". The bare "/compare" and
-// "/compare/similar" still return null and fall through to the homepage — they carry no state
-// to restore, which is exactly why entering compare no longer leaves the URL in that shape.
-export function compareIdsFromPath(pathname) {
+// Returns { ids, originId } for a comparison link, or null if this isn't one. `ids` is the
+// whole comparison in display order, origin first when there is one; `originId` is null for a
+// hand-picked comparison. A bare "/compare" carries nothing to restore and returns null.
+export function compareRouteFromPath(pathname) {
   const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
-  if (!normalized.startsWith(COMPARE_PREFIX)) return null;
-  let rest = normalized.slice(COMPARE_PREFIX.length);
-  if (rest.startsWith(SIMILAR_SEGMENT)) rest = rest.slice(SIMILAR_SEGMENT.length);
+  if (normalized !== COMPARE_ROOT && !normalized.startsWith(`${COMPARE_ROOT}/`)) return null;
+  const rest = normalized.slice(COMPARE_ROOT.length + 1);
   if (!rest) return null;
-  const ids = rest.split("-").map(Number);
-  if (ids.some(n => !Number.isInteger(n) || n <= 0)) return null;
-  return ids;
+
+  const similar = rest.match(SIMILAR_ROUTE);
+  if (similar) {
+    const originId = Number(similar[1]);
+    const ids = parseIds(similar[2]);
+    if (!isId(originId) || !ids) return null;
+    // Origin leads, and can't also appear in the tail — that would render it twice.
+    return { ids: [originId, ...ids.filter(id => id !== originId)], originId };
+  }
+
+  const ids = parseIds(rest);
+  return ids ? { ids, originId: null } : null;
 }
 
-export function isCompareFromSimilarPath(pathname) {
-  return pathname.startsWith(`${COMPARE_PREFIX}${SIMILAR_SEGMENT}`);
+function isId(n) {
+  return Number.isInteger(n) && n > 0;
 }
 
-// Which analytics bucket a comparison URL belongs to, independent of the ids in it — so
-// GoatCounter keeps seeing two clean paths instead of one row per combination of cars.
-export function compareAnalyticsPath(pathname) {
-  return isCompareFromSimilarPath(pathname) ? `${BASE_PATH}/compare/similar` : `${BASE_PATH}/compare`;
+function parseIds(segment) {
+  const ids = segment.split("-").map(Number);
+  return ids.every(isId) ? ids : null;
 }

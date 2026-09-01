@@ -2554,3 +2554,72 @@ zero, non-compare). Live: entering compare gives `/compare/1-2-3`; removing a ca
 removing the last car gives `/compare`, not `/compare/`. Deep-link restore through the real
 404.html encoding (`/?p=/compare/similar/1-5-21-122-123`) rebuilds all five cars in the compare
 view — the case that was broken — and the legacy `/compare/1-2-3` form still restores.
+
+---
+
+# TODO: Compare URLs get an origin car, and stop re-sorting (2026-09-01)
+
+Follow-on from the ids change. Two related problems.
+
+**1. The column/id order was never the selection order.** `selectedCatalogIds()` and the compare
+table both did `state.cars.filter(...)`, i.e. dataset order, so any notion of "the first car" was
+whatever came first in `evs.json`. It *looked* like ascending catalogId only because ids were
+assigned sequentially as cars were appended — and per `SCHEMA.md` a new car takes `max + 1` and
+numbers are never reused, so the first car inserted mid-file would have broken that illusion.
+
+Proved it by opening the Kia EV6 (car 61) and hitting "Compare all": URL came out
+`/compare/similar/39-61-104-113-120` with the **Ford Mustang Mach-E** as `ids[0]` and as the first
+column. Earlier testing only ever used an Acura, which is car #1, so the origin was accidentally
+first every time.
+
+Fixed by iterating `state.compareSet` instead. A JS Set preserves insertion order, so that's the
+order cars were added — or the order a link listed them. Order is now meaningful and preserved
+end to end: `/compare/34-12-87` restores as 34, 12, 87.
+
+**2. New URL shape carrying the origin car** (user's design):
+
+```
+/compare/12-87-34            hand-picked
+/compare/12/similar/87-34    built by "Compare all" from car 12
+```
+
+The origin gets its own segment rather than a "first id is special" convention, so the anchor
+survives a reload or a handoff. `compareIdsFromPath` is replaced by `compareRouteFromPath`,
+returning `{ ids, originId }` — `ids` is the whole comparison in display order, origin first.
+
+What the anchor does: pins that car as the leftmost column, suppresses its remove button
+(`lockedId` in `renderCompareTable`), and turns "← Back to results" into "← Back to Kia EV6",
+which opens that car's detail as a real navigation so browser-back returns to the comparison.
+It's resolved through the live selection, so it degrades to null on its own if the car isn't
+there. A link naming a since-removed car still opens the rest of the comparison, just unanchored.
+
+**Ordering gotcha worth remembering:** the anchor has to be assigned *before* `renderAll()`, not
+after. It was set inside `enterCompareUrl()`, which runs last in `compareAllSimilar` — so the URL
+was right while the table rendered with no anchor at all (back label and masked X both missing).
+The plain compare entry point clears it before rendering for the mirror-image reason: otherwise a
+previous anchored session leaves a stale "Back to <car>" on an unrelated selection.
+
+**Share is now just "copy the current URL"** — no rebuild, no canonicalisation, no history write.
+The address bar is kept in sync with the selection on every change, so it already *is* the link,
+anchor and order included.
+
+**Analytics reverted to recording the real URL.** `trackPageview()` is back to no-args. Distinct
+comparisons now show as distinct rows (the user's preference); "how often was Compare all used"
+becomes a path filter on "similar" rather than a single row.
+
+**Backward compatibility deliberately dropped** — the site has no real users yet, and compare
+tables aren't statically rendered so crawlers never had them. Old `/compare/similar/<ids>` links
+no longer parse.
+
+**Verified.** Parser across 11 cases: both shapes, arbitrary order preserved and not re-sorted,
+origin deduped out of the tail, trailing slash, zero/non-numeric rejected, bare `/compare` null.
+Live, with the Kia EV6 that exposed the bug: `/compare/61/similar/39-104-120-113`, Kia first with
+no X and 4 of 5 columns removable, "← Back to Kia EV6"; removing a car keeps the anchor; the back
+button lands on `/2026/ev6/light-rwd` with the selection preserved and browser-back rebuilds the
+anchored view. Deep-link restore through the real 404 encoding reproduces all of it. Re-entering
+compare by hand gives an unanchored `/compare/61-104-120-113` with every X present.
+
+**Known degenerate case:** remove every similar car and the URL becomes `/compare/61` (the anchor
+has nothing left to anchor). In-session the header still reads "Back to Kia EV6"; reloading that
+URL gives a plain one-car comparison. A comparison of one car with itself as origin isn't worth a
+URL shape of its own.

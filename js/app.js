@@ -1,7 +1,7 @@
 import { FIELDS, BODY_SPRITE } from "./fields.js";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js";
-import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js";
-import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath, compareAnalyticsPath, isCompareFromSimilarPath, hubSlugFromPath } from "./router.js";
+import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError, carTitle } from "./render.js";
+import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareRouteFromPath, hubSlugFromPath } from "./router.js";
 import { buildHubs, hubBySlug } from "./hubs.js";
 
 const MAX_COMPARE = 6;
@@ -22,12 +22,11 @@ const compareTitle = n => `Comparing ${n} vehicle${n === 1 ? "" : "s"} — ${SIT
 // wasn't — hand it to another device, or just reload it, and you got the homepage, because
 // there was no state in it to restore. Every compare URL now carries its ids.
 //
-// The "/similar" segment survives that change because it distinguishes the entry point:
-// "clicked Compare" vs "clicked Compare all from similar cars". Since the ids would otherwise
-// fragment GoatCounter into one row per combination of cars, pageviews are reported against
-// compareAnalyticsPath() — the URL without them — while the address bar keeps the full,
-// restorable path.
-let compareFromSimilar = false;
+// A comparison reached via "Compare all" is anchored to the car it started from: that car
+// leads the columns, can't be removed, and "Back to" returns to it. The anchor is the
+// catalogId (what the URL carries) rather than the car object, so it survives a reload
+// through nothing but the path. null means a hand-picked comparison with no anchor.
+let compareOriginCatalogId = null;
 
 // GoatCounter's count.js auto-fires one pageview on initial load using whatever
 // location/title were current at that point; it has no idea about our client-side view
@@ -36,11 +35,9 @@ let compareFromSimilar = false;
 // virtual pageview for that transition. No-ops quietly if the script hasn't loaded yet
 // (slow network) or was blocked (ad blockers commonly block analytics scripts) — this is
 // best-effort visibility, not something the app depends on.
-function trackPageview(path) {
+function trackPageview() {
   if (window.goatcounter && typeof window.goatcounter.count === "function") {
-    // count() with no args reads the current location; an explicit path overrides just that,
-    // still taking the title and everything else from the live document.
-    window.goatcounter.count(path ? { path } : undefined);
+    window.goatcounter.count();
   }
 }
 
@@ -184,16 +181,22 @@ async function init() {
   state.filterState = defaultFilterState(state.domains);
   state.pathIndex = buildCarPathIndex(cars);
   state.catalogIndex = new Map(cars.map(c => [c.catalogId, c]));
+  state.idIndex = new Map(cars.map(c => [c.id, c]));
 
   // A shared comparison link — reconstruct before the first render so there's no flash of
   // the homepage first. A car since removed from the dataset just gets skipped; the rest of
   // the comparison still loads if at least one id resolves.
-  const sharedIds = compareIdsFromPath(location.pathname);
-  if (sharedIds) {
-    const foundCars = sharedIds.map(id => state.catalogIndex.get(id)).filter(Boolean);
+  const sharedRoute = compareRouteFromPath(location.pathname);
+  if (sharedRoute) {
+    const foundCars = sharedRoute.ids.map(id => state.catalogIndex.get(id)).filter(Boolean);
     if (foundCars.length) {
-      compareFromSimilar = isCompareFromSimilarPath(location.pathname);
+      // Insertion order here is the URL's order, which is what the columns render in.
       state.compareSet = new Set(foundCars.map(c => c.id));
+      // Only honour the anchor if that car actually resolved — a link naming a since-removed
+      // car should still open the rest of the comparison, just without an anchor.
+      compareOriginCatalogId = foundCars.some(c => c.catalogId === sharedRoute.originId)
+        ? sharedRoute.originId
+        : null;
       state.view = "compare";
       document.title = compareTitle(foundCars.length);
     }
@@ -229,6 +232,19 @@ function bindGlobalEvents() {
   el.resetFiltersBtn.addEventListener("click", resetFilters);
 
   el.backToResultsBtn.addEventListener("click", () => {
+    // An anchored comparison came from a specific car's page, so "back" means that car —
+    // returning to the results list would skip the step the visitor actually took.
+    const origin = compareOriginCar();
+    if (origin) {
+      // A real navigation to that car, so it gets a history entry and browser-back returns to
+      // the comparison (popstate rebuilds it from the path). The selection is deliberately left
+      // alone, matching "Back to results" — leaving the view isn't the same as discarding it.
+      state.view = "results";
+      compareOriginCatalogId = null;
+      renderAll();
+      openDetail(origin);
+      return;
+    }
     state.view = "results";
     renderAll();
     leaveCompareUrl();
@@ -242,12 +258,9 @@ function bindGlobalEvents() {
   });
 
   el.shareCompareBtn.addEventListener("click", () => {
+    // Nothing to build: the address bar is kept in sync with the selection on every change,
+    // so sharing is just handing over the current URL — anchor, order and all.
     if (!selectedCatalogIds().length) return;
-    // Canonicalize before copying: a shared link shouldn't carry "/similar", which records how
-    // *this* visitor reached the comparison and means nothing to whoever receives it.
-    compareFromSimilar = false;
-    writeCompareUrl();
-    trackPageview(compareAnalyticsPath(location.pathname));
     copyToClipboard(location.href, el.shareCompareBtn);
   });
 
@@ -258,9 +271,13 @@ function bindGlobalEvents() {
 
   el.compareBarViewBtn.addEventListener("click", () => {
     state.view = "compare";
+    // A hand-picked comparison has no anchor. Cleared before rendering for the same reason
+    // compareAllSimilar sets one there — and so a previous anchored session can't leave a
+    // stale "Back to <car>" on an unrelated selection.
+    compareOriginCatalogId = null;
     renderAll();
     resetCompareScroll();
-    enterCompareUrl(false);
+    enterCompareUrl(null);
   });
 
   el.modalCloseBtn.addEventListener("click", closeModal);
@@ -306,11 +323,13 @@ function bindGlobalEvents() {
     // Only reachable by hard-loading a shared /compare/<ids> link and then navigating away
     // (opening a car pushes a real history entry) — everything else that touches this URL
     // uses replaceState, so it never sits in the back-stack on its own otherwise.
-    const sharedIds = compareIdsFromPath(location.pathname);
-    const foundCars = sharedIds ? sharedIds.map(id => state.catalogIndex.get(id)).filter(Boolean) : [];
+    const sharedRoute = compareRouteFromPath(location.pathname);
+    const foundCars = sharedRoute ? sharedRoute.ids.map(id => state.catalogIndex.get(id)).filter(Boolean) : [];
     closeModal({ updateHistory: false });
     if (foundCars.length) {
-      compareFromSimilar = isCompareFromSimilarPath(location.pathname);
+      compareOriginCatalogId = foundCars.some(c => c.catalogId === sharedRoute.originId)
+        ? sharedRoute.originId
+        : null;
       state.compareSet = new Set(foundCars.map(c => c.id));
       state.view = "compare";
       document.title = compareTitle(foundCars.length);
@@ -504,29 +523,42 @@ function sortCars(cars, sortKey) {
 // Writes the current comparison into the URL. Called on every change to the set while the
 // compare view is open, not only on entry — now that the ids are in the path, a stale URL is
 // worse than a bare one, because it looks like it describes what's on screen.
+// Iterates the compareSet, NOT state.cars — a Set keeps insertion order, so this is the order
+// cars were actually added (or the order a shared link listed them), which is what both the
+// columns and the URL use. Filtering state.cars instead silently re-sorted everything into
+// dataset order, which is why the origin car was only accidentally the first column.
+function selectedCars() {
+  return [...state.compareSet].map(id => state.idIndex.get(id)).filter(Boolean);
+}
+
 // catalogId is the short number the URL is built from; a car without one simply can't be
 // encoded, so it's dropped rather than allowed to produce an unparseable path.
 function selectedCatalogIds() {
-  return state.cars
-    .filter(c => state.compareSet.has(c.id))
-    .map(c => c.catalogId)
-    .filter(id => id != null);
+  return selectedCars().map(c => c.catalogId).filter(id => id != null);
+}
+
+// The anchor car of a "Compare all" comparison, or null. Resolved through the live selection
+// so it goes null on its own if that car ever leaves the set.
+function compareOriginCar() {
+  if (compareOriginCatalogId == null) return null;
+  const car = state.catalogIndex.get(compareOriginCatalogId);
+  return car && state.compareSet.has(car.id) ? car : null;
 }
 
 function writeCompareUrl() {
   const ids = selectedCatalogIds();
-  history.replaceState({}, "", compareSharePath(ids, { fromSimilar: compareFromSimilar }));
+  history.replaceState({}, "", compareSharePath(ids, { originId: compareOriginCatalogId }));
   document.title = compareTitle(state.compareSet.size);
 }
 
-function enterCompareUrl(fromSimilar) {
-  compareFromSimilar = fromSimilar;
+function enterCompareUrl(originCatalogId) {
+  compareOriginCatalogId = originCatalogId;
   writeCompareUrl();
-  trackPageview(compareAnalyticsPath(location.pathname));
+  trackPageview();
 }
 
 function leaveCompareUrl() {
-  compareFromSimilar = false;
+  compareOriginCatalogId = null;
   history.replaceState({}, "", homePath());
   document.title = HOME_TITLE;
   trackPageview();
@@ -535,13 +567,18 @@ function leaveCompareUrl() {
 // "Compare all" in the detail modal's Similar Vehicles section: replaces whatever's
 // currently selected (not additive — a fresh start, per the request) with this car plus
 // its similar-vehicle matches, then jumps straight to the compare view.
+// ids[0] is the car whose modal this was opened from; the rest are its similar matches.
+// Seeding the Set in that order makes it the leftmost column, and it becomes the anchor.
 function compareAllSimilar(ids) {
   state.compareSet = new Set(ids);
   state.view = "compare";
+  // Before renderAll, not after: the anchor decides the "Back to" label and which column loses
+  // its remove button, and both are settled while rendering.
+  compareOriginCatalogId = state.idIndex.get(ids[0])?.catalogId ?? null;
   closeModal({ updateHistory: false });
   renderAll();
   resetCompareScroll();
-  enterCompareUrl(true);
+  enterCompareUrl(compareOriginCatalogId);
 }
 
 function toggleCompare(id, shouldAdd) {
@@ -670,11 +707,16 @@ function renderResultsView() {
     closeSidebar();
     el.viewResults.hidden = true;
     el.viewCompare.hidden = false;
-    const carsToShow = state.cars.filter(c => state.compareSet.has(c.id));
+    const carsToShow = selectedCars();
     el.compareCount.textContent = carsToShow.length;
+    const origin = compareOriginCar();
+    // The anchor is what the whole comparison hangs off — the URL names it and "Back to"
+    // returns to it — so it can't be removed out from under either of those.
+    el.backToResultsBtn.textContent = origin ? `\u2190 Back to ${carTitle(origin)}` : "\u2190 Back to results";
     renderCompareTable(el.compareTable, carsToShow, {
       onRemove: id => { state.compareSet.delete(id); renderAll(); writeCompareUrl(); },
       onOpenDetail: openDetail,
+      lockedId: origin ? origin.id : null,
     });
     updateCompareScrollNav();
   } else {

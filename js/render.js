@@ -176,7 +176,10 @@ function groupScrollBtn(dir) {
     + `aria-hidden="true" tabindex="-1">${glyph}</button>`;
 }
 
-export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
+// lockedId: the anchor car of a "Compare all" comparison. It keeps its column but loses its
+// remove button — the URL names it and the header's "Back to" links to it, so removing it would
+// leave both pointing at a car that isn't in the comparison any more.
+export function renderCompareTable(table, cars, { onRemove, onOpenDetail, lockedId = null }) {
   table.innerHTML = "";
   // Drives the mobile column sizing in styles.css. Two cars are made to fit the viewport exactly
   // (no horizontal scroll at all); three or more deliberately overflow so they can be swiped
@@ -196,7 +199,7 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
     <th class="compare-col-header">
       <div class="compare-col-header-row">
         <div class="compare-col-title"><span class="compare-col-icon">${bodyIcon(car)}</span> ${carTitle(car)}</div>
-        ${onRemove ? `<button class="compare-col-remove" data-id="${esc(car.id)}" aria-label="Remove">&times;</button>` : ""}
+        ${onRemove && car.id !== lockedId ? `<button class="compare-col-remove" data-id="${esc(car.id)}" aria-label="Remove">&times;</button>` : ""}
       </div>
       <div class="compare-col-trim">${car.modelYear} · ${esc(car.trim)}</div>
       <div class="compare-col-price${bestPrice !== null && car.msrp !== bestPrice ? " compare-col-price-not-cheapest" : ""}">${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
