@@ -1,7 +1,7 @@
 import { FIELDS, BODY_SPRITE } from "./fields.js";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js";
 import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js";
-import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath, hubSlugFromPath } from "./router.js";
+import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath, compareAnalyticsPath, isCompareFromSimilarPath, hubSlugFromPath } from "./router.js";
 import { buildHubs, hubBySlug } from "./hubs.js";
 
 const MAX_COMPARE = 6;
@@ -14,13 +14,20 @@ const titleFor = car => `${car.modelYear} ${car.make} ${car.model} ${car.trim} �
 const compareTitle = n => `Comparing ${n} vehicle${n === 1 ? "" : "s"} — ${SITE_NAME}`;
 
 // Compare has no prerendered pages of its own (not remotely tractable to prerender every
-// combination of 149 cars), so these paths are cosmetic/analytics-only — a direct hard load
-// of "/compare" just shows the homepage, same as any other unrecognized path. What they do
-// give us: a distinct URL + title per entry point, and (via trackPageview below) a distinct
-// GoatCounter pageview, so "clicked Compare" and "clicked Compare all from similar cars" show
-// up as different traffic instead of both looking like plain homepage views.
-const COMPARE_PATH = "/compare";
-const COMPARE_FROM_SIMILAR_PATH = "/compare/similar";
+// combination of 149 cars), so a hard load of one of these URLs goes through 404.html's
+// deep-link restore and rebuilds the view from the ids in the path.
+//
+// Those ids used to go in only when you pressed Share; entering compare wrote a bare
+// "/compare" or "/compare/similar", which carries nothing. That URL looked shareable and
+// wasn't — hand it to another device, or just reload it, and you got the homepage, because
+// there was no state in it to restore. Every compare URL now carries its ids.
+//
+// The "/similar" segment survives that change because it distinguishes the entry point:
+// "clicked Compare" vs "clicked Compare all from similar cars". Since the ids would otherwise
+// fragment GoatCounter into one row per combination of cars, pageviews are reported against
+// compareAnalyticsPath() — the URL without them — while the address bar keeps the full,
+// restorable path.
+let compareFromSimilar = false;
 
 // GoatCounter's count.js auto-fires one pageview on initial load using whatever
 // location/title were current at that point; it has no idea about our client-side view
@@ -29,9 +36,11 @@ const COMPARE_FROM_SIMILAR_PATH = "/compare/similar";
 // virtual pageview for that transition. No-ops quietly if the script hasn't loaded yet
 // (slow network) or was blocked (ad blockers commonly block analytics scripts) — this is
 // best-effort visibility, not something the app depends on.
-function trackPageview() {
+function trackPageview(path) {
   if (window.goatcounter && typeof window.goatcounter.count === "function") {
-    window.goatcounter.count();
+    // count() with no args reads the current location; an explicit path overrides just that,
+    // still taking the title and everything else from the live document.
+    window.goatcounter.count(path ? { path } : undefined);
   }
 }
 
@@ -183,6 +192,7 @@ async function init() {
   if (sharedIds) {
     const foundCars = sharedIds.map(id => state.catalogIndex.get(id)).filter(Boolean);
     if (foundCars.length) {
+      compareFromSimilar = isCompareFromSimilarPath(location.pathname);
       state.compareSet = new Set(foundCars.map(c => c.id));
       state.view = "compare";
       document.title = compareTitle(foundCars.length);
@@ -232,15 +242,13 @@ function bindGlobalEvents() {
   });
 
   el.shareCompareBtn.addEventListener("click", () => {
-    const ids = state.cars
-      .filter(c => state.compareSet.has(c.id))
-      .map(c => c.catalogId)
-      .filter(id => id != null);
-    if (!ids.length) return;
-    const path = compareSharePath(ids);
-    history.replaceState({}, "", path);
-    trackPageview();
-    copyToClipboard(`${location.origin}${path}`, el.shareCompareBtn);
+    if (!selectedCatalogIds().length) return;
+    // Canonicalize before copying: a shared link shouldn't carry "/similar", which records how
+    // *this* visitor reached the comparison and means nothing to whoever receives it.
+    compareFromSimilar = false;
+    writeCompareUrl();
+    trackPageview(compareAnalyticsPath(location.pathname));
+    copyToClipboard(location.href, el.shareCompareBtn);
   });
 
   el.compareBarClearBtn.addEventListener("click", () => {
@@ -252,7 +260,7 @@ function bindGlobalEvents() {
     state.view = "compare";
     renderAll();
     resetCompareScroll();
-    enterCompareUrl(COMPARE_PATH);
+    enterCompareUrl(false);
   });
 
   el.modalCloseBtn.addEventListener("click", closeModal);
@@ -302,6 +310,7 @@ function bindGlobalEvents() {
     const foundCars = sharedIds ? sharedIds.map(id => state.catalogIndex.get(id)).filter(Boolean) : [];
     closeModal({ updateHistory: false });
     if (foundCars.length) {
+      compareFromSimilar = isCompareFromSimilarPath(location.pathname);
       state.compareSet = new Set(foundCars.map(c => c.id));
       state.view = "compare";
       document.title = compareTitle(foundCars.length);
@@ -492,13 +501,32 @@ function sortCars(cars, sortKey) {
 // Replace (not push) for entering/leaving compare — like closeModal's own history writes,
 // this is a mode switch on the current page rather than a drill-down navigation, so it
 // shouldn't grow the back-button stack or need popstate to know how to reconstruct it.
-function enterCompareUrl(path) {
-  history.replaceState({}, "", path);
+// Writes the current comparison into the URL. Called on every change to the set while the
+// compare view is open, not only on entry — now that the ids are in the path, a stale URL is
+// worse than a bare one, because it looks like it describes what's on screen.
+// catalogId is the short number the URL is built from; a car without one simply can't be
+// encoded, so it's dropped rather than allowed to produce an unparseable path.
+function selectedCatalogIds() {
+  return state.cars
+    .filter(c => state.compareSet.has(c.id))
+    .map(c => c.catalogId)
+    .filter(id => id != null);
+}
+
+function writeCompareUrl() {
+  const ids = selectedCatalogIds();
+  history.replaceState({}, "", compareSharePath(ids, { fromSimilar: compareFromSimilar }));
   document.title = compareTitle(state.compareSet.size);
-  trackPageview();
+}
+
+function enterCompareUrl(fromSimilar) {
+  compareFromSimilar = fromSimilar;
+  writeCompareUrl();
+  trackPageview(compareAnalyticsPath(location.pathname));
 }
 
 function leaveCompareUrl() {
+  compareFromSimilar = false;
   history.replaceState({}, "", homePath());
   document.title = HOME_TITLE;
   trackPageview();
@@ -513,7 +541,7 @@ function compareAllSimilar(ids) {
   closeModal({ updateHistory: false });
   renderAll();
   resetCompareScroll();
-  enterCompareUrl(COMPARE_FROM_SIMILAR_PATH);
+  enterCompareUrl(true);
 }
 
 function toggleCompare(id, shouldAdd) {
@@ -645,7 +673,7 @@ function renderResultsView() {
     const carsToShow = state.cars.filter(c => state.compareSet.has(c.id));
     el.compareCount.textContent = carsToShow.length;
     renderCompareTable(el.compareTable, carsToShow, {
-      onRemove: id => { state.compareSet.delete(id); renderAll(); },
+      onRemove: id => { state.compareSet.delete(id); renderAll(); writeCompareUrl(); },
       onOpenDetail: openDetail,
     });
     updateCompareScrollNav();

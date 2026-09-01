@@ -69,20 +69,41 @@ export function homePath() {
 // hard reload/crawler hit falls back to the homepage — same accepted tradeoff as /compare
 // itself; catalogId exists purely to keep this URL short, not for anything else.
 const COMPARE_PREFIX = `${BASE_PATH}/compare/`;
+// "/compare/similar/<ids>" records that the comparison was built by "Compare all" from a car's
+// similar-vehicles list, rather than picked by hand. It only distinguishes the entry point for
+// analytics; the ids after it are what actually rebuild the view, and both forms restore
+// identically.
+const SIMILAR_SEGMENT = "similar/";
 
-export function compareSharePath(catalogIds) {
-  return `${COMPARE_PREFIX}${catalogIds.join("-")}`;
+export function compareSharePath(catalogIds, { fromSimilar = false } = {}) {
+  const entry = `${BASE_PATH}/compare${fromSimilar ? "/similar" : ""}`;
+  // Removing the last car empties the selection while the view stays open. Return the bare
+  // entry path rather than a dangling "/compare/" — it round-trips to null either way, but
+  // there's no reason to put a trailing slash in the address bar.
+  return catalogIds.length ? `${entry}/${catalogIds.join("-")}` : entry;
 }
 
-// Returns an array of positive integers, or null if pathname isn't a "/compare/<ids>" share
-// link at all (including the plain "/compare" and "/compare/similar" analytics-only paths —
-// "similar" fails to parse as a number, so this correctly falls through without touching them).
+// Returns an array of positive integers, or null if pathname isn't a comparison link carrying
+// ids. Accepts both "/compare/<ids>" and "/compare/similar/<ids>". The bare "/compare" and
+// "/compare/similar" still return null and fall through to the homepage — they carry no state
+// to restore, which is exactly why entering compare no longer leaves the URL in that shape.
 export function compareIdsFromPath(pathname) {
   const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
   if (!normalized.startsWith(COMPARE_PREFIX)) return null;
-  const rest = normalized.slice(COMPARE_PREFIX.length);
+  let rest = normalized.slice(COMPARE_PREFIX.length);
+  if (rest.startsWith(SIMILAR_SEGMENT)) rest = rest.slice(SIMILAR_SEGMENT.length);
   if (!rest) return null;
   const ids = rest.split("-").map(Number);
   if (ids.some(n => !Number.isInteger(n) || n <= 0)) return null;
   return ids;
+}
+
+export function isCompareFromSimilarPath(pathname) {
+  return pathname.startsWith(`${COMPARE_PREFIX}${SIMILAR_SEGMENT}`);
+}
+
+// Which analytics bucket a comparison URL belongs to, independent of the ids in it — so
+// GoatCounter keeps seeing two clean paths instead of one row per combination of cars.
+export function compareAnalyticsPath(pathname) {
+  return isCompareFromSimilarPath(pathname) ? `${BASE_PATH}/compare/similar` : `${BASE_PATH}/compare`;
 }

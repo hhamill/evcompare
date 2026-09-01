@@ -2511,3 +2511,46 @@ margin spends the footer's existing slack instead of making every card taller. H
 Verified at 375px: checkbox 22×22, a click on it toggles compare with the modal staying shut, and
 a point at the label's top-right corner — card territory before — now resolves to the label.
 Desktop unchanged at 15×15.
+
+---
+
+# TODO: Compare URLs carry their ids (2026-09-01)
+
+**Bug.** Open a car, hit "Compare all" from Similar Vehicles, then hand the page to another
+device (or just reload) — you get the homepage. The URL said `/compare/similar`, which carries no
+state, so 404.html's deep-link restore had nothing to rebuild from.
+
+The id-encoding already existed (`compareSharePath`) but was wired **only** to the Share button.
+Entering the compare view wrote a bare `/compare` or `/compare/similar`. Those were documented as
+"cosmetic/analytics-only", which was a defensible call when compare was a within-session mode —
+but the URL still *looks* shareable, and it is now routinely moved between devices.
+
+**Fix — every compare URL carries its ids**, in the shape the user proposed:
+`/compare/1-2-3` and `/compare/similar/1-5-21-122-123`.
+
+- `router.js`: `compareSharePath(ids, { fromSimilar })` builds both forms; `compareIdsFromPath`
+  accepts both and still returns null for the bare paths. Old `/compare/<ids>` links keep working
+  unchanged. With an empty selection it returns the bare entry path rather than a dangling
+  `/compare/`.
+- `app.js`: `writeCompareUrl()` rebuilds the path from the live selection and is called on
+  **every** change while compare is open, not just on entry — with ids in the path a stale URL is
+  worse than a bare one, because it looks like it describes what's on screen. Removing a car in
+  the compare table now updates the URL, which it never did before.
+- The entry point is tracked in a module-level `compareFromSimilar` flag, set on entry and
+  restored from the path on deep-link/popstate, so later removals keep the URL's shape.
+- Share canonicalizes: it drops `/similar` before copying, since that segment records how *this*
+  visitor arrived and means nothing to the recipient.
+
+**Analytics kept intact.** The `/similar` segment existed to separate "clicked Compare" from
+"clicked Compare all from similar cars" in GoatCounter, and ids would have fragmented that into
+one row per combination of cars. `trackPageview(path)` now passes an explicit path, so pageviews
+are still reported against `/compare` and `/compare/similar` while the address bar holds the full
+restorable URL.
+
+**Verified.** Router parser across 12 cases (both forms, bare paths, trailing slash, non-numeric,
+zero, non-compare). Live: entering compare gives `/compare/1-2-3`; removing a car gives
+`/compare/2-3`; "Compare all" gives `/compare/similar/1-5-21-122-123` and a removal there keeps
+`/compare/similar/…`; Share rewrites `/compare/similar/5-21-122-123` to `/compare/5-21-122-123`;
+removing the last car gives `/compare`, not `/compare/`. Deep-link restore through the real
+404.html encoding (`/?p=/compare/similar/1-5-21-122-123`) rebuilds all five cars in the compare
+view — the case that was broken — and the legacy `/compare/1-2-3` form still restores.
