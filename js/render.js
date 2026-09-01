@@ -1,7 +1,7 @@
-import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "./fields.js?v=14";
+import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "./fields.js?v=15";
 import { findSimilarCars } from "./similar.js?v=6";
 import { carPath, hubPath } from "./router.js?v=6";
-import { hubsForCar } from "./hubs.js?v=5";
+import { hubsForCar } from "./hubs.js?v=6";
 
 // "msrp" used to sit here too, printing the same number a second time directly under the
 // green price in the card header. The freed slot goes to 0-60, which actually varies across

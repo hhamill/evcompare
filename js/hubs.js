@@ -1,4 +1,4 @@
-import { fieldByKey, fmtVal } from "./fields.js?v=12";
+import { fieldByKey, fmtVal } from "./fields.js?v=15";
 
 // Landing pages for questions people actually search — "3-row electric SUVs", "EVs that tow".
 // Each hub is a PREDICATE evaluated against the dataset, not a list of ids (which would go
@@ -28,6 +28,7 @@ const PRACTICAL_HUBS = [
     slug: "electric-suvs-with-three-rows",
     noun: "three-row electric SUVs",
     h1: "Electric SUVs with three rows",
+    pill: "Three-row SUVs",
     title: "3-Row Electric SUVs — Every Model Compared",
     blurb: "Every three-row electric SUV sold in the US, with seating, range and price side by side.",
     match: c => val("isThreeRow", c) === true,
@@ -47,6 +48,7 @@ const PRACTICAL_HUBS = [
     slug: "evs-under-40000",
     noun: "EVs under $40,000",
     h1: "Electric cars under $40,000",
+    pill: "Under $40,000",
     title: "Electric Cars Under $40,000 — Cheapest EVs Compared",
     blurb: "The most affordable electric vehicles on sale in the US, sorted by price.",
     match: c => { const v = num("msrp", c); return v !== null && v < 40000; },
@@ -63,6 +65,7 @@ const PRACTICAL_HUBS = [
     slug: "evs-with-300-mile-range",
     noun: "EVs with 300+ miles of range",
     h1: "EVs with 300+ miles of range",
+    pill: "300+ mi range",
     title: "Longest-Range EVs — 300+ Mile Electric Cars",
     blurb: "Electric vehicles with an EPA-rated range of 300 miles or more.",
     match: c => { const v = num("epaRange", c); return v !== null && v >= 300; },
@@ -79,6 +82,7 @@ const PRACTICAL_HUBS = [
     slug: "evs-that-tow",
     noun: "EVs that tow 5,000 lb or more",
     h1: "EVs that tow 5,000 lb or more",
+    pill: "Tows 5,000 lb+",
     title: "Electric Trucks & SUVs That Tow 5,000 lb+",
     blurb: "Electric vehicles rated to tow at least 5,000 pounds, sorted by capacity.",
     match: c => { const v = num("towCapacityLbs", c); return v !== null && v >= 5000; },
@@ -95,6 +99,7 @@ const PRACTICAL_HUBS = [
     slug: "quickest-evs",
     noun: "EVs under four seconds to 60",
     h1: "The quickest EVs — 0–60 in under 4 seconds",
+    pill: "0–60 under 4s",
     title: "Quickest EVs — 0–60 mph in Under 4 Seconds",
     blurb: "Electric vehicles that reach 60 mph in under four seconds, sorted by acceleration.",
     match: c => { const v = num("zeroTo60", c); return v !== null && v < 4; },
@@ -111,6 +116,7 @@ const PRACTICAL_HUBS = [
     slug: "fastest-charging-evs",
     noun: "EVs charging at 250 kW or more",
     h1: "The fastest-charging EVs — 250 kW and up",
+    pill: "250 kW+ charging",
     title: "Fastest-Charging EVs — 250 kW+ DC Fast Charging",
     blurb: "Electric vehicles that accept 250 kW or more on a DC fast charger.",
     match: c => { const v = num("maxDcKw", c); return v !== null && v >= 250; },
@@ -127,6 +133,7 @@ const PRACTICAL_HUBS = [
     slug: "evs-with-most-cargo-space",
     noun: "EVs with 70+ cu ft of cargo space",
     h1: "EVs with the most cargo space",
+    pill: "Most cargo space",
     title: "EVs With the Most Cargo Space — 70+ Cubic Feet",
     blurb: "Electric vehicles offering 70 cubic feet or more with the seats folded.",
     match: c => { const v = num("maxCubicFeet", c); return v !== null && v >= 70; },
@@ -143,6 +150,7 @@ const PRACTICAL_HUBS = [
     slug: "small-electric-suvs",
     noun: "small electric SUVs",
     h1: "Small electric SUVs",
+    pill: "Small SUVs",
     title: "Small Electric SUVs — Every Model Compared",
     blurb: "Compact electric SUVs and crossovers, sized by the EPA rather than by marketing.",
     match: c => c.epaSizeClass === "Small SUV",
@@ -163,6 +171,7 @@ const PRACTICAL_HUBS = [
     slug: "large-electric-suvs",
     noun: "larger electric SUVs",
     h1: "Larger electric SUVs",
+    pill: "Larger SUVs",
     title: "Large & Midsize Electric SUVs — Every Model Compared",
     blurb: "The electric SUVs the EPA classes above its Small category — midsize through full-size.",
     match: c => c.epaSizeClass === "Standard SUV",
@@ -190,6 +199,7 @@ const PRACTICAL_HUBS = [
     slug: "non-tesla-evs-with-supercharger-access",
     noun: "non-Tesla EVs that can charge at a Tesla Supercharger",
     h1: "Non-Tesla EVs that can charge at a Tesla Supercharger",
+    pill: "Supercharger access",
     title: "Which Non-Tesla EVs Can Use Tesla Superchargers",
     blurb: "Non-Tesla electric vehicles the manufacturer has enabled on the Tesla Supercharger network, natively or with an approved adapter.",
     match: c => c.make !== "Tesla" && val("superchargerAccess", c) === true,
@@ -220,6 +230,10 @@ const PRACTICAL_HUBS = [
 
 ];
 
+// `pill` is the short label used only for the category nav at the top of the homepage. The
+// full `h1` stays the page's own heading, its <title>, and the anchor's title attribute — this
+// is purely to stop ten long chips from filling a phone screen before the first car. Optional:
+// anything without one falls back to h1.
 export function hubBySlug(slug, hubs) {
   return hubs.find(h => h.slug === slug) || null;
 }

@@ -2115,3 +2115,43 @@ that still cannot — Audi Q4 e-tron and the three VinFasts, named in the page t
 Verified: the new hub renders with 133 cars, the old path redirects to it, the sitemap carries the
 new slug and not the old, and hub backlinks on car pages follow the field — an Ioniq 5 carries the
 link, while the Q4 e-tron (no access) and any Tesla correctly do not.
+
+## Mobile: category pills were eating the fold (2026-08-28)
+
+On a 375px phone the ten category chips wrapped to roughly **340px of vertical space — taller than
+the first car card** — so the list a visitor came for started below the fold. Two changes:
+
+**Shorter chip labels.** Hubs gained an optional `pill` property used only by the homepage nav;
+the full `h1` stays the page's heading, its `<title>`, and now the anchor's `title` attribute, so
+hover and assistive tech still get the descriptive name. "Non-Tesla EVs that can charge at a Tesla
+Supercharger" becomes "Supercharger access". This helped desktop too — three sprawling rows down
+to two tidy ones.
+
+**One swipeable row on mobile**, the native chip idiom on both platforms, with a masked right edge
+so it reads as scrollable rather than clipped. 340px -> 29px. Every link stays in the DOM and
+rendered, so nothing is lost for crawlers or for the internal linking these pills exist to provide.
+Scoped to `#hubLinks` deliberately: the make and body navs share `.hub-links` but sit *below* the
+grid, where wrapping is fine and 34 chips in one scroller would not be.
+
+### The part that nearly shipped broken: the cache-bust cascade
+
+Assets are versioned by hand in query strings (`app.js?v=56`), and **bumping a module means
+bumping everything that imports it** — otherwise a returning visitor keeps the cached parent, which
+keeps importing the old child URL. Today's edits touched `fields.js`, `hubs.js` and `styles.css`,
+so the full cascade was:
+
+    fields.js  14 -> 15   (app.js, filters.js, render.js, similar.js)
+               12 -> 15   (hubs.js — see below)
+    filters.js 11 -> 12   render.js 30 -> 31   hubs.js 5 -> 6
+    app.js     56 -> 57   styles.css 37 -> 38
+
+This was not cosmetic. `hubs.js` calls `val("superchargerAccess", c)`, which resolves through
+`fieldByKey` in `fields.js`; a client holding a pre-change `fields.js` would have got `undefined`
+and the repurposed Supercharger hub would have matched nothing.
+
+**Fixed a latent smell while there:** `hubs.js` pinned `fields.js?v=12` while everything else used
+`v=14`, so the browser held **two separate module instances of the same file**. Now unified at 15.
+
+Worth automating eventually — a content hash would remove the whole class of error. Noted, not done.
+
+(Unrelated and pre-existing: `/favicon.ico` 404s because the site uses an inline SVG favicon. Harmless.)

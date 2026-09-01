@@ -396,6 +396,26 @@ a.filter-chip-clear { text-decoration: none; }
 }
 .hub-links a:hover { border-color: var(--accent-2); }
 
+/* On a phone the ten category chips wrapped to roughly 340px — taller than the first car card,
+   so the list a visitor actually came for started below the fold. One swipeable row instead,
+   which is the native chip idiom on both platforms. Every link stays in the DOM and rendered,
+   so this costs nothing for crawlers or for the internal linking these pills exist to provide.
+   Scoped to #hubLinks: the make/body navs share .hub-links but sit below the grid, where
+   wrapping is fine and 34 chips in one scroller would not be. */
+@media (max-width: 640px) {
+  #hubLinks {
+    flex-wrap: nowrap; overflow-x: auto; margin-bottom: 12px; padding-bottom: 2px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    /* Fades the right edge so the row reads as scrollable rather than clipped. */
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  }
+  #hubLinks::-webkit-scrollbar { display: none; }
+  #hubLinks > * { flex: 0 0 auto; scroll-snap-align: start; }
+  #hubLinks a { padding: 5px 12px; }
+}
+
 /* Breadth linking below the grid rather than 34 pills above it, which would bury the
    results. Conventional placement for this kind of nav, and position matters far less to a
    crawler than existence does. */

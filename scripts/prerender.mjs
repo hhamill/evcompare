@@ -252,7 +252,7 @@ ${FAVICON}
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=37" />
+<link rel="stylesheet" href="/css/styles.css?v=38" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -347,7 +347,7 @@ ${o.introHtml}
 
 </div>
 
-<script type="module" src="/js/app.js?v=56"></script>
+<script type="module" src="/js/app.js?v=57"></script>
 </body>
 </html>
 `;
@@ -555,8 +555,10 @@ function buildHomepage() {
   // Hub links are injected here rather than hardcoded in index.html so they can't drift from
   // js/hubs.js, and rendered server-side rather than by app.js so a crawler actually sees
   // them — a sitemap entry with no inbound link is a weak signal.
+  // Short `pill` label with the full h1 kept as the title attribute, so the visible chip is
+  // phone-sized while hover and assistive tech still get the descriptive name.
   const links = HUBSETS.practical.map(h =>
-    `<a href="${esc(hubPath(h))}/">${esc(h.h1)}</a>`).join("\n      ");
+    `<a href="${esc(hubPath(h))}/" title="${esc(h.h1)}">${esc(h.pill ?? h.h1)}</a>`).join("\n      ");
   return src
     .replace('<nav id="hubLinks" class="hub-links" aria-label="Browse by category"></nav>',
              `<nav id="hubLinks" class="hub-links" aria-label="Browse by category">\n      <span class="hub-links-label">Browse:</span>\n      ${links}\n    </nav>`)
@@ -633,7 +635,7 @@ function docShell(o) {
 <meta name="twitter:image" content="${esc(OG_IMAGE)}" />
 ${o.jsonLd ? `<script type="application/ld+json">${JSON.stringify(o.jsonLd)}</script>` : ""}
 ${FAVICON}
-<link rel="stylesheet" href="/css/styles.css?v=37" />
+<link rel="stylesheet" href="/css/styles.css?v=38" />
 </head>
 <body>
 <div class="app">
