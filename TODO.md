@@ -2195,3 +2195,35 @@ Verified: from `/electric-suvs-with-three-rows/` one click gives `/` with 149 ca
 the homepage intro back as the page's single `<h1>`, all 10 category pills, no scope chip, correct
 title, no console errors. Also verified the escape-hatch case the button existed for — an app
 loaded on an unresolvable car slug — still gets you out.
+
+## Small SUVs get their own silhouette (2026-08-28)
+
+The "Crossover" body silhouette was drawn during the icon work and then orphaned when the
+Crossover body style was retired on 2026-08-28 — a good drawing with nothing to point at. It is
+now the icon for EPA's **Small SUV** class, which is what it actually depicts.
+
+Worth doing because `bodyStyle: "SUV"` is a very wide bucket — 99 of 149 records — spanning a
+Volvo EX30 to an Escalade IQ under one shape. Splitting on `epaSizeClass` distinguishes **47 cars,
+a third of the grid**, rather than being a rare special case.
+
+    #body-SUV        52  (37 Standard SUV, 10 unclassed, 2 Midsize Wagon, 3 Special Purpose)
+    #body-SUV-Small  47
+
+Implementation notes:
+
+- The symbol was recovered from `dad7d73~1` and re-added as **`body-SUV-Small`**, not
+  `body-Crossover`. Reviving the retired name would have quietly reintroduced the concept the
+  dataset deliberately dropped; the id now describes what it is used for.
+- `bodyIcon(style)` became **`bodyIcon(car)`** — the choice needs two fields, and passing the car
+  avoids a two-argument call that would be easy to get backwards. Four callers in `render.js`.
+- **Unclassed SUVs keep the generic shape.** 10 records have no `epaSizeClass` (no EPA id), and
+  defaulting them to Small would assert something unknown. They read as plain SUVs, which is the
+  honest default and matches how the rest of the dataset treats a missing value.
+
+Verified in the browser: Cadillac shows the split correctly within one make — Escalade IQ and
+Vistiq (Standard) on the generic shape, Lyriq (Small) on the new one — and the totals match the
+data exactly.
+
+Not touched, though it looks odd: EPA classes the **Optiq** as Standard SUV despite it being a
+compact crossover. That is EPA's call and this dataset defers to it on purpose (see the Crossover
+retirement) — overriding it by eye is exactly what `epaSizeClass` exists to avoid.

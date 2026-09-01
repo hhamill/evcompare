@@ -1,4 +1,4 @@
-import { fieldByKey, fmtVal } from "./fields.js?v=15";
+import { fieldByKey, fmtVal } from "./fields.js?v=16";
 
 // Landing pages for questions people actually search — "3-row electric SUVs", "EVs that tow".
 // Each hub is a PREDICATE evaluated against the dataset, not a list of ids (which would go

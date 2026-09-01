@@ -1,4 +1,4 @@
-import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "./fields.js?v=15";
+import { FIELDS, GROUP_ORDER, bodyIcon, carSummarySentence, fmtVal, fieldByKey, isRealValue } from "./fields.js?v=16";
 import { findSimilarCars } from "./similar.js?v=6";
 import { carPath, hubPath } from "./router.js?v=6";
 import { hubsForCar } from "./hubs.js?v=6";
@@ -136,7 +136,7 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
     card.innerHTML = `
       <div class="ev-card-top">
         <div style="display:flex; gap:10px; align-items:flex-start;">
-          <div class="ev-card-icon">${bodyIcon(car.bodyStyle)}</div>
+          <div class="ev-card-icon">${bodyIcon(car)}</div>
           <div>
             <div class="ev-card-title">${carTitle(car)}</div>
             <div class="ev-card-trim">${car.modelYear} · ${esc(car.trim)}</div>
@@ -185,7 +185,7 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
   headRow.innerHTML = `<th></th>` + cars.map(car => `
     <th class="compare-col-header">
       <div class="compare-col-header-row">
-        <div class="compare-col-title"><span class="compare-col-icon">${bodyIcon(car.bodyStyle)}</span> ${carTitle(car)}</div>
+        <div class="compare-col-title"><span class="compare-col-icon">${bodyIcon(car)}</span> ${carTitle(car)}</div>
         ${onRemove ? `<button class="compare-col-remove" data-id="${esc(car.id)}" aria-label="Remove">&times;</button>` : ""}
       </div>
       <div class="compare-col-trim">${car.modelYear} · ${esc(car.trim)}</div>
@@ -320,7 +320,7 @@ function renderSimilarSection(anchor, allCars) {
     return `
       <div class="similar-card" data-id="${esc(car.id)}">
         <div class="similar-card-top">
-          <span class="similar-card-icon">${bodyIcon(car.bodyStyle)}</span>
+          <span class="similar-card-icon">${bodyIcon(car)}</span>
           <div>
             <div class="similar-card-title">${carTitle(car)}</div>
             <div class="similar-card-trim">${car.modelYear} · ${esc(car.trim)}</div>
@@ -377,7 +377,7 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
 
   body.innerHTML = `
     <div class="modal-header-row">
-      <div class="modal-title">${bodyIcon(car.bodyStyle)} ${carTitle(car)}</div>
+      <div class="modal-title">${bodyIcon(car)} ${carTitle(car)}</div>
       <button id="modalShareBtn" class="btn btn-ghost btn-sm icon-btn">${SHARE_ICON} Share</button>
     </div>
     <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
