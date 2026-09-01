@@ -81,14 +81,14 @@ export const FIELDS = [
 
   // ---- Range & Charging ----
   { key: "epaRange", label: "EPA Range", group: "Range & Charging", type: "range", compareBetter: "higher", get: c => c.range?.epaMiles,
-    format: v => fmtNum(v, n => `${n} mi`) },
+    format: v => fmtNum(v, n => `${n}\u00A0mi`) },
   { key: "usableKwh", label: "Battery Capacity", group: "Range & Charging", type: "range", get: c => c.battery?.usableKwh,
-    format: v => fmtNum(v, n => `${n} kWh`) },
+    format: v => fmtNum(v, n => `${n}\u00A0kWh`) },
   { key: "chargePort", label: "Charge Port Type", group: "Range & Charging", type: "enum", get: c => c.charging?.portType },
   { key: "maxDcKw", label: "Max DC Fast Charging", group: "Range & Charging", type: "range", compareBetter: "higher", get: c => c.charging?.maxDcKw,
-    format: v => fmtNum(v, n => `${n} kW`) },
+    format: v => fmtNum(v, n => `${n}\u00A0kW`) },
   { key: "level2Kw", label: "Level 2 AC Charging", group: "Range & Charging", type: "range", step: 0.1, compareBetter: "higher", get: c => c.charging?.level2Kw,
-    format: v => fmtNum(v, n => `${roundTo(n, 1)} kW`) },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)}\u00A0kW`) },
   { key: "vehicleToLoad", label: "Vehicle-to-Load (V2L)", group: "Range & Charging", type: "boolean", get: c => c.charging?.vehicleToLoad },
   { key: "heatPump", label: "Heat Pump", group: "Range & Charging", type: "boolean", get: c => c.charging?.heatPump },
   // Deliberately separate from both chargePort and nacsAdapterAvailable, because network access
@@ -115,11 +115,11 @@ export const FIELDS = [
   { key: "zeroTo60", label: "0–60 mph", group: "Performance & Drivetrain", type: "range", step: 0.1, compareBetter: "lower", get: c => c.performance?.zeroTo60Sec,
     format: v => fmtNum(v, n => `${roundTo(n, 1)}s`) },
   { key: "horsepower", label: "Horsepower", group: "Performance & Drivetrain", type: "range", compareBetter: "higher", get: c => c.performance?.horsepowerHp,
-    format: v => fmtNum(v, n => `${n} hp`) },
+    format: v => fmtNum(v, n => `${n}\u00A0hp`) },
   { key: "towCapacityLbs", label: "Tow Capacity", group: "Performance & Drivetrain", type: "range", compareBetter: "higher", get: c => c.towCapacityLbs,
-    format: v => fmtNum(v, n => `${n.toLocaleString()} lb`) },
+    format: v => fmtNum(v, n => `${n.toLocaleString()}\u00A0lb`) },
   { key: "groundClearanceIn", label: "Ground Clearance", group: "Performance & Drivetrain", type: "range", step: 0.1, get: c => c.groundClearanceIn,
-    format: v => fmtNum(v, n => `${roundTo(n, 1)} in`) },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)}\u00A0in`) },
   { key: "wheelSizesIn", label: "Wheel Size", group: "Performance & Drivetrain", type: "enumMulti", get: c => c.wheelSizesIn,
     format: v => Array.isArray(v) && v.length ? v.map(x => `${x}"`).join(", ") : "—" },
 
@@ -151,11 +151,11 @@ export const FIELDS = [
 
   // ---- Cargo ----
   { key: "rearCubicFeet", label: "Rear Cargo Volume", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.rearCubicFeet,
-    format: v => fmtNum(v, n => `${roundTo(n, 1)} cf`) },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)}\u00A0cf`) },
   { key: "maxCubicFeet", label: "Max Cargo (seats folded)", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.maxCubicFeet,
-    format: v => fmtNum(v, n => `${roundTo(n, 1)} cf`) },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)}\u00A0cf`) },
   { key: "frunkCubicFeet", label: "Frunk Volume", group: "Cargo", type: "range", step: 0.1, get: c => c.cargo?.frunkCubicFeet,
-    format: v => fmtNum(v, n => `${roundTo(n, 1)} cf`) },
+    format: v => fmtNum(v, n => `${roundTo(n, 1)}\u00A0cf`) },
 ];
 
 export const GROUP_ORDER = [
@@ -194,6 +194,13 @@ export const BODY_SPRITE =
 </svg>`;
 
 const BODY_STYLES = new Set(["Sedan", "Coupe", "Hatchback", "SUV", "Truck", "Minivan", "Van"]);
+
+// Units are joined to their number with a NON-BREAKING space (\u00A0), not a plain one. The
+// modal's spec grid stays two columns even on a phone, so cells get narrow enough that "3,500 lb"
+// wrapped to "3,500" / "lb" while the label beside it still had room — the number and its unit
+// are one token to a reader and should break as one. Deliberately not solved with
+// `white-space: nowrap` on the value: that would also stop genuinely multi-word values like
+// "Minicompact Car" from wrapping, and those can overflow a narrow cell.
 
 // Falls back to the SUV shape, not a lightning bolt: an unmapped body style should degrade to
 // a generic vehicle rather than to something that reads as an error. That bolt was reachable

@@ -2257,3 +2257,23 @@ paragraph under it.
 
 Verified at desktop and 375px, opened both by deep link and by clicking a grid card: header pinned
 at the bottom of the scroll, 14px clear gap above the summary at rest, no console errors.
+
+## Units were wrapping away from their numbers on mobile (2026-08-28)
+
+The modal's spec grid stays two columns even on a phone, so cells get narrow enough that values
+broke at their internal space: **"3,500" / "lb"** and **"7" / "in"** on separate lines, while the
+label beside them still had room. A number and its unit are one token to a reader and should
+break as one, or not at all.
+
+Fixed in the formatters rather than the CSS: the ten unit-suffixed `format` functions in
+`js/fields.js` now join with a **non-breaking space** (`\u00A0`) — mi, kWh, kW (x2), hp, lb, in,
+cf (x3). The label wraps instead, which is the right thing to break: "Tow / Capacity" reads fine,
+"3,500 / lb" does not.
+
+**Deliberately not `white-space: nowrap` on `.modal-row .v`.** That would have fixed these cases
+but also stopped genuinely multi-word values from wrapping — `epaSizeClass` alone has "Minicompact
+Car", "Standard Pickup", "Special Purpose" — and an unwrappable long value in a narrow cell
+overflows instead of wrapping. The nbsp is targeted at the actual problem and cannot overflow.
+
+Applies everywhere `fmtVal` is used, so cards and the compare table get it too, not just the
+modal. Verified in the rendered bytes (`3,500` + `C2 A0` + `lb`) and at 375px.
