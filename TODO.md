@@ -2431,3 +2431,33 @@ the corner cell stays exactly aligned with the label column (both `25 → 205`).
   the cells to the right are empty so there is nothing to collide with, and the row now reads as
   one full-width section band. Applies on desktop too, where it looks better than the old
   segmented version.
+
+**Follow-up 3 (same day).** iOS hides overlay scrollbars while idle, so on a phone there was no
+standing cue that the table continued past the viewport edge — it just looked like it ended.
+Added `‹‹` / `››` chevrons in the group rows (the user's own suggestion, and the right home for
+them: group rows repeat all the way down, so the hint stays on screen however far you have
+scrolled vertically, and their cells are empty so there is nothing to displace).
+
+Each is a sticky *cell* rather than an overlay, which avoids needing a wrapper element around the
+scroll container. The right chevron pins the last group cell to the scrollport's right edge; the
+left one pins the first group cell to `left: 88px` — deliberately the label column's width rather
+than 0, so it parks beside the label instead of underneath it. (Sticking group cells at 0 is
+exactly the bug fixed in follow-up 1; the fix there was not "never stick these cells", it was
+"don't stick them at 0".) `updateCompareScrollNav` already computed both facts for the desktop
+nav buttons — it now also toggles `.can-scroll-left` / `.can-scroll-right` on the container, so a
+chevron only shows while there is actually more that way.
+
+Scoped to `<880px`, which is exactly where the desktop `‹ ›` nav buttons are hidden — so each
+viewport gets one affordance, not two.
+
+**Gotcha worth keeping:** the first pass used `td:first-child` and silently never matched. A group
+row is `<th>Name</th>` followed by the `<td>`s, so the row's first child is the `th` and no `td`
+is ever a first child. `:first-of-type` is type-scoped and matches the first `td` regardless.
+`td:last-child` happened to work (the last child really is a td) but is now `:last-of-type` too,
+for symmetry and to survive anything being appended to the row later.
+
+**Verified** at 375px with 3 cars: `››` on every group row at scrollLeft 0, `‹‹` parked beside the
+label column at the scrolled end, and both absent with 2 cars (no overflow) and on desktop, where
+the group cells stay `static`. Note when testing: the `scroll` event lands after the snap settles,
+so reading `className` immediately after setting `scrollLeft` returns the previous state — the
+screenshot is authoritative, not the synchronous readout.

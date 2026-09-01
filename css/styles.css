@@ -814,6 +814,30 @@ a.filter-chip-clear { text-decoration: none; }
   .compare-col-view-btn { white-space: normal; }
   .compare-table tr.group-row th, .compare-table tr.group-row td { font-size: 10px; }
 
+  /* "More cars this way" chevrons. iOS hides overlay scrollbars while idle, so a phone had no
+     standing cue that the table continued past the viewport edge. The group rows are the right
+     home for them: they repeat the whole way down, so the hint stays on screen however far you
+     have scrolled vertically, and their cells are empty so there is nothing to displace.
+
+     Each is a sticky *cell* rather than an overlay, which is what keeps it glued to the edge
+     without needing a wrapper element. The right-hand one pins the last cell to the scrollport's
+     right edge; the left-hand one pins the first cell to `left: 88px` — deliberately the label
+     column's width, not 0, so it parks beside the label instead of underneath it (sticking these
+     cells at 0 is exactly the bug that had the group name covered up). Group cells all share one
+     background and have no dividers, so a shifted cell is invisible. `.can-scroll-*` come from
+     updateCompareScrollNav, so a chevron only appears while there is actually more that way.
+
+     `:first-of-type`, not `:first-child`: the row's first child is the label `<th>`, so no `<td>`
+     in it is ever a first child and the left chevron silently never matched. */
+  .compare-table tr.group-row td:first-of-type { position: sticky; left: 88px; }
+  .compare-table tr.group-row td:last-of-type { position: sticky; right: 0; text-align: right; }
+  .compare-scroll.can-scroll-left tr.group-row td:first-of-type::before,
+  .compare-scroll.can-scroll-right tr.group-row td:last-of-type::after {
+    color: var(--accent); font-size: 13px; letter-spacing: 0; opacity: .75;
+  }
+  .compare-scroll.can-scroll-left tr.group-row td:first-of-type::before { content: "\2039\2039"; }
+  .compare-scroll.can-scroll-right tr.group-row td:last-of-type::after { content: "\203A\203A"; }
+
   /* Snap so a swipe lands on a column edge rather than anywhere in between. `mandatory`,
      not `proximity`: proximity is advisory and iOS simply declined to snap most gestures,
      which was the whole complaint. It only constrains the x axis, so vertical scrolling is

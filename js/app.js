@@ -601,10 +601,17 @@ function compareColWidth() {
 function updateCompareScrollNav() {
   const scrollEl = el.compareScroll;
   const overflows = scrollEl.scrollWidth > scrollEl.clientWidth + 1;
+  const atStart = scrollEl.scrollLeft <= 0;
+  const atEnd = scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
   el.compareScrollNav.hidden = !overflows;
+  // Same two facts drive the mobile chevrons in the group rows (see styles.css). iOS hides
+  // overlay scrollbars while idle, so on a phone there was nothing on screen saying more cars
+  // existed off to the side — the table just looked like it ended at the viewport.
+  scrollEl.classList.toggle("can-scroll-left", overflows && !atStart);
+  scrollEl.classList.toggle("can-scroll-right", overflows && !atEnd);
   if (!overflows) return;
-  el.compareScrollLeftBtn.disabled = scrollEl.scrollLeft <= 0;
-  el.compareScrollRightBtn.disabled = scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
+  el.compareScrollLeftBtn.disabled = atStart;
+  el.compareScrollRightBtn.disabled = atEnd;
 }
 
 function renderResultsView() {
