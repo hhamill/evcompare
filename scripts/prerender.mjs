@@ -252,7 +252,16 @@ ${FAVICON}
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=42" />
+<!-- No ?v= cache-busting on css/js, deliberately. GitHub Pages serves these with
+     cache-control: max-age=600 and an ETag, so they go stale on their own within ten minutes.
+     A query string cannot pin old content anyway — /js/fields.js?v=16 and ?v=17 both return
+     whatever the file currently is, so the only thing it bought was a forced cache miss.
+     Meanwhile the hand-maintained numbers had to cascade through every importer (fields.js
+     alone has five), and a missed bump ships a genuinely broken tree rather than a stale one.
+     If this ever needs to be strict, use an import map or hashed filenames, not query strings.
+     Contrast assets/og-image.png, which keeps a ?v= because it is a real content hash and
+     social-media scrapers cache it far more aggressively than a browser does. -->
+<link rel="stylesheet" href="/css/styles.css" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -347,7 +356,7 @@ ${o.introHtml}
 
 </div>
 
-<script type="module" src="/js/app.js?v=64"></script>
+<script type="module" src="/js/app.js"></script>
 </body>
 </html>
 `;
@@ -635,7 +644,7 @@ function docShell(o) {
 <meta name="twitter:image" content="${esc(OG_IMAGE)}" />
 ${o.jsonLd ? `<script type="application/ld+json">${JSON.stringify(o.jsonLd)}</script>` : ""}
 ${FAVICON}
-<link rel="stylesheet" href="/css/styles.css?v=42" />
+<link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
 <div class="app">

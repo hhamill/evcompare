@@ -2277,3 +2277,38 @@ overflows instead of wrapping. The nbsp is targeted at the actual problem and ca
 
 Applies everywhere `fmtVal` is used, so cards and the compare table get it too, not just the
 modal. Verified in the rendered bytes (`3,500` + `C2 A0` + `lb`) and at 375px.
+
+## Removed hand-maintained `?v=` cache-busting (2026-08-28)
+
+Every `?v=` on css/js is gone — 15 references across five modules, `index.html` and two page
+shells. The og-image one **stays**: that is a real content hash, and social scrapers cache far
+more aggressively than browsers.
+
+**Why, evidence first.** GitHub Pages serves these assets with `cache-control: max-age=600` and an
+ETag (checked against the live site). So they expire on their own within ten minutes.
+
+**And the protection was largely illusory.** A query string cannot pin old content on a static
+host: `/js/fields.js?v=16` and `?v=17` both return whatever the file currently is. It only forces
+a cache miss. A client with a stale cached `app.js` still requests `fields.js?v=16` and gets it
+**from its own cache** — the old file. That is exactly the mismatch the versions were supposed to
+prevent, and they did not prevent it.
+
+**What they did reliably cause is the cascade.** The version lives inside the *importing* file, so
+touching `fields.js` means bumping it in five importers, then bumping those importers in whatever
+imports *them*, then `app.js` in two shells. Missing a link does not ship something stale, it
+ships something **broken** — `hubs.js` calling `fieldByKey("superchargerAccess")` against a cached
+older `fields.js` gets `undefined` and the Supercharger hub matches nothing. That nearly shipped
+today, and the cascade cost something on four separate occasions in one session.
+
+**Deploy frequency argues for removal, not against it.** More deploys means more chances to forget
+a bump — a non-self-healing broken deploy — while the risk being mitigated (mixed modules for a
+user active across a deploy) self-heals in ten minutes.
+
+**If this ever needs to be strict**, the fix is an import map or hashed filenames, not query
+strings. An import map is the better shape here: modules import unversioned specifiers and one
+generated block in the HTML maps each to a hashed URL, so changing one file never changes another
+— no cascade, and no transitive hashing needed. Naive per-file hashing does *not* remove the
+cascade, it only automates it, because the importer embeds the dependency's URL.
+
+Rationale is repeated as a comment next to the `<link>` in `index.html` and in `pageShell()`, since
+the natural instinct on seeing an unversioned asset is to helpfully add a version back.

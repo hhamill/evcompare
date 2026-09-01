@@ -1,8 +1,8 @@
-import { FIELDS, BODY_SPRITE } from "./fields.js?v=17";
-import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js?v=13";
-import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=34";
-import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath, hubSlugFromPath } from "./router.js?v=6";
-import { buildHubs, hubBySlug } from "./hubs.js?v=7";
+import { FIELDS, BODY_SPRITE } from "./fields.js";
+import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js";
+import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js";
+import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath, hubSlugFromPath } from "./router.js";
+import { buildHubs, hubBySlug } from "./hubs.js";
 
 const MAX_COMPARE = 6;
 
