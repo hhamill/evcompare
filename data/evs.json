@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:36e554ed482d3aae225c0ecea917f08dd5b6f6bfe2511a9b94b211e8786f4728",
+  "hash": "sha256:f129acff6113ce34e02421529a019f75b91ff7b7fef363341099f8de07a8d4f2",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -7,7 +7,7 @@
   "url": "https://evcompare.org",
   "datasetPage": "https://evcompare.org/data/",
   "documentation": "https://evcompare.org/data/SCHEMA.md",
-  "count": 149,
+  "count": 151,
   "models": [
     {
       "id": "acura-zdx-2024-a-spec-rwd",
@@ -10415,7 +10415,7 @@
       "id": "volvo-ex60-2027-p6-plus",
       "url": "https://evcompare.org/2027/ex60/p6-plus-single-motor-rwd/",
       "catalogId": 126,
-      "lastVerifiedDate": "2026-08-28",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Volvo",
       "model": "EX60",
       "trim": "P6 Plus (Single Motor RWD)",
@@ -10475,9 +10475,9 @@
         21
       ],
       "seats": {
-        "leatherAvailable": true,
+        "leatherAvailable": false,
         "ventilatedAvailable": true,
-        "heatedSteeringWheel": true,
+        "heatedSteeringWheel": false,
         "heatedRearSeats": false
       },
       "cargo": {
@@ -10491,13 +10491,13 @@
         "manufacturerSpec": "https://www.volvocars.com/us/cars/ex60-electric/specifications/",
         "review": "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review"
       },
-      "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus; leather (Nappa) and ventilated seats are Ultra-trim/option items. Heated rear seats and built-in rear booster cushions are Ultra-trim features, not standard on Plus. Battery warranty is 10 years to 80% capacity (no mileage cap published). Range sourced to Volvo rather than fueleconomy.gov: EPA has published only one EX60 P6 entry, the 22-inch-wheel configuration at 295mi (id 50697), and this record is the standard 20/21-inch car that Volvo rates at 307mi. epaSizeClass is EPA's class for that same id 50697 — size class is a property of the vehicle, not of the wheel package — so it holds here, but npm run fetch-epa cannot regenerate it and reports this record as not derivable."
+      "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus. Verified against Volvo's own equipment-level comparison 2026-09-01: Nappa leather is not offered on Plus at any price (Ultra only), while ventilated Nordico, heated rear seats, a heated steering wheel and integrated booster cushions are all cost options on Plus and standard on Ultra - so the non-Available booleans here read false, per the base-configuration rule in SCHEMA. Standard wheel is the 20-inch (21-inch is an $800 option); Ultra starts on 21-inch and cannot be had with the 20. Battery warranty is 10 years to 80% capacity (no mileage cap published). Range sourced to Volvo rather than fueleconomy.gov: EPA has published only one EX60 P6 entry, the 22-inch-wheel configuration at 295mi (id 50697), and this record is the standard 20/21-inch car that Volvo rates at 307mi. epaSizeClass is EPA's class for that same id 50697 — size class is a property of the vehicle, not of the wheel package — so it holds here, but npm run fetch-epa cannot regenerate it and reports this record as not derivable."
     },
     {
       "id": "volvo-ex60-2027-p10-awd-plus",
       "url": "https://evcompare.org/2027/ex60/p10-awd-plus-dual-motor-awd/",
       "catalogId": 127,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Volvo",
       "model": "EX60",
       "trim": "P10 AWD Plus (Dual Motor AWD)",
@@ -10557,9 +10557,9 @@
         21
       ],
       "seats": {
-        "leatherAvailable": true,
+        "leatherAvailable": false,
         "ventilatedAvailable": true,
-        "heatedSteeringWheel": true,
+        "heatedSteeringWheel": false,
         "heatedRearSeats": false
       },
       "cargo": {
@@ -10574,7 +10574,171 @@
         "review": "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review",
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50696"
       },
-      "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus; leather (Nappa) and ventilated seats are Ultra-trim/option items. Heated rear seats and built-in rear booster cushions are Ultra-trim features, not standard on Plus. Battery warranty is 10 years to 80% capacity. A higher-output P12 AWD configuration (112 kWh, 670 hp) is also planned."
+      "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus. Verified against Volvo's own equipment-level comparison 2026-09-01: Nappa leather is not offered on Plus at any price (Ultra only), while ventilated Nordico, heated rear seats, a heated steering wheel and integrated booster cushions are all cost options on Plus and standard on Ultra - so the non-Available booleans here read false, per the base-configuration rule in SCHEMA. Standard wheel is the 20-inch (21-inch is an $800 option); Ultra starts on 21-inch and cannot be had with the 20. Battery warranty is 10 years to 80% capacity. A higher-output P12 AWD configuration (112 kWh, 670 hp) is also planned."
+    },
+    {
+      "id": "volvo-ex60-2027-p6-ultra",
+      "url": "https://evcompare.org/2027/ex60/p6-ultra-single-motor-rwd/",
+      "catalogId": 150,
+      "lastVerifiedDate": "2026-09-01",
+      "make": "Volvo",
+      "model": "EX60",
+      "trim": "P6 Ultra (Single Motor RWD)",
+      "modelYear": 2027,
+      "bodyStyle": "SUV",
+      "epaSizeClass": "Standard SUV",
+      "onSaleDate": "2026-05-18",
+      "msrp": 66395,
+      "doors": 5,
+      "rearDoorStyle": "Hinged",
+      "slidingDoors": false,
+      "isThreeRow": false,
+      "seatingRows": 2,
+      "maxPassengers": 5,
+      "builtInBoosterSeats": true,
+      "drivetrain": "RWD",
+      "allWheelDriveAvailable": true,
+      "battery": {
+        "usableKwh": 80,
+        "warrantyYears": 10,
+        "warrantyMiles": null
+      },
+      "range": {
+        "epaMiles": 307,
+        "source": "https://www.volvocars.com/us/cars/ex60-electric/specifications/"
+      },
+      "performance": {
+        "zeroTo60Sec": 5.7,
+        "horsepowerHp": 369,
+        "topSpeedMph": 112
+      },
+      "charging": {
+        "portType": "NACS",
+        "superchargerAccess": true,
+        "maxDcKw": 320,
+        "level2Kw": 19.2,
+        "vehicleToLoad": true,
+        "heatPump": true
+      },
+      "techFeatures": {
+        "appleCarPlay": true,
+        "androidAuto": false,
+        "wirelessPhoneCharging": true
+      },
+      "driverAssist": {
+        "handsFreeDriving": {
+          "available": false,
+          "name": null,
+          "subscriptionUsdPerMonth": null
+        },
+        "collisionAvoidanceAutoBrake": true,
+        "laneKeepAssist": true,
+        "adaptiveCruiseControl": true
+      },
+      "wheelSizesIn": [
+        21,
+        22
+      ],
+      "seats": {
+        "leatherAvailable": true,
+        "ventilatedAvailable": true,
+        "heatedSteeringWheel": true,
+        "heatedRearSeats": true
+      },
+      "cargo": {
+        "rearCubicFeet": 20.4,
+        "maxCubicFeet": 58.2,
+        "frunkCubicFeet": 3
+      },
+      "towCapacityLbs": 3600,
+      "groundClearanceIn": 7.2,
+      "links": {
+        "manufacturerSpec": "https://www.volvocars.com/us/cars/ex60-electric/specifications/",
+        "review": "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review"
+      },
+      "notes": "All-new 2027 model; US order bank opened May 18, 2026. Ultra is the upper of Volvo's two EX60 equipment levels. Standard wheel is the 21-inch 6-Spoke (22-inch optional); Plus's 20-inch wheel is not offered on Ultra. Ventilated Nappa leather, heated rear seats, heated steering wheel, integrated booster cushions, Bowers & Wilkins audio, electrochromic roof and High-Definition Pixel headlights are standard here - on Plus they are optional or not offered at all. Battery warranty is 10 years to 80% capacity (no mileage cap published). Volvo publishes range per powertrain rather than per wheel (up to 307 miles for P6) and the configurator shows the same figure on Ultra's 21-inch standard wheel as on Plus's 20-inch, so range.wheelSizeIn is deliberately left unset rather than asserting a wheel-specific number Volvo does not publish. No fueleconomy.gov link: EPA's only P6 entry is the 22-inch configuration at 295mi (id 50697), which is an option here rather than this record's standard car. epaSizeClass is EPA's class for that same id - size class is a property of the vehicle, not of the wheel package - so it holds, but npm run fetch-epa cannot regenerate it and reports this record as not derivable."
+    },
+    {
+      "id": "volvo-ex60-2027-p10-awd-ultra",
+      "url": "https://evcompare.org/2027/ex60/p10-awd-ultra-dual-motor-awd/",
+      "catalogId": 151,
+      "lastVerifiedDate": "2026-09-01",
+      "make": "Volvo",
+      "model": "EX60",
+      "trim": "P10 AWD Ultra (Dual Motor AWD)",
+      "modelYear": 2027,
+      "bodyStyle": "SUV",
+      "epaSizeClass": "Standard SUV",
+      "onSaleDate": "2026-05-18",
+      "msrp": 68745,
+      "doors": 5,
+      "rearDoorStyle": "Hinged",
+      "slidingDoors": false,
+      "isThreeRow": false,
+      "seatingRows": 2,
+      "maxPassengers": 5,
+      "builtInBoosterSeats": true,
+      "drivetrain": "AWD",
+      "allWheelDriveAvailable": true,
+      "battery": {
+        "usableKwh": 91,
+        "warrantyYears": 10,
+        "warrantyMiles": null
+      },
+      "range": {
+        "epaMiles": 330,
+        "source": "https://www.volvocars.com/us/cars/ex60-electric/specifications/"
+      },
+      "performance": {
+        "zeroTo60Sec": 4.4,
+        "horsepowerHp": 503,
+        "topSpeedMph": 112
+      },
+      "charging": {
+        "portType": "NACS",
+        "superchargerAccess": true,
+        "maxDcKw": 370,
+        "level2Kw": 19.2,
+        "vehicleToLoad": true,
+        "heatPump": true
+      },
+      "techFeatures": {
+        "appleCarPlay": true,
+        "androidAuto": false,
+        "wirelessPhoneCharging": true
+      },
+      "driverAssist": {
+        "handsFreeDriving": {
+          "available": false,
+          "name": null,
+          "subscriptionUsdPerMonth": null
+        },
+        "collisionAvoidanceAutoBrake": true,
+        "laneKeepAssist": true,
+        "adaptiveCruiseControl": true
+      },
+      "wheelSizesIn": [
+        21,
+        22
+      ],
+      "seats": {
+        "leatherAvailable": true,
+        "ventilatedAvailable": true,
+        "heatedSteeringWheel": true,
+        "heatedRearSeats": true
+      },
+      "cargo": {
+        "rearCubicFeet": 20.4,
+        "maxCubicFeet": 58.2,
+        "frunkCubicFeet": 3
+      },
+      "towCapacityLbs": 4500,
+      "groundClearanceIn": 7.2,
+      "links": {
+        "manufacturerSpec": "https://www.volvocars.com/us/cars/ex60-electric/specifications/",
+        "review": "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review"
+      },
+      "notes": "All-new 2027 model; US order bank opened May 18, 2026. Ultra is the upper of Volvo's two EX60 equipment levels. Standard wheel is the 21-inch 6-Spoke (22-inch optional); Plus's 20-inch wheel is not offered on Ultra. Ventilated Nappa leather, heated rear seats, heated steering wheel, integrated booster cushions, Bowers & Wilkins audio, electrochromic roof and High-Definition Pixel headlights are standard here - on Plus they are optional or not offered at all. Battery warranty is 10 years to 80% capacity (no mileage cap published). Volvo publishes range per powertrain rather than per wheel (up to 330 miles for P10) and the configurator shows the same figure on Ultra's 21-inch standard wheel as on Plus's 20-inch, so range.wheelSizeIn is deliberately left unset rather than asserting a wheel-specific number Volvo does not publish. No fueleconomy.gov link: EPA's P10 entry (id 50696) does not state which wheel it certifies, and this record is the 21-inch standard car, so the link is omitted rather than asserting a match. epaSizeClass is EPA's class for that same id - size class is a property of the vehicle, not of the wheel package - so it holds, but npm run fetch-epa cannot regenerate it and reports this record as not derivable."
     },
     {
       "id": "volvo-ex90-2026-twin-motor-awd",

@@ -2675,3 +2675,64 @@ record at `example.com`. `npm run audit`: no flags.
 **Process note:** cleaning up that negative control with `git checkout data/evs.json` silently
 reverted the five real link removals along with the test mutation. Copy the file aside and
 restore from the copy instead — `git checkout` can't tell a deliberate edit from a scratch one.
+
+---
+
+# TODO: Trim-depth pass — batch 1, Volvo EX60 Ultra (2026-09-01)
+
+First batch of the trim-depth pass. The EX60 had only Plus for each powertrain; Volvo sells
+Plus **and** Ultra across both, so two of its four trims were missing. Now 151 trims / 83 models
+(1.82 per model, was 1.80).
+
+**Added**, both sourced from Volvo's US configurator and equipment-level comparison:
+
+| | P6 Ultra | P10 AWD Ultra |
+| --- | --- | --- |
+| MSRP | $66,395 | $68,745 |
+| Range | 307mi | 330mi |
+| Wheels | 21 std, 22 opt | 21 std, 22 opt |
+
+Prices read directly out of the configurator rather than derived: Ultra is $66,395 and P10 AWD
+adds $2,350, and selecting both showed $68,745. Worth noting the same +$2,350 reproduces the
+existing P10 Plus record exactly ($59,795 → $62,145), which independently validates both.
+
+Ultra's standard wheel is the **21-inch** — Plus's 20-inch isn't offered on it at all — so Ultra
+is a genuinely different base configuration, not just a feature pack. `range.wheelSizeIn` is
+still deliberately unset on all four records: Volvo publishes range per *powertrain* ("up to 307
+miles" for P6), and the configurator shows the same figure on Ultra's 21-inch as on Plus's
+20-inch, so there is no wheel-specific number to record without inventing one.
+
+## Two corrections to the existing Plus records
+
+Volvo's equipment-level comparison is column-per-level, so it settles what is standard vs optional
+per trim. Two fields were wrong:
+
+- **`seats.leatherAvailable: true → false`.** Nappa leather is not offered on Plus at any price —
+  it's Ultra-only. The record's own note already said "leather (Nappa) ... are Ultra-trim/option
+  items" while the field claimed it was available, so note and data disagreed.
+- **`seats.heatedSteeringWheel: true → false`.** Optional on Plus, standard on Ultra. The record
+  was also internally inconsistent: heated steering wheel and heated rear seats are *both*
+  "Optional" on Plus, yet were recorded `true` and `false` respectively.
+
+Resolved using the field labels as the contract, which is what a visitor actually reads:
+`leatherAvailable` / `ventilatedAvailable` say **Available** and mean "can be had, standard or
+option"; `heatedSteeringWheel`, `heatedRearSeats` and `builtInBoosterSeats` have no such suffix
+and mean "standard on this trim". That reading also agrees with the base-configuration rule added
+to SCHEMA earlier today.
+
+- [ ] **Dataset-wide consistency pass on the non-`Available` seat booleans.** Only the EX60 was
+      checked here. Across 151 records `heatedSteeringWheel` is true on 88 and false on 17, and
+      there is no way to tell from the data which reading each was entered under. Worth a sweep,
+      but it is a research pass per record, not a mechanical fix.
+
+## Extraction gotcha worth keeping
+
+Volvo's comparison table renders "included" as `<img alt="Available">` — a checkmark icon with no
+text. Scraping `innerText` therefore produces rows like `Heated rear seats | Optional` where the
+second column is silently empty, and it is impossible to tell which level the lone "Optional"
+belongs to. Two of my first three parses would have written the wrong column into the file. Read
+the real `<tr>`/`<th>`/`<td>` structure and take `img[alt]` as the value.
+
+`npm run audit`: no flags. `npm run sync-urls` corrected both new URLs (my hand-written slugs were
+wrong — `p10-awd-ultra-dual-motor-awd`, not what I guessed). Verified in the app: 151 vehicles,
+both new pages deep-link and render.
