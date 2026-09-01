@@ -755,6 +755,14 @@ a.filter-chip-clear { text-decoration: none; }
   .layout { flex-direction: column; }
   .content { padding: 16px; }
 
+  /* The card's compare checkbox, 50% up from 15px. Tapping a card opens its detail view, and
+     at 15px a thumb aimed at the box lands outside it often enough to be annoying — you get
+     the modal instead of a tick. The <label> already swallows the click for its whole area
+     (text included), so the padding here is the part that actually widens the safe zone; the
+     negative margin spends the card footer's existing slack rather than making cards taller. */
+  .ev-card-add input { width: 22px; height: 22px; }
+  .ev-card-add { padding: 6px 8px 6px 0; margin: -6px 0; }
+
   /* The topbar used to wrap to three rows here — 149px of a 812px phone viewport (18%),
      permanently sticky. Everything below collapses it to one row (~56px): the wordmark
      drops to just the mark, search shares the row instead of claiming its own, and Reset

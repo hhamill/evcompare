@@ -2493,3 +2493,21 @@ for programmatic scrolls, so `className` reads stale right after setting `scroll
 container updates them immediately, which is also how to prove the toggle logic is correct.
 Separately, `behavior: "smooth"` is a no-op in the pane — stub `window.matchMedia` to report
 `prefers-reduced-motion` so the handler takes its `"auto"` branch and the scroll actually happens.
+
+---
+
+# TODO: Bigger compare checkbox on mobile (2026-09-01)
+
+Tapping a card opens its detail modal, and the card footer's compare checkbox was 15px — small
+enough that a thumb aimed at it regularly landed on the card instead, so you got the modal rather
+than a tick.
+
+Bumped to 22px (the requested +50%) inside `@media (max-width: 880px)`. Also gave
+`.ev-card-add` `padding: 6px 8px 6px 0` with `margin: -6px 0`: the `<label>` already stops click
+propagation for its whole area, so padding is what actually widens the safe zone, and the negative
+margin spends the footer's existing slack instead of making every card taller. Hit area went from
+~136×18 to 136×40; cards grew ~10px, most of that the checkbox itself.
+
+Verified at 375px: checkbox 22×22, a click on it toggles compare with the modal staying shut, and
+a point at the label's top-right corner — card territory before — now resolves to the label.
+Desktop unchanged at 15×15.
