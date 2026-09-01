@@ -2339,6 +2339,7 @@ later rule at equal specificity before theorizing about intrinsic sizing.
 one:
 
 - `.compare-table` gets `min-width: max(100%, calc(88px + var(--compare-cars, 2) * 118px))`.
+  **Superseded — see the follow-up section below; the fixed 118px was wrong for 3+ cars.**
   One or two cars resolve to `100%`, so the table fits its container exactly and there is no
   horizontal scroll to fight; three or more deliberately exceed the viewport and swipe over.
 - `--compare-cars` is set on the table element by `renderCompareTable` in `js/render.js`, since
@@ -2365,3 +2366,49 @@ against the sticky label column, confirming the snap points and `scroll-padding-
 identical `behavior: "auto"` scroll on the same element moves it, `"smooth"` fires no scroll
 events at all. This is environmental and predates the change; what the change touches
 (`compareColWidth()`) was confirmed to return the real column width (200 at desktop).
+
+---
+
+# TODO: Compare view follow-up — snapping, and two overlap bugs (2026-09-01)
+
+Testing the section above on a real iPhone (Chrome/iOS) turned up three things. Two cars did fit
+cleanly, but three still floated diagonally with no snapping, and the group header row painted over
+the scroll container's scrollbar.
+
+**1. A fixed 118px column was the wrong shape.** With three cars the table came to
+`88 + 3×118 = 442` against a 331px scrollport — an overflow of **111px, less than one column**.
+So there was no column-edge snap point to reach and the drag just floated wherever it landed.
+The width has to come from the viewport, not a constant: a car column is now exactly half the
+space left after the label column, `min-width: calc(88px + var(--compare-cars, 2) * (100% - 88px) / 2)`.
+That one relationship gives everything — two cars come to exactly 100% (no scroll at all), and
+three or more overflow by a whole number of car columns, so every snap point is one car wide.
+Measured at 375px: columns `[88, 121.5, 121.5, 121.5]`, max scroll `122` = exactly one column.
+
+**2. `proximity` snapping is advisory, and iOS mostly declined it.** Switched to
+`scroll-snap-type: x mandatory`. The earlier reasoning against it — that a mandatory x-snap would
+fight a mostly-vertical drag — was wrong: it constrains only the x axis, and a vertical drag simply
+keeps whatever column x was already snapped to. Added `overscroll-behavior-x: contain` so a
+horizontal swipe running off the end doesn't chain into the browser's back gesture. Verified the
+landing positions with 3 cars: `30 → 0`, `70 → 122`, `110 → 122`, `200 → 122`, and at 122 the
+second car's left edge sits at 105 — exactly the label column's right edge, so `scroll-padding-left`
+is doing its job.
+
+**3. Two sticky-overlap bugs, both pre-existing.**
+
+- The group row is `<th>Group</th>` plus one empty `<td>` per car, and the rule styling it applied
+  `position: sticky; left: 0` to the **tds as well as the th**. Each empty cell pinned itself to the
+  scrollport's left edge, so the first car's 118px cell painted straight over the 88px label column
+  and hid the group name — and, being in the positioned layer, over the scrollbar gutter too (which
+  is what the iOS screenshot showed). Measured before the fix: that td sat at `left: 17, right: 135`
+  while the label column ended at 105. The rule is visual-only now; the `th` still sticks because
+  it's a `tbody th` and picks that up from the rule above.
+- The header row's corner cell had `position: sticky; top: 0` but no `left: 0`, so while the body's
+  label column stayed pinned, a scrolled-past car's *title* slid into the label lane even though its
+  data cells were correctly disappearing underneath. Gave it `left: 0` and `z-index: 6` (it overlaps
+  both the rest of the header at 5 and the label column at 4). This one affected desktop too, on any
+  comparison wide enough to scroll.
+
+**Verified.** Mobile 375px, 2 cars: `331/331`, no overflow, nav hidden, columns `[88, 121.5, 121.5]`.
+3 cars: snaps between two clean positions, corner cell blank, no bleed into the label lane. Desktop
+1280px unchanged — `table-layout: auto`, `min-width: 640px`, no snapping; scrolled to max with 6 cars
+the corner cell stays exactly aligned with the label column (both `25 → 205`).

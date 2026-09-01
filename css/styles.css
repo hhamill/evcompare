@@ -529,6 +529,11 @@ a.filter-chip-clear { text-decoration: none; }
 .compare-table thead th {
   position: sticky; top: 0; background: var(--bg-elevated); z-index: 5; vertical-align: top; padding-top: 14px;
 }
+/* The corner cell. Without `left: 0` here the header row's empty first cell scrolls away
+   while the body's label column stays pinned, so a scrolled-past car's title slid into the
+   label lane even though its data cells were correctly disappearing under it. z-index has to
+   clear both the rest of the header (5) and the label column (4), since it overlaps both. */
+.compare-table thead th:first-child { left: 0; z-index: 6; }
 .compare-table tbody th {
   position: sticky; left: 0; background: var(--bg); z-index: 4; color: var(--text-dim); font-weight: 600; white-space: normal; min-width: 180px;
 }
@@ -537,9 +542,14 @@ a.filter-chip-clear { text-decoration: none; }
    column to find out which one wins. */
 .row-label-clickable { cursor: pointer; transition: color .15s; }
 .row-label-clickable:hover { color: var(--accent); }
+/* Visual only — deliberately no `position: sticky` here. The group row is `<th>Group</th>`
+   plus one empty `<td>` per car, and sticking the *tds* too pinned each empty cell to the
+   scrollport's left edge, where the first car's cell (118px wide) painted straight over the
+   88px label column and hid the group name. Being in the positioned layer, it also painted
+   over the scroll container's scrollbar gutter. The `th` still sticks — it's a `tbody th`,
+   so it picks that up from the rule above; this rule only recolors it. */
 .compare-table tr.group-row th, .compare-table tr.group-row td {
   background: var(--bg-elevated); color: var(--accent); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
-  position: sticky; left: 0;
 }
 .compare-col-header { min-width: 200px; }
 .compare-col-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
@@ -774,14 +784,19 @@ a.filter-chip-clear { text-decoration: none; }
 
   /* Two cars is the common comparison, and on a phone the table came out ~1.25x the
      viewport: the container then scrolled on both axes at once and a drag drifted
-     diagonally, which is disorienting. min-width decides whether it overflows at all —
-     for one or two cars it resolves to 100%, so the table fits its container exactly and
-     there is no horizontal scroll to fight; from three cars up it deliberately exceeds
-     the viewport and the snapping below takes over. --compare-cars is set on the table by
-     renderCompareTable, since CSS can't branch on how many columns exist. */
+     diagonally, which is disorienting.
+
+     A car column is exactly half the space left over after the 88px label column, so the
+     whole table is 88px + N half-widths. That one relationship gives all the behavior:
+     two cars come to exactly 100% and there is no horizontal scroll at all; three or more
+     overflow by a whole number of car columns, so every snap point below is one car wide
+     and a swipe pages cleanly from cars 1-2 to 2-3. Picking a fixed column width instead
+     (118px) is what made three cars scroll by a useless 111px — less than one column, so
+     there was nothing to snap to and the drag just floated. --compare-cars is set on the
+     table by renderCompareTable, since CSS can't branch on how many columns exist. */
   .compare-table {
     table-layout: fixed;
-    min-width: max(100%, calc(88px + var(--compare-cars, 2) * 118px));
+    min-width: calc(88px + var(--compare-cars, 2) * (100% - 88px) / 2);
   }
   .compare-table th, .compare-table td { padding: 8px 10px; font-size: 12px; }
   .compare-table thead th:first-child,
@@ -794,11 +809,18 @@ a.filter-chip-clear { text-decoration: none; }
   .compare-col-view-btn { white-space: normal; }
   .compare-table tr.group-row th, .compare-table tr.group-row td { font-size: 10px; }
 
-  /* Snap so a swipe lands on a column edge rather than anywhere in between. `proximity`
-     rather than `mandatory`: this container scrolls vertically too, and a mandatory x-snap
-     fights a mostly-vertical drag. scroll-padding-left keeps a snapped column clear of the
-     sticky label column instead of sliding underneath it. */
-  .compare-scroll { scroll-snap-type: x proximity; scroll-padding-left: 88px; }
+  /* Snap so a swipe lands on a column edge rather than anywhere in between. `mandatory`,
+     not `proximity`: proximity is advisory and iOS simply declined to snap most gestures,
+     which was the whole complaint. It only constrains the x axis, so vertical scrolling is
+     untouched — a mostly-vertical drag just keeps whatever column it was already snapped to.
+     scroll-padding-left keeps a snapped column clear of the sticky label column instead of
+     sliding underneath it, and overscroll-behavior-x stops a horizontal swipe that runs out
+     of table from chaining into the browser's back gesture. */
+  .compare-scroll {
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 88px;
+    overscroll-behavior-x: contain;
+  }
   .compare-table thead th:not(:first-child) { scroll-snap-align: start; }
 }
 
