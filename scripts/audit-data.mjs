@@ -168,11 +168,20 @@ for (const m of M) {
 // inside it — so a manufacturer/review URL parked here doesn't just mislabel the link, it
 // silently makes the record underivable. Five records had picked up whatever `range.source`
 // happened to be; four of them were sitting in the epaSizeClass gap as a result.
+// The id matters as much as the host: five more records pointed at a fueleconomy.gov
+// *PowerSearch listing* rather than a vehicle, which is the right site at the wrong
+// granularity — fetch-epa reads the id out of the URL, so a search page leaves the record just
+// as underivable as a wrong domain does, while looking correct.
 for (const m of M) {
   const u = m.links?.epaWindowSticker;
-  if (u && !/(^|\.)fueleconomy\.gov$/.test(new URL(u).hostname))
-    flag("bad-link", `${name(m)}: links.epaWindowSticker points at ${new URL(u).hostname}, not fueleconomy.gov`,
-      `bad-epa-link/${m.id}/${new URL(u).hostname}`);
+  if (!u) continue;
+  const host = new URL(u).hostname;
+  if (!/(^|\.)fueleconomy\.gov$/.test(host))
+    flag("bad-link", `${name(m)}: links.epaWindowSticker points at ${host}, not fueleconomy.gov`,
+      `bad-epa-link/${m.id}/${host}`);
+  else if (!/[?&]id=\d+/.test(u))
+    flag("bad-link", `${name(m)}: links.epaWindowSticker has no ?id= — it's a search page, not a vehicle entry`,
+      `no-epa-id/${m.id}`);
 }
 
 // 11. Duplicate identity.
@@ -190,7 +199,7 @@ const LABELS = {
   "epa-range": "Recorded EPA range disagrees with the EPA source",
   "trim-drift": "Possible trim drift — a figure shared where it probably shouldn't be",
   implausible: "Physically implausible within a model",
-  "bad-link": "links.epaWindowSticker isn't a fueleconomy.gov URL",
+  "bad-link": "links.epaWindowSticker isn't a usable EPA vehicle link",
   efficiency: "Efficiency outside the plausible band — range or battery suspect",
   duplicate: "Duplicate record identity",
   "unit-tell": "Number looks converted from metric rather than taken from a US source",

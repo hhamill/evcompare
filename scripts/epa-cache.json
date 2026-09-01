@@ -367,6 +367,22 @@
     "range": 266,
     "fetchedOn": "2026-08-28"
   },
+  "48746": {
+    "year": 2025,
+    "make": "Rivian",
+    "model": "R1S Dual Large (22in)",
+    "vclass": "Standard Sport Utility Vehicle 4WD",
+    "range": 329,
+    "fetchedOn": "2026-09-01"
+  },
+  "48756": {
+    "year": 2025,
+    "make": "Rivian",
+    "model": "R1T Dual Large (22in)",
+    "vclass": "Standard Pickup Trucks 4WD",
+    "range": 329,
+    "fetchedOn": "2026-09-01"
+  },
   "48762": {
     "year": 2025,
     "make": "Subaru",

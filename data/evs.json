@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:f129acff6113ce34e02421529a019f75b91ff7b7fef363341099f8de07a8d4f2",
+  "hash": "sha256:5d96a341e80ca3766fbd4c55f57c01ca035f628b73239a95939f803e54149b36",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -1778,13 +1778,13 @@
       "id": "cadillac-optiq-2025-luxury-awd",
       "url": "https://evcompare.org/2025/optiq/luxury-awd/",
       "catalogId": 22,
-      "lastVerifiedDate": "2026-08-28",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Cadillac",
       "model": "Optiq",
       "trim": "Luxury AWD",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
       "msrp": 52895,
       "doors": 5,
@@ -1855,19 +1855,19 @@
         "manufacturerSpec": "https://www.cadillac.com/electric/optiq",
         "review": "https://insideevs.com/reviews/754331/2025-cadillac-optiq-ev-review/"
       },
-      "notes": "Optiq is AWD-only in the US — every trim gets standard dual-motor AWD (front motor primary, rear engages as needed). No Apple CarPlay/Android Auto — Cadillac EVs use Google built-in instead. Super Cruise (hands-free highway driver-assist, not full self-driving) comes with a complimentary 3-year trial, then $25/month (or $15/month bundled with OnStar Connected Services)."
+      "notes": "Optiq is AWD-only in the US — every trim gets standard dual-motor AWD (front motor primary, rear engages as needed). No Apple CarPlay/Android Auto — Cadillac EVs use Google built-in instead. Super Cruise (hands-free highway driver-assist, not full self-driving) comes with a complimentary 3-year trial, then $25/month (or $15/month bundled with OnStar Connected Services). epaSizeClass is taken from EPA's 2026 OPTIQ AWD entry (id 49952, Standard Sport Utility Vehicle 4WD): EPA has no 2025 Optiq entry at all, and size class is a property of the vehicle rather than of its model year. Deliberately no epaWindowSticker link - pointing this MY2025 record at a 2026 entry is what the 2026-08-28 reconciliation removed, and it would re-raise the model-year audit flag."
     },
     {
       "id": "cadillac-optiq-2025-sport-awd",
       "url": "https://evcompare.org/2025/optiq/sport-awd/",
       "catalogId": 23,
-      "lastVerifiedDate": "2026-08-28",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Cadillac",
       "model": "Optiq",
       "trim": "Sport AWD",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
       "msrp": 53495,
       "doors": 5,
@@ -1938,7 +1938,7 @@
         "manufacturerSpec": "https://www.cadillac.com/electric/optiq",
         "review": "https://insideevs.com/reviews/754331/2025-cadillac-optiq-ev-review/"
       },
-      "notes": "Mechanically identical to Luxury AWD; Sport differs mainly in styling (gloss-black exterior accents and dark badging vs. Luxury's Galvano Chrome trim). No Apple CarPlay/Android Auto — Google built-in only. Super Cruise (hands-free highway driver-assist, not full self-driving) is offered, $25/month after the trial period."
+      "notes": "Mechanically identical to Luxury AWD; Sport differs mainly in styling (gloss-black exterior accents and dark badging vs. Luxury's Galvano Chrome trim). No Apple CarPlay/Android Auto — Google built-in only. Super Cruise (hands-free highway driver-assist, not full self-driving) is offered, $25/month after the trial period. epaSizeClass is taken from EPA's 2026 OPTIQ AWD entry (id 49952, Standard Sport Utility Vehicle 4WD): EPA has no 2025 Optiq entry at all, and size class is a property of the vehicle rather than of its model year. Deliberately no epaWindowSticker link - pointing this MY2025 record at a 2026 entry is what the 2026-08-28 reconciliation removed, and it would re-raise the model-year audit flag."
     },
     {
       "id": "cadillac-vistiq-2026-luxury-awd",
@@ -2692,13 +2692,13 @@
       "id": "chevrolet-silverado-ev-2026-rst-max-range",
       "url": "https://evcompare.org/2026/silverado-ev/rst-max-range/",
       "catalogId": 33,
-      "lastVerifiedDate": "2026-08-28",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Chevrolet",
       "model": "Silverado EV",
       "trim": "RST (Max Range)",
       "modelYear": 2026,
       "bodyStyle": "Truck",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard Pickup",
       "onSaleDate": null,
       "msrp": 98695,
       "doors": 4,
@@ -2765,10 +2765,9 @@
       "groundClearanceIn": "N/A",
       "links": {
         "manufacturerSpec": "https://www.chevrolet.com/electric/silverado-ev",
-        "review": "https://www.caranddriver.com/chevrolet/silverado-ev",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2026&year2=2026&make=Chevrolet&baseModel=Silverado&srchtyp=ymm&pageno=1&rowLimit=50"
+        "review": "https://www.caranddriver.com/chevrolet/silverado-ev"
       },
-      "notes": "Pickup truck with no enclosed rear cargo hold — storage is a 10.7 cu ft front 'e-trunk' plus bed. RST is the range-topping trim with the 205 kWh Max Range Ultium pack. The 460-mile range figure is GM's own advertised estimate for RST (no RST-specific EPA-certified rating has been published). 754 hp / 785 lb-ft and the 4.5s 0-60 reflect RST's 'Wide Open Watts' launch-control peak; sustained output is lower. Super Cruise (hands-free highway driver-assist, not full self-driving) is available. RST rides on adjustable Adaptive Air Ride suspension, so no single ground-clearance figure is published."
+      "notes": "Pickup truck with no enclosed rear cargo hold — storage is a 10.7 cu ft front 'e-trunk' plus bed. RST is the range-topping trim with the 205 kWh Max Range Ultium pack. The 460-mile range figure is GM's own advertised estimate for RST (no RST-specific EPA-certified rating has been published). 754 hp / 785 lb-ft and the 4.5s 0-60 reflect RST's 'Wide Open Watts' launch-control peak; sustained output is lower. Super Cruise (hands-free highway driver-assist, not full self-driving) is available. RST rides on adjustable Adaptive Air Ride suspension, so no single ground-clearance figure is published. epaSizeClass is taken from EPA's 2026 Silverado EV Max Range WT entry (id 49639, Standard Pickup Trucks 4WD): EPA certifies the Max Range pack only in WT trim (493mi), not RST, and size class is a property of the vehicle rather than of its trim. No epaWindowSticker link, since no EPA entry describes this RST record and its 460mi figure."
     },
     {
       "id": "dodge-charger-daytona-2025-scat-pack-awd",
@@ -8177,13 +8176,13 @@
       "id": "rivian-r1s-2025-dual-motor-awd-large-pack",
       "url": "https://evcompare.org/2025/r1s/dual-motor-awd-large-pack/",
       "catalogId": 99,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Rivian",
       "model": "R1S",
       "trim": "Dual-Motor AWD (Large Pack)",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
       "msrp": 82900,
       "doors": 5,
@@ -8252,21 +8251,21 @@
       "links": {
         "manufacturerSpec": "https://rivian.com/r1s",
         "review": "https://www.caranddriver.com/rivian/r1s",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1S&srchtyp=ymm&pageno=1&rowLimit=50"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48746"
       },
-      "notes": "3-row SUV; no captain's-chairs option in MY2025 (added for MY2027), so the 2nd-row bench gives 7-passenger seating. Rides on adjustable air suspension (roughly 8.3-14.6 in of travel depending on mode), so no single ground-clearance figure is published. Vegan/synthetic interior materials only — no leather offered. No Apple CarPlay/Android Auto support. Rivian's 'Highway Assist' is a hands-on/limited hands-free driver-assist feature, not full self-driving."
+      "notes": "3-row SUV; no captain's-chairs option in MY2025 (added for MY2027), so the 2nd-row bench gives 7-passenger seating. Rides on adjustable air suspension (roughly 8.3-14.6 in of travel depending on mode), so no single ground-clearance figure is published. Vegan/synthetic interior materials only — no leather offered. No Apple CarPlay/Android Auto support. Rivian's 'Highway Assist' is a hands-on/limited hands-free driver-assist feature, not full self-driving. EPA splits this trim by wheel: id 48745 is the 20-inch at 300mi, id 48746 the 22-inch at 329mi. The 329mi recorded here is the 22-inch figure, so the record is now cited to id 48746 and its range and source agree. OPEN: per the base-configuration rule in SCHEMA a record should describe the standard (cheapest) wheel, and if the 20-inch is standard this should become 300mi against id 48745. Rivian's own site could not be read to confirm which wheel is standard, so the existing sourced figure was kept rather than guessed."
     },
     {
       "id": "rivian-r1s-2025-quad-motor-awd-max-pack",
       "url": "https://evcompare.org/2025/r1s/quad-motor-awd-max-pack/",
       "catalogId": 100,
-      "lastVerifiedDate": "2026-08-21",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Rivian",
       "model": "R1S",
       "trim": "Quad-Motor AWD (Max Pack)",
       "modelYear": 2025,
       "bodyStyle": "SUV",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
       "msrp": 121990,
       "doors": 5,
@@ -8334,22 +8333,21 @@
       "groundClearanceIn": "N/A",
       "links": {
         "manufacturerSpec": "https://rivian.com/r1s",
-        "review": "https://www.caranddriver.com/rivian/r1s",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1S&srchtyp=ymm&pageno=1&rowLimit=50"
+        "review": "https://www.caranddriver.com/rivian/r1s"
       },
-      "notes": "Top performance trim: four independently-controlled motors, 1,025 hp / 1,198 lb-ft, sub-2.6s 0-60 (2.5s possible with 22-inch Super Sport wheels + Launch mode). Range is Rivian's own claim for the shared 140 kWh Max pack. Same cargo, seating, and interior-material notes as the Dual-Motor Large Pack entry apply."
+      "notes": "Top performance trim: four independently-controlled motors, 1,025 hp / 1,198 lb-ft, sub-2.6s 0-60 (2.5s possible with 22-inch Super Sport wheels + Launch mode). Range is Rivian's own claim for the shared 140 kWh Max pack. Same cargo, seating, and interior-material notes as the Dual-Motor Large Pack entry apply. epaSizeClass is taken from EPA's 2025 R1S Tri Max entry (id 48751, Standard Sport Utility Vehicle 4WD): EPA has certified no Quad-Motor R1S, and size class is a property of the vehicle rather than of its motor count, so the sibling entry settles it. No epaWindowSticker link, because no EPA entry describes this trim - the 374mi figure is Rivian's own claim, as noted above."
     },
     {
       "id": "rivian-r1t-2025-adventure-dual-motor-awd-large-pack",
       "url": "https://evcompare.org/2025/r1t/adventure-dual-motor-awd-large-pack/",
       "catalogId": 101,
-      "lastVerifiedDate": "2026-08-28",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Rivian",
       "model": "R1T",
       "trim": "Adventure Dual-Motor AWD (Large Pack)",
       "modelYear": 2025,
       "bodyStyle": "Truck",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard Pickup",
       "onSaleDate": null,
       "msrp": 76900,
       "doors": 4,
@@ -8418,9 +8416,9 @@
       "links": {
         "manufacturerSpec": "https://rivian.com/r1t",
         "review": "https://www.caranddriver.com/rivian/r1t",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2025&year2=2025&make=Rivian&baseModel=R1T&srchtyp=ymm&pageno=1&rowLimit=50"
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48756"
       },
-      "notes": "Pickup truck with no conventional enclosed rear cargo/trunk area. Storage comes from an 11 cu ft powered frunk, an 11.7 cu ft 'Gear Tunnel' running through the cabin (65 in L x 18.1 in W x 20.3 in H, doors on both ends), and a 54.2 in long truck bed (51.1 in wide, extendable to 83.6 in with the tailgate down and seats folded). Adjustable air suspension means no single ground-clearance figure is published. Vegan/synthetic interior materials only; no Apple CarPlay/Android Auto support. Public sources for this trim are limited on top speed: Rivian does not publish one, and the spec databases carry only the first-generation R1T — 2025 is a second-generation truck with a different powertrain, so those figures do not transfer."
+      "notes": "Pickup truck with no conventional enclosed rear cargo/trunk area. Storage comes from an 11 cu ft powered frunk, an 11.7 cu ft 'Gear Tunnel' running through the cabin (65 in L x 18.1 in W x 20.3 in H, doors on both ends), and a 54.2 in long truck bed (51.1 in wide, extendable to 83.6 in with the tailgate down and seats folded). Adjustable air suspension means no single ground-clearance figure is published. Vegan/synthetic interior materials only; no Apple CarPlay/Android Auto support. Public sources for this trim are limited on top speed: Rivian does not publish one, and the spec databases carry only the first-generation R1T — 2025 is a second-generation truck with a different powertrain, so those figures do not transfer. EPA splits this trim by wheel: id 48755 is the 20-inch at 300mi, id 48756 the 22-inch at 329mi. The 329mi recorded here is the 22-inch figure, so the record is now cited to id 48756 and its range and source agree. OPEN: per the base-configuration rule in SCHEMA a record should describe the standard (cheapest) wheel, and if the 20-inch is standard this should become 300mi against id 48755. Rivian's own site could not be read to confirm which wheel is standard, so the existing sourced figure was kept rather than guessed."
     },
     {
       "id": "rivian-r2-2027-premium-awd",
@@ -8840,13 +8838,13 @@
       "id": "tesla-cybertruck-2026-cyberbeast",
       "url": "https://evcompare.org/2026/cybertruck/cyberbeast/",
       "catalogId": 107,
-      "lastVerifiedDate": "2026-08-28",
+      "lastVerifiedDate": "2026-09-01",
       "make": "Tesla",
       "model": "Cybertruck",
       "trim": "Cyberbeast",
       "modelYear": 2026,
       "bodyStyle": "Truck",
-      "epaSizeClass": null,
+      "epaSizeClass": "Standard Pickup",
       "onSaleDate": null,
       "msrp": 99990,
       "doors": 4,
@@ -8913,10 +8911,9 @@
       "groundClearanceIn": 8,
       "links": {
         "manufacturerSpec": "https://www.tesla.com/cybertruck",
-        "review": "https://www.caranddriver.com/tesla/cybertruck",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/PowerSearch.do?action=noform&path=1&year1=2022&year2=2026&make=Tesla&baseModel=Cybertruck&srchtyp=ymm&pageno=1&rowLimit=100"
+        "review": "https://www.caranddriver.com/tesla/cybertruck"
       },
-      "notes": "No enclosed rear cargo hold; Tesla hasn't published an official frunk cubic-foot figure. Cyberbeast is the tri-motor performance flagship: 845 hp / ~1,030 lb-ft, 2.6s 0-60, standard on 20-inch wheels with adaptive air suspension (so ground clearance varies and no single figure is published). Full Self-Driving (Supervised) is subscription-only at $99/month, available on Cyberbeast."
+      "notes": "No enclosed rear cargo hold; Tesla hasn't published an official frunk cubic-foot figure. Cyberbeast is the tri-motor performance flagship: 845 hp / ~1,030 lb-ft, 2.6s 0-60, standard on 20-inch wheels with adaptive air suspension (so ground clearance varies and no single figure is published). Full Self-Driving (Supervised) is subscription-only at $99/month, available on Cyberbeast. epaSizeClass is taken from EPA's 2026 Cybertruck AWD entry (id 50039, Standard Pickup Trucks 4WD): EPA has never certified a Cyberbeast in any model year, and size class is a property of the vehicle rather than of its motor count. No epaWindowSticker link, since no EPA entry describes this trim."
     },
     {
       "id": "tesla-model-3-2026-standard-rwd",
