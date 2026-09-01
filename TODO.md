@@ -2155,3 +2155,28 @@ and the repurposed Supercharger hub would have matched nothing.
 Worth automating eventually — a content hash would remove the whole class of error. Noted, not done.
 
 (Unrelated and pre-existing: `/favicon.ico` 404s because the site uses an inline SVG favicon. Harmless.)
+
+## Bug: the logo rewrote the URL without going home (2026-08-28)
+
+Clicking the brand logo while inside a hub set the URL to `/` but left `state.hub` in place, so
+the address bar said homepage while the grid was still scoped to a category. That is the one state
+where the URL actively lies about what you are looking at.
+
+Fixed by making the logo reproduce what the **"All N models"** link does. That link is a real
+`<a href="/">`, so its full page load resets everything; the logo only ever rewrote the URL.
+
+**The non-obvious half was the slider domains.** `state.domains` is computed from the *hub's*
+matched set — that is deliberate, it is what clamps the sliders to the scope so you can narrow
+further but never widen back out of the hub you are standing in. So leaving a hub is not
+`state.hub = null`; the domains have to be recomputed against the full dataset and the filter
+state rebuilt against those. Without that the price slider would still have topped out at $39,995
+while the page claimed all 149 cars. Verified it now goes back to $210,995.
+
+**One deliberate divergence from a real reload:** `state.compareSet` is preserved. Comparison
+picks are effortful and are not represented in the URL, so silently discarding them on a logo
+click would be destructive — and the compare bar already has its own Clear. Verified a ticked car
+survives the click.
+
+Verified end to end: from `/evs-under-40000/` with a search term applied, one logo click gives
+`/`, 149 cards, no scope chip, no filter chips, empty search box, price slider back to full range,
+title reset, and the comparison selection intact.

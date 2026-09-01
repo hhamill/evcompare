@@ -248,8 +248,13 @@ function bindGlobalEvents() {
   // view, and resets the URL to "/" regardless of what it currently is — including an
   // invalid/unmatched deep link (e.g. a typo'd car slug), which nothing else in the nav
   // gives you a direct way out of.
+  //
+  // It also has to actually GO HOME. Previously it rewrote the URL to "/" while the hub and
+  // any filters stayed put, so the address bar said homepage while the grid was still scoped
+  // to a category — the one state where the URL lies about what you are looking at.
   el.brandHome.addEventListener("click", () => {
     closeModal({ updateHistory: false });
+    goHome();
     state.view = "results";
     renderAll();
     leaveCompareUrl();
@@ -370,6 +375,29 @@ function rebuildSidebar() {
     state.view = "results";
     renderAll();
   }, hiddenFilterKeys());
+}
+
+// Back to a pristine homepage, matching what the "All N models" link does — that one is a real
+// <a href="/"> whose full page load resets everything, so the logo has to reproduce the effect
+// rather than only rewriting the URL.
+//
+// Leaving a hub is not just `state.hub = null`. Domains are computed from the hub's matched set
+// — that is what clamps the sliders to the scope — so they must be recomputed against the full
+// dataset before the filter state is rebuilt against them. Skip that and the sliders keep the
+// hub's narrower bounds while the page claims to show all 149 cars.
+//
+// Deliberately does NOT clear state.compareSet, which is the one place this diverges from a real
+// reload. Comparison picks are effortful and are not represented in the URL, so silently
+// discarding them on a logo click would be destructive; the compare bar has its own Clear.
+function goHome() {
+  if (state.hub) {
+    state.hub = null;
+    state.domains = computeDomains(state.cars);
+  }
+  state.filterState = defaultFilterState(state.domains);
+  state.searchText = "";
+  el.searchInput.value = "";
+  rebuildSidebar();
 }
 
 function resetFilters() {
