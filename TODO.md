@@ -2227,3 +2227,33 @@ data exactly.
 Not touched, though it looks odd: EPA classes the **Optiq** as Standard SUV despite it being a
 compact crossover. That is EPA's call and this dataset defers to it on purpose (see the Crossover
 retirement) — overriding it by eye is exactly what `epaSizeClass` exists to avoid.
+
+## Car detail modal: pin the car's identity while you scroll (2026-08-28)
+
+Several screens of specs down, the "Similar vehicles" list compares each car to "this car" — with
+no visible answer to which car that is. The modal's header now sticks to the top of the scrolling
+body, so make, model, year, trim and price stay on screen the whole way down.
+
+**Done without scroll-driven JS.** Rather than a header that collapses on scroll (an
+IntersectionObserver, a sentinel, and a second condensed layout to maintain), the header was made
+compact enough to pin as-is: trim and price now share one flex row instead of stacking, which
+takes the pinned block to two lines / 85px — **12% of the modal on a phone**. Cheap enough to
+leave visible always, so there is no state to manage.
+
+### The CSS trap worth remembering
+
+First attempt bled the header over `.modal-body`'s 28px padding with `margin: -28px -28px 14px`.
+That put the header's *natural* position above the scrollport, so `position: sticky` engaged
+immediately at rest — shifting it down 28px visually while layout kept it 28px higher, which slid
+the summary paragraph's first line underneath it. It looked like a z-index or margin bug and was
+neither.
+
+Fix: `.modal-body` gives up its top padding and `.modal-head` supplies it instead, so the head's
+natural position starts flush with the scrollport and sticky is a no-op until you actually scroll.
+
+Also removed `.modal-summary`'s `margin-top: -8px`, which existed only to close the gap under the
+old standalone `.modal-price` block — with price now inside the sticky head, it was pulling the
+paragraph under it.
+
+Verified at desktop and 375px, opened both by deep link and by clicking a grid card: header pinned
+at the bottom of the scroll, 14px clear gap above the summary at rest, no console errors.

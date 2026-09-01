@@ -1,6 +1,6 @@
 import { FIELDS, BODY_SPRITE } from "./fields.js?v=16";
 import { computeDomains, defaultFilterState, matchesFilters, renderFilterSidebar, describeActiveFilters, clearFilter } from "./filters.js?v=12";
-import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=32";
+import { renderCardGrid, renderCompareTable, renderDetailModal, renderSkeletonGrid, renderLoadError } from "./render.js?v=33";
 import { carPath, buildCarPathIndex, carForPath, homePath, compareSharePath, compareIdsFromPath, hubSlugFromPath } from "./router.js?v=6";
 import { buildHubs, hubBySlug } from "./hubs.js?v=6";
 

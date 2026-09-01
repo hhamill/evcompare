@@ -252,7 +252,7 @@ ${FAVICON}
     }
   })(window.location);
 </script>
-<link rel="stylesheet" href="/css/styles.css?v=39" />
+<link rel="stylesheet" href="/css/styles.css?v=42" />
 <script data-goatcounter="https://evcompare.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -347,7 +347,7 @@ ${o.introHtml}
 
 </div>
 
-<script type="module" src="/js/app.js?v=62"></script>
+<script type="module" src="/js/app.js?v=63"></script>
 </body>
 </html>
 `;
@@ -635,7 +635,7 @@ function docShell(o) {
 <meta name="twitter:image" content="${esc(OG_IMAGE)}" />
 ${o.jsonLd ? `<script type="application/ld+json">${JSON.stringify(o.jsonLd)}</script>` : ""}
 ${FAVICON}
-<link rel="stylesheet" href="/css/styles.css?v=39" />
+<link rel="stylesheet" href="/css/styles.css?v=42" />
 </head>
 <body>
 <div class="app">

@@ -598,7 +598,11 @@ a.filter-chip-clear { text-decoration: none; }
   display: flex; flex-direction: column;
 }
 .modal-body {
-  overflow-y: auto; padding: 28px;
+  /* No top padding: .modal-head supplies it instead, so the head's natural position starts flush
+     with the scrollport. Give it a negative top margin here instead and `position: sticky` pins
+     it immediately at rest, shifting it down visually while layout keeps it higher up — which
+     slides the following paragraph underneath the header. */
+  overflow-y: auto; padding: 0 28px 28px;
   min-height: 0; /* let this flex child actually shrink and scroll instead of stretching .modal */
 }
 .modal-close {
@@ -610,9 +614,25 @@ a.filter-chip-clear { text-decoration: none; }
 .modal-header-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 2px; }
 .modal-header-row .modal-title { margin-bottom: 0; }
 .icon-btn { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
-.modal-trim { color: var(--text-dim); font-size: 14px; margin-bottom: 12px; }
-.modal-price { font-size: 18px; color: var(--accent); font-weight: 700; margin-bottom: 18px; }
-.modal-summary { font-size: 14px; color: var(--text-dim); line-height: 1.5; margin: -8px 0 18px; }
+/* Sticks to the top of .modal-body's scrollport so the car's identity stays on screen the whole
+   way down. Bleeds horizontally over .modal-body's 28px padding and re-adds it, so the opaque
+   background covers the full width and specs scroll cleanly underneath rather than beside it.
+   z-index sits below .modal-close (which is positioned on .modal, outside this scroll box). */
+.modal-head {
+  position: sticky; top: 0; z-index: 1;
+  background: var(--bg-elevated);
+  margin: 0 -28px 14px; padding: 24px 28px 10px;
+  border-bottom: 1px solid var(--border-soft);
+}
+/* One row, so the pinned block stays two lines tall. Wraps on a narrow phone rather than
+   letting a long trim name squeeze the price. */
+.modal-subline { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.modal-trim { color: var(--text-dim); font-size: 14px; }
+.modal-price { font-size: 18px; color: var(--accent); font-weight: 700; margin-left: auto; }
+/* No negative top margin: that used to close the gap under the old standalone .modal-price
+   block, but the price now lives in the sticky .modal-head, so pulling up here slid the
+   summary's first line underneath the pinned header. */
+.modal-summary { font-size: 14px; color: var(--text-dim); line-height: 1.5; margin: 0 0 18px; }
 .modal-section { margin-bottom: 18px; }
 .modal-section h4 { font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-faint); margin-bottom: 8px; }
 .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; }

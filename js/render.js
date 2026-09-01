@@ -376,19 +376,28 @@ export function renderDetailModal(body, car, { inCompare, onToggleCompare, allCa
   if (rangeSourceHref) links.push(`<a href="${esc(rangeSourceHref)}" target="_blank" rel="noopener">fueleconomy.gov ↗</a>`);
 
   body.innerHTML = `
-    <div class="modal-header-row">
-      <div class="modal-title">${bodyIcon(car)} ${carTitle(car)}</div>
-      <button id="modalShareBtn" class="btn btn-ghost btn-sm icon-btn">${SHARE_ICON} Share</button>
-    </div>
-    <div class="modal-trim">${car.modelYear} · ${esc(car.trim)}</div>
+    ${/* Pinned to the top of the scrolling body so the car you are reading about stays on
+         screen all the way down to "Similar vehicles" — otherwise, several screens of specs
+         later, the list of other cars has no visible answer to "which one am I looking at?".
+         Trim and price share a row rather than stacking, which keeps the pinned block to two
+         lines; a taller header would cost more than the context is worth on a phone. */""}
+    <div class="modal-head">
+      <div class="modal-header-row">
+        <div class="modal-title">${bodyIcon(car)} ${carTitle(car)}</div>
+        <button id="modalShareBtn" class="btn btn-ghost btn-sm icon-btn">${SHARE_ICON} Share</button>
+      </div>
+      <div class="modal-subline">
+        <span class="modal-trim">${car.modelYear} · ${esc(car.trim)}</span>
     ${/* The summary sentence directly below states the price in context ("...and an MSRP of
          $64,500"), so announcing this standalone number too is pure repetition. It only does
          so when the price is a real number, though: for null/"N/A"/"Pending" the sentence
          omits price entirely, and then this element is the *only* place a screen reader
          learns the price is unpublished — so it stays announced, with a label. */""}
-    <div class="modal-price"${isRealValue(car.msrp) ? ' aria-hidden="true"' : ""}>${
-      isRealValue(car.msrp) ? "" : '<span class="sr-only">Price: </span>'
-    }${fmtVal(fieldByKey("msrp"), car.msrp)}</div>
+        <span class="modal-price"${isRealValue(car.msrp) ? ' aria-hidden="true"' : ""}>${
+          isRealValue(car.msrp) ? "" : '<span class="sr-only">Price: </span>'
+        }${fmtVal(fieldByKey("msrp"), car.msrp)}</span>
+      </div>
+    </div>
     <p class="modal-summary">${esc(carSummarySentence(car))} Full specs below.</p>
     ${sections}
     ${links.length ? `<div class="modal-section"><h4>Links</h4><div class="modal-links">${links.join("")}</div></div>` : ""}
