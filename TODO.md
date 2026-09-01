@@ -2041,3 +2041,48 @@ Model Y variant. Worth remembering that a flag names a pair, not a culprit.
 134 mph, alongside 0-60 of 4.7s and 3.3s. The more powerful car is limited slightly lower.
 
 `npm run audit` is back to **No flags**.
+
+## New field: `charging.superchargerAccess` (2026-08-28)
+
+**Why it exists.** `nacsAdapter.available` and `portType` describe how a car *plugs in*; they do
+not say whether it is *allowed on the network*. Those are granted by different mechanisms — an
+automaker signs an agreement with Tesla and ships app/billing integration, whereas a connector or
+an adapter is just a part. The field answers the question buyers actually mean: can this car
+charge at a Supercharger?
+
+**It deliberately cuts across both routes**, so one filter shows every Supercharger-capable car,
+whether it gets there natively or with an adapter. `portType` and `nacsAdapter` remain separate
+filters for anyone who cares which. Populated on all 149: **144 true, 5 false**.
+
+**The five that cannot:**
+
+- **VinFast VF8 x2, VF9** — no manufacturer-approved adapter and no agreement.
+- **Audi Q4 e-tron x2** — Audi states outright that the Q4 "is not currently able to utilize the
+  Audi NACS DC Charging Adapter or the Tesla NACS Partner Supercharger network", while every other
+  Audi e-tron can. The reason is worth recording: the Q4 is essentially a rebadged VW ID.4 on a
+  400V architecture, and it was left out when the rest of the Audi line was enabled.
+
+**They are collinear today, and that is fine.** No car in the set has an approved adapter or a
+native port yet lacks access, so the new column agrees with `nacsAdapter.available` everywhere.
+That is not an argument against the field — the two demonstrably diverge *in time*. Stellantis
+signed its NACS agreement and had approved-adapter plans long before access actually went live for
+Jeep, Dodge, Fiat and Ram in **March 2026**. During that window our data said `adapter=true` for
+cars that could not in fact charge at a Supercharger. The next brand rollout will do the same.
+
+**This field goes stale**, unlike ground clearance. Brands get switched on; models get added or
+excluded. It needs periodic re-checking, and `SCHEMA.md` says so.
+
+**Checked while populating**, so it isn't re-researched:
+
+- **Volkswagen has access** (from 18 Nov 2025, adapter standard on MY2026 cars). An Audi source
+  said "Volkswagen is not Tesla's NACS partner yet", which was true when written and is not now —
+  a good reminder that sources on this topic date fast.
+- **Stellantis is live** as of March 2026, and the eligible list explicitly covers the Charger
+  Daytona, Wagoneer S, Fiat 500e and the 2026 Recon — every Stellantis record here.
+- **Subaru Solterra has access** through the SubaruConnect app; the certified adapter's price is
+  still unpublished, which is why `costUsd` stays null and is correct.
+- **Our Nissan Leaf records are the 2026 NACS-native car**, not the old CHAdeMO Leaf that cannot
+  use Superchargers at all.
+- VW's own wording independently confirms the DC scoping done earlier: "NACS DC adapters are only
+  for use with compatible DC fast chargers. They are not designed for use with Level 1 or Level 2
+  AC charging equipment."

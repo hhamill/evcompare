@@ -91,6 +91,16 @@ export const FIELDS = [
     format: v => fmtNum(v, n => `${roundTo(n, 1)} kW`) },
   { key: "vehicleToLoad", label: "Vehicle-to-Load (V2L)", group: "Range & Charging", type: "boolean", get: c => c.charging?.vehicleToLoad },
   { key: "heatPump", label: "Heat Pump", group: "Range & Charging", type: "boolean", get: c => c.charging?.heatPump },
+  // Deliberately separate from both chargePort and nacsAdapterAvailable, because network access
+  // and physical compatibility are granted by different mechanisms. An automaker signs an
+  // agreement with Tesla and ships app/billing integration; a connector or an adapter is just a
+  // part. The two diverge in time — Stellantis had NACS agreements and approved-adapter plans
+  // well before Supercharger access actually went live for Jeep and Dodge in early 2026 — so a
+  // car can be physically capable and still not be allowed on the network. This field answers
+  // "can it actually charge there", which is the question buyers mean; chargePort and
+  // nacsAdapterAvailable answer "how does it plug in", which is a different filter.
+  { key: "superchargerAccess", label: "Tesla Supercharger Access", group: "Range & Charging", type: "boolean", get: c => c.charging?.superchargerAccess },
+
   // "DC" is load-bearing in these two labels, not decoration. A CCS1 car can take either a
   // NACS-to-CCS1 DC adapter (Supercharger, Rivian Adventure Network) or a NACS-to-J1772 AC
   // adapter for Level 2 — and no single adapter does both. Only the DC one is tracked here,
