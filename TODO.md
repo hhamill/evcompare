@@ -2412,3 +2412,22 @@ is doing its job.
 3 cars: snaps between two clean positions, corner cell blank, no bleed into the label lane. Desktop
 1280px unchanged — `table-layout: auto`, `min-width: 640px`, no snapping; scrolled to max with 6 cars
 the corner cell stays exactly aligned with the label column (both `25 → 205`).
+
+**Follow-up 2 (same day).** Two things left over from the phone test above:
+
+- **Snapping stopped once you scrolled down the table.** The snap targets were the `thead th`
+  cells, and Chromium only considers x-snap areas that *also* intersect the scrollport
+  vertically — so past the header there were no candidates left and mandatory snapping quietly
+  became a no-op. Confirmed by A/B with the header forced non-sticky and as the only target:
+  `70 → 122` at `scrollTop: 0`, but `70 → 70` at `scrollTop: 900`. Fix: `scroll-snap-align`
+  now also on `tbody td`. Body cells run the table's full height and every cell in a column
+  shares the same x, so they all resolve to the same snap position. Verified snapping holds at
+  `scrollTop` 0 / 300 / 900 / 1790 (max).
+  (An earlier A/B seemed to show the *sticky* header failing even at the top; that was a
+  stylesheet-injection race, not a real effect. The vertical-intersection rule alone explains it.)
+- **Group name crossed the column divider.** "Performance & Drivetrain" is wider than the 88px
+  label column even wrapped, and overflowed across the first vertical border. Per the user's
+  suggestion, dropped the dividers on group rows only (`tr.group-row td { border-left: none }`) —
+  the cells to the right are empty so there is nothing to collide with, and the row now reads as
+  one full-width section band. Applies on desktop too, where it looks better than the old
+  segmented version.

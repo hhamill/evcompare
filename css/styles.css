@@ -526,6 +526,11 @@ a.filter-chip-clear { text-decoration: none; }
 .compare-table th:not(:first-child), .compare-table td:not(:first-child) {
   border-left: 1px solid var(--border-soft);
 }
+/* ...except on the group rows. A long group name ("Performance & Drivetrain") is wider than
+   the 88px label column on a phone even wrapped, and overflowed across the first divider.
+   The cells to its right are empty, so there is nothing for it to collide with — dropping
+   the dividers just here lets it run, and the row reads as one full-width section band. */
+.compare-table tr.group-row td { border-left: none; }
 .compare-table thead th {
   position: sticky; top: 0; background: var(--bg-elevated); z-index: 5; vertical-align: top; padding-top: 14px;
 }
@@ -821,7 +826,14 @@ a.filter-chip-clear { text-decoration: none; }
     scroll-padding-left: 88px;
     overscroll-behavior-x: contain;
   }
-  .compare-table thead th:not(:first-child) { scroll-snap-align: start; }
+  /* Every car cell is a snap target, not just the header. Chromium only considers x-snap
+     areas that also intersect the scrollport *vertically*, so with the header cells as the
+     only targets, snapping worked at the top of the table and silently stopped once you
+     scrolled down past them — confirmed by A/B: header-only snaps 70 to 122 at scrollTop 0
+     and leaves it at 70 by scrollTop 900. Body cells run the table's whole height, and every
+     cell in a column shares the same x, so they all resolve to the same snap position. */
+  .compare-table thead th:not(:first-child),
+  .compare-table tbody td { scroll-snap-align: start; }
 }
 
 /* ---------- Documentation pages ---------- */
