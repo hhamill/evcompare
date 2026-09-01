@@ -178,35 +178,46 @@ const PRACTICAL_HUBS = [
     },
   },
   {
-    // Deliberately scoped to the physical connector, not "Supercharger access": whether a
-    // given car can use every Supercharger stall also depends on per-brand network
-    // agreements, which this dataset doesn't track and shouldn't imply.
-    slug: "non-tesla-evs-with-nacs-port",
-    noun: "non-Tesla EVs with a NACS port",
-    h1: "Non-Tesla EVs with a NACS (Tesla-style) charge port",
-    title: "Which EVs Use the Tesla (NACS) Plug — Native Ports & Adapters",
-    blurb: "Non-Tesla electric vehicles that ship with a native NACS port, plus the ones that need an adapter.",
-    match: c => c.make !== "Tesla" && val("chargePort", c) === "NACS",
+    // Repurposed 2026-08-28 from "has a NACS port" to "can actually charge at a Supercharger".
+    // The old framing answered how a car plugs in; this one answers what buyers actually ask.
+    // Now that charging.superchargerAccess exists, the page can state the answer instead of
+    // disclaiming it in a closing sentence. The old slug still resolves — prerender emits a
+    // redirect stub there, because it was the most-cited page on the site.
+    //
+    // The list is deliberately near-total (133 of 138) and that IS the answer: almost every
+    // non-Tesla EV can Supercharge now. The information a reader wants is carried by the intro —
+    // the native/adapter split, and the handful that still cannot.
+    slug: "non-tesla-evs-with-supercharger-access",
+    noun: "non-Tesla EVs that can charge at a Tesla Supercharger",
+    h1: "Non-Tesla EVs that can charge at a Tesla Supercharger",
+    title: "Which Non-Tesla EVs Can Use Tesla Superchargers",
+    blurb: "Non-Tesla electric vehicles the manufacturer has enabled on the Tesla Supercharger network, natively or with an approved adapter.",
+    match: c => c.make !== "Tesla" && val("superchargerAccess", c) === true,
     highlight: "maxDcKw", order: "desc",
     determines: [],
     intro: (cars, total, all) => {
       const nonTesla = all.filter(c => c.make !== "Tesla");
-      const adapter = nonTesla.filter(c => val("chargePort", c) === "CCS1"
-        && val("nacsAdapterAvailable", c) === true);
+      const native = cars.filter(c => val("chargePort", c) === "NACS");
+      const adapter = cars.filter(c => val("chargePort", c) === "CCS1");
       const free = adapter.filter(c => num("nacsAdapterCost", c) === 0).length;
-      const none = nonTesla.length - cars.length - adapter.length;
-      return `${cars.length} of the ${nonTesla.length} non-Tesla EVs we track ship with a native NACS port, `
-        + `so they connect to a Tesla Supercharger without an adapter. `
-        + `Another ${adapter.length} use a CCS1 port with a manufacturer-approved NACS DC fast-charge adapter`
-        + (free ? ` — ${free} of those include it at no cost` : "")
-        + `. ${none} have no approved NACS route at all. `
-        + `Adapters counted here are DC fast-charge adapters — the kind that gets you onto a `
-        + `Supercharger. Separate NACS-to-J1772 adapters exist for AC/Level 2 charging, and no `
-        + `single adapter does both. `
-        + `This tracks the physical connector; whether a vehicle can use every Supercharger stall `
-        + `also depends on network access agreements, which vary by brand.`;
+      const without = nonTesla.filter(c => val("superchargerAccess", c) !== true);
+      const names = [...new Set(without.map(c => `${c.make} ${c.model}`))];
+      return `${cars.length} of the ${nonTesla.length} non-Tesla EVs we track can charge at a Tesla `
+        + `Supercharger — so the question is now which ones can't. `
+        + `${native.length} ship with a native NACS port and just plug in. `
+        + `${adapter.length} use a CCS1 port with a manufacturer-approved NACS DC fast-charge adapter`
+        + (free ? `, ${free} of which include it at no cost` : "")
+        + `. `
+        + (names.length
+            ? `The ${without.length} that cannot: ${names.join(", ")}. `
+            : "")
+        + `Access is granted by the automaker, not by the plug — it needs an agreement with Tesla `
+        + `and app/billing integration, so a car can be physically compatible and still not be `
+        + `allowed on the network. Adapters here are DC fast-charge adapters; separate `
+        + `NACS-to-J1772 adapters exist for AC/Level 2 charging, and no single adapter does both.`;
     },
   },
+
 ];
 
 export function hubBySlug(slug, hubs) {

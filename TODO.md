@@ -2086,3 +2086,32 @@ excluded. It needs periodic re-checking, and `SCHEMA.md` says so.
 - VW's own wording independently confirms the DC scoping done earlier: "NACS DC adapters are only
   for use with compatible DC fast chargers. They are not designed for use with Level 1 or Level 2
   AC charging equipment."
+
+## Repurposed the NACS hub to Supercharger access (2026-08-28)
+
+`/non-tesla-evs-with-nacs-port/` answered *how a car plugs in*. It now answers what buyers
+actually ask — **can it charge at a Supercharger?** — which only became expressible once
+`charging.superchargerAccess` existed. The page used to end by disclaiming the very thing it was
+being read for ("whether a vehicle can use every Supercharger stall also depends on network
+access agreements"); it now states it.
+
+    slug   non-tesla-evs-with-nacs-port  ->  non-tesla-evs-with-supercharger-access
+    match  chargePort === "NACS"         ->  superchargerAccess === true
+    count  51 cars                       ->  133 cars
+
+**The old URL still works.** GitHub Pages has no server-side redirects, and this was the most
+citable page on the site, so `prerender.mjs` now emits a stub at any renamed hub's old path: a
+`<link rel="canonical">` at the new URL (which is what actually tells a crawler the page moved and
+carries its authority across), plus a meta refresh and a visible link for a human who lands there.
+The stub is deliberately kept **out of `sitemap.xml`** and marked `noindex, follow` — it is a
+signpost, not a page. `RENAMED_HUBS` in `prerender.mjs` is the table; **keep entries forever**, since
+a 404 is worse than a stub.
+
+**The list is now near-total on purpose — 133 of 138 — and that is the answer.** Almost every
+non-Tesla EV can Supercharge in 2026, so the interesting content moved into the intro: the
+native-vs-adapter split (51 native, 82 by adapter, 21 of those free) and, more usefully, the five
+that still cannot — Audi Q4 e-tron and the three VinFasts, named in the page text.
+
+Verified: the new hub renders with 133 cars, the old path redirects to it, the sitemap carries the
+new slug and not the old, and hub backlinks on car pages follow the field — an Ioniq 5 carries the
+link, while the Q4 e-tron (no access) and any Tesla correctly do not.

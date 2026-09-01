@@ -414,6 +414,13 @@ function pageFor(car) {
 // Below this, a hub is too thin to be worth indexing. It WARNS rather than skipping: once a
 // URL is indexed, having it start 404ing is worse than a thin page, and silently dropping it
 // means finding out from Search Console weeks later. A human decides.
+// Hubs that changed slug. Keep entries forever — an old URL that 404s is worse than a stub.
+const RENAMED_HUBS = [
+  // 2026-08-28: reframed from "has a NACS port" to "can actually charge at a Supercharger",
+  // once charging.superchargerAccess made the difference expressible.
+  { from: "non-tesla-evs-with-nacs-port", to: "non-tesla-evs-with-supercharger-access" },
+];
+
 const HUB_MIN = 8;   // default floor; make/body hubs carry their own (see js/hubs.js)
 
 const HUBSETS = buildHubs(cars);
@@ -908,6 +915,34 @@ function main() {
     sitemapEntries.push({ loc: `${SITE_BASE_URL}${hubPath(hub)}/`, lastmod });
     hubCount++;
   }
+  // ---------- redirect stubs for renamed hubs ----------
+  //
+  // GitHub Pages has no server-side redirects, so renaming a hub would leave its old URL dead.
+  // These pages are the most-linked on the site, so a rename emits a stub at the old path: a
+  // canonical pointing at the new URL (which is what tells a crawler the page moved and passes
+  // its authority along) plus a meta refresh and a visible link for anyone who lands there.
+  // Deliberately kept OUT of sitemap.xml — it is a signpost, not a page worth indexing.
+  for (const { from, to } of RENAMED_HUBS) {
+    const target = `${SITE_BASE_URL}${BASE_PATH}/${to}/`;
+    const dir = path.join(DIST, from);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(path.join(dir, "index.html"),
+      `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Moved — ${esc(SITE_NAME)}</title>
+<link rel="canonical" href="${esc(target)}">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url=${esc(target)}">
+</head>
+<body>
+<p>This page has moved to <a href="${esc(target)}">${esc(target)}</a>.</p>
+</body>
+</html>
+`);
+  }
+
   let count = 0;
   for (const car of cars) {
     const rel = relFilePath(car);
