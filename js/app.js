@@ -10,10 +10,6 @@ const MAX_COMPARE = 6;
 // car page is reached via a hard load (prerendered <title>) or client-side "navigation" (pushState).
 const SITE_NAME = "EV Compare";
 const HOME_TITLE = "EV Compare — Find and compare electric vehicles";
-// Mirrors the copy prerendered into the homepage (index.html) and car pages (prerender.mjs
-// buildCarPage). Needed here because leaving a hub client-side has to put the homepage's own
-// heading back — a hub page's DOM never contained this string to copy from.
-const HOME_INTRO = "View and compare electric vehicles sold in the US. Click a model or use the filters to get started.";
 const titleFor = car => `${car.modelYear} ${car.make} ${car.model} ${car.trim} — Specs & Price | ${SITE_NAME}`;
 const compareTitle = n => `Comparing ${n} vehicle${n === 1 ? "" : "s"} — ${SITE_NAME}`;
 
@@ -103,7 +99,6 @@ const el = {
   modalBody: document.getElementById("modalBody"),
   modalCloseBtn: document.getElementById("modalCloseBtn"),
   themeToggleBtn: document.getElementById("themeToggleBtn"),
-  brandHome: document.getElementById("brandHome"),
 };
 
 // Cycles auto (follow system) -> light -> dark -> auto. Applied as early as possible (before
@@ -248,22 +243,6 @@ function bindGlobalEvents() {
     copyToClipboard(`${location.origin}${path}`, el.shareCompareBtn);
   });
 
-  // The one universal escape hatch: closes any open modal, drops back to the results
-  // view, and resets the URL to "/" regardless of what it currently is — including an
-  // invalid/unmatched deep link (e.g. a typo'd car slug), which nothing else in the nav
-  // gives you a direct way out of.
-  //
-  // It also has to actually GO HOME. Previously it rewrote the URL to "/" while the hub and
-  // any filters stayed put, so the address bar said homepage while the grid was still scoped
-  // to a category — the one state where the URL lies about what you are looking at.
-  el.brandHome.addEventListener("click", () => {
-    closeModal({ updateHistory: false });
-    goHome();
-    state.view = "results";
-    renderAll();
-    leaveCompareUrl();
-  });
-
   el.compareBarClearBtn.addEventListener("click", () => {
     state.compareSet.clear();
     renderAll();
@@ -379,49 +358,6 @@ function rebuildSidebar() {
     state.view = "results";
     renderAll();
   }, hiddenFilterKeys());
-}
-
-// Back to a pristine homepage, matching what the "All N models" link does — that one is a real
-// <a href="/"> whose full page load resets everything, so the logo has to reproduce the effect
-// rather than only rewriting the URL.
-//
-// Leaving a hub is not just `state.hub = null`. Domains are computed from the hub's matched set
-// — that is what clamps the sliders to the scope — so they must be recomputed against the full
-// dataset before the filter state is rebuilt against them. Skip that and the sliders keep the
-// hub's narrower bounds while the page claims to show all 149 cars.
-//
-// Deliberately does NOT clear state.compareSet, which is the one place this diverges from a real
-// reload. Comparison picks are effortful and are not represented in the URL, so silently
-// discarding them on a logo click would be destructive; the compare bar has its own Clear.
-function goHome() {
-  if (state.hub) {
-    state.hub = null;
-    state.domains = computeDomains(state.cars);
-    restoreHomeIntro();
-  }
-  state.filterState = defaultFilterState(state.domains);
-  state.searchText = "";
-  el.searchInput.value = "";
-  rebuildSidebar();
-}
-
-// A hub page is prerendered with its own <h1 class="hub-title"> and a generated intro
-// paragraph, both in the persistent area rather than the disposable static block — deliberately,
-// so a JS visitor doesn't lose the page's only heading on boot. Nothing else removes them, so
-// leaving a hub client-side left the old summary sitting above a full, unfiltered grid.
-//
-// The intro element is swapped rather than just retitled: on a hub page it is a <p> (the <h1>
-// being the hub title we just removed), so reusing it as-is would leave the page with no
-// heading at all. Homepage markup has the intro line as the <h1>, and this restores that.
-function restoreHomeIntro() {
-  document.querySelector(".hub-title")?.remove();
-  const intro = document.querySelector(".intro-line");
-  if (!intro) return;
-  if (intro.tagName === "H1") { intro.textContent = HOME_INTRO; return; }
-  const h1 = document.createElement("h1");
-  h1.className = "intro-line";
-  h1.textContent = HOME_INTRO;
-  intro.replaceWith(h1);
 }
 
 function resetFilters() {

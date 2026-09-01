@@ -2158,48 +2158,40 @@ Worth automating eventually — a content hash would remove the whole class of e
 
 ## Bug: the logo rewrote the URL without going home (2026-08-28)
 
-Clicking the brand logo while inside a hub set the URL to `/` but left `state.hub` in place, so
-the address bar said homepage while the grid was still scoped to a category. That is the one state
-where the URL actively lies about what you are looking at.
+Clicking the brand logo while inside a hub set the URL to `/` but left the page scoped to the
+category — the one state where the URL actively lies about what you are looking at.
 
-Fixed by making the logo reproduce what the **"All N models"** link does. That link is a real
-`<a href="/">`, so its full page load resets everything; the logo only ever rewrote the URL.
+**First attempt was wrong, and worth recording as a lesson.** The logo was a `<button>` running
+JS, so I made the handler reproduce a homepage: null the hub, recompute the slider domains against
+the full dataset, reset filter state, clear the search, remove the hub `<h1>`, swap the intro
+paragraph back to the homepage copy and promote it to an `<h1>`. That is ~60 lines whose entire job
+was to re-derive, by hand, the page that the server already renders at `/`.
 
-**The non-obvious half was the slider domains.** `state.domains` is computed from the *hub's*
-matched set — that is deliberate, it is what clamps the sliders to the scope so you can narrow
-further but never widen back out of the hub you are standing in. So leaving a hub is not
-`state.hub = null`; the domains have to be recomputed against the full dataset and the filter
-state rebuilt against those. Without that the price slider would still have topped out at $39,995
-while the page claimed all 149 cars. Verified it now goes back to $210,995.
+It also did not work. I shipped it twice — first missing the hub state, then missing the summary
+paragraph — with a third gap (the "Browse:" pill row never came back) still outstanding when the
+user asked the obvious question: **the "All N models" link is just `<a href="/">` and it works, so
+why is the logo a button?**
 
-**One deliberate divergence from a real reload:** `state.compareSet` is preserved. Comparison
-picks are effortful and are not represented in the URL, so silently discarding them on a logo
-click would be destructive — and the compare bar already has its own Clear. Verified a ticked car
-survives the click.
+**No good reason.** The logo is now `<a class="brand" href="/">` and all ~60 lines are deleted.
+The browser does the reset by navigating, which is correct by construction — there is no list of
+state to keep in sync, so there is nothing to forget. The pill row came back for free, which is
+precisely the point: the bug class was "hand-mirroring server-rendered state", and it is now gone
+rather than patched a third time.
 
-Verified end to end: from `/evs-under-40000/` with a search term applied, one logo click gives
-`/`, 149 cards, no scope chip, no filter chips, empty search box, price slider back to full range,
-title reset, and the comparison selection intact.
+The codebase already had the answer: `docShell()` renders the same brand as `<a class="brand"
+href="...">` on the `/data/` and `/terms/` pages. Only the app shell used a button.
 
-### Follow-up: the hub's summary paragraph also survived (same day)
+Free with the change: middle-click and cmd-click open the homepage in a new tab, right-click offers
+"Copy link address", and every page gains a real internal link home rather than a scripted one.
 
-First fix reset the data but not the copy — the hub's `<h1 class="hub-title">` and its generated
-intro ("23 of the 149 electric vehicles we track seat three rows…") stayed above a full,
-unfiltered grid. Both are prerendered into the *persistent* area rather than the disposable static
-block, deliberately, so a JS visitor doesn't lose the page's only heading on boot; nothing else
-ever removed them.
+**Trade-off accepted:** clicking the logo is now a full page load, so `state.compareSet` is lost —
+the earlier JS version deliberately preserved it. That matches what the "All N models" link has
+always done, the compare bar has its own Clear, and comparisons are shareable by URL. Simplicity
+and correctness beat preserving in-memory state on a "take me home" click.
 
-`restoreHomeIntro()` now swaps them back. The element is **replaced rather than retitled**: on a
-hub page the intro is a `<p>` (the `<h1>` being the hub title just removed), so reusing it in place
-would leave the page with no heading at all. Homepage markup has the intro line as the `<h1>`, and
-this restores that shape — verified exactly one `<h1>` before and after.
+`.brand` needed one CSS line (`text-decoration: none`); it already reset button chrome.
 
-Costs a third copy of the homepage intro string (`index.html`, `prerender.mjs` car pages, now
-`app.js`), since a hub page's DOM never contains it to copy from. Commented in all three.
-
-### Known, not fixed: the category pills don't come back
-
-`#hubLinks` only exists in `index.html`, so hub and car pages never had it. Going home
-client-side therefore lands on a homepage without the "Browse:" row, where a real reload would
-show it. Putting the nav on hub pages would fix it and add hub-to-hub internal links, but it also
-changes what hub pages look like, so it is a design call rather than a bug fix.
+Verified: from `/electric-suvs-with-three-rows/` one click gives `/` with 149 cards, no hub title,
+the homepage intro back as the page's single `<h1>`, all 10 category pills, no scope chip, correct
+title, no console errors. Also verified the escape-hatch case the button existed for — an app
+loaded on an unresolvable car slug — still gets you out.
