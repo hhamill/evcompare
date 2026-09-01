@@ -347,7 +347,7 @@ ${o.introHtml}
 
 </div>
 
-<script type="module" src="/js/app.js?v=59"></script>
+<script type="module" src="/js/app.js?v=60"></script>
 </body>
 </html>
 `;

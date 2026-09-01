@@ -2180,3 +2180,26 @@ survives the click.
 Verified end to end: from `/evs-under-40000/` with a search term applied, one logo click gives
 `/`, 149 cards, no scope chip, no filter chips, empty search box, price slider back to full range,
 title reset, and the comparison selection intact.
+
+### Follow-up: the hub's summary paragraph also survived (same day)
+
+First fix reset the data but not the copy — the hub's `<h1 class="hub-title">` and its generated
+intro ("23 of the 149 electric vehicles we track seat three rows…") stayed above a full,
+unfiltered grid. Both are prerendered into the *persistent* area rather than the disposable static
+block, deliberately, so a JS visitor doesn't lose the page's only heading on boot; nothing else
+ever removed them.
+
+`restoreHomeIntro()` now swaps them back. The element is **replaced rather than retitled**: on a
+hub page the intro is a `<p>` (the `<h1>` being the hub title just removed), so reusing it in place
+would leave the page with no heading at all. Homepage markup has the intro line as the `<h1>`, and
+this restores that shape — verified exactly one `<h1>` before and after.
+
+Costs a third copy of the homepage intro string (`index.html`, `prerender.mjs` car pages, now
+`app.js`), since a hub page's DOM never contains it to copy from. Commented in all three.
+
+### Known, not fixed: the category pills don't come back
+
+`#hubLinks` only exists in `index.html`, so hub and car pages never had it. Going home
+client-side therefore lands on a homepage without the "Browse:" row, where a real reload would
+show it. Putting the nav on hub pages would fix it and add hub-to-hub internal links, but it also
+changes what hub pages look like, so it is a design call rather than a bug fix.

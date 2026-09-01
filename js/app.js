@@ -10,6 +10,10 @@ const MAX_COMPARE = 6;
 // car page is reached via a hard load (prerendered <title>) or client-side "navigation" (pushState).
 const SITE_NAME = "EV Compare";
 const HOME_TITLE = "EV Compare — Find and compare electric vehicles";
+// Mirrors the copy prerendered into the homepage (index.html) and car pages (prerender.mjs
+// buildCarPage). Needed here because leaving a hub client-side has to put the homepage's own
+// heading back — a hub page's DOM never contained this string to copy from.
+const HOME_INTRO = "View and compare electric vehicles sold in the US. Click a model or use the filters to get started.";
 const titleFor = car => `${car.modelYear} ${car.make} ${car.model} ${car.trim} — Specs & Price | ${SITE_NAME}`;
 const compareTitle = n => `Comparing ${n} vehicle${n === 1 ? "" : "s"} — ${SITE_NAME}`;
 
@@ -393,11 +397,31 @@ function goHome() {
   if (state.hub) {
     state.hub = null;
     state.domains = computeDomains(state.cars);
+    restoreHomeIntro();
   }
   state.filterState = defaultFilterState(state.domains);
   state.searchText = "";
   el.searchInput.value = "";
   rebuildSidebar();
+}
+
+// A hub page is prerendered with its own <h1 class="hub-title"> and a generated intro
+// paragraph, both in the persistent area rather than the disposable static block — deliberately,
+// so a JS visitor doesn't lose the page's only heading on boot. Nothing else removes them, so
+// leaving a hub client-side left the old summary sitting above a full, unfiltered grid.
+//
+// The intro element is swapped rather than just retitled: on a hub page it is a <p> (the <h1>
+// being the hub title we just removed), so reusing it as-is would leave the page with no
+// heading at all. Homepage markup has the intro line as the <h1>, and this restores that.
+function restoreHomeIntro() {
+  document.querySelector(".hub-title")?.remove();
+  const intro = document.querySelector(".intro-line");
+  if (!intro) return;
+  if (intro.tagName === "H1") { intro.textContent = HOME_INTRO; return; }
+  const h1 = document.createElement("h1");
+  h1.className = "intro-line";
+  h1.textContent = HOME_INTRO;
+  intro.replaceWith(h1);
 }
 
 function resetFilters() {
