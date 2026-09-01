@@ -72,7 +72,7 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
     "level2Kw": 11.5,
     "vehicleToLoad": false,          // V2L / bidirectional power outlet
     "heatPump": true,
-    "nacsAdapter": { "available": true, "costUsd": 200 }  // CCS1 vehicles only — omit entirely for NACS-native ones, don't set to a false/null placeholder. costUsd: a number for a purchased adapter, 0 if included/standard, null if available but the manufacturer hasn't published a price yet (e.g. Subaru Solterra as of this research). available: false means the manufacturer has no approved adapter at all (e.g. VinFast, and the Audi Q4 e-tron specifically despite other Audi e-trons having one) — not "hasn't been researched."
+    "nacsAdapter": { "available": true, "costUsd": 200 }  // **A DC fast-charge adapter, specifically** — the NACS-to-CCS1 kind that gets a CCS1 car onto a Tesla Supercharger or Rivian Adventure Network stall. A separate NACS-to-J1772 adapter exists for AC/Level 2 charging and **no single adapter does both**; the AC one is deliberately not tracked, because it is the DC adapter that decides whether the car can road-trip on a NACS network. CCS1 vehicles only — omit entirely for NACS-native ones, don't set to a false/null placeholder. costUsd: a number for a purchased adapter, 0 if included/standard, null if available but the manufacturer hasn't published a price yet (e.g. Subaru Solterra as of this research). available: false means the manufacturer has no approved adapter at all (e.g. VinFast, and the Audi Q4 e-tron specifically despite other Audi e-trons having one) — not "hasn't been researched."
   },
   "techFeatures": {
     "appleCarPlay": false,

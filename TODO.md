@@ -814,9 +814,22 @@ these are the hard residue rather than unstarted work.
 
 Follow-on, harder:
 
-- [ ] **`charging.nacsAdapter.available` — 62 null / `.costUsd` — 69 null.** Feeds the
-      `/non-tesla-evs-with-nacs-port/` hub, which is the most citable page on the site. Harder
-      because manufacturers announce adapter programmes piecemeal and pricing changes.
+- [x] **`charging.nacsAdapter` — done, and it was never as gappy as this file claimed.** The
+      "62 null / 69 null" figures recorded here were wrong: they counted the 62 NACS-native cars
+      that **deliberately omit the key**, which `SCHEMA.md` has always instructed. Checked
+      2026-08-28: all 87 CCS1 records carry it, all 62 NACS-native records omit it, zero
+      mismatches. `available` is 100% filled (82 true, 5 false). `costUsd` has 7 nulls, and 5 of
+      those are `available: false`, where no price is the correct answer. The only genuine gap is
+      the Subaru Solterra pair, where the manufacturer has not published a price — already
+      documented in `SCHEMA.md` as exactly that case.
+
+      **Scope clarified 2026-08-28 (user's call):** this field means a **DC fast-charge adapter**
+      — the NACS-to-CCS1 kind that gets a CCS1 car onto a Supercharger or Rivian Adventure
+      Network stall. A separate NACS-to-J1772 adapter exists for AC/Level 2 and **no single
+      adapter does both**. The AC one is deliberately untracked, since the DC adapter is what
+      decides whether a car can road-trip on a NACS network. Now said in three places: the two
+      UI labels are "NACS DC Adapter" / "NACS DC Adapter Cost", the hub intro spells out the
+      AC/DC split, and `SCHEMA.md` carries the full reasoning.
 
 **Decided 2026-08-28 — two deleted, one kept.** `techFeatures.cupholders` (139/149 null) and
 `techFeatures.usbPorts` (typeC/typeA/total, ~92 null) are **removed** from the schema, the data and

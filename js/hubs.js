@@ -197,9 +197,12 @@ const PRACTICAL_HUBS = [
       const none = nonTesla.length - cars.length - adapter.length;
       return `${cars.length} of the ${nonTesla.length} non-Tesla EVs we track ship with a native NACS port, `
         + `so they connect to a Tesla Supercharger without an adapter. `
-        + `Another ${adapter.length} use a CCS1 port with a manufacturer-approved NACS adapter`
+        + `Another ${adapter.length} use a CCS1 port with a manufacturer-approved NACS DC fast-charge adapter`
         + (free ? ` — ${free} of those include it at no cost` : "")
         + `. ${none} have no approved NACS route at all. `
+        + `Adapters counted here are DC fast-charge adapters — the kind that gets you onto a `
+        + `Supercharger. Separate NACS-to-J1772 adapters exist for AC/Level 2 charging, and no `
+        + `single adapter does both. `
         + `This tracks the physical connector; whether a vehicle can use every Supercharger stall `
         + `also depends on network access agreements, which vary by brand.`;
     },
