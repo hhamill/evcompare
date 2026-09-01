@@ -277,8 +277,8 @@ function bindGlobalEvents() {
     left,
     behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
   });
-  el.compareScrollLeftBtn.addEventListener("click", () => scrollCompareBy(-280));
-  el.compareScrollRightBtn.addEventListener("click", () => scrollCompareBy(280));
+  el.compareScrollLeftBtn.addEventListener("click", () => scrollCompareBy(-compareColWidth()));
+  el.compareScrollRightBtn.addEventListener("click", () => scrollCompareBy(compareColWidth()));
   el.compareScroll.addEventListener("scroll", updateCompareScrollNav);
   window.addEventListener("resize", updateCompareScrollNav);
 
@@ -586,6 +586,14 @@ function closeModal({ updateHistory = true } = {}) {
 function resetCompareScroll() {
   el.compareScroll.scrollTop = 0;
   el.compareScroll.scrollLeft = 0;
+}
+
+// One car column, measured rather than assumed. These buttons used to move a hardcoded 280px,
+// which lands mid-column at any real column width and is most of why paging felt like scrolling
+// to an arbitrary place. Falls back to 280 only if the table isn't rendered yet.
+function compareColWidth() {
+  const col = el.compareScroll.querySelector("thead th:not(:first-child)");
+  return col ? Math.round(col.getBoundingClientRect().width) : 280;
 }
 
 // Shows/hides the header's left/right nav buttons based on whether the table actually

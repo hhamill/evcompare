@@ -2312,3 +2312,56 @@ cascade, it only automates it, because the importer embeds the dependency's URL.
 
 Rationale is repeated as a comment next to the `<link>` in `index.html` and in `pageShell()`, since
 the natural instinct on seeing an unversioned asset is to helpfully add a version back.
+---
+
+# TODO: Compare view — two cars fit the phone viewport exactly (2026-09-01)
+
+**Symptom.** With two cars selected on a phone, the compare grid was slightly wider than the
+viewport, so the container scrolled on *both* axes at once — a mostly-vertical drag drifted
+sideways, and the horizontal scrollbar flickered in and out. Nothing was clipped badly enough to
+look broken; it just felt loose. Wanted: two cars cleanly in view with no horizontal scroll at
+all, and swipes that land on a column edge rather than anywhere in between.
+
+**The actual cause, which was not what it looked like.** Measured columns were `[108, 150, 150]`
+against a 331px scrollport. My first read was that 150px was a *min-content floor* — that under
+`table-layout: auto` no `width` can push a column below its content's minimum, and the nowrap
+"View details" button (84px min-content) was setting it. That was wrong, and shrinking the button
+proved it: the columns stayed at 150px.
+
+There was simply already a `min-width: 150px` on the car columns, in the existing mobile block at
+the bottom of `styles.css` — from the earlier pass that first made this table usable on a phone.
+I had written a *new* `@media (max-width: 640px)` block higher up in the file, so the older
+880px block won on source order and silently reverted everything. The "mysterious floor" was my
+own overridden CSS. Worth remembering: when a declaration appears to have no effect, check for a
+later rule at equal specificity before theorizing about intrinsic sizing.
+
+**Fix** — folded into the existing `@media (max-width: 880px)` block rather than adding a second
+one:
+
+- `.compare-table` gets `min-width: max(100%, calc(88px + var(--compare-cars, 2) * 118px))`.
+  One or two cars resolve to `100%`, so the table fits its container exactly and there is no
+  horizontal scroll to fight; three or more deliberately exceed the viewport and swipe over.
+- `--compare-cars` is set on the table element by `renderCompareTable` in `js/render.js`, since
+  CSS cannot branch on how many columns exist.
+- Label column down to 88px (`min-width: 0`, `max-width: none` to clear the old fixed 108px);
+  car columns get `width: auto` with `min-width: 0` so fixed layout splits the remainder evenly.
+- `.compare-col-title` and `.compare-col-view-btn` get `white-space: normal` so a long name like
+  "Audi Q4 e-tron" wraps inside its column instead of demanding width.
+- `.compare-scroll` gets `scroll-snap-type: x proximity` + `scroll-padding-left: 88px`, with
+  `scroll-snap-align: start` on the car header cells. `proximity` not `mandatory`: this container
+  scrolls vertically too, and a mandatory x-snap fights a mostly-vertical drag. The padding keeps
+  a snapped column clear of the sticky label column instead of sliding under it.
+- `js/app.js`: the desktop prev/next buttons now page by `compareColWidth()` (measured from a real
+  header cell) instead of a hardcoded 280px.
+
+**Verified** at 375×812: two cars give `scrollWidth === clientWidth` (331/331, columns
+`[88, 122, 122]`), no horizontal overflow, and the scroll nav auto-hides. Four cars overflow on
+purpose (560 vs 331, columns `[88, 118×4]`) and `scrollTo({left: 118})` lands column 2 flush
+against the sticky label column, confirming the snap points and `scroll-padding-left`. Desktop at
+1280px is untouched: `table-layout: auto`, `min-width: 640px`, columns `[180, 200×6]`, no snapping.
+
+**Not verified in-browser:** the prev/next buttons' actual movement. They use
+`behavior: "smooth"`, and smooth scroll animations are a no-op in the automation pane — an
+identical `behavior: "auto"` scroll on the same element moves it, `"smooth"` fires no scroll
+events at all. This is environmental and predates the change; what the change touches
+(`compareColWidth()`) was confirmed to return the real column width (200 at desktop).

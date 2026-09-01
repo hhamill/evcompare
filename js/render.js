@@ -172,6 +172,10 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
 
 export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
   table.innerHTML = "";
+  // Drives the mobile column sizing in styles.css. Two cars are made to fit the viewport exactly
+  // (no horizontal scroll at all); three or more deliberately overflow so they can be swiped
+  // through. CSS alone can't branch on how many columns there are, hence the custom property.
+  table.style.setProperty("--compare-cars", String(cars.length));
   if (cars.length === 0) {
     table.innerHTML = `<tr><td class="empty-state">No vehicles selected for comparison.</td></tr>`;
     return;
