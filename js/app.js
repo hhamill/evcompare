@@ -279,6 +279,13 @@ function bindGlobalEvents() {
   });
   el.compareScrollLeftBtn.addEventListener("click", () => scrollCompareBy(-compareColWidth()));
   el.compareScrollRightBtn.addEventListener("click", () => scrollCompareBy(compareColWidth()));
+  // The chevrons in the group rows page by exactly one car column, same as the header's
+  // prev/next. Delegated because the group rows are rebuilt on every compare render.
+  el.compareScroll.addEventListener("click", e => {
+    const btn = e.target.closest(".group-scroll-btn");
+    if (!btn) return;
+    scrollCompareBy(btn.classList.contains("group-scroll-left") ? -compareColWidth() : compareColWidth());
+  });
   el.compareScroll.addEventListener("scroll", updateCompareScrollNav);
   window.addEventListener("resize", updateCompareScrollNav);
 

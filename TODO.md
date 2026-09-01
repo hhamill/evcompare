@@ -2461,3 +2461,35 @@ label column at the scrolled end, and both absent with 2 cars (no overflow) and 
 the group cells stay `static`. Note when testing: the `scroll` event lands after the snap settles,
 so reading `className` immediately after setting `scrollLeft` returns the previous state — the
 screenshot is authoritative, not the synchronous readout.
+
+**Follow-up 4 (same day).** Made the chevrons real controls rather than decoration, and enabled
+them at every width — on desktop, clicking an in-context arrow beats hunting for a horizontal
+scrollbar parked at the bottom of a tall table.
+
+- They're now `<button class="group-scroll-btn">` rendered into the outermost cells of each group
+  row (`js/render.js`), not `::before`/`::after` content. A delegated click handler on
+  `.compare-scroll` pages by `compareColWidth()` — the same one-real-column distance the header's
+  prev/next buttons use — so on mobile the existing `x mandatory` snap lands it on a column edge.
+- `aria-hidden="true"` + `tabindex="-1"` on them. There are two per group row, ~16 in a full table,
+  and putting them all in the tab order would bury the real controls. The compare header's own
+  prev/next buttons are the accessible/keyboard equivalent and stay reachable.
+- **New token `--compare-label-w`** on `.compare-scroll`: `180px` base, `88px` under 880px. The
+  left chevron sticks at exactly the label column's width, so hardcoding 88px would have parked it
+  180px too far left on desktop. The same token now feeds the label column's own width, the
+  table's `min-width` maths and `scroll-padding-left`, which were three separate copies of that
+  number before.
+
+**Verified.** Mobile 375px / 3 cars: right click `0 → 122`, left click `122 → 0`, one exact column
+each way. Desktop 1280px / 6 cars: label column 180px ending at x=205 with the left chevron cell
+pinned at 205 and the right one flush against the content edge; right click `0 → 160` (clamped to
+max), left click back to `0`.
+
+**Open question for the user:** desktop now shows both the header's `‹ ›` pair and the in-table
+chevrons. Harmless, but the header pair could go if the in-table ones are enough.
+
+**Testing note (cost real time twice).** The Browser pane does not deliver native `scroll` events
+for programmatic scrolls, so `className` reads stale right after setting `scrollLeft` and the
+`.can-scroll-*` classes look broken when they aren't. Dispatching `new Event("scroll")` on the
+container updates them immediately, which is also how to prove the toggle logic is correct.
+Separately, `behavior: "smooth"` is a no-op in the pane — stub `window.matchMedia` to report
+`prefers-reduced-motion` so the handler takes its `"auto"` branch and the scroll actually happens.

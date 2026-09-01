@@ -511,7 +511,11 @@ a.filter-chip-clear { text-decoration: none; }
    non-scrolling one. Bounding the height and setting overflow-y:auto explicitly embraces
    that forced behavior instead of fighting it: the table now scrolls in its own contained
    viewport (like a spreadheet), and the sticky header pins correctly to *that*. */
+/* The label column's width, in one place: the sticky offset for the left chevron, the table's
+   min-width maths and scroll-padding-left all have to agree with it or the chevron parks in the
+   wrong lane and snapped columns land underneath the labels. */
 .compare-scroll {
+  --compare-label-w: 180px;
   overflow-x: auto; overflow-y: auto; max-height: calc(100dvh - var(--topbar-h) - 130px);
   border: 1px solid var(--border-soft); border-radius: var(--radius-md);
 }
@@ -527,10 +531,44 @@ a.filter-chip-clear { text-decoration: none; }
   border-left: 1px solid var(--border-soft);
 }
 /* ...except on the group rows. A long group name ("Performance & Drivetrain") is wider than
-   the 88px label column on a phone even wrapped, and overflowed across the first divider.
-   The cells to its right are empty, so there is nothing for it to collide with — dropping
-   the dividers just here lets it run, and the row reads as one full-width section band. */
+   the label column on a phone even wrapped, and overflowed across the first divider. The cells
+   to its right are empty, so there is nothing for it to collide with — dropping the dividers
+   just here lets it run, and the row reads as one full-width section band. */
 .compare-table tr.group-row td { border-left: none; }
+
+/* Scroll chevrons. iOS hides overlay scrollbars while idle, so a phone had no standing cue that
+   the table continued past the viewport edge; on desktop, clicking these is friendlier than
+   finding a horizontal scrollbar parked at the bottom of a tall table. The group rows are the
+   right home for them: they repeat the whole way down, so both the cue and the control stay on
+   screen however far you have scrolled vertically, and their cells are empty so there is nothing
+   to displace.
+
+   Each rides in a sticky *cell* rather than an overlay, which is what glues it to the edge
+   without needing a wrapper element around the scroll container. The right-hand one pins the last
+   group cell to the scrollport's right edge; the left-hand one pins the first to the label
+   column's width — deliberately not 0, so it parks beside the labels rather than underneath them
+   (sticking these cells at 0 is exactly what once covered the group name up). Group cells share
+   one background and have no dividers, so a shifted cell is invisible.
+
+   `:first-of-type`/`:last-of-type`, not `:first-child`: the row's first child is the label `<th>`,
+   so no `<td>` in it is ever a first child and the left chevron silently never matches. */
+.compare-table tr.group-row td:first-of-type { position: sticky; left: var(--compare-label-w); }
+.compare-table tr.group-row td:last-of-type { position: sticky; right: 0; text-align: right; }
+
+.group-scroll-btn {
+  display: none;
+  border: none; background: transparent; cursor: pointer;
+  color: var(--accent); opacity: .75;
+  font-size: 13px; line-height: 1; letter-spacing: 0;
+  /* Negative margin buys a comfortable tap target out of the group row's own padding rather
+     than making the row taller. */
+  padding: 8px 10px; margin: -8px 0;
+}
+.group-scroll-btn:hover { opacity: 1; }
+/* `.can-scroll-*` come from updateCompareScrollNav, so a chevron only appears — and is only
+   clickable — while there is actually more table that way. */
+.compare-scroll.can-scroll-left .group-scroll-left,
+.compare-scroll.can-scroll-right .group-scroll-right { display: inline-block; }
 .compare-table thead th {
   position: sticky; top: 0; background: var(--bg-elevated); z-index: 5; vertical-align: top; padding-top: 14px;
 }
@@ -540,7 +578,7 @@ a.filter-chip-clear { text-decoration: none; }
    clear both the rest of the header (5) and the label column (4), since it overlaps both. */
 .compare-table thead th:first-child { left: 0; z-index: 6; }
 .compare-table tbody th {
-  position: sticky; left: 0; background: var(--bg); z-index: 4; color: var(--text-dim); font-weight: 600; white-space: normal; min-width: 180px;
+  position: sticky; left: 0; background: var(--bg); z-index: 4; color: var(--text-dim); font-weight: 600; white-space: normal; min-width: var(--compare-label-w);
 }
 /* Marks a row where the cars actually differ, so there's a real winner to jump to — e.g. on
    a 5-car mobile comparison you can tap "Tow Capacity" instead of swiping through every
@@ -801,11 +839,11 @@ a.filter-chip-clear { text-decoration: none; }
      table by renderCompareTable, since CSS can't branch on how many columns exist. */
   .compare-table {
     table-layout: fixed;
-    min-width: calc(88px + var(--compare-cars, 2) * (100% - 88px) / 2);
+    min-width: calc(var(--compare-label-w) + var(--compare-cars, 2) * (100% - var(--compare-label-w)) / 2);
   }
   .compare-table th, .compare-table td { padding: 8px 10px; font-size: 12px; }
   .compare-table thead th:first-child,
-  .compare-table tbody th { width: 88px; min-width: 0; max-width: none; }
+  .compare-table tbody th { width: var(--compare-label-w); min-width: 0; max-width: none; }
   /* No width on the car columns: under fixed layout they split whatever is left over
      evenly, which is what keeps two of them flush with the viewport edge. The base
      min-widths have to be cleared or they'd re-impose the old 150px floor. */
@@ -813,31 +851,6 @@ a.filter-chip-clear { text-decoration: none; }
   .compare-col-title { font-size: 13px; white-space: normal; }
   .compare-col-view-btn { white-space: normal; }
   .compare-table tr.group-row th, .compare-table tr.group-row td { font-size: 10px; }
-
-  /* "More cars this way" chevrons. iOS hides overlay scrollbars while idle, so a phone had no
-     standing cue that the table continued past the viewport edge. The group rows are the right
-     home for them: they repeat the whole way down, so the hint stays on screen however far you
-     have scrolled vertically, and their cells are empty so there is nothing to displace.
-
-     Each is a sticky *cell* rather than an overlay, which is what keeps it glued to the edge
-     without needing a wrapper element. The right-hand one pins the last cell to the scrollport's
-     right edge; the left-hand one pins the first cell to `left: 88px` — deliberately the label
-     column's width, not 0, so it parks beside the label instead of underneath it (sticking these
-     cells at 0 is exactly the bug that had the group name covered up). Group cells all share one
-     background and have no dividers, so a shifted cell is invisible. `.can-scroll-*` come from
-     updateCompareScrollNav, so a chevron only appears while there is actually more that way.
-
-     `:first-of-type`, not `:first-child`: the row's first child is the label `<th>`, so no `<td>`
-     in it is ever a first child and the left chevron silently never matched. */
-  .compare-table tr.group-row td:first-of-type { position: sticky; left: 88px; }
-  .compare-table tr.group-row td:last-of-type { position: sticky; right: 0; text-align: right; }
-  .compare-scroll.can-scroll-left tr.group-row td:first-of-type::before,
-  .compare-scroll.can-scroll-right tr.group-row td:last-of-type::after {
-    color: var(--accent); font-size: 13px; letter-spacing: 0; opacity: .75;
-  }
-  .compare-scroll.can-scroll-left tr.group-row td:first-of-type::before { content: "\2039\2039"; }
-  .compare-scroll.can-scroll-right tr.group-row td:last-of-type::after { content: "\203A\203A"; }
-
   /* Snap so a swipe lands on a column edge rather than anywhere in between. `mandatory`,
      not `proximity`: proximity is advisory and iOS simply declined to snap most gestures,
      which was the whole complaint. It only constrains the x axis, so vertical scrolling is
@@ -846,8 +859,9 @@ a.filter-chip-clear { text-decoration: none; }
      sliding underneath it, and overscroll-behavior-x stops a horizontal swipe that runs out
      of table from chaining into the browser's back gesture. */
   .compare-scroll {
+    --compare-label-w: 88px;
     scroll-snap-type: x mandatory;
-    scroll-padding-left: 88px;
+    scroll-padding-left: var(--compare-label-w);
     overscroll-behavior-x: contain;
   }
   /* Every car cell is a snap target, not just the header. Chromium only considers x-snap

@@ -170,6 +170,12 @@ export function renderCardGrid(container, cars, { compareSet, onToggleCompare, o
   }
 }
 
+function groupScrollBtn(dir) {
+  const glyph = dir === "left" ? "\u2039\u2039" : "\u203A\u203A";
+  return `<button type="button" class="group-scroll-btn group-scroll-${dir}" `
+    + `aria-hidden="true" tabindex="-1">${glyph}</button>`;
+}
+
 export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
   table.innerHTML = "";
   // Drives the mobile column sizing in styles.css. Two cars are made to fit the viewport exactly
@@ -213,7 +219,18 @@ export function renderCompareTable(table, cars, { onRemove, onOpenDetail }) {
     if (!fields) continue;
     const groupRow = document.createElement("tr");
     groupRow.className = "group-row";
-    groupRow.innerHTML = `<th>${groupName}</th>` + cars.map(() => `<td></td>`).join("");
+    // The outermost cells of each group row carry the scroll chevrons (styled and shown/hidden
+    // in styles.css). They repeat down the whole table, so the "there's more this way" cue —
+    // and now the control for it — is on screen however far you've scrolled vertically.
+    // aria-hidden + tabindex="-1": there are two of these per group row, so ~16 in a full table,
+    // and putting them all in the tab order would bury real controls. The compare header's own
+    // prev/next buttons are the accessible equivalent and stay reachable.
+    groupRow.innerHTML = `<th>${groupName}</th>` + cars.map((_, i) => {
+      let inner = "";
+      if (i === 0) inner += groupScrollBtn("left");
+      if (i === cars.length - 1) inner += groupScrollBtn("right");
+      return `<td>${inner}</td>`;
+    }).join("");
     tbody.appendChild(groupRow);
 
     for (const field of fields) {
