@@ -10489,8 +10489,7 @@
       "groundClearanceIn": 7.2,
       "links": {
         "manufacturerSpec": "https://www.volvocars.com/us/cars/ex60-electric/specifications/",
-        "review": "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review",
-        "epaWindowSticker": "https://www.volvocars.com/us/cars/ex60-electric/specifications/"
+        "review": "https://www.thedrive.com/car-reviews/2027-volvo-ex60-first-drive-review"
       },
       "notes": "All-new 2027 model; US order bank opened May 18, 2026, deliveries expected summer 2026. Pilot Assist (adaptive cruise + lane centering) is standard on the Plus trim. Nordico (vegan) upholstery is standard on Plus; leather (Nappa) and ventilated seats are Ultra-trim/option items. Heated rear seats and built-in rear booster cushions are Ultra-trim features, not standard on Plus. Battery warranty is 10 years to 80% capacity (no mileage cap published). Range sourced to Volvo rather than fueleconomy.gov: EPA has published only one EX60 P6 entry, the 22-inch-wheel configuration at 295mi (id 50697), and this record is the standard 20/21-inch car that Volvo rates at 307mi. epaSizeClass is EPA's class for that same id 50697 — size class is a property of the vehicle, not of the wheel package — so it holds here, but npm run fetch-epa cannot regenerate it and reports this record as not derivable."
     },
@@ -10822,8 +10821,7 @@
       "groundClearanceIn": 6,
       "links": {
         "manufacturerSpec": "https://www.ford.com/commercial-trucks/e-transit/specs/",
-        "review": "https://www.edmunds.com/ford/e-transit-cargo-van/2026/features-specs/",
-        "epaWindowSticker": "https://insideevs.com/news/779514/2026-ford-e-transit-interior-battery-charging-range/"
+        "review": "https://www.edmunds.com/ford/e-transit-cargo-van/2026/features-specs/"
       },
       "notes": "First Ford EV commercial van in this dataset. Represents the base Low Roof, standard-wheelbase Cargo Van RWD configuration; Medium/High Roof and Extended-length body options exist with up to 487.3 cu ft cargo, but Low Roof is the highest-volume fleet configuration. Seats only the driver and front passenger (no rear seats in a cargo van). BlueCruise isn't offered on E-Transit. Native CCS1 charge port, with an optional NACS adapter for Supercharger access. Historically RWD-only."
     },
@@ -11486,8 +11484,7 @@
       "groundClearanceIn": 7.5,
       "links": {
         "manufacturerSpec": "https://www.porsche.com/usa/models/cayenne/cayenne-electric-models/cayenne-electric/",
-        "review": "https://www.edmunds.com/porsche/cayenne/2026/electric/",
-        "epaWindowSticker": "https://www.edmunds.com/porsche/cayenne/2026/mpg/"
+        "review": "https://www.edmunds.com/porsche/cayenne/2026/electric/"
       },
       "notes": "New full-size electric SUV body style for Porsche (larger than the Macan Electric), on sale since March 2026. EPA range isn't yet certified — Porsche and reviewers cite WLTP-based estimates in the 300-340 mile range, but no official EPA figure has been published yet. All trims are dual-motor AWD, no RWD option. Ground clearance varies 6.9-9.6 in across the adaptive air suspension's four ride-height modes; 7.5 in ('Normal' mode) is shown here. First Porsche with a native NACS DC fast-charging port (paired with a separate J1772 port for AC) — comes standard with an included NACS-to-CCS1 adapter for accessing non-Tesla CCS networks too."
     },
@@ -11568,8 +11565,7 @@
       "groundClearanceIn": 7.5,
       "links": {
         "manufacturerSpec": "https://www.porsche.com/usa/models/cayenne/cayenne-electric-models/cayenne-turbo-electric/",
-        "review": "https://www.edmunds.com/porsche/cayenne/2026/electric/",
-        "epaWindowSticker": "https://www.edmunds.com/porsche/cayenne/2026/mpg/"
+        "review": "https://www.edmunds.com/porsche/cayenne/2026/electric/"
       },
       "notes": "New full-size electric SUV body style for Porsche (larger than the Macan Electric), on sale since March 2026. EPA range isn't yet certified — Porsche and reviewers cite WLTP-based estimates in the 300-340 mile range, but no official EPA figure has been published yet. All trims are dual-motor AWD, no RWD option. Ground clearance varies 6.9-9.6 in across the adaptive air suspension's four ride-height modes; 7.5 in ('Normal' mode) is shown here. First Porsche with a native NACS DC fast-charging port (paired with a separate J1772 port for AC) — comes standard with an included NACS-to-CCS1 adapter for accessing non-Tesla CCS networks too."
     },
@@ -12311,8 +12307,7 @@
       "groundClearanceIn": 6.6,
       "links": {
         "manufacturerSpec": "https://www.tesla.com/modely",
-        "review": "https://tslna.com/en/tesla-model-y-l-guide-2026/",
-        "epaWindowSticker": "https://tslna.com/en/tesla-model-y-l-guide-2026/"
+        "review": "https://tslna.com/en/tesla-model-y-l-guide-2026/"
       },
       "notes": "New long-wheelbase 3-row/6-seat variant of Model Y, launched July 2026 — a genuinely different body style from the standard 2-row Model Y, not just a trim/package. Horsepower (444 hp) is computed from Tesla's published combined motor output (194 kW rear + 137 kW front); Tesla doesn't publish an official combined hp figure directly. Cargo figures differ from the standard 2-row Model Y due to the stretched 3-row body; frunk and tow rating are shared with the standard Model Y."
     },

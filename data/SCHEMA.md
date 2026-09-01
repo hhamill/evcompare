@@ -57,6 +57,9 @@ Each entry in `models` is one **trim** of one model (a single model year, e.g. "
   },
   "range": {
     "epaMiles": 320,
+    "wheelSizeIn": 19,                           // optional. Which wheel this figure is for, when
+                                                 // `wheelSizesIn` lists more than one. See "A record is
+                                                 // one trim in its base configuration" below.
     "source": "https://www.fueleconomy.gov/..."   // link to the EPA/fueleconomy.gov listing used, or to
                                                  // the manufacturer's own page when fueleconomy.gov has
                                                  // no entry for this exact configuration (see below)
@@ -176,6 +179,33 @@ values derived from the site's own routing:
   contradicts the value is worse than no link. Say which configuration is involved in `notes`.
   (Live examples: the Volvo EX60 P6, where EPA lists only the 22-inch car at 295mi while this record is
   the standard 20/21-inch car Volvo rates at 307mi; and the Lexus ES 350e/500e before EPA published.)
+## A record is one trim in its base configuration
+
+A record is one **trim**, and a trim is a distinct drive/powertrain and equipment level — the
+things that change what the car *is*. Volvo's EX60 is four records: P6 Plus, P10 Plus, P6 Ultra,
+P10 Ultra.
+
+Options **within** a trim do not get their own records, and wheels are the big one. Half this
+dataset (75 of 149 records) offers more than one wheel size, and wheel size changes both range
+and price. Splitting on it would take the dataset past 240 records whose cards differ only by a
+number, which is worse for every view in the app, and it still would not be complete — EPA also
+splits its own entries by charger speed and sub-package.
+
+**So every figure in a record describes that trim's base configuration: the standard (cheapest)
+wheel, no options.** `msrp` already means this. `range.epaMiles`, `performance.*` and the cargo
+figures mean it too. `wheelSizesIn` lists what can be ordered, not what the numbers describe.
+
+Two consequences worth knowing:
+
+- **EPA's entry may describe a different configuration than ours.** When fueleconomy.gov only
+  publishes, say, the 22-inch car and this record is the standard 20-inch one, `range.source`
+  must point at the manufacturer instead, and `notes` should say why — see the Volvo EX60 P6
+  Plus record for the worked example. Do not silently adopt EPA's number for a car it isn't
+  describing, and do not leave `links.epaWindowSticker` pointing at a mismatched entry.
+- **`range.wheelSizeIn` records which wheel the figure is for**, and is worth setting on any
+  record whose `wheelSizesIn` has more than one entry. It is optional and largely unpopulated:
+  set it when you can source which wheel is standard, rather than assuming the smallest is.
+
 - **Numeric ("range"-type) fields have three distinct non-value states — pick the right one, don't default everything to `null`:**
   - `null` — **unknown**: the field applies to this vehicle, we just couldn't confirm a real number from a reliable source. Never guess a number instead — leave it `null`. (e.g. a top speed no manufacturer publishes — see the notes convention just below.)
     When a field is left `null` because the search was genuinely exhausted rather than not yet

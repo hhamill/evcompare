@@ -2623,3 +2623,55 @@ compare by hand gives an unanchored `/compare/61-104-120-113` with every X prese
 has nothing left to anchor). In-session the header still reads "Back to Kia EV6"; reloading that
 URL gives a plain one-car comparison. A comparison of one car with itself as origin isn't worth a
 URL shape of its own.
+
+---
+
+# TODO: A record is one trim in its base configuration (2026-09-01)
+
+**The question.** Volvo's EX60 comes as P6/P10 (drive) × Plus/Ultra (equipment) × 20/21/22
+(wheels), and range and price move with all three. So is "drive + wheels" a trim?
+
+**The answer: drive and equipment are trims, wheels are an option.** Not an EX60 quirk either —
+**75 of 149 records list more than one wheel size**, 20 of them three or more (the BMW iX offers
+20/21/22/23). Splitting on wheels would take the dataset past 240 records whose cards differ only
+by a number, which makes the grid and the compare view worse, and it still wouldn't be complete:
+EPA splits its own entries by charger speed and sub-package too.
+
+So the rule, now written into `data/SCHEMA.md` under "A record is one trim in its base
+configuration": **every figure in a record describes that trim's base configuration — standard
+(cheapest) wheel, no options.** `msrp` already meant this; now range, performance and cargo say
+so explicitly, and `wheelSizesIn` is documented as "what can be ordered", not "what these numbers
+describe". Added an optional `range.wheelSizeIn` to record which wheel a figure is for.
+Deliberately left unpopulated: set it when the standard wheel can be *sourced*, rather than
+assuming the smallest in the array.
+
+This also settles the EX60 P6 Plus flag, which turned out not to need settling — the record was
+already right (Volvo-sourced 307mi for the standard car, with EPA's 22-inch 295mi entry explained
+in `notes`). The open question was whether to formalise the prose, and the answer is the SCHEMA
+rule rather than a data change.
+
+## A real defect found while checking it
+
+`links.epaWindowSticker` is defined by SCHEMA as a fueleconomy.gov URL, and `npm run fetch-epa`
+derives `epaSizeClass` from **the id inside it**. Five records had picked up whatever
+`range.source` happened to be:
+
+| record | pointed at |
+| --- | --- |
+| `volvo-ex60-2027-p6-plus` | volvocars.com |
+| `ford-e-transit-2026-cargo-van-low-roof` | insideevs.com |
+| `porsche-cayenne-electric-2026-base` | edmunds.com |
+| `porsche-cayenne-electric-2026-turbo` | edmunds.com |
+| `tesla-model-y-2026-l` | tslna.com |
+
+Not just mislabelled — **4 of the 5 were sitting in the `epaSizeClass` null list because of it**,
+about 29% of that gap. Removed rather than repointed (the Cadillac Optiq precedent): in every
+case the URL was already present on the same record as `range.source` or `review`, so nothing was
+lost. The field now appears on 139 of 149 records and every one is a fueleconomy.gov link.
+
+Added **audit check 10** so it can't come back, and verified it fires by temporarily pointing one
+record at `example.com`. `npm run audit`: no flags.
+
+**Process note:** cleaning up that negative control with `git checkout data/evs.json` silently
+reverted the five real link removals along with the test mutation. Copy the file aside and
+restore from the copy instead — `git checkout` can't tell a deliberate edit from a scratch one.

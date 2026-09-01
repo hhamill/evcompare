@@ -163,7 +163,19 @@ for (const m of M) {
     flag("impossible", `${name(m)}: rear cargo ${r} exceeds max ${x}`, `cargo-order/${m.id}/${r}-${x}`);
 }
 
-// 10. Duplicate identity.
+// 10. links.epaWindowSticker holding something that isn't an EPA link. SCHEMA defines this
+// field as a fueleconomy.gov URL, and `npm run fetch-epa` derives epaSizeClass from the id
+// inside it — so a manufacturer/review URL parked here doesn't just mislabel the link, it
+// silently makes the record underivable. Five records had picked up whatever `range.source`
+// happened to be; four of them were sitting in the epaSizeClass gap as a result.
+for (const m of M) {
+  const u = m.links?.epaWindowSticker;
+  if (u && !/(^|\.)fueleconomy\.gov$/.test(new URL(u).hostname))
+    flag("bad-link", `${name(m)}: links.epaWindowSticker points at ${new URL(u).hostname}, not fueleconomy.gov`,
+      `bad-epa-link/${m.id}/${new URL(u).hostname}`);
+}
+
+// 11. Duplicate identity.
 const seen = new Map();
 for (const m of M) {
   const k = `${m.modelYear}|${m.make}|${m.model}|${m.trim}`;
@@ -178,6 +190,7 @@ const LABELS = {
   "epa-range": "Recorded EPA range disagrees with the EPA source",
   "trim-drift": "Possible trim drift — a figure shared where it probably shouldn't be",
   implausible: "Physically implausible within a model",
+  "bad-link": "links.epaWindowSticker isn't a fueleconomy.gov URL",
   efficiency: "Efficiency outside the plausible band — range or battery suspect",
   duplicate: "Duplicate record identity",
   "unit-tell": "Number looks converted from metric rather than taken from a US source",
