@@ -3019,3 +3019,25 @@ unambiguous. BMW's own page quotes "up to 344-362 mi", consistent with these.
       wheel sizes per trim, and above all the **charge port** — our MY2026 note says "BMW plans to
       add native NACS starting with the 2027 model year", so CCS1 must not be carried over. BMW's
       "See technical specifications" panel or a spec PDF is the next place to look.
+
+**Paused mid-batch: fueleconomy.gov stopped responding (2026-09-02).** Started the ranked list with
+the BMW i4 — the ideal first target, since it is the largest BMW gap (2 trims vs 4 EPA variants:
+we hold eDrive40 and M60 xDrive, missing **eDrive35** and **xDrive40**) and, unlike the i7, it is
+*not* in the staleness list, so it needs trims added rather than a rebase. bmwusa.com works.
+
+EPA then went quiet — empty bodies from `/menu/options`, `/menu/model` and even a plain
+`/vehicle/50188` lookup that had worked minutes earlier. Not a 404 and not a 429, just nothing, so
+it reads as connection-level throttling rather than a bad request. Almost certainly self-inflicted:
+`audit-coverage` made 112 menu requests at 120ms spacing on top of a day of individual lookups.
+
+- [ ] **Resume the i4 when EPA recovers.** Needs the ids and ranges for `i4 eDrive35 Gran Coupe
+      (19 inch Wheels)` and `i4 xDrive40 Gran Coupe (18 inch Wheels)` — note the EPA model name
+      *includes* the parenthetical, so `/menu/options` must be queried with the full string;
+      querying the stripped name returns null. (The coverage script strips only for comparison.)
+      Prices and specs then come from bmwusa.com, which is confirmed working.
+
+**Politeness lesson, second time today.** IIHS returned a Cloudflare 429 with `retry-after: 3552`
+after fewer than 100 requests; EPA went silent after a few hundred. Both were avoidable. The
+coverage sweep is already cached and committed so it costs nothing to re-run, but per-variant
+lookups are not cached at all — worth giving them the same `epa-cache.json` treatment before the
+next big pass, and spacing anything bulk at 500ms+ rather than 120ms.
