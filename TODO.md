@@ -2973,3 +2973,49 @@ single-trim models are a batch each, not a batch together.
 `npm run audit`: no flags. `npm run fetch-epa` independently confirms all three as Standard SUV
 from EPA id 50634 (note it silently reported "3 to fetch, fetched 0" on the first run — a
 transient failure that succeeded on retry; the script counts failures but they are easy to miss).
+
+---
+
+# TODO: Correction — BMW was never blocking automation (2026-09-02)
+
+The batch-2 entry above states that "bmwusa.com returns 'Sorry! There was a problem' on every URL"
+and concludes BMW blocks automation. **That is wrong, and the conclusion was mine, not BMW's.**
+
+I guessed at URL shapes — `/vehicles/bmw-i/i7.html` and `/vehicles/bmw-i-series/i7/bmw-i7-sedan.html`
+— and both 404'd. "Sorry! There was a problem" is simply BMW's error template for a bad path. The
+i7 actually lives under the 7-series: `/vehicles/7-series/sedan/bmw-i7-sedan.html`, which loads
+fine in the same browser pane that I claimed was blocked.
+
+**The correct URL was already sitting in our own data**, as `links.manufacturerSpec` on
+`bmw-i7-2026-xdrive60`. Checking the record before guessing would have cost one command and saved
+the whole detour — and would have avoided recording a false claim about a vendor.
+
+The same doubt applies to the Edmunds "empty render" in that entry: I requested
+`/bmw/i7/2026/` while the record cites `/bmw/i7/`. That may have been the identical mistake, so
+**treat "Edmunds blocks automation" as unverified** rather than established. Rivian and the IIHS
+429 are unaffected — the Rivian cookie wall and the Cloudflare `retry-after` were both directly
+observed.
+
+**Rule for the rest of the pass:** start from `links.manufacturerSpec` on the record being worked
+on. Only guess a URL when the record has none, and never conclude "blocked" from a 404 — a block
+looks like a challenge page, a 403 or a 429, not a site's own "page not found".
+
+## What the working source then produced (i7, ready to write)
+
+BMW has restructured the i7 for **MY2027**, so this is another rebase rather than an addition —
+our record is MY2026 xDrive60. The M70 is **gone** for 2027, and the RWD eDrive50 has been
+replaced by an AWD xDrive50:
+
+| MY2027 trim | MSRP (BMW) | EPA range | EPA id |
+| --- | --- | --- | --- |
+| i7 xDrive50 | $106,200 | 354 mi | 50604 (20" all-season) |
+| i7 xDrive60 | $124,700 | 344 mi | 50607 (20" all-season) |
+
+Both AWD, both EPA "Large Cars". EPA splits by wheel *and* tire compound (20"/21", all-season vs
+summer) but range is identical across the all-season entries, so the base-configuration figure is
+unambiguous. BMW's own page quotes "up to 344-362 mi", consistent with these.
+
+- [ ] **Still needed before writing:** horsepower and 0-60 per trim, battery kWh, charging rates,
+      wheel sizes per trim, and above all the **charge port** — our MY2026 note says "BMW plans to
+      add native NACS starting with the 2027 model year", so CCS1 must not be carried over. BMW's
+      "See technical specifications" panel or a spec PDF is the next place to look.
