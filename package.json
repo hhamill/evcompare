@@ -7,6 +7,7 @@
     "sync-urls": "node scripts/sync-urls.mjs",
     "audit": "node scripts/audit-data.mjs",
     "fetch-epa": "node scripts/fetch-epa.mjs",
-    "find-epa-id": "node scripts/find-epa-id.mjs"
+    "find-epa-id": "node scripts/find-epa-id.mjs",
+    "audit-coverage": "node scripts/audit-coverage.mjs"
   }
 }
