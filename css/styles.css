@@ -658,8 +658,14 @@ a.filter-chip-clear { text-decoration: none; }
   overflow-y: auto; padding: 0 28px 28px;
   min-height: 0; /* let this flex child actually shrink and scroll instead of stretching .modal */
 }
+/* z-index has to beat .modal-head's. Both are positioned elements and .modal-body creates no
+   stacking context (overflow alone doesn't), so they compete directly — and the sticky head,
+   which bleeds the full width of the modal and covers this corner, was painting straight over
+   the button. It stayed clickable-in-theory but was invisible and unhittable, leaving
+   backdrop-tap as the only way out of the modal on a phone. */
 .modal-close {
-  position: absolute; top: 16px; right: 16px; border: none; background: var(--bg-card); color: var(--text-dim);
+  position: absolute; top: 16px; right: 16px; z-index: 2;
+  border: none; background: var(--bg-card); color: var(--text-dim);
   width: 30px; height: 30px; border-radius: 50%; font-size: 18px; cursor: pointer; line-height: 1;
 }
 .modal-close:hover { color: var(--text); }
@@ -670,7 +676,8 @@ a.filter-chip-clear { text-decoration: none; }
 /* Sticks to the top of .modal-body's scrollport so the car's identity stays on screen the whole
    way down. Bleeds horizontally over .modal-body's 28px padding and re-adds it, so the opaque
    background covers the full width and specs scroll cleanly underneath rather than beside it.
-   z-index sits below .modal-close (which is positioned on .modal, outside this scroll box). */
+   .modal-close sits above this (z-index 2): being outside the scroll box does not put it on top,
+   since both are positioned in the same stacking context and this one raised itself to 1. */
 .modal-head {
   position: sticky; top: 0; z-index: 1;
   background: var(--bg-elevated);

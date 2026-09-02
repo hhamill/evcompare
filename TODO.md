@@ -2802,3 +2802,36 @@ enough to borrow from without asserting something false:
 - **Ford E-Transit** — EPA does not rate it at all (commercial van above the rated weight class).
 
 These will not be fixed by more searching; they need EPA to publish. `npm run audit`: no flags.
+
+---
+
+# TODO: Detail modal's close button was invisible (2026-09-01)
+
+**Regression from today's sticky-header work.** The modal's top-right X vanished, leaving
+backdrop-tap as the only way out — and on a phone the modal fills nearly the whole screen, so
+there is barely any backdrop to tap.
+
+Nothing was missing: `#modalCloseBtn` was in the markup and its click handler was bound. The
+sticky `.modal-head` added earlier today carries `z-index: 1`, and `.modal-close` has
+`position: absolute` with **no** z-index. `.modal-body` creates no stacking context — `overflow`
+alone doesn't — so the two positioned elements compete directly and the head, which bleeds the
+full width of the modal (measured 25→340 against a button at 304→334), painted straight over it.
+
+Measured before the fix: the button existed at (304, 74) 30×30 and `visibility: visible`, but
+`document.elementFromPoint` at its own centre returned `DIV.modal-head`. Invisible *and*
+unhittable, while looking perfectly correct in the DOM.
+
+Fixed with `z-index: 2` on `.modal-close`. Verified: `elementFromPoint` now returns the button
+and clicking it closes the modal back to `/`.
+
+**The comment I wrote on `.modal-head` asserted the opposite** — "z-index sits below .modal-close
+(which is positioned on .modal, outside this scroll box)" — and that reasoning is wrong: being
+outside the scroll box does not put an element on top when both are positioned in the same
+stacking context and the other one raised itself. Comment corrected rather than left to mislead
+the next reader.
+
+**Testing note:** the fix looked like it had failed, because the browser served cached CSS
+(`z-index` still read `auto` after a normal reload). Since the `?v=` cache-busting was removed,
+verifying a CSS change in the pane needs a forced re-fetch — swap the `<link>` href to
+`styles.css?bust=<timestamp>`, or `fetch(url, {cache: "reload"})` first to confirm the server
+copy actually has the change.
