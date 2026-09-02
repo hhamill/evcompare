@@ -2897,3 +2897,79 @@ on Node v17, where `fetch` does not exist — the script's `try/catch` swallowed
 and every lookup looked like a miss. Use `node:https`, as the existing scripts do. Likewise the
 IIHS probe's last 15 results were 429s, not misses; they were a contiguous block at the end of
 the run, which is what gave it away.
+
+---
+
+# TODO: Trim-depth pass batch 2 — Genesis Electrified GV70 rebased to MY2027 (2026-09-02)
+
+153 trims / 83 models now (1.84 per model). Per the agreed policy: **rebase to the current model
+year rather than add trims at a stale one, and skip models whose maker's site is blocked.**
+
+## Two models attempted, one delivered
+
+**Audi Q6 e-tron — abandoned, and worth knowing why.** The trim ladder came out cleanly from
+Audi's configurator (Premium quattro $64,500 / Premium Plus quattro $68,900 / Prestige quattro
+$73,100, all 0-60 4.9s, 19-inch standard with 20-inch a $1,000 option). But it is **MY2027** while
+our record is MY2025, EPA has no 2026 or 2027 Q6 entries at all, and Audi's own page contradicts
+itself: the configurator says "Starting at $64,500" while the model card on the same page says
+"Starting at $66,700 · Single or dual motors · 375 HP (RWD) | 456 HP (quattro)". With no EPA range
+for the year and two different vendor prices, writing it would have meant picking one — exactly
+the conflation risk this policy exists to avoid. Left alone.
+
+**BMW i7 — blocked on sourcing.** EPA confirms three powertrains for MY2026 and we hold only the
+middle one: eDrive50 RWD 314mi (id 49940), xDrive60 AWD 311mi (id 49945, ours), M70 xDrive AWD
+267mi (id 49943). Ranges, ids and size class are solid; price, horsepower and 0-60 are not, because
+**bmwusa.com returns "Sorry! There was a problem" on every URL and Edmunds renders an empty page**.
+Both are blocking automation. Parked until a working BMW source turns up.
+
+## Genesis Electrified GV70: 1 record → 3
+
+MY2025 → MY2027, because nearly every headline figure moved:
+
+| | MY2025 (was) | MY2027 (now) |
+| --- | --- | --- |
+| lineup | one Advanced trim, Prestige a $6,800 package | three trims |
+| base price | $66,950 | **$58,500** |
+| battery | 77.4 kWh | **84 kWh** |
+| EPA range | 236 mi | **250 mi** |
+| size class | Small SUV | **Standard SUV** |
+
+| trim | MSRP | wheels | catalogId |
+| --- | --- | --- | --- |
+| AWD | $58,500 | 19" | 152 |
+| Advanced AWD | $66,300 | 20" | 46 (rebased in place) |
+| Prestige AWD | $70,650 | 20" | 153 |
+
+All three share one powertrain — 320 kW / 429 hp (10-second Boost Mode allows 360 kW / ~483 hp),
+516 lb-ft, dual 160 kW motors — so they differ only in equipment and wheels, exactly the trim
+shape SCHEMA now defines.
+
+**Range: 250, not 263.** Genesis's own product guide advertises "up to 263 miles", but EPA's
+single 2027 certification (id 50634) says 250 and Genesis's web page quotes 250 as
+EPA-estimated. 263 is an unqualified best-case claim; 250 is the certified figure. Note EPA does
+*not* split the 2027 car by wheel (unlike 2026, where 19-inch was 263mi and 20-inch 243mi), so one
+figure legitimately covers all three trims.
+
+Other specs from Genesis's 2027 product-guide PDF, extracted with the stdlib zlib+regex technique:
+84 kWh ("Battery System Capacity" — Genesis publishes no usable figure), 350 kW DC / 10.9 kW
+onboard AC, 3,500 lb tow with brakes, 6.9 in ground clearance, 28.7 / 56.5 cu ft cargo.
+
+## Fields deliberately left null rather than carried over
+
+- [ ] `zeroTo60Sec` — Genesis publishes only "approximately five seconds". The old record's 4.2s
+      was the MY2025 car's Boost-Mode figure and must not be assumed to still hold.
+- [ ] `topSpeedMph` — not published for MY2027.
+- [ ] `charging.portType`, `superchargerAccess`, `heatPump` — **the important ones.** The MY2025
+      record said CCS1 with a free NACS adapter, but Hyundai Motor Group has been moving models to
+      a native NACS port, and neither the product guide nor the web page states the connector.
+      Carrying CCS1 forward would have been a guess on a field buyers filter on.
+
+**Cost note for planning the rest of the pass:** a rebase is far more expensive than "add a trim".
+Every field has to be re-verified against the new model year, and the honest outcome here is three
+well-sourced records that are *less complete* than the one stale record they replaced. That is the
+right trade — correct-with-gaps beats confidently-wrong — but it means the remaining 11 stale
+single-trim models are a batch each, not a batch together.
+
+`npm run audit`: no flags. `npm run fetch-epa` independently confirms all three as Standard SUV
+from EPA id 50634 (note it silently reported "3 to fetch, fetched 0" on the first run — a
+transient failure that succeeded on retry; the script counts failures but they are easy to miss).

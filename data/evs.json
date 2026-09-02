@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:5d96a341e80ca3766fbd4c55f57c01ca035f628b73239a95939f803e54149b36",
+  "hash": "sha256:e72aaf974a81bff3729f96fdfdd2bb5901caf30be112e1be820bfa2e503b4eed",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -7,7 +7,7 @@
   "url": "https://evcompare.org",
   "datasetPage": "https://evcompare.org/data/",
   "documentation": "https://evcompare.org/data/SCHEMA.md",
-  "count": 151,
+  "count": 153,
   "models": [
     {
       "id": "acura-zdx-2024-a-spec-rwd",
@@ -3766,18 +3766,18 @@
       "notes": "Offered as a single 'Advanced' AWD trim for 2025. Battery grew from 87.2 kWh (pre-facelift) to 94.5 kWh for the current facelifted version."
     },
     {
-      "id": "genesis-electrified-gv70-2025-advanced-awd",
-      "url": "https://evcompare.org/2025/electrified-gv70/advanced-awd/",
-      "catalogId": 46,
-      "lastVerifiedDate": "2026-08-28",
+      "id": "genesis-electrified-gv70-2027-awd",
+      "url": "https://evcompare.org/2027/electrified-gv70/awd/",
+      "catalogId": 152,
+      "lastVerifiedDate": "2026-09-02",
       "make": "Genesis",
       "model": "Electrified GV70",
-      "trim": "Advanced AWD",
-      "modelYear": 2025,
+      "trim": "AWD",
+      "modelYear": 2027,
       "bodyStyle": "SUV",
-      "epaSizeClass": "Small SUV",
+      "epaSizeClass": "Standard SUV",
       "onSaleDate": null,
-      "msrp": 66950,
+      "msrp": 58500,
       "doors": 4,
       "rearDoorStyle": "Hinged",
       "slidingDoors": false,
@@ -3788,27 +3788,107 @@
       "drivetrain": "AWD",
       "allWheelDriveAvailable": true,
       "battery": {
-        "usableKwh": 77.4,
+        "usableKwh": 84,
         "warrantyYears": 10,
         "warrantyMiles": 100000
       },
       "range": {
-        "epaMiles": 236,
-        "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48353"
+        "epaMiles": 250,
+        "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50634"
       },
       "performance": {
-        "zeroTo60Sec": 4.2,
+        "zeroTo60Sec": null,
         "horsepowerHp": 429,
-        "topSpeedMph": 146
+        "topSpeedMph": null
       },
       "charging": {
-        "portType": "CCS1",
-        "superchargerAccess": true,
+        "portType": null,
+        "superchargerAccess": null,
         "maxDcKw": 350,
-        "level2Kw": 11,
+        "level2Kw": 10.9,
         "vehicleToLoad": true,
-        "heatPump": true,
-        "nacsAdapter": { "available": true, "costUsd": 0 }
+        "heatPump": null
+      },
+      "techFeatures": {
+        "appleCarPlay": true,
+        "androidAuto": true,
+        "wirelessPhoneCharging": true
+      },
+      "driverAssist": {
+        "handsFreeDriving": {
+          "available": false,
+          "name": null,
+          "subscriptionUsdPerMonth": null
+        },
+        "collisionAvoidanceAutoBrake": true,
+        "laneKeepAssist": true,
+        "adaptiveCruiseControl": true
+      },
+      "wheelSizesIn": [
+        19
+      ],
+      "seats": {
+        "leatherAvailable": true,
+        "ventilatedAvailable": false,
+        "heatedSteeringWheel": true,
+        "heatedRearSeats": false
+      },
+      "cargo": {
+        "rearCubicFeet": 28.7,
+        "maxCubicFeet": 56.5,
+        "frunkCubicFeet": null
+      },
+      "towCapacityLbs": 3500,
+      "groundClearanceIn": 6.9,
+      "links": {
+        "manufacturerSpec": "https://www.genesis.com/us/en/electrified-gv70",
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50634"
+      },
+      "notes": "Rebased from MY2025 to MY2027 on 2026-09-02: Genesis no longer sells the 2025 car, and almost every headline figure changed - the battery went 77.4 to 84 kWh, EPA range 236 to 250 mi, and the lineup was restructured. In MY2025 'Prestige' was a $6,800 option package on a single Advanced trim; for MY2027 Genesis sells three distinct trims (AWD / Advanced AWD / Prestige AWD) and the base price dropped to $58,500. All three share one powertrain: 320 kW / 429 hp (a 10-second Boost Mode allows 360 kW / ~483 hp), 516 lb-ft, dual 160 kW motors. Range is EPA's single 2027 certification (id 50634, 250 mi) which does not split by wheel, so all three trims carry it; Genesis's own product guide separately advertises 'up to 263 miles', an unqualified best-case claim rather than the certified figure, and is not used here. Specs sourced from Genesis's 2027 Electrified GV70 product guide PDF: 84 kWh (published as 'Battery System Capacity' - Genesis does not state a usable figure), 350 kW DC / 10.9 kW onboard AC, 3,500 lb tow with brakes, 6.9 in minimum ground clearance, 28.7 / 56.5 cu ft cargo behind 2nd / 1st row. NOT re-verified for MY2027 and therefore left null rather than carried over from the 2025 record: 0-60 (Genesis says only 'approximately five seconds'), top speed, charge port type and heat pump - Hyundai Motor Group has been moving models to native NACS, so the 2025 record's CCS1 must not be assumed to still hold. This is the base AWD trim: 19-inch wheels (235/55R19), leather seating surfaces, 27-inch OLED display. Ventilated front seats, panoramic sunroof and Bang & Olufsen audio are Advanced-trim additions."
+    },
+    {
+      "id": "genesis-electrified-gv70-2027-advanced-awd",
+      "url": "https://evcompare.org/2027/electrified-gv70/advanced-awd/",
+      "catalogId": 46,
+      "lastVerifiedDate": "2026-09-02",
+      "make": "Genesis",
+      "model": "Electrified GV70",
+      "trim": "Advanced AWD",
+      "modelYear": 2027,
+      "bodyStyle": "SUV",
+      "epaSizeClass": "Standard SUV",
+      "onSaleDate": null,
+      "msrp": 66300,
+      "doors": 4,
+      "rearDoorStyle": "Hinged",
+      "slidingDoors": false,
+      "isThreeRow": false,
+      "seatingRows": 2,
+      "maxPassengers": 5,
+      "builtInBoosterSeats": false,
+      "drivetrain": "AWD",
+      "allWheelDriveAvailable": true,
+      "battery": {
+        "usableKwh": 84,
+        "warrantyYears": 10,
+        "warrantyMiles": 100000
+      },
+      "range": {
+        "epaMiles": 250,
+        "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50634"
+      },
+      "performance": {
+        "zeroTo60Sec": null,
+        "horsepowerHp": 429,
+        "topSpeedMph": null
+      },
+      "charging": {
+        "portType": null,
+        "superchargerAccess": null,
+        "maxDcKw": 350,
+        "level2Kw": 10.9,
+        "vehicleToLoad": true,
+        "heatPump": null
       },
       "techFeatures": {
         "appleCarPlay": true,
@@ -3830,23 +3910,103 @@
       ],
       "seats": {
         "leatherAvailable": true,
-        "ventilatedAvailable": null,
-        "heatedSteeringWheel": null,
-        "heatedRearSeats": true
+        "ventilatedAvailable": true,
+        "heatedSteeringWheel": true,
+        "heatedRearSeats": false
       },
       "cargo": {
-        "rearCubicFeet": 29,
-        "maxCubicFeet": 57,
+        "rearCubicFeet": 28.7,
+        "maxCubicFeet": 56.5,
         "frunkCubicFeet": null
       },
       "towCapacityLbs": 3500,
-      "groundClearanceIn": 7,
+      "groundClearanceIn": 6.9,
       "links": {
-        "manufacturerSpec": "https://www.genesis.com/us/en/electrified-gv70/",
-        "review": "https://www.cars.com/research/genesis-electrified_gv70-2025/specs/",
-        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=48353"
+        "manufacturerSpec": "https://www.genesis.com/us/en/electrified-gv70",
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50634"
       },
-      "notes": "Offered as a single 'Advanced' AWD trim. An optional $6,800 Prestige package adds Nappa leather, a 15-speaker Lexicon audio system, a head-up display, and heated rear seats."
+      "notes": "Rebased from MY2025 to MY2027 on 2026-09-02: Genesis no longer sells the 2025 car, and almost every headline figure changed - the battery went 77.4 to 84 kWh, EPA range 236 to 250 mi, and the lineup was restructured. In MY2025 'Prestige' was a $6,800 option package on a single Advanced trim; for MY2027 Genesis sells three distinct trims (AWD / Advanced AWD / Prestige AWD) and the base price dropped to $58,500. All three share one powertrain: 320 kW / 429 hp (a 10-second Boost Mode allows 360 kW / ~483 hp), 516 lb-ft, dual 160 kW motors. Range is EPA's single 2027 certification (id 50634, 250 mi) which does not split by wheel, so all three trims carry it; Genesis's own product guide separately advertises 'up to 263 miles', an unqualified best-case claim rather than the certified figure, and is not used here. Specs sourced from Genesis's 2027 Electrified GV70 product guide PDF: 84 kWh (published as 'Battery System Capacity' - Genesis does not state a usable figure), 350 kW DC / 10.9 kW onboard AC, 3,500 lb tow with brakes, 6.9 in minimum ground clearance, 28.7 / 56.5 cu ft cargo behind 2nd / 1st row. NOT re-verified for MY2027 and therefore left null rather than carried over from the 2025 record: 0-60 (Genesis says only 'approximately five seconds'), top speed, charge port type and heat pump - Hyundai Motor Group has been moving models to native NACS, so the 2025 record's CCS1 must not be assumed to still hold. Advanced adds 20-inch wheels (265/45R20), ventilated front seats, panoramic sunroof, Bang & Olufsen premium audio and the surround-view/blind-spot-view monitors over the base AWD."
+    },
+    {
+      "id": "genesis-electrified-gv70-2027-prestige-awd",
+      "url": "https://evcompare.org/2027/electrified-gv70/prestige-awd/",
+      "catalogId": 153,
+      "lastVerifiedDate": "2026-09-02",
+      "make": "Genesis",
+      "model": "Electrified GV70",
+      "trim": "Prestige AWD",
+      "modelYear": 2027,
+      "bodyStyle": "SUV",
+      "epaSizeClass": "Standard SUV",
+      "onSaleDate": null,
+      "msrp": 70650,
+      "doors": 4,
+      "rearDoorStyle": "Hinged",
+      "slidingDoors": false,
+      "isThreeRow": false,
+      "seatingRows": 2,
+      "maxPassengers": 5,
+      "builtInBoosterSeats": false,
+      "drivetrain": "AWD",
+      "allWheelDriveAvailable": true,
+      "battery": {
+        "usableKwh": 84,
+        "warrantyYears": 10,
+        "warrantyMiles": 100000
+      },
+      "range": {
+        "epaMiles": 250,
+        "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50634"
+      },
+      "performance": {
+        "zeroTo60Sec": null,
+        "horsepowerHp": 429,
+        "topSpeedMph": null
+      },
+      "charging": {
+        "portType": null,
+        "superchargerAccess": null,
+        "maxDcKw": 350,
+        "level2Kw": 10.9,
+        "vehicleToLoad": true,
+        "heatPump": null
+      },
+      "techFeatures": {
+        "appleCarPlay": true,
+        "androidAuto": true,
+        "wirelessPhoneCharging": true
+      },
+      "driverAssist": {
+        "handsFreeDriving": {
+          "available": false,
+          "name": null,
+          "subscriptionUsdPerMonth": null
+        },
+        "collisionAvoidanceAutoBrake": true,
+        "laneKeepAssist": true,
+        "adaptiveCruiseControl": true
+      },
+      "wheelSizesIn": [
+        20
+      ],
+      "seats": {
+        "leatherAvailable": true,
+        "ventilatedAvailable": true,
+        "heatedSteeringWheel": true,
+        "heatedRearSeats": true
+      },
+      "cargo": {
+        "rearCubicFeet": 28.7,
+        "maxCubicFeet": 56.5,
+        "frunkCubicFeet": null
+      },
+      "towCapacityLbs": 3500,
+      "groundClearanceIn": 6.9,
+      "links": {
+        "manufacturerSpec": "https://www.genesis.com/us/en/electrified-gv70",
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50634"
+      },
+      "notes": "Rebased from MY2025 to MY2027 on 2026-09-02: Genesis no longer sells the 2025 car, and almost every headline figure changed - the battery went 77.4 to 84 kWh, EPA range 236 to 250 mi, and the lineup was restructured. In MY2025 'Prestige' was a $6,800 option package on a single Advanced trim; for MY2027 Genesis sells three distinct trims (AWD / Advanced AWD / Prestige AWD) and the base price dropped to $58,500. All three share one powertrain: 320 kW / 429 hp (a 10-second Boost Mode allows 360 kW / ~483 hp), 516 lb-ft, dual 160 kW motors. Range is EPA's single 2027 certification (id 50634, 250 mi) which does not split by wheel, so all three trims carry it; Genesis's own product guide separately advertises 'up to 263 miles', an unqualified best-case claim rather than the certified figure, and is not used here. Specs sourced from Genesis's 2027 Electrified GV70 product guide PDF: 84 kWh (published as 'Battery System Capacity' - Genesis does not state a usable figure), 350 kW DC / 10.9 kW onboard AC, 3,500 lb tow with brakes, 6.9 in minimum ground clearance, 28.7 / 56.5 cu ft cargo behind 2nd / 1st row. NOT re-verified for MY2027 and therefore left null rather than carried over from the 2025 record: 0-60 (Genesis says only 'approximately five seconds'), top speed, charge port type and heat pump - Hyundai Motor Group has been moving models to native NACS, so the 2025 record's CCS1 must not be assumed to still hold. Prestige adds Nappa leather with quilting, a head-up display, 3-zone climate control and heated 2nd-row seats over Advanced; it shares Advanced's 20-inch wheels."
     },
     {
       "id": "genesis-gv60-2025-standard-rwd",
