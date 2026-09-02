@@ -3041,3 +3041,54 @@ after fewer than 100 requests; EPA went silent after a few hundred. Both were av
 coverage sweep is already cached and committed so it costs nothing to re-run, but per-variant
 lookups are not cached at all — worth giving them the same `epa-cache.json` treatment before the
 next big pass, and spacing anything bulk at 500ms+ rather than 120ms.
+
+---
+
+# TODO: Cached, rate-limited EPA client + i4 xDrive40 (2026-09-02)
+
+## `scripts/epa.mjs` — one slow, cached client
+
+Built after throttling ourselves out of fueleconomy.gov. Two rules, both load-bearing:
+
+1. **Everything is cached, including `/menu/options`.** Resolving "which EPA id is the i4 xDrive40
+   on 18-inch wheels" is the most repeated call in trim work and was being paid for every single
+   time. Now in `scripts/epa-options-cache.json` alongside the vehicle and menu caches.
+2. **A failed request is never cached.** EPA signals failure with an *empty body*, not a status
+   code, so a failed call parses to the same `[]` as a make/year that genuinely has no entries.
+   Caching that writes "this make has nothing" in permanently and every later run reads the lie.
+   `ok` now tracks whether the HTTP call succeeded, separately from whether the result was empty.
+
+Default spacing is **600ms**, not the 120ms that got us cut off (`EPA_DELAY_MS` overrides). Nothing
+here is latency-sensitive — every caller is a batch job, and a warm run makes no requests at all.
+
+**This was not hypothetical: 35 of the 112 cached menu entries were empty**, and there was no way
+to tell a genuine "EPA has no 2028 data" from a request that failed during the throttle. All 35
+were purged and re-verified through the new client, which reported no failures — so they are
+legitimately empty, but we now *know* that rather than assume it. `audit-coverage` is refactored
+onto the client and prints a warning if any make could not be checked, instead of silently
+reporting a clean bill of health off missing data.
+
+## BMW i4: 2 trims → 3
+
+The ranked list's ideal first target — biggest BMW gap and *not* stale, so it needed a trim added
+rather than a rebase. Added **xDrive40**: $62,300, 287mi, 396hp, 4.9s, 124mph, AWD.
+
+Everything is vendor-sourced. BMW's configurator gives the price; its model page gives 0-60 and the
+268-287mi range band; and the FAQ block on that page — which is where BMW actually publishes these
+— gives horsepower (335 eDrive / 396 xDrive / 591 M60), top speeds (118 / 124 / 130) and the pack
+(83.9 kWh gross, 81.2 kWh usable, *all* i4 models). EPA id 50192 is the standard 18-inch at 287mi;
+50193 is the optional 19-inch at 268mi, and per the base-configuration rule this record is the
+18-inch car. BMW's own 268-287 band matches both EPA entries exactly.
+
+## A real limit on the coverage audit, found here
+
+`audit-coverage` flagged the i4 as `2 trims vs 4 variants`, expecting eDrive35 **and** xDrive40.
+Only xDrive40 exists as a product: **EPA certifies an i4 eDrive35 (id 50187, 251mi) that BMW does
+not sell in the US** — it is on neither the configurator nor the model page. So section B
+overcounts not only for wheel/charger splits but for **variants EPA certifies that are not sold
+here**. The audit output is a lead list, never a to-do list; each entry still needs the vendor to
+confirm the trim is real before it is written.
+
+- [ ] **BMW i4 M60 horsepower disagreement.** We record 593 hp; BMW's own FAQ says 591. Small, but
+      it is the vendor contradicting us on a headline spec, so it wants one check rather than a
+      shrug. Found incidentally while sourcing the xDrive40.

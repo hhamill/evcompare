@@ -847,6 +847,15 @@
     "range": 321,
     "fetchedOn": "2026-08-28"
   },
+  "50187": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "i4 eDrive35 Gran Coupe (19 inch Wheels)",
+    "vclass": "Compact Cars",
+    "drive": "Rear-Wheel Drive",
+    "range": 251,
+    "fetchedOn": "2026-09-02"
+  },
   "50188": {
     "year": 2026,
     "make": "BMW",
@@ -862,6 +871,24 @@
     "vclass": "Compact Cars",
     "range": 278,
     "fetchedOn": "2026-08-28"
+  },
+  "50192": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "i4 xDrive40 Gran Coupe (18 inch Wheels)",
+    "vclass": "Compact Cars",
+    "drive": "All-Wheel Drive",
+    "range": 287,
+    "fetchedOn": "2026-09-02"
+  },
+  "50193": {
+    "year": 2026,
+    "make": "BMW",
+    "model": "i4 xDrive40 Gran Coupe (19 inch Wheels)",
+    "vclass": "Compact Cars",
+    "drive": "All-Wheel Drive",
+    "range": 268,
+    "fetchedOn": "2026-09-02"
   },
   "50194": {
     "year": 2026,

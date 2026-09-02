@@ -27,8 +27,6 @@
   "ZDX AWD Type S",
   "ZDX RWD"
  ],
- "2027|Acura": [],
- "2028|Acura": [],
  "2025|Audi": [
   "A3 quattro",
   "A4 allroad quattro",
@@ -146,7 +144,6 @@
   "SQ6 Sportback e-tron (21 inch Tires)",
   "SQ8"
  ],
- "2028|Audi": [],
  "2025|BMW": [
   "228 xDrive Gran Coupe",
   "230i Coupe",
@@ -420,7 +417,6 @@
   "X7 M60i xDrive",
   "X7 xDrive40i"
  ],
- "2028|BMW": [],
  "2025|Cadillac": [
   "CELESTIQ",
   "CT4",
@@ -490,7 +486,6 @@
   "VISTIQ 11kW Charger",
   "VISTIQ 19kW Charger"
  ],
- "2028|Cadillac": [],
  "2025|Chevrolet": [
   "Blazer AWD",
   "Blazer EV AWD",
@@ -613,7 +608,6 @@
   "Traverse AWD",
   "Traverse FWD"
  ],
- "2028|Chevrolet": [],
  "2025|Dodge": [
   "Charger Daytona R/T AWD 245/55ZR18",
   "Charger Daytona R/T AWD 255/45R20",
@@ -648,7 +642,6 @@
   "Durango AWD",
   "Durango RWD"
  ],
- "2028|Dodge": [],
  "2025|Fiat": [
   "500e",
   "500e All Season"
@@ -657,8 +650,6 @@
   "500e",
   "500e All Season"
  ],
- "2027|Fiat": [],
- "2028|Fiat": [],
  "2025|Ford": [
   "Bronco 4WD",
   "Bronco Badlands 4WD",
@@ -753,7 +744,6 @@
   "Expedition 2WD",
   "Expedition 4WD"
  ],
- "2028|Ford": [],
  "2025|GMC": [
   "Acadia AWD",
   "Acadia FWD",
@@ -822,7 +812,6 @@
   "Terrain AWD Denali/AT4",
   "Terrain FWD"
  ],
- "2028|GMC": [],
  "2025|Genesis": [
   "Electrified G80",
   "Electrified GV70",
@@ -873,7 +862,6 @@
   "GV80 MHEV",
   "GV80 RWD"
  ],
- "2028|Genesis": [],
  "2025|Honda": [
   "Accord",
   "Accord Hybrid",
@@ -927,7 +915,6 @@
   "HR-V AWD",
   "HR-V FWD"
  ],
- "2028|Honda": [],
  "2025|Hyundai": [
   "Elantra",
   "Elantra Hybrid",
@@ -1057,7 +1044,6 @@
   "Sonata Hybrid Blue",
   "Venue"
  ],
- "2028|Hyundai": [],
  "2025|Jeep": [
   "Compass 4WD",
   "Gladiator 4WD",
@@ -1107,7 +1093,6 @@
   "Wrangler 2dr 4WD",
   "Wrangler 4dr 4WD"
  ],
- "2028|Jeep": [],
  "2025|Kia": [
   "Carnival",
   "Carnival Hybrid",
@@ -1209,7 +1194,6 @@
   "Telluride Hybrid FWD",
   "Telluride X-Pro"
  ],
- "2028|Kia": [],
  "2025|Lexus": [
   "ES 250 AWD",
   "ES 300h",
@@ -1291,8 +1275,6 @@
   "UX 300h",
   "UX 300h AWD"
  ],
- "2027|Lexus": [],
- "2028|Lexus": [],
  "2025|Lucid": [
   "Air G Touring XR AWD with 19 inch wheels",
   "Air G Touring XR AWD with 20 inch wheels",
@@ -1339,7 +1321,6 @@
   "Gravity GT w/22F23R wheels (3R)",
   "Gravity Touring w/20F21R wheels"
  ],
- "2028|Lucid": [],
  "2025|MINI": [
   "Cooper Convertible",
   "Cooper Hardtop 2 door",
@@ -1373,7 +1354,6 @@
   "Countryman SE ALL4 (18 inch Wheels)",
   "Countryman SE ALL4 (19 inch Wheels)"
  ],
- "2028|MINI": [],
  "2025|Mercedes-Benz": [
   "AMG C43 4matic",
   "AMG C63 S E Performance",
@@ -1577,7 +1557,6 @@
   "S580 4matic Maybach",
   "SL680 Maybach"
  ],
- "2028|Mercedes-Benz": [],
  "2025|Nissan": [
   "Altima",
   "Altima AWD",
@@ -1653,7 +1632,6 @@
   "Z",
   "Z NISMO"
  ],
- "2028|Nissan": [],
  "2025|Polestar": [
   "2 Dual Motor (19 Inch Wheels)",
   "2 Dual Motor (20 Inch Wheels)",
@@ -1680,8 +1658,6 @@
   "4 Long Range Dual Motor Performance",
   "4 Long Range Single Motor"
  ],
- "2027|Polestar": [],
- "2028|Polestar": [],
  "2025|Porsche": [
   "718 Boxster",
   "718 Boxster GTS",
@@ -1808,8 +1784,6 @@
   "Taycan Turbo S",
   "Taycan Turbo S Cross Turismo"
  ],
- "2027|Porsche": [],
- "2028|Porsche": [],
  "2025|Rivian": [
   "R1S All-Terrain Dual Large (20in)",
   "R1S All-Terrain Dual Large Plus (20in)",
@@ -1936,7 +1910,6 @@
   "R2 Performance AWD (20in AT)",
   "R2 Performance AWD (21in)"
  ],
- "2028|Rivian": [],
  "2025|Subaru": [
   "Ascent",
   "Ascent Limited/Touring/Onyx AWD",
@@ -1992,7 +1965,6 @@
   "Uncharted 20 inch AWD",
   "Uncharted AWD"
  ],
- "2028|Subaru": [],
  "2025|Tesla": [
   "Cybertruck AWD",
   "Cybertruck Long Range",
@@ -2032,8 +2004,6 @@
   "Model Y Standard RWD (18in Wheels)",
   "Model Y Standard RWD (19in Wheels)"
  ],
- "2027|Tesla": [],
- "2028|Tesla": [],
  "2025|Toyota": [
   "4Runner 2WD",
   "4Runner 4WD",
@@ -2186,7 +2156,6 @@
   "Prius AWD XLE/LTD",
   "Prius XLE/LTD"
  ],
- "2028|Toyota": [],
  "2025|VinFast": [
   "VF 6 Plus",
   "VF 7 Plus",
@@ -2194,14 +2163,12 @@
   "VF 8 Plus",
   "VF 9 Plus"
  ],
- "2026|VinFast": [],
  "2027|VinFast": [
   "VF 7 Plus",
   "VF 8 Eco",
   "VF 8 Plus",
   "VF 9 Plus"
  ],
- "2028|VinFast": [],
  "2025|Volkswagen": [
   "Atlas",
   "Atlas 4motion Peak Edition",
@@ -2258,7 +2225,6 @@
   "Taos 4motion",
   "Tiguan 4motion"
  ],
- "2028|Volkswagen": [],
  "2025|Volvo": [
   "EC40",
   "EC40 Twin",
@@ -2325,5 +2291,39 @@
   "XC90 B5 AWD",
   "XC90 B6 AWD"
  ],
+ "2027|Acura": [],
+ "2028|Acura": [],
+ "2028|Audi": [],
+ "2028|BMW": [],
+ "2028|Cadillac": [],
+ "2028|Chevrolet": [],
+ "2028|Dodge": [],
+ "2027|Fiat": [],
+ "2028|Fiat": [],
+ "2028|Ford": [],
+ "2028|GMC": [],
+ "2028|Genesis": [],
+ "2028|Honda": [],
+ "2028|Hyundai": [],
+ "2028|Jeep": [],
+ "2028|Kia": [],
+ "2027|Lexus": [],
+ "2028|Lexus": [],
+ "2028|Lucid": [],
+ "2028|MINI": [],
+ "2028|Mercedes-Benz": [],
+ "2028|Nissan": [],
+ "2027|Polestar": [],
+ "2028|Polestar": [],
+ "2027|Porsche": [],
+ "2028|Porsche": [],
+ "2028|Rivian": [],
+ "2028|Subaru": [],
+ "2027|Tesla": [],
+ "2028|Tesla": [],
+ "2028|Toyota": [],
+ "2026|VinFast": [],
+ "2028|VinFast": [],
+ "2028|Volkswagen": [],
  "2028|Volvo": []
 }

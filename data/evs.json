@@ -1,5 +1,5 @@
 {
-  "hash": "sha256:e72aaf974a81bff3729f96fdfdd2bb5901caf30be112e1be820bfa2e503b4eed",
+  "hash": "sha256:8035da83464c2e34bb3a7a064c564cb24e5b84dc5fd2ee05b6c3658640bafcb2",
   "license": "CC0-1.0",
   "attribution": "EV Compare (evcompare.org) — appreciated, not required",
   "disclaimer": "Provided as is, without warranty of any kind. Compiled by hand from manufacturer specifications, EPA listings and published reviews; it may contain errors or omissions, and figures correct when verified may since have changed. Verify against the manufacturer before relying on any value. No liability is accepted for any use of this data.",
@@ -7,7 +7,7 @@
   "url": "https://evcompare.org",
   "datasetPage": "https://evcompare.org/data/",
   "documentation": "https://evcompare.org/data/SCHEMA.md",
-  "count": 153,
+  "count": 154,
   "models": [
     {
       "id": "acura-zdx-2024-a-spec-rwd",
@@ -848,6 +848,93 @@
         "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50188"
       },
       "notes": "Base RWD trim of BMW's 4 Series Gran Coupe-based liftback sedan. For 2026, BMW added silicon-carbide inverters, raising EPA range over the prior model year. Forward collision warning and lane departure warning are standard; full adaptive cruise and lane centering require the optional Driving Assistant Professional package. Charge port is CCS1 (adapter needed for Tesla Superchargers). BMW offers no factory tow package on this model in North America and publishes no US tow rating, so it is recorded as 0 lb — not rated to tow here. The 1,600 kg / 2,000 kg figures that circulate are European ratings for markets where the factory hitch is sold."
+    },
+    {
+      "id": "bmw-i4-2026-xdrive40",
+      "url": "https://evcompare.org/2026/i4/xdrive40/",
+      "catalogId": 154,
+      "lastVerifiedDate": "2026-09-02",
+      "make": "BMW",
+      "model": "i4",
+      "trim": "xDrive40",
+      "modelYear": 2026,
+      "bodyStyle": "Hatchback",
+      "epaSizeClass": "Compact Car",
+      "onSaleDate": null,
+      "msrp": 62300,
+      "doors": 5,
+      "rearDoorStyle": "Hinged",
+      "slidingDoors": false,
+      "isThreeRow": false,
+      "seatingRows": 2,
+      "maxPassengers": 5,
+      "builtInBoosterSeats": false,
+      "drivetrain": "AWD",
+      "allWheelDriveAvailable": true,
+      "battery": {
+        "usableKwh": 81.2,
+        "warrantyYears": 8,
+        "warrantyMiles": 100000
+      },
+      "range": {
+        "epaMiles": 287,
+        "source": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50192"
+      },
+      "performance": {
+        "zeroTo60Sec": 4.9,
+        "horsepowerHp": 396,
+        "topSpeedMph": 124
+      },
+      "charging": {
+        "portType": "CCS1",
+        "superchargerAccess": true,
+        "maxDcKw": 205,
+        "level2Kw": 11,
+        "vehicleToLoad": false,
+        "heatPump": true,
+        "nacsAdapter": {
+          "available": true,
+          "costUsd": 175
+        }
+      },
+      "techFeatures": {
+        "appleCarPlay": true,
+        "androidAuto": true,
+        "wirelessPhoneCharging": true
+      },
+      "driverAssist": {
+        "handsFreeDriving": {
+          "available": false,
+          "name": null,
+          "subscriptionUsdPerMonth": null
+        },
+        "collisionAvoidanceAutoBrake": true,
+        "laneKeepAssist": true,
+        "adaptiveCruiseControl": true
+      },
+      "wheelSizesIn": [
+        18,
+        19
+      ],
+      "seats": {
+        "leatherAvailable": true,
+        "ventilatedAvailable": null,
+        "heatedSteeringWheel": null,
+        "heatedRearSeats": null
+      },
+      "cargo": {
+        "rearCubicFeet": 16.6,
+        "maxCubicFeet": null,
+        "frunkCubicFeet": 0
+      },
+      "towCapacityLbs": 0,
+      "groundClearanceIn": 4.9,
+      "links": {
+        "manufacturerSpec": "https://www.bmwusa.com/vehicles/bmw-i-series/i4/bmw-i4-gran-coupe.html",
+        "review": "https://www.edmunds.com/bmw/i4/2026/",
+        "epaWindowSticker": "https://www.fueleconomy.gov/feg/Find.do?action=sbs&id=50192"
+      },
+      "notes": "AWD version of the i4 Gran Coupe, added 2026-09-02 from BMW's own configurator and model page: $62,300, 4.9s 0-60, 396 hp and a 124 mph top speed, all quoted by BMW directly (the horsepower and top-speed figures come from the FAQ block on bmwusa.com's i4 page). Shares the eDrive40's pack - BMW states 83.9 kWh gross / 81.2 kWh usable for every i4 - and its body, charging and equipment, so those are carried across rather than re-derived. EPA splits this trim by wheel: id 50192 is the standard 18-inch at 287mi, id 50193 the optional 19-inch at 268mi; per the base-configuration rule in SCHEMA this record is the 18-inch car. BMW's page independently quotes 268-287 mi for the xDrive40, matching both EPA entries. Tow is 0 for the same reason as the eDrive40: BMW publishes no US tow rating and offers no factory hitch here. Note EPA also certifies an i4 eDrive35 (id 50187, 251mi) which BMW does NOT sell in the US - it appears on neither the configurator nor the model page - so it is deliberately not recorded."
     },
     {
       "id": "bmw-i4-2026-m60-xdrive",

@@ -29,17 +29,14 @@
 // its base configuration"). NOISE below collapses those so the comparison is variant-to-trim
 // rather than entry-to-trim; without it the Cadillac Lyriq reads as six variants when it is two
 // powertrains times two chargers.
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
-import https from "node:https";
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { getModels, save, report } from "./epa.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const EVS = path.join(ROOT, "data", "evs.json");
-const CACHE = path.join(ROOT, "scripts", "epa-menu-cache.json");
-const REFRESH = process.argv.includes("--refresh");
 const YEARS = [2025, 2026, 2027, 2028];
-const DELAY_MS = 120;
 
 // EPA files sub-brands under the parent make; we record them as the sub-brand.
 const ALIAS = { "Mercedes-Maybach": "Mercedes-Benz" };
@@ -58,15 +55,6 @@ const NOISE = [
 const strip = s => NOISE.reduce((a, re) => a.replace(re, " "), s).replace(/\s+/g, " ").trim();
 const norm = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "");
 
-const cache = !REFRESH && existsSync(CACHE) ? JSON.parse(readFileSync(CACHE, "utf8")) : {};
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const get = u => new Promise(res => {
-  https.get(u, { headers: { Accept: "application/json" } }, r => {
-    let d = ""; r.on("data", c => d += c);
-    r.on("end", () => { try { res(JSON.parse(d)); } catch { res(null); } });
-  }).on("error", () => res(null));
-});
-
 const cars = JSON.parse(readFileSync(EVS, "utf8")).models;
 const byModel = new Map();
 for (const c of cars) {
@@ -76,19 +64,18 @@ for (const c of cars) {
 }
 
 const makes = [...new Set(cars.map(c => ALIAS[c.make] ?? c.make))];
-let fetched = 0;
+// Every lookup goes through the shared client: rate limited, cached, and — crucially — a failed
+// request is not cached, so a throttled run leaves gaps to retry rather than writing "this make
+// has no models" into the cache permanently and reporting a clean bill of health off a lie.
+const menu = new Map();
 for (const mk of makes) for (const y of YEARS) {
-  const key = `${y}|${mk}`;
-  if (cache[key]) continue;
-  const j = await get(`https://www.fueleconomy.gov/ws/rest/vehicle/menu/model?year=${y}&make=${encodeURIComponent(mk)}`);
-  let items = j?.menuItem ?? [];
-  if (!Array.isArray(items)) items = [items];
-  cache[key] = items.map(x => x?.value).filter(Boolean);
-  fetched++;
-  await sleep(DELAY_MS);
+  menu.set(`${y}|${mk}`, (await getModels(y, mk)) ?? []);
 }
-writeFileSync(CACHE, JSON.stringify(cache, null, 1) + "\n");
-console.log(`${makes.length} makes x ${YEARS.length} years · ${fetched} fetched, ${Object.keys(cache).length} cached\n`);
+save("models");
+const cache = Object.fromEntries(menu);
+const complete = report();
+if (!complete) console.log(`\nResults below are INCOMPLETE — some makes could not be checked.`);
+console.log(`${makes.length} makes x ${YEARS.length} years\n`);
 
 // Assign each EPA name to the LONGEST model name we hold that prefixes it, so "Ioniq 5" cannot
 // swallow entries that belong to "Ioniq 5 N".
