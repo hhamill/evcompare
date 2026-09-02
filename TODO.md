@@ -2835,3 +2835,65 @@ the next reader.
 verifying a CSS change in the pane needs a forced re-fetch — swap the `<link>` href to
 `styles.css?bust=<timestamp>`, or `fetch(url, {cache: "reload"})` first to confirm the server
 copy actually has the change.
+
+---
+
+# TODO: Safety ratings — investigated, deliberately not added (2026-09-01)
+
+Prompted by a competing site showing safety ratings. Both public sources were checked and both
+were rejected on coverage. Recorded here so this isn't re-investigated from scratch; no code was
+written and no schema changed.
+
+## NHTSA — public API, unusable coverage
+
+`https://api.nhtsa.gov/SafetyRatings/...` is public, needs no key, and is shaped like the EPA
+pipeline (list call, then per-vehicle fetch). It returns overall stars, frontal split
+driver/passenger, side and side-pole, rollover plus rollover probability, and ESC/FCW presence.
+It rates by model + body + **drivetrain**, not trim, so it would have been a vehicle property
+shared across trim records — the same shape as `epaSizeClass`.
+
+Coverage across our 151 records, measured:
+
+| model year | rated | total |
+| --- | --- | --- |
+| 2024 | 2 | 2 |
+| 2025 | 32 | 68 |
+| 2026 | **0** | 68 |
+| 2027 | **0** | 13 |
+
+NHTSA has published nothing for 2026, and 54% of this dataset is 2026/2027. Two nuances that
+don't rescue it: exact-name matching undercounts (NHTSA calls them `MUSTANG MACH-E BEV` and
+`F-150 (SUPER CREW) LIGHTNING BEV`), and 6 of 8 sampled 2026 models do have a 2025 rating — but
+carrying a prior year forward is a per-record judgement, not a rule, since a refresh invalidates
+it. Rejected: a field that is empty for every 2026 and 2027 car is noise.
+
+## IIHS — better coverage, but rate-limited and slug-fragile
+
+IIHS licenses the numeric dataset, but its consumer rating pages are free, so the idea was to
+link rather than store values: `https://www.iihs.org/ratings/vehicle/{make}/{model}/{year}`
+(the body-style suffix in their own links is optional). Coverage genuinely beats NHTSA — the 2026
+BMW i4 has an IIHS page, while NHTSA has never rated an i4 in any model year.
+
+Measured 26 real pages against 42 genuine 404s in the 68 combos that answered — **38%, and that
+is a floor**, since a naive slug is wrong for at least `ID.4` and `Equinox EV` and those counted
+as 404s.
+
+Three findings that make it more work than it looks:
+
+- **Soft 404s.** A missing vehicle returns HTTP **200** with a page titled "404", so link
+  validity cannot be checked by status code — only by reading `<title>`. Shipping unverified
+  links means shipping links to error pages.
+- **Cloudflare rate limiting.** A 429 with `retry-after: 3552` (~1 hour) arrived after well under
+  100 requests. A bulk verification sweep is out; it would need a slow, cached, incremental
+  checker in the shape of `epa-cache.json`.
+- **Slugs need a hand-maintained map**, the same naming problem EPA and NHTSA both have.
+
+Rejected on the same reasoning as NHTSA: partial coverage on a safety field is arguably worse
+than none, because a blank reads as "no rating" rather than "not tested", and the build cost is a
+polite verifier plus a slug map for a link that a third of records would carry.
+
+**Measurement gotcha worth keeping:** the first NHTSA probe reported 0/151 because this repo runs
+on Node v17, where `fetch` does not exist — the script's `try/catch` swallowed the ReferenceError
+and every lookup looked like a miss. Use `node:https`, as the existing scripts do. Likewise the
+IIHS probe's last 15 results were 429s, not misses; they were a contiguous block at the end of
+the run, which is what gave it away.
